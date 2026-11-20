@@ -406,7 +406,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const params=new URLSearchParams(window.location.search);
  const chapter=Number(params.get('chapter'));
  if(!Number.isInteger(chapter)||chapter<1||chapter>6)return;
- const groups={"1":["pathshala"],"2":["chapter2","planetExample","chapter2exam","practice"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"]};
+ const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"]};
  const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति"];
  const allowed=new Set(groups[chapter]);
  document.body.classList.add('chapter-focus');
@@ -421,7 +421,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const actions=document.createElement('div');actions.className='chapter-pager';
  if(chapter>1){const a=document.createElement('a');a.href='index.html?chapter='+(chapter-1);a.textContent='← अघिल्लो अध्याय';actions.append(a)}
  if(chapter<6){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को अध्याय →';actions.append(a)}
- banner.append(back,eyebrow,title,actions);main.prepend(banner);
+ const toc=document.createElement('nav');toc.className='chapter-toc';toc.setAttribute('aria-label','यस अध्यायका विषयहरू');const tocHeading=document.createElement('strong');tocHeading.textContent='यस अध्यायमा';toc.append(tocHeading);for(const id of groups[chapter]){const section=document.getElementById(id);if(!section)continue;const heading=section.querySelector('h2,h3');const link=document.createElement('a');link.href='#'+id;link.textContent=heading?heading.textContent.trim():id;toc.append(link)}banner.append(back,eyebrow,title,actions,toc);main.prepend(banner);document.title=titles[chapter]+' | ज्योतिष पाठशाला';
  document.querySelectorAll('#nav a[href^="#"]').forEach(a=>{
   const hash=a.getAttribute('href');a.setAttribute('href','index.html'+hash);
  });
