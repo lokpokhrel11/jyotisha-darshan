@@ -427,3 +427,55 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
  document.querySelectorAll('.brand').forEach(a=>a.href='index.html#home');
 })();
+
+
+/* v3.4 Chapter 2 progressive disclosure: lesson, practice, quiz. */
+(function(){
+ if(new URLSearchParams(location.search).get('chapter')!=='2')return;
+ const banner=document.querySelector('.chapter-focus-banner');
+ if(!banner)return;
+ const ids={lesson:['chapter2'],practice:['planetExample'],quiz:['chapter2exam']};
+ const tabs=document.createElement('div');tabs.className='learning-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','अध्याय २ अध्ययन विकल्प');
+ const buttons={};
+ let active='lesson',current=0;
+ const qContainer=document.getElementById('chapter2ExamQuestions');
+ const pager=document.createElement('div');pager.className='exam-stepper';
+ const counter=document.createElement('span');counter.setAttribute('aria-live','polite');
+ const prev=document.createElement('button');prev.type='button';prev.textContent='← अघिल्लो प्रश्न';
+ const next=document.createElement('button');next.type='button';next.textContent='अर्को प्रश्न →';
+ pager.append(prev,counter,next);
+ qContainer.after(pager);
+ function questions(){return [...qContainer.querySelectorAll('fieldset.exam-question')]}
+ function showQuestion(index){
+  const list=questions();if(!list.length)return;
+  current=Math.max(0,Math.min(index,list.length-1));
+  list.forEach((q,i)=>{q.hidden=i!==current;q.classList.toggle('question-hidden',i!==current)});
+  counter.textContent='प्रश्न '+(current+1)+' / '+list.length;
+  prev.disabled=current===0;next.disabled=current===list.length-1;
+ }
+ function activate(name,focus=false){
+  active=name;
+  for(const [key,sections] of Object.entries(ids)){
+   for(const id of sections){const section=document.getElementById(id);if(section)section.hidden=key!==name;}
+   buttons[key].setAttribute('aria-selected',String(key===name));
+   buttons[key].tabIndex=key===name?0:-1;
+  }
+  if(name==='quiz')showQuestion(current);
+  if(focus)buttons[name].focus();
+ }
+ for(const [key,label] of [['lesson','पाठ'],['practice','अभ्यास'],['quiz','परीक्षा']]){
+  const btn=document.createElement('button');btn.type='button';btn.className='learning-tab';btn.textContent=label;btn.setAttribute('role','tab');btn.setAttribute('aria-controls',ids[key][0]);btn.addEventListener('click',()=>activate(key));tabs.append(btn);buttons[key]=btn;
+ }
+ tabs.addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft'].includes(e.key))return;e.preventDefault();const keys=['lesson','practice','quiz'];activate(keys[(keys.indexOf(active)+(e.key==='ArrowRight'?1:2))%3],true)});
+ const toc=banner.querySelector('.chapter-toc');if(toc)toc.hidden=true;
+ banner.append(tabs);
+ prev.addEventListener('click',()=>showQuestion(current-1));
+ next.addEventListener('click',()=>showQuestion(current+1));
+ qContainer.addEventListener('change',()=>{if(current<questions().length-1){next.classList.add('ready-next')}});
+ const form=document.getElementById('chapter2ExamForm');
+ form.addEventListener('submit',()=>{questions().forEach(q=>{q.hidden=false;q.classList.remove('question-hidden')});pager.hidden=true;});
+ document.getElementById('examReset').addEventListener('click',()=>queueMicrotask(()=>{pager.hidden=false;showQuestion(0)}));
+ // Preserve deep links to the exercise and assessment when opening a chapter.
+ const hash=location.hash.slice(1);
+ activate(hash==='chapter2exam'?'quiz':hash==='planetExample'?'practice':'lesson');
+})();
