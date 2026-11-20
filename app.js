@@ -550,3 +550,37 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  document.getElementById('chapter3Reset').addEventListener('click',()=>queueMicrotask(()=>show(0)));
  show(0);
 })();
+
+
+/* v4.0: Accessible collapsible practice tools in chapters 4–6. */
+(function(){
+ const chapter=Number(new URLSearchParams(location.search).get('chapter'));
+ const groups={4:['istakala','localSunrise'],5:['padaPractice','dashaBalance'],6:['antardasha','tribhagi','yogini']};
+ if(!groups[chapter])return;
+ const panels=groups[chapter].map(id=>document.getElementById(id)).filter(Boolean);
+ const expanded=new Set();
+ function setOpen(section,open){
+  section.classList.toggle('practice-panel-open',open);
+  const button=section.querySelector('.practice-panel-toggle');
+  if(button)button.setAttribute('aria-expanded',String(open));
+  for(const child of section.children){if(child.classList.contains('section-heading'))continue;child.hidden=!open;}
+  if(open)expanded.add(section.id);else expanded.delete(section.id);
+ }
+ panels.forEach((section,index)=>{
+  const heading=section.querySelector(':scope > .section-heading');
+  if(!heading)return;
+  const h=heading.querySelector('h2');
+  if(!h)return;
+  const button=document.createElement('button');
+  button.type='button';button.className='practice-panel-toggle';
+  button.setAttribute('aria-expanded','false');
+  const label=document.createElement('span');label.textContent=h.textContent.trim();
+  const chevron=document.createElement('span');chevron.className='practice-panel-chevron';chevron.setAttribute('aria-hidden','true');chevron.textContent='⌄';
+  button.append(label,chevron);
+  h.replaceChildren(button);
+  button.addEventListener('click',()=>setOpen(section,!expanded.has(section.id)));
+  setOpen(section,false);
+ });
+ const hash=decodeURIComponent(location.hash.slice(1));
+ if(groups[chapter].includes(hash)){const target=document.getElementById(hash);if(target)setOpen(target,true);}
+})();
