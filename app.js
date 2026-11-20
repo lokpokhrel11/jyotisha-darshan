@@ -516,3 +516,37 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const matching=Object.entries(mapping).find(([,ids])=>ids.includes(hash));
  activate(matching?matching[0]:'lesson');
 })();
+
+
+/* v3.8: Chapter 3 one-question-at-a-time assessment. */
+(function(){
+ if(new URLSearchParams(location.search).get('chapter')!=='3')return;
+ const form=document.getElementById('chapter3ExamForm'),container=document.getElementById('chapter3ExamQuestions');
+ if(!form||!container)return;
+ const pager=document.createElement('div');pager.className='exam-stepper';
+ const prev=document.createElement('button');prev.type='button';prev.textContent='← अघिल्लो प्रश्न';
+ const counter=document.createElement('span');counter.setAttribute('aria-live','polite');
+ const next=document.createElement('button');next.type='button';next.textContent='अर्को प्रश्न →';
+ pager.append(prev,counter,next);container.after(pager);
+ let current=0;
+ const questions=()=>[...container.querySelectorAll('fieldset.exam-question')];
+ function show(index){
+  const list=questions();if(!list.length)return;
+  current=Math.max(0,Math.min(index,list.length-1));
+  list.forEach((q,i)=>{q.hidden=i!==current;q.classList.toggle('question-hidden',i!==current)});
+  counter.textContent='प्रश्न '+(current+1)+' / '+list.length;
+  prev.disabled=current===0;next.disabled=current===list.length-1;
+ }
+ prev.addEventListener('click',()=>show(current-1));
+ next.addEventListener('click',()=>show(current+1));
+ // If submission is incomplete, take the student to the first unanswered question.
+ form.addEventListener('submit',()=>{
+  const list=questions();
+  const firstMissing=list.findIndex((q,i)=>!form.querySelector('input[name="ch3q'+i+'"]:checked'));
+  if(firstMissing!==-1){show(firstMissing);return;}
+  // The existing result panel already provides the complete answer review.
+  show(current);
+ });
+ document.getElementById('chapter3Reset').addEventListener('click',()=>queueMicrotask(()=>show(0)));
+ show(0);
+})();
