@@ -1,5 +1,6 @@
-# v1.9 · Nakshatra pada exercise
-- Added Chapter 5 pada calculator with quarter thresholds and Rohini worked example.
-- Uses ghadi/pala input, validates bhayat < bhavog, does not infer nakshatra identity.
-- No dasha remainder or kshaya/vriddhi support yet.
-- JavaScript syntax validated; browser QA pending.
+# v2.0 · Chapter 5 Vimshottari balance
+- New interactive दशा शेष calculator with selectable nakshatra lord and 9 traditional mahadasha durations.
+- Shows remaining fraction, decimal years and approximate years/months/days using a 360-day teaching year.
+- Includes Rohini/Moon worked example from source notes.
+- Source caveat: day rounding may differ by a day from intermediate-step rounding in the notes.
+- JavaScript syntax validated; full browser QA pending.

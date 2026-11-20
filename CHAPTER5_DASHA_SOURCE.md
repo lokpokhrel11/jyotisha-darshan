@@ -1,0 +1,2 @@
+# Chapter 5.7 source mapping
+Primary study notes, 117-page PDF, p.54, section 5.7: formula (bhavog-bhayat)/bhavog * nakshatra lord years; Rohini example 55/58,14/40, Moon 10y, about 7y4m17d; Magha/Ketu example. Mahadasha lengths from Chapter 6.1. The site uses nearest-day rounding at the final 360-day conversion; this can differ slightly from the notes' stepwise decimal truncation. It does not calculate calendar dates or infer a nakshatra.

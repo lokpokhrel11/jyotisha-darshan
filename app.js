@@ -323,3 +323,16 @@ $('padaCalculate').addEventListener('click',()=>{
  out.textContent=`चरण: ${['पहिलो','दोस्रो','तेस्रो','चौथो'][stage-1]} (${stage}/४)। भयात: ${fmt(a)}। एक चरण: ${exactFmt(b/4)}। ${bounds}`;
 });
 $('padaCalculate').click();
+
+// Chapter 5.7: Vimshottari balance. Input is ghadi/pala, output uses 360-day pedagogical year.
+const dbYears={sun:6,moon:10,mars:7,rahu:18,jupiter:16,saturn:19,mercury:17,ketu:7,venus:20};
+$('dbCalculate').addEventListener('click',()=>{
+ const parse=(s)=>{const m=/^\s*(\d+)\s*\/\s*(\d+)\s*$/.exec(s);if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return Number.isSafeInteger(g)&&Number.isSafeInteger(p)&&p<60?g*60+p:null;};
+ const a=parse($('dbBhayat').value),b=parse($('dbBhavog').value),out=$('dbOutput'),years=dbYears[$('dbLord').value];
+ if(a===null||b===null||b<=0||a<0||a>=b||!years){out.textContent='घडी/पला सही लेख्नुहोस् (जस्तै 14/40)। भयात भभोगभन्दा कम हुनुपर्छ।';return;}
+ const fraction=(b-a)/b,remaining=years*fraction;
+ // Use nearest day for a stable, transparent pedagogical conversion.
+ const totalDays=Math.round(remaining*360),y=Math.floor(totalDays/360),mo=Math.floor(totalDays%360/30),d=totalDays%30;
+ out.textContent=`बाँकी नक्षत्र-अंश: ${b-a}/${b} = ${(fraction*100).toFixed(2)}%। महादशा अवधि: ${years} वर्ष। दशा शेष: ${remaining.toFixed(4)} वर्ष ≈ ${y} वर्ष ${mo} महिना ${d} दिन (३६०-दिने वर्षमा, नजिकको दिनमा गोलाकार)।`;
+});
+$('dbCalculate').click();
