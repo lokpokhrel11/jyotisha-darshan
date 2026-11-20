@@ -1,3 +1,10 @@
+# v3.1 · Focused chapter reading
+- Six chapter-specific URLs using `index.html?chapter=1` through `?chapter=6`.
+- Each view displays its relevant lesson and related existing exercises, without removing calculator DOM elements.
+- Previous/next chapter controls and dashboard return link.
+- Existing main homepage and all existing calculations retained.
+- Browser QA not completed; syntax and repository checks pending.
+
 # v3.0 · Student dashboard
 - Six chapter cards, local-only chapter-open progress, reset and practice shortcuts.
 - Existing calculators retained. Browser QA pending.
