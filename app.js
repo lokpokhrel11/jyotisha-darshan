@@ -388,3 +388,13 @@ function renderTribhagi(){
  $('triOutput').replaceChildren(note,table);
 }
 $('triCalculate').addEventListener('click',renderTribhagi);$('triLord').addEventListener('change',renderTribhagi);renderTribhagi();
+
+// Chapter 6.4: standard eight-Yogini cycle as used in printed examples.
+const yoginis=[['मङ्गला','चन्द्र',1],['पिङ्गला','सूर्य',2],['धान्या','बृहस्पति',3],['भ्रामरी','मङ्गल',4],['भद्रिका','बुध',5],['उल्का','शनि',6],['सिद्धा','शुक्र',7],['सङ्कटा','राहु',8]];
+function yoginiSelection(){const n=Number($('ygNak').value);if(!Number.isInteger(n)||n<1||n>27)return null;return {n,index:(n+3-1)%8};}
+function yoginiCycle(){const o=$('ygOutput'),selection=yoginiSelection();if(!selection){o.textContent='नक्षत्र क्रम १ देखि २७ सम्मको पूर्ण सङ्ख्या राख्नुहोस्।';return;}
+ const {n,index}=selection,table=document.createElement('table');table.className='data-table';const heading=document.createElement('tr');['योगिनी','ग्रह','वर्ष','सञ्चित वर्ष'].forEach(t=>{const th=document.createElement('th');th.textContent=t;heading.append(th);});table.append(heading);let sum=0;for(let i=0;i<8;i++){const y=yoginis[(index+i)%8];sum+=y[2];const row=document.createElement('tr');[y[0],y[1],String(y[2]),String(sum)].forEach(t=>{const td=document.createElement('td');td.textContent=t;row.append(td);});table.append(row);}const intro=document.createElement('p');intro.textContent=`(${n} + ३) ÷ ८ को शेष ${(n+3)%8} → पहिलो योगिनी ${yoginis[index][0]} (${yoginis[index][2]} वर्ष)। आठ दशाको जम्मा ३६ वर्ष।`;o.replaceChildren(intro,table);}
+function yoginiBalance(){const selection=yoginiSelection(),out=$('ygBalanceOutput');if(!selection){out.textContent='पहिले नक्षत्र क्रम १–२७ राख्नुहोस्।';return;}
+ const parse=v=>{const m=/^(\d{1,2})\s*\/\s*(\d{1,2})$/.exec(v.trim());if(!m||Number(m[2])>=60)return null;return Number(m[1])*60+Number(m[2]);};const a=parse($('ygBhayat').value),b=parse($('ygBhavog').value);if(a===null||b===null||b<=0||a<0||a>=b){out.textContent='भयात र भभोग घडी/पला रूपमा दिनुहोस् (उदाहरण 14/40); ० ≤ भयात < भभोग हुनुपर्छ।';return;}
+ const y=yoginis[selection.index],remaining=(b-a)/b*y[2],totalDays=Math.round(remaining*360),years=Math.floor(totalDays/360),months=Math.floor((totalDays%360)/30),days=totalDays%30;out.textContent=`${y[0]} (${y[1]}) को पूर्ण अवधि ${y[2]} वर्ष। दशा शेष = (${b} − ${a}) ÷ ${b} × ${y[2]} = ${remaining.toFixed(4)} वर्ष ≈ ${years} वर्ष ${months} महिना ${days} दिन।`;}
+$('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventListener('click',yoginiBalance);yoginiCycle();yoginiBalance();

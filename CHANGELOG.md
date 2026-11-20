@@ -1,5 +1,5 @@
-# v2.3 · Chapter 6.3 Tribhagi dasha
-- Added interactive 80-year Tribhagi sequence with exact month arithmetic.
-- Preserves 2/3 scaling from Vimshottari, source example beginning Moon, and cumulative totals.
-- No birth-date prediction or individual dasha balance.
-- JavaScript syntax checked; browser regression pending.
+# v2.4 · Chapter 6.4 Yogini Dasha
+- Standard eight-Yogini 36-year cycle, nakshatra ordinal → starting Yogini, cycle table, optional balance calculation.
+- Distinguishes printed eight-Yogini examples from unresolved handwritten nine-Yogini variant.
+- Rohini test: ordinal 4 → Siddha (Venus, 7 years); 14/40 and 55/58 → about 5 years 2 months.
+- JavaScript syntax checked; browser regression QA pending.
