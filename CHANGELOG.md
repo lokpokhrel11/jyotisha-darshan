@@ -1,5 +1,5 @@
-# v1.6 · Local sunrise teaching calculator
-- Calendar sunrise minus 4 minutes minus signed birthplace offset, rounded to nearest minute per notes.
-- Damouli worked example, explicit manual source of offset.
-- No automatic astronomical calculation or collection of birth information.
-- Syntax validation passed; browser QA pending.
+# v1.7 · Chapter 5, basic bhayata/bhabhoga
+- Two source-based standard cases and ghadi/pala calculator.
+- Validation: elapsed < total, boundary equality, invalid entries.
+- Explicitly excludes kshaya and vriddhi nakshatra cases.
+- JavaScript syntax checked; browser QA pending.

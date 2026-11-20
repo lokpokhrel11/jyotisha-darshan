@@ -290,3 +290,15 @@ $('lsCalculate').addEventListener('click',()=>{
  out.textContent=`वेलान्तर ${m[1]}${rounded} मिनेट (गोलाकार)। पात्रोको सूर्योदय − ४ मिनेट − (${m[1]}${rounded} मिनेट) = स्थानीय सूर्योदय ${hh}:${mm}। यो समय इष्टकाल अभ्यासमा प्रविष्ट गर्नुहोस्।`;
 });
 $('lsCalculate').click();
+
+// Chapter 5: standard cases only; use integer pala to avoid rounding errors.
+function bhRead(v){const m=/^(\d{1,2})\s*\/\s*(\d{1,2})$/.exec((v||'').trim());if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return g>=0&&g<=60&&p>=0&&p<60&&!(g===60&&p>0)?g*60+p:null;}
+function bhFmt(p){return `${Math.floor(p/60)} घडी ${String(p%60).padStart(2,'0')} पला`;}
+$('bhCalculate').addEventListener('click',()=>{
+ const i=bhRead($('bhIst').value),e=bhRead($('bhToday').value),o=bhRead($('bhOther').value),out=$('bhOutput');
+ if([i,e,o].some(v=>v===null)||i>=3600||e>=3600||o>=3600){out.textContent='कृपया ००/०० देखि ५९/५९ सम्मका घडी/पला सही ढाँचामा राख्नुहोस्।';return;}
+ if(i===e){out.textContent='इष्टकाल र अन्त्य-मान बराबर छन्। यो सीमा-क्षणका लागि पञ्चाङ्गको थप जाँच आवश्यक छ।';return;}
+ const a=i>e,bh=a?i-e:3600-o+i,bb=a?3600-e+o:3600-o+e;
+ if(bh<0||bb<=0||bh>=bb){out.textContent='भयात भभोगभन्दा कम हुनुपर्छ। प्रविष्ट गरिएको अर्को दिनको मान वा पञ्चाङ्गको अवस्था जाँच्नुहोस्।';return;}
+ out.textContent=`अवस्था ${a?'क':'ख'} · भयात: ${bhFmt(bh)} · भभोग: ${bhFmt(bb)}। जाँच: भयात < भभोग। ${a?'आजको अन्त्य-मानपछि अर्को नक्षत्रमा जन्म।':'आजको अन्त्य-मानभित्रको नक्षत्रमा जन्म।'}`;
+});$('bhCalculate').click();
