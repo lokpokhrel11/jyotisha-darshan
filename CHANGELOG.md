@@ -1,12 +1,6 @@
-# Jyotisha Darshan v0.3
-
-- Expanded Chapter 1 with tithi/paksha, Nandadi groups, nakshatra/pada and angular tithi exercises.
-- Added interactive group classification, longitude-to-nakshatra-order/pada, and solar-lunar angular tithi calculators.
-- Teaching calculations use fictional inputs, not live ephemerides.
-- Source: October 4, 2026 Jyotisha study notes, Chapter 1, printed pages 2–7. Explanations paraphrased.
-- Updated service worker cache.
-
-## Pending
-- Guruji verification of chart geometry and all interpretive conventions.
-- Full Chapter 1 content and assessments still require further development.
-- Manual browser, screen-reader, and mobile testing.
+# v0.4 · Chapter 1 source-aligned content expansion
+- Nine collapsible sections mapped to PDF chapter 1 sections 1.1–1.8 (including 1.2क).
+- Complete nakshatra and lord sequence; Vishkumbhadi 27 and Anandadi 28 lists; karanas, ayanas and seasons.
+- Corrected tithi calculation interface to flag exact 12-degree boundaries.
+- SOURCE_AUDIT.md records provenance and unresolved limitations.
+- The existing five-question assessment is introductory only, not a complete chapter examination.
