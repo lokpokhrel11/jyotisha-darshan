@@ -151,7 +151,7 @@ function drawExalted(){const g=$('exaltedChartLabels');g.replaceChildren();house
  const b=document.createElementNS('http://www.w3.org/2000/svg','text');b.setAttribute('x',x);b.setAttribute('y',y+10);b.setAttribute('font-size','10');b.textContent=roman[i];g.append(b);
  if(showExalted&&exaltedByHouse[n]){const c=document.createElementNS('http://www.w3.org/2000/svg','text');c.setAttribute('x',x);c.setAttribute('y',y+23);c.setAttribute('font-size','11');c.textContent=exaltedByHouse[n];g.append(c);}
 });}
-function revealExalted(){const p=exaltedPlanets[Number(ep.value)];$('exaltedResult').textContent=`${p.name}: ${p.house} औँ भाव, ${signs[p.house-1]} राशि (${p.house})। गुरुजीको उच्च कुण्डलीको उदाहरण।`;}
+function revealExalted(){const p=exaltedPlanets[Number(ep.value)];$('exaltedResult').textContent=`${p.name}: ${p.house} औँ भाव, ${signs[p.house-1]} राशि (${p.house})। उच्च कुण्डलीको शिक्षण उदाहरण।`;}
 $('exaltedReveal').addEventListener('click',revealExalted);
 ep.addEventListener('change',()=>{$('exaltedResult').textContent='ग्रह फेरियो। उत्तर देखाउनुहोस्।';});
 $('exaltedToggle').addEventListener('click',()=>{showExalted=!showExalted;$('exaltedToggle').setAttribute('aria-pressed',String(showExalted));$('exaltedToggle').textContent=showExalted?'चार्टका ग्रह लुकाउनुहोस्':'चार्टमा सबै ग्रह देखाउनुहोस्';drawExalted();});
@@ -169,17 +169,17 @@ const chapter2Questions=[
  ['२.२','भावको स्थान कुन अवस्थामा बदलिन्छ?',['लग्न बदलिँदा','ग्रह बदलिँदा','उत्तर भारतीय चार्टमा बदलिँदैन'],2,'उत्तर भारतीय शैलीमा भावको स्थान स्थिर रहन्छ।'],
  ['२.३','वृश्चिक राशिको स्वामी को हो?',['मङ्गल','बुध','शुक्र'],0,'राशि १ र ८ मङ्गलका घर हुन्।'],
  ['२.३','धनु राशिको स्वामी को हो?',['शनि','बृहस्पति','चन्द्र'],1,'राशि ९ र १२ बृहस्पतिका घर हुन्।'],
- ['२.३','राहु र केतुका राशिस्वामी सम्बन्धमा गुरुजीको नियम कुन हो?',['दुवैका दुई-दुई घर छन्','यस तहमा आफ्ना घर मानिँदैनन्','दुवै सिंहका स्वामी हुन्'],1,'गुरुजीको पानामा राहु र केतुको घर हुँदैन भनिएको छ।'],
+ ['२.३','राहु र केतुका राशिस्वामी सम्बन्धमा यस पाठको नियम कुन हो?',['दुवैका दुई-दुई घर छन्','यस तहमा आफ्ना घर मानिँदैनन्','दुवै सिंहका स्वामी हुन्'],1,'यस पाठमा राहु र केतुको घर हुँदैन भनिएको छ।'],
  ['२.४','सिंह लग्नमा पहिलो भावमा कुन राशि हुन्छ?',['मेष','सिंह','कन्या'],1,'लग्न राशि नै पहिलो भावमा रहन्छ।'],
  ['२.४','सिंह लग्नमा नवौँ भावमा कुन राशि पर्छ?',['मेष','मीन','धनु'],0,'५ + ९ − १ = १३, १२ घटाउँदा १ अर्थात् मेष।'],
  ['२.४','सिंह लग्नमा धनु राशिमा बसेको ग्रह कुन भावमा हुन्छ?',['पाँचौँ','नवौँ','दोस्रो'],0,'९ − ५ + १ = ५।'],
  ['२.४','वृश्चिक लग्नमा छैटौँ भावमा कुन राशि हुन्छ?',['मेष','मीन','मिथुन'],0,'८ + ६ − १ = १३ → १, मेष।'],
- ['२.५','सन्तान र विद्या कुन भावका मुख्य शब्द हुन्?',['तेस्रो','पाँचौँ','आठौँ'],1,'गुरुजीको पहिलो तहको तालिकामा पाँचौँ भाव सन्तान र विद्यासँग जोडिएको छ।'],
- ['२.५','केन्द्र भावहरूको सही समूह कुन हो?',['१, ४, ७, १०','१, ५, ९','६, ८, १२'],0,'गुरुजीको चार केन्द्र १, ४, ७, १० हुन्।'],
- ['२.५','यस पाठमा गुरुजीले त्रिकोण कुन भावलाई भन्नुभएको छ?',['१, ५, ९','५, ९','४, ७, १०'],1,'यो स्रोतको विशिष्ट सूची हो: ५ र ९।'],
- ['उच्च कुण्डली','गुरुजीको मेष लग्न उच्च कुण्डलीमा बृहस्पति कहाँ छ?',['चौथो भाव कर्कट','नवौँ भाव धनु','दशौँ भाव मकर'],0,'स्रोतको चित्रमा बृहस्पति कर्कट अर्थात् चौथो भावमा छ।'],
- ['उच्च कुण्डली','गुरुजीको उच्च कुण्डलीमा कुन भाव खाली छ?',['पाँचौँ','सातौँ','दशौँ'],0,'पाँचौँ, आठौँ र एघारौँ भाव खाली छन्।'],
- ['उच्च कुण्डली','गुरुजीको उच्च कुण्डलीमा मङ्गल कहाँ छ?',['पहिलो भाव मेष','दशौँ भाव मकर','छैटौँ भाव कन्या'],1,'मङ्गल मकर राशिमा दशौँ भावमा छ।']
+ ['२.५','सन्तान र विद्या कुन भावका मुख्य शब्द हुन्?',['तेस्रो','पाँचौँ','आठौँ'],1,'यस पाठको प्रारम्भिक तालिकामा पाँचौँ भाव सन्तान र विद्यासँग जोडिएको छ।'],
+ ['२.५','केन्द्र भावहरूको सही समूह कुन हो?',['१, ४, ७, १०','१, ५, ९','६, ८, १२'],0,'यस पाठका चार केन्द्र १, ४, ७, १० हुन्।'],
+ ['२.५','यस पाठमा त्रिकोण कुन भावलाई भन्नुभएको छ?',['१, ५, ९','५, ९','४, ७, १०'],1,'यो स्रोतको विशिष्ट सूची हो: ५ र ९।'],
+ ['उच्च कुण्डली','मेष लग्नको शिक्षण उच्च कुण्डलीमा बृहस्पति कहाँ छ?',['चौथो भाव कर्कट','नवौँ भाव धनु','दशौँ भाव मकर'],0,'स्रोतको चित्रमा बृहस्पति कर्कट अर्थात् चौथो भावमा छ।'],
+ ['उच्च कुण्डली','यस शिक्षण उच्च कुण्डलीमा कुन भाव खाली छ?',['पाँचौँ','सातौँ','दशौँ'],0,'पाँचौँ, आठौँ र एघारौँ भाव खाली छन्।'],
+ ['उच्च कुण्डली','यस शिक्षण उच्च कुण्डलीमा मङ्गल कहाँ छ?',['पहिलो भाव मेष','दशौँ भाव मकर','छैटौँ भाव कन्या'],1,'मङ्गल मकर राशिमा दशौँ भावमा छ।']
 ];
 const examForm=$('chapter2ExamForm'),examQuestions=$('chapter2ExamQuestions'),examResults=$('examResults');
 function renderChapter2Exam(){examQuestions.replaceChildren();chapter2Questions.forEach((q,i)=>{const fs=document.createElement('fieldset');fs.className='exam-question';const lg=document.createElement('legend');lg.textContent=`${i+1}. [${q[0]}] ${q[1]}`;fs.append(lg);q[2].forEach((answer,j)=>{const label=document.createElement('label');label.className='exam-option';const radio=document.createElement('input');radio.type='radio';radio.name=`chapter2q${i}`;radio.value=String(j);label.append(radio,document.createTextNode(' '+answer));fs.append(label);});examQuestions.append(fs);});examResults.hidden=true;examResults.replaceChildren();updateChapter2Progress();}
@@ -227,7 +227,7 @@ const planetDignities=[
 for(const id of ['planetSelect','planetStatus','aspectPlanet'])navagraha.forEach((n,i)=>$(id).add(new Option(n,String(i))));
 signs.forEach((n,i)=>$('planetSign').add(new Option(`${i+1} · ${n}`,String(i+1))));
 for(let n=1;n<=12;n++)$('aspectHouse').add(new Option(`${n} औँ भाव`,String(n)));
-function showPlanetTraits(){const i=Number($('planetSelect').value);$('planetTraits').textContent=`${navagraha[i]}: ${planetTraitsData[i]}। [गुरुजी]`;}
+function showPlanetTraits(){const i=Number($('planetSelect').value);$('planetTraits').textContent=`${navagraha[i]}: ${planetTraitsData[i]}। `;}
 $('planetSelect').addEventListener('change',showPlanetTraits);showPlanetTraits();
 function checkPlanetStatus(){const i=Number($('planetStatus').value),r=Number($('planetSign').value),d=planetDignities[i];const matches=[];if(d.ex===r)matches.push('उच्च');if(d.own.includes(r))matches.push('स्वगृही');if(d.deb===r)matches.push('नीच');const status=matches.length?matches.join(' र '):'उच्च, नीच वा स्वगृहीमध्ये कुनै होइन';const note=d.deb===null?' यस ग्रहको नीच राशि स्रोतमा उल्लेख छैन।':'';$('planetStatusResult').textContent=`${navagraha[i]} · ${signs[r-1]}: ${status}।${note}`;}
 $('checkPlanetStatus').addEventListener('click',checkPlanetStatus);
