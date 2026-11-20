@@ -1,3 +1,7 @@
+# v3.9 · Refresh Chapter 3 assessment assets
+- Force-refresh browser references to JavaScript and CSS for the Chapter 3 one-question exam.
+- No assessment content or scoring changes.
+
 # v3.8 · Chapter 3 compact exam
 - Chapter 3 now displays one of its 15 exam questions at a time with previous/next navigation.
 - Answers persist when moving between questions; existing scoring, explanations and retake remain intact.
