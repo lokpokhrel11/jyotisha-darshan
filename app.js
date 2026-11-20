@@ -16,38 +16,49 @@ function showAnga(i){$('angaTabs').querySelectorAll('button').forEach((b,j)=>{b.
 anga.forEach((a,i)=>{const b=document.createElement('button');b.textContent=a.name;b.addEventListener('click',()=>showAnga(i));$('angaTabs').append(b);});showAnga(0);
 $('openLesson').addEventListener('click',()=>{$('lesson').hidden=false;$('lesson').scrollIntoView({behavior:'smooth',block:'start'});});
 $('closeLesson').addEventListener('click',()=>{$('lesson').hidden=true;});
-// Multiple formative checks grounded in Chapter 1 of the study notes.
+// Chapter 1 formative assessment. Each item includes its study-note section.
 const questions=[
- {q:'पञ्चाङ्गका पाँच अङ्गमध्ये कुन पर्दछ?',options:['लग्न','करण','भावेश'],correct:1,why:'करण पञ्चाङ्गका पाँच अङ्गमध्ये एक हो।'},
- {q:'एक तिथिमा कति करण हुन्छन्?',options:['एक','दुई','चार'],correct:1,why:'एक तिथि दुई करण बराबर हुन्छ।'},
- {q:'नक्षत्रको परम्परागत संख्या कति हो?',options:['१२','२७','३०'],correct:1,why:'पञ्चाङ्गमा २७ नक्षत्र प्रयोग गरिन्छ।'},
- {q:'वारको परम्परागत संख्या कति हो?',options:['५','७','९'],correct:1,why:'वार सात हुन्छन्।'},
- {q:'पञ्चाङ्गमा योगको संख्या कति हो?',options:['११','२७','३०'],correct:1,why:'योग २७ हुन्छन्।'}
+ {unit:'१.१',q:'पञ्चाङ्गका पाँच अङ्गमध्ये कुन पर्दछ?',options:['लग्न','करण','भावेश'],correct:1,why:'तिथि, वार, नक्षत्र, योग र करण पाँच अङ्ग हुन्।'},
+ {unit:'१.१',q:'पञ्चाङ्गका पाँच अङ्गमध्ये कुन पर्दैन?',options:['योग','नक्षत्र','दशा'],correct:2,why:'दशा ज्योतिष अध्ययनको विषय हो तर पञ्चाङ्गका पाँच अङ्गमध्ये होइन।'},
+ {unit:'१.२',q:'चन्द्रमासमा कुल कति तिथि मानिन्छन्?',options:['१५','३०','२७'],correct:1,why:'शुक्ल र कृष्ण पक्षमा १५–१५ गरी ३० तिथि हुन्छन्।'},
+ {unit:'१.२',q:'३० तिथि भए पनि छुट्टाछुट्टै नाम कति छन्?',options:['१५','१६','३०'],correct:1,why:'चौध नाम दुई पक्षमा दोहोरिन्छन्; पूर्णिमा र औँसी छुट्टै हुन्।'},
+ {unit:'१.२',q:'पाँचौँ तिथि कुन नन्दादि समूहमा पर्छ?',options:['पूर्णा','जया','रिक्ता'],correct:0,why:'नन्दा, भद्रा, जया, रिक्ता, पूर्णाको पाँच-पाँच क्रम दोहोरिन्छ।'},
+ {unit:'१.२क',q:'३६०° लाई ३० तिथिमा बाँड्दा एक तिथिको कोण कति?',options:['१०°','१२°','१३°२०′'],correct:1,why:'३६०° ÷ ३० = १२°।'},
+ {unit:'१.२क',q:'एक अंशमा कति कला हुन्छन्?',options:['३०','६०','१००'],correct:1,why:'१ अंश = ६० कला; १ कला = ६० विकला।'},
+ {unit:'१.३',q:'परम्परागत वारहरूको संख्या कति?',options:['५','७','९'],correct:1,why:'आइतबारदेखि शनिबारसम्म सात वार हुन्छन्।'},
+ {unit:'१.४',q:'मानक गणनामा नक्षत्र कति?',options:['१२','२७','२८'],correct:1,why:'मानक विभाजनमा २७ नक्षत्र; अभिजित छुट्टै सन्दर्भमा आउँछ।'},
+ {unit:'१.४',q:'प्रत्येक नक्षत्रमा कति पाउ हुन्छन्?',options:['२','४','६'],correct:1,why:'२७ × ४ = १०८ पाउ।'},
+ {unit:'१.४',q:'तिष्य अर्को कुन नक्षत्रको नाम हो?',options:['पुष्य','रोहिणी','रेवती'],correct:0,why:'नोटमा तिष्य/पुष्य एउटै आठौँ नक्षत्रका नाम हुन्।'},
+ {unit:'१.५',q:'विष्कुम्भादि योग सूचीमा शुभ कुन क्रममा छ?',options:['२३','२४','२५'],correct:0,why:'२३ शुभ र २४ शुक्ल हुन्।'},
+ {unit:'१.६',q:'आनन्दादि योग कति छन्?',options:['२७','२८','३०'],correct:1,why:'आनन्दादि २८ र विष्कुम्भादि २७ योगका अलग सूची हुन्।'},
+ {unit:'१.७',q:'करणका प्रकार जम्मा कति छन्?',options:['७','११','१५'],correct:1,why:'सात चर र चार स्थिर गरी ११ प्रकारका करण हुन्छन्।'},
+ {unit:'१.८',q:'अयन र ऋतुका संख्या क्रमशः कति?',options:['२ र ६','६ र २','२ र १२'],correct:0,why:'दुई अयन र छ ऋतु मानिन्छन्।'}
 ];
-let questionIndex=0,correctCount=0,answered=false;
+let questionIndex=0,correctCount=0,answered=false,unitScores={};
 function renderQuestion(){
  const q=questions[questionIndex];answered=false;
  $('questionTitle').textContent=q.q;$('quizFeedback').textContent='';
- $('quizProgress').textContent=`प्रश्न ${questionIndex+1} / ${questions.length} · सही ${correctCount}`;
+ $('quizProgress').textContent=`प्रश्न ${questionIndex+1} / ${questions.length} · सही ${correctCount} · स्रोत खण्ड ${q.unit}`;
  $('quizOptions').replaceChildren();
  q.options.forEach((option,i)=>{const b=document.createElement('button');b.type='button';b.textContent=option;b.addEventListener('click',()=>{
-  if(answered)return;answered=true;
-  const ok=i===q.correct;if(ok)correctCount++;
+  if(answered)return;answered=true;const ok=i===q.correct;if(ok)correctCount++;
+  if(!unitScores[q.unit])unitScores[q.unit]={right:0,total:0};unitScores[q.unit].total++;if(ok)unitScores[q.unit].right++;
   $('quizFeedback').textContent=(ok?'सही। ':'अहिले सही भएन। ')+q.why;
-  $('quizProgress').textContent=`प्रश्न ${questionIndex+1} / ${questions.length} · सही ${correctCount}`;
+  $('quizProgress').textContent=`प्रश्न ${questionIndex+1} / ${questions.length} · सही ${correctCount} · स्रोत खण्ड ${q.unit}`;
   $('quizOptions').querySelectorAll('button').forEach(x=>x.disabled=true);
   $('nextQuestion').hidden=questionIndex===questions.length-1;
   if(questionIndex===questions.length-1){
-   const passed=correctCount>=4;
-   $('quizFeedback').textContent+=` अन्तिम नतिजा: ${correctCount}/5। `+(passed?'अध्यायको प्रारम्भिक जाँच पूरा भयो।':'फेरि पढेर अभ्यास गर्नुहोस्।');
+   const passed=correctCount>=12;
+   $('quizFeedback').textContent+=` अन्तिम नतिजा: ${correctCount}/${questions.length}। `+(passed?'प्रारम्भिक मूल्याङ्कन पूरा भयो।':'पुनः अध्ययन गरेर प्रयास गर्नुहोस्।');
+   $('unitBreakdown').textContent='खण्डअनुसार: '+Object.entries(unitScores).map(([unit,v])=>`${unit}: ${v.right}/${v.total}`).join(' · ');
    $('restartQuiz').hidden=false;
-   try{localStorage.setItem('jd-lesson1-v02',JSON.stringify({score:correctCount,total:5,completed:passed}));}catch(e){}
+   try{localStorage.setItem('jd-chapter1-v05',JSON.stringify({score:correctCount,total:questions.length,completed:passed,units:unitScores}));}catch(e){}
   }
- });$('quizOptions').append(b);});
- $('nextQuestion').hidden=true;
+ });$('quizOptions').append(b);});$('nextQuestion').hidden=true;
 }
 $('nextQuestion').addEventListener('click',()=>{questionIndex++;renderQuestion()});
-$('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;$('restartQuiz').hidden=true;renderQuestion()});
+$('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;unitScores={};$('restartQuiz').hidden=true;$('unitBreakdown').textContent='';renderQuestion()});
+try{const prev=JSON.parse(localStorage.getItem('jd-chapter1-v05')||'null');if(prev){$('savedProgress').textContent=`अघिल्लो अभ्यास: ${prev.score}/${prev.total} · ${prev.completed?'मापदण्ड पूरा':'पुनः अभ्यास आवश्यक'}`;}}catch(e){}
 renderQuestion();
 // Chapter 1 expanded learning tools. Angles are hypothetical teaching inputs.
 const tithiGroups=['नन्दा','भद्रा','जया','रिक्ता','पूर्णा'];
