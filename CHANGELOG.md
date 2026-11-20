@@ -1,3 +1,9 @@
+# v3.4 · Chapter 2 compact learning prototype
+- Chapter 2 focused view now uses lesson/practice/quiz tabs; other chapters unchanged.
+- Chapter 2 quiz presents one question at a time, preserving existing questions, scoring and reset logic.
+- Results reveal the full question set for review; retake restores one-question navigation.
+- Deep links to practice and quiz are supported. Browser regression testing is still required.
+
 # v3.3 · Narrow-screen CSS safeguards
 - Added responsive wrapping and minimum-width protection for chapter cards, quizzes, navigation and form controls.
 - Improved small-screen spacing and tap target sizes.
