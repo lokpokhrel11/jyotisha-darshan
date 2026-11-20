@@ -1,3 +1,10 @@
+# v3.7 · Compact chapter views across the Pathshala
+- Added lesson/practice tabs to chapters 1, 4, 5 and 6; lesson/exam tabs to chapter 3.
+- Kept Chapter 2's tested single-question exam unchanged.
+- Preserved all existing calculators and exercises; inactive sections are hidden rather than removed.
+- Supports deep links to a chapter's practice or assessment section.
+- Further live functional QA needed for each chapter.
+
 # v3.6 · Bottom chapter navigation
 - Added अध्ययन कक्षमा फर्कनुहोस् link at the bottom of every focused chapter (1–6), matching the top link.
 - Updated asset versions for immediate loading.
