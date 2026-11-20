@@ -1,3 +1,9 @@
+# v3.3 · Narrow-screen CSS safeguards
+- Added responsive wrapping and minimum-width protection for chapter cards, quizzes, navigation and form controls.
+- Improved small-screen spacing and tap target sizes.
+- No Jyotisha calculations changed.
+- Mobile device/browser verification remains pending; CSS changes are preventative, not a certified mobile pass.
+
 # v3.2 · Lesson navigation refinement
 - Chapter-specific table of contents with anchor links to lesson sections and exercises.
 - Corrected Kundali practice placement to chapter 1; chapter 2 keeps its own example and exam.
