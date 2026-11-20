@@ -11,11 +11,11 @@ const anga=[
 const $=id=>document.getElementById(id);
 $('year').textContent=new Date().getFullYear();
 $('menu').addEventListener('click',()=>{const open=$('nav').classList.toggle('open');$('menu').setAttribute('aria-expanded',String(open));});
-$('nav').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>$('nav').classList.remove('open')));
+$('nav').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{$('nav').classList.remove('open');$('menu').setAttribute('aria-expanded','false');}));
 function showAnga(i){$('angaTabs').querySelectorAll('button').forEach((b,j)=>{b.classList.toggle('selected',i===j);b.setAttribute('aria-pressed',String(i===j));});const a=anga[i];$('angaDetail').innerHTML=`<strong>${a.name}</strong> · ${a.count}<p>${a.desc}</p>`;}
 anga.forEach((a,i)=>{const b=document.createElement('button');b.textContent=a.name;b.addEventListener('click',()=>showAnga(i));$('angaTabs').append(b);});showAnga(0);
 $('openLesson').addEventListener('click',()=>{$('lesson').hidden=false;$('lesson').scrollIntoView({behavior:'smooth',block:'start'});});
-$('closeLesson').addEventListener('click',()=>{$('lesson').hidden=true;});
+$('closeLesson').addEventListener('click',()=>{$('lesson').hidden=true;$('openLesson').focus();});
 // Chapter 1 formative assessment. Each item includes its study-note section.
 const questions=[
  {unit:'१.१',q:'पञ्चाङ्गका पाँच अङ्गमध्ये कुन पर्दछ?',options:['लग्न','करण','भावेश'],correct:1,why:'तिथि, वार, नक्षत्र, योग र करण पाँच अङ्ग हुन्।'},
@@ -68,16 +68,16 @@ $('tithiNumber').addEventListener('change',showTithiGroup);showTithiGroup();
 function validAngle(id){const v=Number($(id).value);return $(id).value.trim()!==''&&Number.isFinite(v)&&v>=0&&v<360?v:null;}
 $('nakCalculate').addEventListener('click',()=>{
  const d=validAngle('nakDegree');if(d===null){$('nakResult').textContent='० देखि ३६० भन्दा कम अंश लेख्नुहोस्।';return;}
- const n=Math.floor((d+1e-10)/(360/27))+1;const pad=Math.floor(((d%(360/27))+1e-10)/(360/108))+1;
+ const n=Math.floor(d/(360/27))+1;const pad=Math.floor((d-(n-1)*(360/27))/(360/108))+1;
  $('nakResult').textContent=`नक्षत्र क्रम ${Math.min(n,27)} · पाउ ${Math.min(pad,4)}। यो २७ नक्षत्रको समान खण्डमा आधारित अभ्यास हो।`;
 });
 $('tithiCalculate').addEventListener('click',()=>{
  const sun=validAngle('sunLongitude'),moon=validAngle('moonLongitude');
  if(sun===null||moon===null){$('tithiCalcResult').textContent='दुवै भोगांश ० देखि ३६० भन्दा कम हुनुपर्छ।';return;}
- const diff=(moon-sun+360)%360;const idx=Math.floor((diff+1e-10)/12);const paksha=idx<15?'शुक्ल':'कृष्ण';
+ const diff=(moon-sun+360)%360;const idx=Math.floor(diff/12);const paksha=idx<15?'शुक्ल':'कृष्ण';
  const n=idx%15+1;const names=['प्रतिपदा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी','षष्ठी','सप्तमी','अष्टमी','नवमी','दशमी','एकादशी','द्वादशी','त्रयोदशी','चतुर्दशी'];
  const name=n===15?(paksha==='शुक्ल'?'पूर्णिमा':'औँसी'):names[n-1];
- const nearest=Math.round(diff/12)*12;const boundary=Math.abs(diff-nearest)<1e-8||Math.abs(diff-nearest+360)<1e-8;
+ const nearest=Math.round(diff/12)*12;const boundary=Math.abs(diff-nearest)<1e-9;
  $('tithiCalcResult').textContent=boundary?`अन्तर ${diff.toFixed(2)}° · यो १२° को ठीक सीमा हो। ${diff===0?'०° औँसीको सन्दर्भबिन्दु हो। ':diff===180?'१८०° पूर्णिमाको सन्दर्भबिन्दु हो। ':''}सीमापछि सुरु हुने तिथि: ${paksha} ${name}। वास्तविक पञ्चाङ्गमा सटीक समयसहित जाँच गर्नुहोस्।`:`अन्तर ${diff.toFixed(2)}° · ${paksha} पक्ष · ${name} (तिथि ${n})।`;
 });
 // Source-verified Chapter 1 lists (PDF pp. 8–10).
@@ -92,7 +92,7 @@ const lagna=$('lagna'),bhava=$('bhava');signs.forEach((s,i)=>lagna.add(new Optio
 // Fixed North Indian chart houses: 1 top diamond, 4 left diamond, 7 bottom diamond, 10 right diamond.
 // Other houses occupy the corner triangles. Labels are at approximate visual centers.
 const houseCenters=[[200,91],[105,51],[51,106],[92,200],[51,293],[106,348],[200,309],[294,348],[349,294],[309,200],[349,106],[294,51]];
-function updateChart(){const l=Number(lagna.value);const g=$('chartLabels');g.replaceChildren();houseCenters.forEach(([x,y],i)=>{const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',y);t.textContent=String((l+i-1)%12+1);g.append(t);});}
+function updateChart(){const l=Number(lagna.value);const g=$('chartLabels');g.replaceChildren();houseCenters.forEach(([x,y],i)=>{const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',y);t.textContent=String(((l+i-1)%12)+1);g.append(t);});}
 function calculate(){const l=Number(lagna.value),h=Number(bhava.value),idx=(l+h-2)%12;$('result').textContent=`${h} औँ भावमा ${idx+1} नम्बरको ${signs[idx]} राशि पर्छ। यसको स्वामी ${lords[idx]} हो।`;updateChart();}
 $('calculate').addEventListener('click',calculate);lagna.addEventListener('change',()=>{$('result').textContent='लग्न परिवर्तन भयो। नयाँ नतिजा हेर्न गणना गर्नुहोस्।';updateChart();});bhava.addEventListener('change',()=>{$('result').textContent='राशि पत्ता लगाउनुहोस् बटन थिच्नुहोस्।';});$('newExample').addEventListener('click',()=>{lagna.value=String(Math.floor(Math.random()*12)+1);bhava.value=String(Math.floor(Math.random()*12)+1);$('result').textContent='नयाँ उदाहरण छानियो। पहिले आफैँ गणना गर्नुहोस्।';updateChart();});
 updateChart();

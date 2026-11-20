@@ -40,3 +40,7 @@ Upload all files from this directory to the repository root, replacing existing 
 
 ## v0.3
 Upload extracted files to the repository root. See CHANGELOG.md.
+
+
+## v0.6
+Quality-control release. Upload the entire directory contents to the repository root. See QA_REPORT.md.
