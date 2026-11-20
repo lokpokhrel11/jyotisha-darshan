@@ -263,3 +263,17 @@ $('ch4Calculate').addEventListener('click',()=>{
  out.textContent=`${hr} घण्टा ${mn} मिनेट = ${ghadi} घडी ${pala} पला ${vipala} विपला। जाँच: ${(hr*60+mn)} मिनेट × २.५ पला प्रति मिनेट।`;
 });
 $('ch4Calculate').click();
+
+// Chapter 4.3: local-sunrise-only teaching calculator, no location data collected.
+function istSeconds(v){const m=/^(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(v||'');if(!m)return null;const a=m.slice(1).map(x=>x===undefined?0:Number(x));if(a[0]>23||a[1]>59||a[2]>59)return null;return a[0]*3600+a[1]*60+a[2];}
+$('istCalculate').addEventListener('click',()=>{
+ const birth=istSeconds($('istBirth').value),sun=istSeconds($('istSunrise').value),previous=$('istPrevious').value==='previous',out=$('istOutput');
+ if(birth===null||sun===null){out.textContent='कृपया दुवै समय सही ढाँचामा दिनुहोस्।';return;}
+ if(!previous&&birth<sun){out.textContent='जन्म समय सूर्योदयभन्दा अघि छ। अघिल्लो दिनको स्थानीय सूर्योदय प्रविष्ट गरी त्यसको विकल्प छान्नुहोस्।';return;}
+ if(previous&&birth>=sun){out.textContent='अघिल्लो दिनको सूर्योदय विकल्पमा जन्मसमय आजको सूर्योदयअघिको हुनुपर्छ। सही सूर्योदय समय पुष्टि गर्नुहोस्।';return;}
+ const elapsed=birth-sun+(previous?86400:0);
+ const totalVipala=elapsed*2.5; // 1 second of clock time = 2.5 vipala
+ const ghadi=Math.floor(totalVipala/3600),pala=Math.floor((totalVipala%3600)/60),vipala=totalVipala%60;
+ out.textContent=`बितेको समय: ${Math.floor(elapsed/3600)} घण्टा ${Math.floor(elapsed%3600/60)} मिनेट ${elapsed%60} सेकेन्ड। इष्टकाल = ${ghadi} घडी ${pala} पला ${Number(vipala.toFixed(2))} विपला।`;
+});
+$('istCalculate').click();
