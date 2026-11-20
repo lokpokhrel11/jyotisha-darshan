@@ -1,3 +1,9 @@
+# v3.2 · Lesson navigation refinement
+- Chapter-specific table of contents with anchor links to lesson sections and exercises.
+- Corrected Kundali practice placement to chapter 1; chapter 2 keeps its own example and exam.
+- Chapter-specific document titles and mobile-responsive topic navigation.
+- Existing calculators unchanged; interactive browser regression tests still pending.
+
 # v3.1 · Focused chapter reading
 - Six chapter-specific URLs using `index.html?chapter=1` through `?chapter=6`.
 - Each view displays its relevant lesson and related existing exercises, without removing calculator DOM elements.
