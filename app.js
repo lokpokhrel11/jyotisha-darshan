@@ -16,12 +16,45 @@ function showAnga(i){$('angaTabs').querySelectorAll('button').forEach((b,j)=>{b.
 anga.forEach((a,i)=>{const b=document.createElement('button');b.textContent=a.name;b.addEventListener('click',()=>showAnga(i));$('angaTabs').append(b);});showAnga(0);
 $('openLesson').addEventListener('click',()=>{$('lesson').hidden=false;$('lesson').scrollIntoView({behavior:'smooth',block:'start'});});
 $('closeLesson').addEventListener('click',()=>{$('lesson').hidden=true;});
-$('lesson').querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>{const good=b.dataset.answer==='5';$('quizFeedback').textContent=good?'सही! पञ्चाङ्गमा पाँच अङ्ग हुन्छन्।':'फेरि प्रयास गर्नुहोस्। “पञ्च” को अर्थ पाँच हो।';if(good){try{localStorage.setItem('jd-lesson1-quiz','complete');}catch(e){}}}));
+// Multiple formative checks grounded in Chapter 1 of the study notes.
+const questions=[
+ {q:'पञ्चाङ्गका पाँच अङ्गमध्ये कुन पर्दछ?',options:['लग्न','करण','भावेश'],correct:1,why:'करण पञ्चाङ्गका पाँच अङ्गमध्ये एक हो।'},
+ {q:'एक तिथिमा कति करण हुन्छन्?',options:['एक','दुई','चार'],correct:1,why:'एक तिथि दुई करण बराबर हुन्छ।'},
+ {q:'नक्षत्रको परम्परागत संख्या कति हो?',options:['१२','२७','३०'],correct:1,why:'पञ्चाङ्गमा २७ नक्षत्र प्रयोग गरिन्छ।'},
+ {q:'वारको परम्परागत संख्या कति हो?',options:['५','७','९'],correct:1,why:'वार सात हुन्छन्।'},
+ {q:'पञ्चाङ्गमा योगको संख्या कति हो?',options:['११','२७','३०'],correct:1,why:'योग २७ हुन्छन्।'}
+];
+let questionIndex=0,correctCount=0,answered=false;
+function renderQuestion(){
+ const q=questions[questionIndex];answered=false;
+ $('questionTitle').textContent=q.q;$('quizFeedback').textContent='';
+ $('quizProgress').textContent=`प्रश्न ${questionIndex+1} / ${questions.length} · सही ${correctCount}`;
+ $('quizOptions').replaceChildren();
+ q.options.forEach((option,i)=>{const b=document.createElement('button');b.type='button';b.textContent=option;b.addEventListener('click',()=>{
+  if(answered)return;answered=true;
+  const ok=i===q.correct;if(ok)correctCount++;
+  $('quizFeedback').textContent=(ok?'सही। ':'अहिले सही भएन। ')+q.why;
+  $('quizProgress').textContent=`प्रश्न ${questionIndex+1} / ${questions.length} · सही ${correctCount}`;
+  $('quizOptions').querySelectorAll('button').forEach(x=>x.disabled=true);
+  $('nextQuestion').hidden=questionIndex===questions.length-1;
+  if(questionIndex===questions.length-1){
+   const passed=correctCount>=4;
+   $('quizFeedback').textContent+=` अन्तिम नतिजा: ${correctCount}/5। `+(passed?'अध्यायको प्रारम्भिक जाँच पूरा भयो।':'फेरि पढेर अभ्यास गर्नुहोस्।');
+   $('restartQuiz').hidden=false;
+   try{localStorage.setItem('jd-lesson1-v02',JSON.stringify({score:correctCount,total:5,completed:passed}));}catch(e){}
+  }
+ });$('quizOptions').append(b);});
+ $('nextQuestion').hidden=true;
+}
+$('nextQuestion').addEventListener('click',()=>{questionIndex++;renderQuestion()});
+$('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;$('restartQuiz').hidden=true;renderQuestion()});
+renderQuestion();
 const lagna=$('lagna'),bhava=$('bhava');signs.forEach((s,i)=>lagna.add(new Option(`${i+1} · ${s}`,String(i+1))));for(let i=1;i<=12;i++)bhava.add(new Option(`${i} औँ भाव`,String(i)));lagna.value='5';bhava.value='9';
 // Fixed North Indian chart houses: 1 top diamond, 4 left diamond, 7 bottom diamond, 10 right diamond.
 // Other houses occupy the corner triangles. Labels are at approximate visual centers.
 const houseCenters=[[200,91],[105,51],[51,106],[92,200],[51,293],[106,348],[200,309],[294,348],[349,294],[309,200],[349,106],[294,51]];
 function updateChart(){const l=Number(lagna.value);const g=$('chartLabels');g.replaceChildren();houseCenters.forEach(([x,y],i)=>{const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',y);t.textContent=String((l+i-1)%12+1);g.append(t);});}
 function calculate(){const l=Number(lagna.value),h=Number(bhava.value),idx=(l+h-2)%12;$('result').textContent=`${h} औँ भावमा ${idx+1} नम्बरको ${signs[idx]} राशि पर्छ। यसको स्वामी ${lords[idx]} हो।`;updateChart();}
-$('calculate').addEventListener('click',calculate);lagna.addEventListener('change',updateChart);bhava.addEventListener('change',()=>{$('result').textContent='राशि पत्ता लगाउनुहोस् बटन थिच्नुहोस्।';});updateChart();
+$('calculate').addEventListener('click',calculate);lagna.addEventListener('change',()=>{$('result').textContent='लग्न परिवर्तन भयो। नयाँ नतिजा हेर्न गणना गर्नुहोस्।';updateChart();});bhava.addEventListener('change',()=>{$('result').textContent='राशि पत्ता लगाउनुहोस् बटन थिच्नुहोस्।';});$('newExample').addEventListener('click',()=>{lagna.value=String(Math.floor(Math.random()*12)+1);bhava.value=String(Math.floor(Math.random()*12)+1);$('result').textContent='नयाँ उदाहरण छानियो। पहिले आफैँ गणना गर्नुहोस्।';updateChart();});
+updateChart();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}

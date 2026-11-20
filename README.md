@@ -33,3 +33,7 @@ Free, static GitHub Pages pilot for a Nepali-first Jyotiṣa education platform,
 5. Create practitioner profiles only after written agreement.
 
 License: All rights reserved unless a separate license is granted. Third-party source texts and notes are not included in this repository.
+
+
+## v0.2 upgrade
+Upload all files from this directory to the repository root, replacing existing files. See CHANGELOG.md. No payment or client-data collection is implemented.
