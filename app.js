@@ -92,7 +92,31 @@ const lagna=$('lagna'),bhava=$('bhava');signs.forEach((s,i)=>lagna.add(new Optio
 // Fixed North Indian chart houses: 1 top diamond, 4 left diamond, 7 bottom diamond, 10 right diamond.
 // Other houses occupy the corner triangles. Labels are at approximate visual centers.
 const houseCenters=[[200,91],[105,51],[51,106],[92,200],[51,293],[106,348],[200,309],[294,348],[349,294],[309,200],[349,106],[294,51]];
-function updateChart(){const l=Number(lagna.value);const g=$('chartLabels');g.replaceChildren();houseCenters.forEach(([x,y],i)=>{const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',y);t.textContent=String(((l+i-1)%12)+1);g.append(t);});}
+const roman=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+let selectedHouse=1;
+function updateChart(){
+ const l=Number(lagna.value),g=$('chartLabels');g.replaceChildren();
+ houseCenters.forEach(([x,y],i)=>{
+  const n=i+1,r=(l+i-1)%12+1;
+  const group=document.createElementNS('http://www.w3.org/2000/svg','g');
+  group.setAttribute('role','button');group.setAttribute('tabindex','0');
+  group.setAttribute('aria-label',`${n} औँ भाव, ${signs[r-1]} राशि`);
+  group.setAttribute('class','chart-house'+(n===selectedHouse?' selected':''));
+  const hit=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  hit.setAttribute('cx',x);hit.setAttribute('cy',y-5);hit.setAttribute('r',28);hit.setAttribute('fill','transparent');
+  const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+  t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('font-size','19');t.textContent=String(r);
+  const sub=document.createElementNS('http://www.w3.org/2000/svg','text');
+  sub.setAttribute('x',x);sub.setAttribute('y',y+14);sub.setAttribute('font-size','10');sub.textContent=roman[i];
+  group.append(hit,t,sub);
+  const select=()=>{selectedHouse=n;updateChart();};
+  group.addEventListener('click',select);
+  group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}});
+  g.append(group);
+ });
+ const r=(l+selectedHouse-2)%12+1;
+ $('chartSelection').textContent=`भाव ${selectedHouse} (${roman[selectedHouse-1]}) · राशि ${r} (${signs[r-1]}) · स्वामी ${lords[r-1]} · ${[1,4,7,10].includes(selectedHouse)?'केन्द्र':([5,9].includes(selectedHouse)?'त्रिकोण':([6,8,12].includes(selectedHouse)?'दुःस्थान':'अन्य भाव'))}`;
+}
 function calculate(){const l=Number(lagna.value),h=Number(bhava.value),idx=(l+h-2)%12;$('result').textContent=`${h} औँ भावमा ${idx+1} नम्बरको ${signs[idx]} राशि पर्छ। यसको स्वामी ${lords[idx]} हो।`;updateChart();}
 $('calculate').addEventListener('click',calculate);lagna.addEventListener('change',()=>{$('result').textContent='लग्न परिवर्तन भयो। नयाँ नतिजा हेर्न गणना गर्नुहोस्।';updateChart();});bhava.addEventListener('change',()=>{$('result').textContent='राशि पत्ता लगाउनुहोस् बटन थिच्नुहोस्।';});$('newExample').addEventListener('click',()=>{lagna.value=String(Math.floor(Math.random()*12)+1);bhava.value=String(Math.floor(Math.random()*12)+1);$('result').textContent='नयाँ उदाहरण छानियो। पहिले आफैँ गणना गर्नुहोस्।';updateChart();});
 updateChart();

@@ -13,3 +13,5 @@
 #chapter2 .method-grid{margin-bottom:28px}
 #chapter2 .practice-layout{margin-top:22px}
 #chapter2 .consult-note{margin-bottom:0}
+
+.chart-house{cursor:pointer;outline:none}.chart-house text{pointer-events:none}.chart-house.selected text{fill:#a87934;font-weight:800}.chart-house:focus-visible circle{stroke:#a87934;stroke-width:2;fill:#f3ead9}.chart-house:hover text{fill:#a87934}

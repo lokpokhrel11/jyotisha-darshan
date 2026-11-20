@@ -1,7 +1,6 @@
-# v0.7 · Chapter 2 introductory module
-- Added Chapter 2 lesson on bhava/rashi/graha distinctions, North Indian chart reading, lagna, and house groups.
-- Added reverse calculation: find house from lagna and sign.
-- Added 12-house meaning lookup using the first-level Guruji chart.
-- Preserved Guruji's trikona convention (5, 9).
-- Source: authoritative 117-page study notes, Chapter 2, PDF pp. 10–15.
-- Chart geometry still requires independent visual review; no natal ascendant computation.
+# v0.8 · Interactive North Indian chart
+- Verified house ordering against Guruji study notes, pp. 11–12.
+- Interactive 12-house SVG: tap/click/keyboard-select a house to inspect its fixed position, sign, lord, and group.
+- Roman house labels distinguish house position from sign number.
+- Preserves Guruji trikona 5/9.
+- The diagram is an instructional schematic, not a computed natal chart.
