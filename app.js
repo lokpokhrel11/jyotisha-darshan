@@ -308,3 +308,18 @@ $('bhCalculate').addEventListener('click',()=>{
  out.textContent=`अवस्था ${a?'क':'ख'} प्रयोग भयो। ${a?'आजको अन्त्य-मानपछि अर्को नक्षत्रमा जन्म।':'आजको अन्त्य-मानभित्रको नक्षत्रमा जन्म।'} जाँच: भयात < भभोग।`;
  bhPanel.textContent=bhFmt(bh);bbPanel.textContent=bhFmt(bb);
 });$('bhCalculate').click();
+
+// Chapter 5: use vipala integer arithmetic to avoid floating point boundaries.
+$('padaCalculate').addEventListener('click',()=>{
+ const out=$('padaOutput');const parse=(s)=>{const m=/^\s*(\d{1,2})\s*[/：:]\s*(\d{1,2})\s*$/.exec(s);if(!m)return null;const g=+m[1],p=+m[2];return g<=60&&p<60&&(g<60||p===0)?(g*60+p)*60:null;};
+ const a=parse($('padaBhayat').value),b=parse($('padaBhavog').value);
+ if(a===null||b===null||b<=0||a<0||a>=b){out.textContent='मान्य घडी/पला दिनुहोस्। भभोग ० भन्दा ठूलो र भयात ० देखि भभोगभन्दा सानो हुनुपर्छ।';return;}
+ const stage=Math.floor(a*4/b)+1;
+ const fmt=(n)=>{const g=Math.floor(n/3600),p=Math.floor((n%3600)/60),v=n%60;return `${g} घडी ${p} पला ${v} विपला`;};
+ const limits=[1,2,3,4].map(k=>`${k} औँ सीमा: ${fmt(b*k/4)}`).join(' · ');
+ // Quarter boundaries can be fractional vipala; show rounded to 2 decimals without claiming exact integer vipala.
+ const exactFmt=n=>Number.isInteger(n)?fmt(n):`${(n/60).toFixed(3)} पला`;
+ const bounds=[1,2,3,4].map(k=>`${k} औँ सीमा: ${exactFmt(b*k/4)}`).join(' | ');
+ out.textContent=`चरण: ${['पहिलो','दोस्रो','तेस्रो','चौथो'][stage-1]} (${stage}/४)। भयात: ${fmt(a)}। एक चरण: ${exactFmt(b/4)}। ${bounds}`;
+});
+$('padaCalculate').click();

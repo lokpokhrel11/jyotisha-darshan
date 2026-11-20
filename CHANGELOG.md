@@ -1,6 +1,5 @@
-# v1.8 · Chapter 5 calculation clarity
-- Added explicit automatic / case क / case ख selector.
-- Added separate, clearly labeled भयात and भभोग result panels.
-- Contextual label for next-day versus previous-day Panchanga end value.
-- Rejects manually selected case inconsistent with the entered numbers.
-- Existing formulas unchanged. JavaScript syntax checked; browser QA pending.
+# v1.9 · Nakshatra pada exercise
+- Added Chapter 5 pada calculator with quarter thresholds and Rohini worked example.
+- Uses ghadi/pala input, validates bhayat < bhavog, does not infer nakshatra identity.
+- No dasha remainder or kshaya/vriddhi support yet.
+- JavaScript syntax validated; browser QA pending.
