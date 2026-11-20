@@ -1,6 +1,6 @@
-# v2.0 · Chapter 5 Vimshottari balance
-- New interactive दशा शेष calculator with selectable nakshatra lord and 9 traditional mahadasha durations.
-- Shows remaining fraction, decimal years and approximate years/months/days using a 360-day teaching year.
-- Includes Rohini/Moon worked example from source notes.
-- Source caveat: day rounding may differ by a day from intermediate-step rounding in the notes.
-- JavaScript syntax validated; full browser QA pending.
+# v2.1 · Chapter 6.1 Vimshottari cycle
+- Interactive nine-period sequence starting with selected nakshatra lord.
+- Optional birth mahadasha balance; if omitted, assumes full first period for teaching.
+- Validates remaining years against first period duration and shows cumulative approximate age ranges.
+- Source: 117-page notes, Chapter 6.1, PDF pp.55–56.
+- JS syntax checks passed; browser regression QA pending.

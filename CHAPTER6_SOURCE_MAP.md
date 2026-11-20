@@ -1,0 +1,2 @@
+# Chapter 6.1 source mapping
+Primary 117-page study notes (October 2026), printed PDF pp.55–56: Vimshottari sequence Ketu 7, Venus 20, Sun 6, Moon 10, Mars 7, Rahu 18, Jupiter 16, Saturn 19, Mercury 17; 120 years. Rohini example begins with remaining Moon mahadasha and continues Mars, Rahu, Jupiter, Saturn, Mercury. This v2.1 lesson is a sequence calculator only. It does not calculate antardasha, birth dates, calendar dates or predictions. Decimal years and displayed ages are approximations.
