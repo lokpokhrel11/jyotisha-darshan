@@ -107,3 +107,6 @@ input,select,textarea{max-width:100%}
 
 /* Bottom navigation for all focused chapters */
 .chapter-bottom-nav{max-width:1200px;margin:16px auto 50px;padding:24px 5vw;border-top:1px solid #d9ded9;display:flex;justify-content:center}.chapter-bottom-nav .chapter-back{margin:0;padding:12px 18px;border:1px solid #c8c9c1;border-radius:9px;background:white;min-height:46px;align-items:center}.chapter-bottom-nav .chapter-back:hover,.chapter-bottom-nav .chapter-back:focus-visible{background:#faf3e7;border-color:#a87934}
+
+/* v3.7 hide inactive lesson/practice/quiz panels across focused chapters */
+.chapter-focus main>section[hidden]{display:none!important}
