@@ -15,3 +15,6 @@ Primary teaching source: 117-page **ज्योतिष शास्त्र:
 - Real-device browser testing, including offline install and refresh.
 - Exact boundary timing conventions require ephemeris support and are outside this prototype.
 - No client records, bookings, payment collection, or real horoscope predictions.
+
+## v1.0.1 follow-up
+User reported reset did not visibly reset questions. Code review found the form was recreated but scroll remained at the bottom. Reset now scrolls/focuses the first question. Requires live user retest.
