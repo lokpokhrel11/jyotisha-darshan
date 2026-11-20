@@ -186,8 +186,21 @@ function renderChapter2Exam(){examQuestions.replaceChildren();chapter2Questions.
 function updateChapter2Progress(){let done=0;chapter2Questions.forEach((q,i)=>{if(examForm.querySelector(`input[name="chapter2q${i}"]:checked`))done++;});$('examProgress').textContent=`उत्तर दिइएका: ${done}/${chapter2Questions.length}`;}
 examForm.addEventListener('change',updateChapter2Progress);
 examForm.addEventListener('submit',event=>{event.preventDefault();const answers=chapter2Questions.map((q,i)=>examForm.querySelector(`input[name="chapter2q${i}"]:checked`));if(answers.some(a=>!a)){examResults.hidden=false;examResults.textContent='कृपया सबै २० प्रश्नको उत्तर दिनुहोस्।';return;}let score=0;const summary=document.createElement('div');const title=document.createElement('h3');chapter2Questions.forEach((q,i)=>{const chosen=Number(answers[i].value);const ok=chosen===q[3];if(ok)score++;const p=document.createElement('p');p.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(p);});title.textContent=`नतिजा: ${score}/20 · ${score>=16?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;examResults.replaceChildren(title,summary);examResults.hidden=false;try{localStorage.setItem('jyotisha-chapter2-score',JSON.stringify({score,total:20}));}catch(e){}examResults.scrollIntoView({behavior:'smooth',block:'start'});});
+// Shuffle the question objects together with their answer keys and explanations.
+// Reject an unchanged order so every reset visibly changes the sequence.
+function reshuffleChapter2Questions(){
+  const previous=chapter2Questions.slice();
+  for(let i=chapter2Questions.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [chapter2Questions[i],chapter2Questions[j]]=[chapter2Questions[j],chapter2Questions[i]];
+  }
+  if(chapter2Questions.every((q,i)=>q===previous[i])){
+    [chapter2Questions[0],chapter2Questions[1]]=[chapter2Questions[1],chapter2Questions[0]];
+  }
+}
 $('examReset').addEventListener('click',()=>{
   examForm.reset();
+  reshuffleChapter2Questions();
   renderChapter2Exam();
   // Return to the beginning so the cleared selections are immediately visible.
   const firstQuestion=examQuestions.querySelector('fieldset');

@@ -1,4 +1,6 @@
-# v1.0.1 · Examination reset usability fix
-- Reset now clears selections, hides the result, updates progress and scrolls/focuses the first question.
-- Offline cache version bumped so the updated JavaScript is loaded.
-- Full cross-browser testing still pending.
+# v1.0.2 · New question order on every retry
+- Chapter 2 retry now shuffles all 20 questions using Fisher–Yates.
+- Guarantees a different sequence from the immediately preceding attempt.
+- Each question remains linked to its original correct answer and explanation.
+- Reset clears answers/results, updates progress and scrolls to the first question.
+- Offline cache version updated.

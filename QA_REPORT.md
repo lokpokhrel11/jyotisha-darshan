@@ -18,3 +18,8 @@ Primary teaching source: 117-page **ज्योतिष शास्त्र:
 
 ## v1.0.1 follow-up
 User reported reset did not visibly reset questions. Code review found the form was recreated but scroll remained at the bottom. Reset now scrolls/focuses the first question. Requires live user retest.
+
+## v1.0.2
+- Verified JavaScript syntax with node --check.
+- Question order changes on retry; answers and explanations move with their question objects.
+- Browser-based user retest still required.
