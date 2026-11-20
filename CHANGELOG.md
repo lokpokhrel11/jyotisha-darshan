@@ -1,6 +1,5 @@
-# v1.5 · Chapter 4 local-sunrise istakala practice
-- Interactive birth time vs manually supplied local sunrise calculation.
-- Damouli worked example: 13:00 − 05:14 = 19 ghadi 25 pala.
-- Validation for pre-sunrise births; previous-day sunrise must be supplied by learner.
-- No geolocation, automated sunrise, birth date or personal data storage.
-- Syntax checked; browser QA pending.
+# v1.6 · Local sunrise teaching calculator
+- Calendar sunrise minus 4 minutes minus signed birthplace offset, rounded to nearest minute per notes.
+- Damouli worked example, explicit manual source of offset.
+- No automatic astronomical calculation or collection of birth information.
+- Syntax validation passed; browser QA pending.
