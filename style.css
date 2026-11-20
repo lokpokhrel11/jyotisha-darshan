@@ -56,3 +56,36 @@
 
 /* v3.2 lesson navigation */
 .chapter-toc{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:25px;padding:15px 0;border-top:1px solid #d9ded9;border-bottom:1px solid #d9ded9}.chapter-toc strong{margin-right:8px;color:#526b72;font-size:.85rem}.chapter-toc a{background:#fff;border:1px solid #dce1dc;border-radius:30px;padding:8px 12px;font-size:.85rem;text-decoration:none;color:#18303a}.chapter-toc a:hover,.chapter-toc a:focus-visible{border-color:#a87934;background:#faf3e7}.chapter-focus main>section{scroll-margin-top:110px}@media(max-width:560px){.chapter-toc{gap:7px}.chapter-toc a{font-size:.81rem;padding:8px 10px}}
+
+/* v3.3 narrow-screen safeguards; live mobile viewport verification still required */
+html,body{max-width:100%}
+main,main>section,.practice-layout>*,.method-grid>*,.cards>*,.dashboard-grid>*,.dashboard-stats>*{min-width:0}
+img,svg,canvas,video{max-width:100%}
+input,select,textarea{max-width:100%}
+.chapter-toc a,.chapter-card,.tile,.result,.detail{overflow-wrap:anywhere}
+@media(max-width:600px){
+ .hero{min-height:auto;padding-top:48px;padding-bottom:52px}
+ .hero h1{font-size:clamp(2.05rem,9vw,3.1rem)}
+ .hero .lead{font-size:1rem}
+ .hero-foot{gap:8px 14px}
+ .hero-foot span:not(:first-child):before{display:none}
+ .section{padding-top:46px;padding-bottom:46px}
+ .section-heading{display:block}
+ .lesson,.practice-controls,.chart-card,.tile{padding:18px}
+ .practice-layout,.method-grid,.three{grid-template-columns:minmax(0,1fr)}
+ .quiz-options,.actions,.dashboard-actions{flex-wrap:wrap}
+ .chapter-pager a,.chapter-toc a{min-height:44px;display:inline-flex;align-items:center}
+ .site-header nav a{min-height:44px}
+ .practice-controls input,.practice-controls select{min-width:0}
+ footer div:nth-child(2){flex-wrap:wrap}
+}
+@media(max-width:360px){
+ .site-header{gap:6px}
+ .brand{gap:7px;min-width:0}
+ .brand strong{font-size:.88rem}
+ .brand small{font-size:.46rem;letter-spacing:.04em}
+ .brandmark{width:34px;height:34px;font-size:19px}
+ .chapter-focus-banner h1{font-size:1.8rem}
+ .chapter-card h3{font-size:1.13rem}
+ .button{padding:10px 13px;gap:8px}
+}
