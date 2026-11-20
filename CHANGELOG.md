@@ -1,7 +1,5 @@
-# v2.2 · Chapter 6.2 Antardasha
-- Interactive nine-subperiod Vimshottari antardasha table for any mahadasha lord.
-- Exact 360-day educational calendar arithmetic; durations and cumulative totals.
-- Verifies that nine subperiods total the complete mahadasha.
-- No calendar dates, birth records or prediction claims.
-- Source: October 2026 study notes, Section 6.2, PDF pp.55–56.
-- JavaScript syntax validated; browser regression QA pending.
+# v2.3 · Chapter 6.3 Tribhagi dasha
+- Added interactive 80-year Tribhagi sequence with exact month arithmetic.
+- Preserves 2/3 scaling from Vimshottari, source example beginning Moon, and cumulative totals.
+- No birth-date prediction or individual dasha balance.
+- JavaScript syntax checked; browser regression pending.

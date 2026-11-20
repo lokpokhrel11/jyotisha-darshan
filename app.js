@@ -376,3 +376,15 @@ function renderAntardasha(){
 $('adCalculate').addEventListener('click',renderAntardasha);
 $('adLord').addEventListener('change',renderAntardasha);
 renderAntardasha();
+
+// Chapter 6.3: exact integer months avoid rounding drift.
+function renderTribhagi(){
+ const start=cyclePlanets.findIndex(p=>p[0]===$('triLord').value);
+ const table=document.createElement('table');table.className='data-table';
+ const head=document.createElement('tr');['ग्रह','त्रिभागी अवधि','सञ्चित अवधि'].forEach(t=>{const c=document.createElement('th');c.textContent=t;head.append(c);});table.append(head);
+ let sum=0;const fmt=m=>`${Math.floor(m/12)} वर्ष ${m%12} महिना`;
+ for(let i=0;i<9;i++){const p=cyclePlanets[(start+i)%9];const months=p[2]*8;sum+=months;const row=document.createElement('tr');[p[1],fmt(months),fmt(sum)].forEach(t=>{const c=document.createElement('td');c.textContent=t;row.append(c);});table.append(row);}
+ const note=document.createElement('p');note.textContent=`जम्मा ${fmt(sum)} (८० वर्ष)। विंशोत्तरी १२० वर्षको दुई तिहाइ।`;
+ $('triOutput').replaceChildren(note,table);
+}
+$('triCalculate').addEventListener('click',renderTribhagi);$('triLord').addEventListener('change',renderTribhagi);renderTribhagi();
