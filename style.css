@@ -15,3 +15,5 @@
 #chapter2 .consult-note{margin-bottom:0}
 
 .chart-house{cursor:pointer;outline:none}.chart-house text{pointer-events:none}.chart-house.selected text{fill:#a87934;font-weight:800}.chart-house:focus-visible circle{stroke:#a87934;stroke-width:2;fill:#f3ead9}.chart-house:hover text{fill:#a87934}
+
+.exam-shell{max-width:850px;margin:auto}.exam-question{border:1px solid #bdc7c7;border-radius:12px;padding:18px;margin:18px 0}.exam-question legend{font-weight:700;padding:0 8px}.exam-option{display:block;margin:10px 0;cursor:pointer}.exam-option input{margin-right:8px}#examResults p{margin:12px 0}#examResults[hidden]{display:none}

@@ -1,7 +1,7 @@
-# v0.9 · Guruji's worked exaltation chart
-- Adds the exact nine-planet, Aries-lagna teaching example from source PDF p. 12.
-- Adds planet-to-house reveal and an overlay toggle for all nine planet names.
-- Preserves empty houses 5, 8, 11 and Guruji's Rahu-in-Gemini / Ketu-in-Sagittarius convention.
-- Distinguishes synthetic exaltation illustration from computed birth charts.
-- Existing v0.8 interactive chart and Chapter 1 assessment retained.
-- Syntax checked; browser layout/interaction remains to be tested after deployment.
+# v1.0 · Chapter 2 formative practical examination
+- 20 multiple-choice questions grounded in Guruji notes pp. 11–15.
+- Covers chart geometry, house/sign/planet distinctions, sign rulers, ascendant calculations, house groups, and the exaltation example.
+- Explains all answers after full submission; 16/20 formative goal.
+- Saves only aggregate score in local browser storage.
+- Source audit: CHAPTER2_EXAM_SOURCE.md.
+- JavaScript syntax validated; visual/browser end-to-end testing remains outstanding.
