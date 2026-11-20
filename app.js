@@ -353,3 +353,26 @@ function renderCycle(){
 $('cycleCalculate').addEventListener('click',renderCycle);
 $('cycleLord').addEventListener('change',()=>{$('cycleBalance').value='';renderCycle();});
 renderCycle();
+
+// Chapter 6.2: all nine antardasha periods within one complete mahadasha.
+function renderAntardasha(){
+ const start=cyclePlanets.findIndex(p=>p[0]===$('adLord').value),out=$('adOutput');
+ if(start<0){out.textContent='मान्य ग्रह छान्नुहोस्।';return;}
+ const major=cyclePlanets[start],totalDays=major[2]*360;
+ let elapsedDays=0;
+ const table=document.createElement('table');table.className='data-table';
+ const header=document.createElement('tr');['अन्तर्दशा','अवधि','सञ्चित अवधि'].forEach(s=>{const th=document.createElement('th');th.textContent=s;header.append(th);});table.append(header);
+ const formatDays=d=>{const years=Math.floor(d/360),months=Math.floor(d%360/30),days=d%30;return `${years} व ${months} म ${days} दि`;};
+ for(let i=0;i<9;i++){
+   const sub=cyclePlanets[(start+i)%9];
+   // Exact integer days under the pedagogical 360-day year: (major*sub/120)*360 = major*sub*3.
+   const durationDays=major[2]*sub[2]*3;
+   elapsedDays+=durationDays;
+   const tr=document.createElement('tr');[`${major[1]}–${sub[1]}`,formatDays(durationDays),formatDays(elapsedDays)].forEach(s=>{const td=document.createElement('td');td.textContent=s;tr.append(td);});table.append(tr);
+ }
+ const summary=document.createElement('p');summary.textContent=`कुल अवधि: ${formatDays(elapsedDays)} = ${major[2]} वर्ष। ${elapsedDays===totalDays?'जम्मा मिल्यो।':'गणना पुनः जाँच्नुहोस्।'}`;
+ out.replaceChildren(summary,table);
+}
+$('adCalculate').addEventListener('click',renderAntardasha);
+$('adLord').addEventListener('change',renderAntardasha);
+renderAntardasha();
