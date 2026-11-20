@@ -110,3 +110,11 @@ input,select,textarea{max-width:100%}
 
 /* v3.7 hide inactive lesson/practice/quiz panels across focused chapters */
 .chapter-focus main>section[hidden]{display:none!important}
+
+
+/* v4.0: Compact practice tool accordion; preserve headings and original calculator markup */
+.practice-panel-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;background:transparent;border:0;color:inherit;font:inherit;font-weight:inherit;padding:10px 0;cursor:pointer}
+.practice-panel-toggle:focus-visible{outline:3px solid #a87934;outline-offset:3px;border-radius:5px}
+.practice-panel-chevron{flex:none;font-size:1.35em;transition:transform .15s ease}
+.practice-panel-open .practice-panel-chevron{transform:rotate(180deg)}
+.chapter-focus .section[id] > [hidden]{display:none!important}
