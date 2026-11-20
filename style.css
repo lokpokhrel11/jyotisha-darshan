@@ -104,3 +104,6 @@ input,select,textarea{max-width:100%}
 .exam-stepper span{font-size:.9rem;font-weight:750;color:#536b73}
 .exam-stepper[hidden]{display:none!important}
 @media(max-width:420px){.learning-tabs{width:100%}.exam-stepper{justify-content:center}.exam-stepper span{order:-1;flex-basis:100%;text-align:center}}
+
+/* Bottom navigation for all focused chapters */
+.chapter-bottom-nav{max-width:1200px;margin:16px auto 50px;padding:24px 5vw;border-top:1px solid #d9ded9;display:flex;justify-content:center}.chapter-bottom-nav .chapter-back{margin:0;padding:12px 18px;border:1px solid #c8c9c1;border-radius:9px;background:white;min-height:46px;align-items:center}.chapter-bottom-nav .chapter-back:hover,.chapter-bottom-nav .chapter-back:focus-visible{background:#faf3e7;border-color:#a87934}
