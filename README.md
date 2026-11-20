@@ -37,3 +37,6 @@ License: All rights reserved unless a separate license is granted. Third-party s
 
 ## v0.2 upgrade
 Upload all files from this directory to the repository root, replacing existing files. See CHANGELOG.md. No payment or client-data collection is implemented.
+
+## v0.3
+Upload extracted files to the repository root. See CHANGELOG.md.

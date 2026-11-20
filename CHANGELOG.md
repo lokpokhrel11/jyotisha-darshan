@@ -1,13 +1,12 @@
-# Jyotisha Darshan v0.2
+# Jyotisha Darshan v0.3
 
-- Replaced single-question check with five-question Panchanga self-assessment and 4/5 completion threshold.
-- Added explanatory feedback and browser-local quiz completion state.
-- Fixed stale written results after changing lagna.
-- Added random lagna/bhava practice scenarios.
-- Added fictional-case practitioner workbench outline (no personal data or payments).
-- Rotated PWA cache identifier to v02.
+- Expanded Chapter 1 with tithi/paksha, Nandadi groups, nakshatra/pada and angular tithi exercises.
+- Added interactive group classification, longitude-to-nakshatra-order/pada, and solar-lunar angular tithi calculators.
+- Teaching calculations use fictional inputs, not live ephemerides.
+- Source: October 4, 2026 Jyotisha study notes, Chapter 1, printed pages 2–7. Explanations paraphrased.
+- Updated service worker cache.
 
-## Pending verification
-- North Indian chart geometry and text placement should be reviewed visually with Guruji before the diagram is certified for instruction.
-- Advanced calculations and daśā are not yet implemented.
-- Public deployment should follow manual testing in Chrome/Safari and mobile browsers.
+## Pending
+- Guruji verification of chart geometry and all interpretive conventions.
+- Full Chapter 1 content and assessments still require further development.
+- Manual browser, screen-reader, and mobile testing.

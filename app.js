@@ -49,6 +49,25 @@ function renderQuestion(){
 $('nextQuestion').addEventListener('click',()=>{questionIndex++;renderQuestion()});
 $('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;$('restartQuiz').hidden=true;renderQuestion()});
 renderQuestion();
+// Chapter 1 expanded learning tools. Angles are hypothetical teaching inputs.
+const tithiGroups=['नन्दा','भद्रा','जया','रिक्ता','पूर्णा'];
+for(let i=1;i<=15;i++)$('tithiNumber').add(new Option(`${i} औँ तिथि`,String(i)));
+function showTithiGroup(){const n=Number($('tithiNumber').value);$('tithiGroupResult').textContent=`${n} औँ तिथि: ${tithiGroups[(n-1)%5]} समूह।`;}
+$('tithiNumber').addEventListener('change',showTithiGroup);showTithiGroup();
+function validAngle(id){const v=Number($(id).value);return $(id).value.trim()!==''&&Number.isFinite(v)&&v>=0&&v<360?v:null;}
+$('nakCalculate').addEventListener('click',()=>{
+ const d=validAngle('nakDegree');if(d===null){$('nakResult').textContent='० देखि ३६० भन्दा कम अंश लेख्नुहोस्।';return;}
+ const n=Math.floor((d+1e-10)/(360/27))+1;const pad=Math.floor(((d%(360/27))+1e-10)/(360/108))+1;
+ $('nakResult').textContent=`नक्षत्र क्रम ${Math.min(n,27)} · पाउ ${Math.min(pad,4)}। यो २७ नक्षत्रको समान खण्डमा आधारित अभ्यास हो।`;
+});
+$('tithiCalculate').addEventListener('click',()=>{
+ const sun=validAngle('sunLongitude'),moon=validAngle('moonLongitude');
+ if(sun===null||moon===null){$('tithiCalcResult').textContent='दुवै भोगांश ० देखि ३६० भन्दा कम हुनुपर्छ।';return;}
+ const diff=(moon-sun+360)%360;const idx=Math.floor((diff+1e-10)/12);const paksha=idx<15?'शुक्ल':'कृष्ण';
+ const n=idx%15+1;const names=['प्रतिपदा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी','षष्ठी','सप्तमी','अष्टमी','नवमी','दशमी','एकादशी','द्वादशी','त्रयोदशी','चतुर्दशी'];
+ const name=n===15?(paksha==='शुक्ल'?'पूर्णिमा':'औँसी'):names[n-1];
+ $('tithiCalcResult').textContent=`अन्तर ${diff.toFixed(2)}° · ${paksha} पक्ष · ${name} (तिथि ${n})।`;
+});
 const lagna=$('lagna'),bhava=$('bhava');signs.forEach((s,i)=>lagna.add(new Option(`${i+1} · ${s}`,String(i+1))));for(let i=1;i<=12;i++)bhava.add(new Option(`${i} औँ भाव`,String(i)));lagna.value='5';bhava.value='9';
 // Fixed North Indian chart houses: 1 top diamond, 4 left diamond, 7 bottom diamond, 10 right diamond.
 // Other houses occupy the corner triangles. Labels are at approximate visual centers.
