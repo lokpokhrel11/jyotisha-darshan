@@ -134,3 +134,25 @@ function reverseCalculate(){const l=Number($('reverseLagna').value),r=Number($('
 $('reverseCalculate').addEventListener('click',reverseCalculate);
 for(const id of ['reverseLagna','reverseRashi'])$(id).addEventListener('change',()=>{$('reverseResult').textContent='चयन परिवर्तन भयो। नयाँ नतिजाका लागि गणना गर्नुहोस्।';});
 reverseCalculate();
+
+
+// Guruji's nine-planet exaltation teaching chart, source PDF p. 12.
+// This is a synthetic exercise, NOT a natal or astronomical chart.
+const exaltedPlanets=[
+ {name:'सूर्य',house:1},{name:'चन्द्र',house:2},{name:'राहु',house:3},
+ {name:'बृहस्पति',house:4},{name:'बुध',house:6},{name:'शनि',house:7},
+ {name:'केतु',house:9},{name:'मङ्गल',house:10},{name:'शुक्र',house:12}
+];
+const exaltedByHouse=Object.fromEntries(exaltedPlanets.map(p=>[p.house,p.name]));
+const ep=$('exaltedPlanet');exaltedPlanets.forEach((p,i)=>ep.add(new Option(p.name,String(i))));
+let showExalted=false;
+function drawExalted(){const g=$('exaltedChartLabels');g.replaceChildren();houseCenters.forEach(([x,y],i)=>{
+ const n=i+1;const a=document.createElementNS('http://www.w3.org/2000/svg','text');a.setAttribute('x',x);a.setAttribute('y',y-5);a.setAttribute('font-size','18');a.textContent=String(n);g.append(a);
+ const b=document.createElementNS('http://www.w3.org/2000/svg','text');b.setAttribute('x',x);b.setAttribute('y',y+10);b.setAttribute('font-size','10');b.textContent=roman[i];g.append(b);
+ if(showExalted&&exaltedByHouse[n]){const c=document.createElementNS('http://www.w3.org/2000/svg','text');c.setAttribute('x',x);c.setAttribute('y',y+23);c.setAttribute('font-size','11');c.textContent=exaltedByHouse[n];g.append(c);}
+});}
+function revealExalted(){const p=exaltedPlanets[Number(ep.value)];$('exaltedResult').textContent=`${p.name}: ${p.house} औँ भाव, ${signs[p.house-1]} राशि (${p.house})। गुरुजीको उच्च कुण्डलीको उदाहरण।`;}
+$('exaltedReveal').addEventListener('click',revealExalted);
+ep.addEventListener('change',()=>{$('exaltedResult').textContent='ग्रह फेरियो। उत्तर देखाउनुहोस्।';});
+$('exaltedToggle').addEventListener('click',()=>{showExalted=!showExalted;$('exaltedToggle').setAttribute('aria-pressed',String(showExalted));$('exaltedToggle').textContent=showExalted?'चार्टका ग्रह लुकाउनुहोस्':'चार्टमा सबै ग्रह देखाउनुहोस्';drawExalted();});
+drawExalted();
