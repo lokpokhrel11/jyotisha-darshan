@@ -400,3 +400,30 @@ function yoginiBalance(){const selection=yoginiSelection(),out=$('ygBalanceOutpu
 $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventListener('click',yoginiBalance);yoginiCycle();yoginiBalance();
 
 (function(){const key='jyotisha-pathshala-opened-v3';let opened=[];try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))opened=[...new Set(v.filter(x=>Number.isInteger(x)&&x>=1&&x<=6))]}catch(_){}const cards=[...document.querySelectorAll('.chapter-card[data-chapter]')];function render(){cards.forEach(c=>c.classList.toggle('visited',opened.includes(Number(c.dataset.chapter))));const n=opened.length;document.getElementById('progressCount').textContent=n+' / ६';document.getElementById('progressFill').style.width=(n/6*100)+'%';document.getElementById('progressTrack').setAttribute('aria-valuenow',String(n))}cards.forEach(c=>c.addEventListener('click',()=>{const n=Number(c.dataset.chapter);if(!opened.includes(n)){opened.push(n);try{localStorage.setItem(key,JSON.stringify(opened))}catch(_){}render()}}));document.getElementById('resetProgress').addEventListener('click',()=>{if(!window.confirm('यस ब्राउजरमा सुरक्षित अध्ययन प्रगति हटाउने?'))return;opened=[];try{localStorage.removeItem(key)}catch(_){}render()});render()})();
+
+/* v3.1 chapter-focused reading mode. All existing widgets stay mounted. */
+(function(){
+ const params=new URLSearchParams(window.location.search);
+ const chapter=Number(params.get('chapter'));
+ if(!Number.isInteger(chapter)||chapter<1||chapter>6)return;
+ const groups={"1":["pathshala"],"2":["chapter2","planetExample","chapter2exam","practice"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"]};
+ const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति"];
+ const allowed=new Set(groups[chapter]);
+ document.body.classList.add('chapter-focus');
+ for(const section of document.querySelectorAll('main > section')){
+  if(!allowed.has(section.id))section.classList.add('chapter-focus-hidden');
+ }
+ const main=document.querySelector('main');
+ const banner=document.createElement('div');banner.className='chapter-focus-banner';
+ const back=document.createElement('a');back.href='index.html#dashboard';back.className='chapter-back';back.textContent='← अध्ययन कक्षमा फर्कनुहोस्';
+ const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent='JYOTISHA PATHSHALA · अध्याय '+chapter;
+ const title=document.createElement('h1');title.textContent=titles[chapter];
+ const actions=document.createElement('div');actions.className='chapter-pager';
+ if(chapter>1){const a=document.createElement('a');a.href='index.html?chapter='+(chapter-1);a.textContent='← अघिल्लो अध्याय';actions.append(a)}
+ if(chapter<6){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को अध्याय →';actions.append(a)}
+ banner.append(back,eyebrow,title,actions);main.prepend(banner);
+ document.querySelectorAll('#nav a[href^="#"]').forEach(a=>{
+  const hash=a.getAttribute('href');a.setAttribute('href','index.html'+hash);
+ });
+ document.querySelectorAll('.brand').forEach(a=>a.href='index.html#home');
+})();
