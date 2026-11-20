@@ -294,11 +294,17 @@ $('lsCalculate').click();
 // Chapter 5: standard cases only; use integer pala to avoid rounding errors.
 function bhRead(v){const m=/^(\d{1,2})\s*\/\s*(\d{1,2})$/.exec((v||'').trim());if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return g>=0&&g<=60&&p>=0&&p<60&&!(g===60&&p>0)?g*60+p:null;}
 function bhFmt(p){return `${Math.floor(p/60)} घडी ${String(p%60).padStart(2,'0')} पला`;}
+function bhUpdateCase(){const choice=$('bhCase').value;$('bhOtherLabel').textContent=choice==='ka'?'भोलिको नक्षत्र अन्त्य-मान (घडी/पला)':choice==='kha'?'हिजोको गत नक्षत्र अन्त्य-मान (घडी/पला)':'भोलि वा हिजोको सम्बन्धित अन्त्य-मान (घडी/पला)';$('bhCaseHelp').textContent=choice==='ka'?'अवस्था क: इष्टकाल आजको अन्त्य-मानभन्दा ठूलो हुनुपर्छ। भोलिको मान प्रविष्ट गर्नुहोस्।':choice==='kha'?'अवस्था ख: इष्टकाल आजको अन्त्य-मानभन्दा सानो हुनुपर्छ। हिजोको गत नक्षत्रको मान प्रविष्ट गर्नुहोस्।':'इष्टकाल र आजको अन्त्य-मान तुलना गरेर अवस्था स्वतः छानिन्छ।';}
+$('bhCase').addEventListener('change',bhUpdateCase);bhUpdateCase();
 $('bhCalculate').addEventListener('click',()=>{
- const i=bhRead($('bhIst').value),e=bhRead($('bhToday').value),o=bhRead($('bhOther').value),out=$('bhOutput');
+ const i=bhRead($('bhIst').value),e=bhRead($('bhToday').value),o=bhRead($('bhOther').value),out=$('bhOutput'),bhPanel=$('bhBhayat'),bbPanel=$('bhBhavog');
+ bhPanel.textContent='—';bbPanel.textContent='—';
  if([i,e,o].some(v=>v===null)||i>=3600||e>=3600||o>=3600){out.textContent='कृपया ००/०० देखि ५९/५९ सम्मका घडी/पला सही ढाँचामा राख्नुहोस्।';return;}
  if(i===e){out.textContent='इष्टकाल र अन्त्य-मान बराबर छन्। यो सीमा-क्षणका लागि पञ्चाङ्गको थप जाँच आवश्यक छ।';return;}
- const a=i>e,bh=a?i-e:3600-o+i,bb=a?3600-e+o:3600-o+e;
+ const a=i>e,choice=$('bhCase').value;
+ if((choice==='ka'&&!a)||(choice==='kha'&&a)){out.textContent=`चयन गरिएको अवस्था ${choice==='ka'?'क':'ख'} र प्रविष्ट मान मेल खाँदैनन्। इष्टकाल र E तुलना गरी अवस्था सच्याउनुहोस्।`;return;}
+ const bh=a?i-e:3600-o+i,bb=a?3600-e+o:3600-o+e;
  if(bh<0||bb<=0||bh>=bb){out.textContent='भयात भभोगभन्दा कम हुनुपर्छ। प्रविष्ट गरिएको अर्को दिनको मान वा पञ्चाङ्गको अवस्था जाँच्नुहोस्।';return;}
- out.textContent=`अवस्था ${a?'क':'ख'} · भयात: ${bhFmt(bh)} · भभोग: ${bhFmt(bb)}। जाँच: भयात < भभोग। ${a?'आजको अन्त्य-मानपछि अर्को नक्षत्रमा जन्म।':'आजको अन्त्य-मानभित्रको नक्षत्रमा जन्म।'}`;
+ out.textContent=`अवस्था ${a?'क':'ख'} प्रयोग भयो। ${a?'आजको अन्त्य-मानपछि अर्को नक्षत्रमा जन्म।':'आजको अन्त्य-मानभित्रको नक्षत्रमा जन्म।'} जाँच: भयात < भभोग।`;
+ bhPanel.textContent=bhFmt(bh);bbPanel.textContent=bhFmt(bb);
 });$('bhCalculate').click();
