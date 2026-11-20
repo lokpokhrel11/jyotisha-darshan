@@ -1,6 +1,6 @@
-# v1.0.2 · New question order on every retry
-- Chapter 2 retry now shuffles all 20 questions using Fisher–Yates.
-- Guarantees a different sequence from the immediately preceding attempt.
-- Each question remains linked to its original correct answer and explanation.
-- Reset clears answers/results, updates progress and scrolls to the first question.
-- Offline cache version updated.
+# v1.1 · Chapter 3 Navagraha foundation
+- Source-grounded introductory lessons, classifications and interactive karakatva, dignity and drishti calculators.
+- Rahu/Ketu debilitation omitted where source blank; aspects withheld pending clarification.
+- Retains v1.0.2 randomized Chapter 2 examination.
+- Source: 117-page Guruji notes, pp. 16–20.
+- Syntax checks passed; browser QA and scholarly approval pending.

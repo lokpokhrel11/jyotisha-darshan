@@ -207,3 +207,38 @@ $('examReset').addEventListener('click',()=>{
   if(firstQuestion){firstQuestion.setAttribute('tabindex','-1');firstQuestion.focus({preventScroll:true});firstQuestion.scrollIntoView({behavior:'smooth',block:'start'});}
 });
 renderChapter2Exam();
+
+// Chapter 3: explicitly mapped to Guruji's 117-page notes, PDF pp. 16–20.
+const navagraha=['सूर्य','चन्द्र','मङ्गल','बुध','बृहस्पति','शुक्र','शनि','राहु','केतु'];
+const planetTraitsData=[
+'हड्डी, मुटु, राजनीति, दाहिने आँखा, अग्नितत्त्व, बुबा',
+'आमा, मन, सुख, पानी, खानेकुरा, देब्रे आँखा',
+'भाइबहिनी, हतियार, रगत, घरजग्गा, साहस',
+'गणित, बोली, लेखन, मामा, छाला, तर्क',
+'धर्म, ज्ञान, सन्तान, उच्चशिक्षा, उपदेश, नैतिकता',
+'दाम्पत्य सुख, सङ्गीत, गायन, रेटिना',
+'अनुशासन, सेवा, फलाम, ढिलाइ, कठिन परिश्रम',
+'प्रविधि, जिद्दी, कुतर्क, भाइरस, विषालु प्राणी',
+'पुरानो ज्ञान, सीप, पेशा, मोक्ष'];
+const planetDignities=[
+{own:[5],ex:1,deb:7},{own:[4],ex:2,deb:8},{own:[1,8],ex:10,deb:4},
+{own:[3,6],ex:6,deb:12},{own:[9,12],ex:4,deb:10},{own:[2,7],ex:12,deb:6},
+{own:[10,11],ex:7,deb:1},{own:[],ex:3,deb:null},{own:[],ex:9,deb:null}];
+for(const id of ['planetSelect','planetStatus','aspectPlanet'])navagraha.forEach((n,i)=>$(id).add(new Option(n,String(i))));
+signs.forEach((n,i)=>$('planetSign').add(new Option(`${i+1} · ${n}`,String(i+1))));
+for(let n=1;n<=12;n++)$('aspectHouse').add(new Option(`${n} औँ भाव`,String(n)));
+function showPlanetTraits(){const i=Number($('planetSelect').value);$('planetTraits').textContent=`${navagraha[i]}: ${planetTraitsData[i]}। [गुरुजी]`;}
+$('planetSelect').addEventListener('change',showPlanetTraits);showPlanetTraits();
+function checkPlanetStatus(){const i=Number($('planetStatus').value),r=Number($('planetSign').value),d=planetDignities[i];const matches=[];if(d.ex===r)matches.push('उच्च');if(d.own.includes(r))matches.push('स्वगृही');if(d.deb===r)matches.push('नीच');const status=matches.length?matches.join(' र '):'उच्च, नीच वा स्वगृहीमध्ये कुनै होइन';const note=d.deb===null?' यस ग्रहको नीच राशि स्रोतमा उल्लेख छैन।':'';$('planetStatusResult').textContent=`${navagraha[i]} · ${signs[r-1]}: ${status}।${note}`;}
+$('checkPlanetStatus').addEventListener('click',checkPlanetStatus);
+for(const id of ['planetStatus','planetSign'])$(id).addEventListener('change',()=>{$('planetStatusResult').textContent='चयन परिवर्तन भयो। अवस्था हेर्नुहोस्।';});checkPlanetStatus();
+const aspectOffsets={2:[4,7,8],4:[5,7,9],6:[3,7,10]};
+function calculateAspects(){const i=Number($('aspectPlanet').value),house=Number($('aspectHouse').value);if(i>=7){$('aspectResult').textContent='राहु–केतुको दृष्टि यस नोटमा स्पष्ट नभएकाले गणना स्थगित छ। [पुष्टि गर्नुपर्ने]';return;}const offsets=aspectOffsets[i]||[7];const houses=offsets.map(n=>((house+n-2)%12)+1);$('aspectResult').textContent=`${navagraha[i]} ${house} औँ भावमा हुँदा ${offsets.join(', ')} औँ दृष्टि क्रमशः ${houses.join(', ')} भावमा पर्छ। बसेको भावलाई १ मानेर गनिएको हो।`;}
+$('aspectCalculate').addEventListener('click',calculateAspects);
+for(const id of ['aspectPlanet','aspectHouse'])$(id).addEventListener('change',()=>{$('aspectResult').textContent='चयन परिवर्तन भयो। फेरि गणना गर्नुहोस्।';});calculateAspects();
+const friendships=[
+['चन्द्र, मङ्गल, बृहस्पति','बुध','शुक्र, शनि'],['सूर्य, बुध','मङ्गल, बृहस्पति, शुक्र, शनि','कोही छैन'],
+['सूर्य, चन्द्र, बृहस्पति','शुक्र, शनि','बुध'],['सूर्य, शुक्र','मङ्गल, बृहस्पति, शनि','चन्द्र'],
+['सूर्य, चन्द्र, मङ्गल','शनि','बुध, शुक्र'],['बुध, शनि','मङ्गल, बृहस्पति','सूर्य, चन्द्र'],
+['बुध, शुक्र','बृहस्पति','सूर्य, चन्द्र, मङ्गल']];
+$('planetFriendship').textContent=friendships.map((a,i)=>`${navagraha[i]} — मित्र: ${a[0]}; सम: ${a[1]}; शत्रु: ${a[2]}।`).join(' ');
