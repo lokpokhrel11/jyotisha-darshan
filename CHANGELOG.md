@@ -1,3 +1,7 @@
+# v3.6 · Bottom chapter navigation
+- Added अध्ययन कक्षमा फर्कनुहोस् link at the bottom of every focused chapter (1–6), matching the top link.
+- Updated asset versions for immediate loading.
+
 # v3.5 · Fresh asset loading
 - Versioned CSS and JavaScript URLs in HTML to bypass stale browser and service-worker asset caches.
 - Service worker cache updated and clients claimed on activation.
