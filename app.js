@@ -253,3 +253,13 @@ chapter3Form.addEventListener('change',updateChapter3Progress);
 chapter3Form.addEventListener('submit',event=>{event.preventDefault();const answers=chapter3Bank.map((q,i)=>chapter3Form.querySelector(`input[name="ch3q${i}"]:checked`));if(answers.some(a=>!a)){chapter3Results.textContent='कृपया सबै १५ प्रश्नको उत्तर दिनुहोस्।';chapter3Results.hidden=false;chapter3Results.scrollIntoView({behavior:'smooth',block:'start'});return;}let score=0;const summary=document.createElement('div');chapter3Bank.forEach((q,i)=>{const ok=Number(answers[i].value)===q[3];if(ok)score++;const line=document.createElement('p');line.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(line);});const heading=document.createElement('h3');heading.textContent=`नतिजा: ${score}/15 · ${score>=12?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;chapter3Results.replaceChildren(heading,summary);chapter3Results.hidden=false;try{localStorage.setItem('jyotisha-chapter3-score',JSON.stringify({score,total:15}));}catch(e){}chapter3Results.scrollIntoView({behavior:'smooth',block:'start'});});
 $('chapter3Reset').addEventListener('click',()=>{const prev=chapter3Bank.slice();for(let i=chapter3Bank.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[chapter3Bank[i],chapter3Bank[j]]=[chapter3Bank[j],chapter3Bank[i]];}if(chapter3Bank.every((q,i)=>q===prev[i]))[chapter3Bank[0],chapter3Bank[1]]=[chapter3Bank[1],chapter3Bank[0]];chapter3Form.reset();renderChapter3();const first=chapter3Container.querySelector('fieldset');if(first){first.setAttribute('tabindex','-1');first.focus({preventScroll:true});first.scrollIntoView({behavior:'smooth',block:'start'});}});
 renderChapter3();
+
+// Chapter 4 unit conversion: integer seconds preserve exact vipala values.
+$('ch4Calculate').addEventListener('click',()=>{
+ const hr=Number($('ch4Hours').value),mn=Number($('ch4Minutes').value),out=$('ch4Output');
+ if(!$('ch4Hours').value||!$('ch4Minutes').value||!Number.isInteger(hr)||!Number.isInteger(mn)||hr<0||hr>23||mn<0||mn>59){out.textContent='कृपया ०–२३ घण्टा र ०–५९ मिनेटको पूर्ण सङ्ख्या दिनुहोस्।';return;}
+ const totalVipala=(hr*60+mn)*150; // 1 minute = 2.5 pala = 150 vipala
+ const ghadi=Math.floor(totalVipala/3600),pala=Math.floor(totalVipala%3600/60),vipala=totalVipala%60;
+ out.textContent=`${hr} घण्टा ${mn} मिनेट = ${ghadi} घडी ${pala} पला ${vipala} विपला। जाँच: ${(hr*60+mn)} मिनेट × २.५ पला प्रति मिनेट।`;
+});
+$('ch4Calculate').click();
