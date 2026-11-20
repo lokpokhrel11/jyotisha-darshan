@@ -1,3 +1,9 @@
+# v3.5 · Fresh asset loading
+- Versioned CSS and JavaScript URLs in HTML to bypass stale browser and service-worker asset caches.
+- Service worker cache updated and clients claimed on activation.
+- No lesson content or calculation logic changed.
+- Live browser verification still required.
+
 # v3.4 · Chapter 2 compact learning prototype
 - Chapter 2 focused view now uses lesson/practice/quiz tabs; other chapters unchanged.
 - Chapter 2 quiz presents one question at a time, preserving existing questions, scoring and reset logic.
