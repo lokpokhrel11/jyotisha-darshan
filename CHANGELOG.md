@@ -1,3 +1,8 @@
+# v3.8 · Chapter 3 compact exam
+- Chapter 3 now displays one of its 15 exam questions at a time with previous/next navigation.
+- Answers persist when moving between questions; existing scoring, explanations and retake remain intact.
+- Incomplete submissions return to the first unanswered question.
+
 # v3.7 · Compact chapter views across the Pathshala
 - Added lesson/practice tabs to chapters 1, 4, 5 and 6; lesson/exam tabs to chapter 3.
 - Kept Chapter 2's tested single-question exam unchanged.
