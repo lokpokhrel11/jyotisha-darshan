@@ -479,3 +479,40 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const hash=location.hash.slice(1);
  activate(hash==='chapter2exam'?'quiz':hash==='planetExample'?'practice':'lesson');
 })();
+
+
+/* v3.7: compact tabs for chapters 1 and 3–6; Chapter 2 retains its validated implementation. */
+(function(){
+ const chapter=Number(new URLSearchParams(location.search).get('chapter'));
+ if(![1,3,4,5,6].includes(chapter))return;
+ const banner=document.querySelector('.chapter-focus-banner');if(!banner)return;
+ const maps={
+  1:{lesson:['pathshala'],practice:['practice']},
+  3:{lesson:['chapter3'],quiz:['chapter3exam']},
+  4:{lesson:['chapter4'],practice:['istakala','localSunrise']},
+  5:{lesson:['chapter5'],practice:['padaPractice','dashaBalance']},
+  6:{lesson:['chapter6'],practice:['antardasha','tribhagi','yogini']}
+ };
+ const mapping=maps[chapter];
+ const tabs=document.createElement('div');tabs.className='learning-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','अध्याय '+chapter+' अध्ययन विकल्प');
+ const buttons={};let active='lesson';
+ function activate(name,focus=false){
+  active=name;
+  for(const [key,ids] of Object.entries(mapping)){
+   ids.forEach(id=>{const section=document.getElementById(id);if(section)section.hidden=key!==name});
+   buttons[key].setAttribute('aria-selected',String(key===name));buttons[key].tabIndex=key===name?0:-1;
+  }
+  if(focus)buttons[name].focus();
+ }
+ for(const [key,label] of Object.entries({lesson:'पाठ',practice:'अभ्यास',quiz:'परीक्षा'})){
+  if(!mapping[key])continue;
+  const btn=document.createElement('button');btn.type='button';btn.className='learning-tab';btn.textContent=label;btn.setAttribute('role','tab');btn.setAttribute('aria-controls',mapping[key][0]);btn.addEventListener('click',()=>activate(key));tabs.append(btn);buttons[key]=btn;
+ }
+ const keys=Object.keys(mapping);
+ tabs.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();activate(keys[(keys.indexOf(active)+(e.key==='ArrowRight'?1:keys.length-1))%keys.length],true)});
+ const toc=banner.querySelector('.chapter-toc');if(toc)toc.hidden=true;
+ banner.append(tabs);
+ const hash=location.hash.slice(1);
+ const matching=Object.entries(mapping).find(([,ids])=>ids.includes(hash));
+ activate(matching?matching[0]:'lesson');
+})();
