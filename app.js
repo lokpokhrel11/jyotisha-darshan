@@ -780,3 +780,27 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  toggle.addEventListener('click',()=>setOpen(toggle.getAttribute('aria-expanded')!=='true'));
  links.addEventListener('click',event=>{if(event.target.closest('a')&&window.matchMedia('(max-width:680px)').matches)setOpen(false)});
 })();
+
+/* Stabilization: consistent chapter-level navigation for integrated Chapters 7 and 8.
+   These are in-page links, not disclosure tabs: all lesson content remains accessible. */
+(function(){
+ const chapter=Number(new URLSearchParams(location.search).get('chapter'));
+ if(chapter!==7&&chapter!==8)return;
+ const banner=document.querySelector('.chapter-focus-banner');
+ if(!banner)return;
+ const targets=chapter===7
+  ?[['पाठ','chapter7'],['अभ्यास','ch7Chart'],['परीक्षा','ch7Quiz']]
+  :[['पाठ','ch8-lesson-1'],['अभ्यास','ch8-lesson-2'],['परीक्षा','ch8AssessmentPanel']];
+ const nav=document.createElement('nav');
+ nav.className='learning-tabs chapter-learning-links';
+ nav.setAttribute('aria-label','पाठ, अभ्यास र परीक्षा');
+ for(const [label,id] of targets){
+  if(!document.getElementById(id))continue;
+  const link=document.createElement('a');
+  link.className='learning-tab';
+  link.href='#'+id;
+  link.textContent=label;
+  nav.append(link);
+ }
+ if(nav.childElementCount)banner.append(nav);
+})();
