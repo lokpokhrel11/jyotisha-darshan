@@ -845,3 +845,9 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 .study-resume p{margin:5px 0 0;opacity:.85}
 .study-resume .button{white-space:normal;text-align:center}
 @media(max-width:480px){.study-resume{padding:16px}.study-resume .button{width:100%}}
+
+/* v82: Visible keyboard skip link, including dark theme. */
+.skip-to-content{position:fixed;z-index:1000;top:8px;left:8px;transform:translateY(-160%);padding:10px 16px;border:2px solid currentColor;border-radius:8px;background:#fff;color:#18303a;font-weight:700;box-shadow:0 4px 14px #0003}
+.skip-to-content:focus,.skip-to-content:focus-visible{transform:translateY(0);outline:3px solid #a87934;outline-offset:2px}
+#main-content:focus{outline:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
