@@ -306,7 +306,7 @@ test('Chapter 9: dashboard entry and source-based lessons are accessible', async
  await expect(page.locator('#chapter9')).toBeVisible();
  await expect(page.locator('#ch9-lesson')).toBeVisible();
  await expect(page.locator('#ch9-limits')).toBeVisible();
- await expect(page.locator('#chapter9 .ch9-local-nav a')).toHaveCount(5);
+ await expect(page.locator('#chapter9 .ch9-local-nav a')).toHaveCount(9);
 });
 
 test('Chapter 9: incomplete and complete source-comprehension quiz', async ({ page }) => {
@@ -368,4 +368,23 @@ test('Chapter 9: strength indicators distinguish sign dignity from house class',
  await expect(result).toContainText('दुःस्थान');
  await page.locator('#ch9StrengthStatus').selectOption('neutral');
  await expect(result).toContainText('पर्याप्त विवरण छैन');
+});
+
+
+test('Chapter 9: integrated study sequence updates without claiming Moon or strength evidence', async ({ page }) => {
+ await page.goto(chapter(9));
+ const summary=page.locator('#ch9SequenceResult');
+ await expect(summary).toContainText('मेष लग्न');
+ await expect(summary).toContainText('चन्द्रको अवस्था उपलब्ध छैन');
+ await page.locator('#ch9Ascendant').selectOption('5');
+ await page.locator('#ch9LordHouse').selectOption('9');
+ await expect(summary).toContainText('सिंह लग्न');
+ await expect(summary).toContainText('मेष');
+ await page.locator('input[name="ch9Occupancy"][value="many"]').check();
+ await expect(summary).toContainText('लग्नमा धेरै ग्रह छन्');
+ await page.locator('#ch9StrengthStatus').selectOption('debilitated');
+ await expect(summary).toContainText('नीच');
+ await expect(summary).toContainText('वास्तविक राशिगत बल हो भनेर पुष्टि गरिएको छैन');
+ await page.locator('#ch9MoonStatus').selectOption('known');
+ await expect(summary).toContainText('विवरण प्रविष्ट वा प्रमाणित गरिएको छैन');
 });
