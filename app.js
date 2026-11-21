@@ -713,3 +713,10 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(!form||!feedback)return;
  form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8source"]:checked');feedback.textContent=!checked?'पहिले एउटा उत्तर छान्नुहोस्।':checked.value==='b'?'सही। “माथिको/तलको सम्पत्ति” को अर्थ नोटमा पुष्टि गर्न बाँकी छ। सम्भावित व्याख्यालाई निश्चित नियम बनाउन हुँदैन।':'यो कथन नोटमा लेखिएको छ। अस्पष्ट र पुष्टि गर्न बाँकी रहेको वाक्य छुट्याउनुहोस्।'});
 })();
+
+/* Chapter 8.5: verify the sequence in Guruji's fourth-house reading. */
+(function(){
+ const form=document.getElementById('ch8ComfortQuiz'),feedback=document.getElementById('ch8ComfortFeedback');
+ if(!form||!feedback)return;
+ form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8comfort"]:checked');feedback.textContent=!checked?'पहिले उत्तर छान्नुहोस्।':checked.value==='a'?'सही। गुरुजीका नोटअनुसार पहिले लग्न र लग्नेश हेर्ने, त्यसपछि चौथो भाव र चन्द्रमाको अवस्था जाँच्ने।':'फेरि हेर्नुहोस्। पृष्ठ ७४ मा लग्न र लग्नेश हेरेपछि चौथो भाव जाँच्ने भनिएको छ।'});
+})();
