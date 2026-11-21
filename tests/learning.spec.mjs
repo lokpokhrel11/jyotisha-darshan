@@ -11,7 +11,8 @@ test('Chapter 2: all 20 answers score, review and reset', async ({ page }) => {
   const questions = page.locator('#chapter2ExamQuestions fieldset.exam-question');
   await expect(questions).toHaveCount(20);
   for (let i = 0; i < 20; i++) {
-    await page.locator(`#chapter2ExamQuestions input[name="chapter2q${i}"][value="0"]`).check({ force: true });
+    await page.locator(`#chapter2ExamQuestions input[name="chapter2q${i}"][value="0"]`).check();
+    if (i < 19) await page.locator('.exam-stepper').filter({ hasText: `प्रश्न ${i + 1} / 20` }).getByRole('button', { name: /अर्को प्रश्न/ }).click();
   }
   await expect(page.locator('#examProgress')).toContainText('20/20');
   await form.locator('button[type="submit"]').click();
@@ -31,7 +32,8 @@ test('Chapter 3: score, review and reset', async ({ page }) => {
   const questions = page.locator('#chapter3ExamQuestions fieldset.exam-question');
   await expect(questions).toHaveCount(15);
   for (let i = 0; i < 15; i++) {
-    await page.locator(`#chapter3ExamQuestions input[name="ch3q${i}"][value="0"]`).check({ force: true });
+    await page.locator(`#chapter3ExamQuestions input[name="ch3q${i}"][value="0"]`).check();
+    if (i < 14) await page.locator('.exam-stepper').filter({ hasText: `प्रश्न ${i + 1} / 15` }).getByRole('button', { name: /अर्को प्रश्न/ }).click();
   }
   await expect(page.locator('#chapter3Progress')).toContainText('15/15');
   await form.locator('button[type="submit"]').click();
