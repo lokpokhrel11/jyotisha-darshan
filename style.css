@@ -838,3 +838,10 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 [data-theme="dark"] .assessment-progress-row .assessment-achieved{color:#9cddb5}
 [data-theme="dark"] .assessment-progress-row .assessment-review{color:#f0c78e}
 [data-theme="dark"] .assessment-progress-row .assessment-unattempted{color:#b5c8d5}
+
+/* v81: Compact local return-to-study panel. */
+.study-resume{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:18px 20px;margin:18px 0;border:1px solid var(--line, #d8d8d8);border-radius:14px;background:var(--surface, transparent)}
+.study-resume strong{display:block;font-size:1rem}
+.study-resume p{margin:5px 0 0;opacity:.85}
+.study-resume .button{white-space:normal;text-align:center}
+@media(max-width:480px){.study-resume{padding:16px}.study-resume .button{width:100%}}
