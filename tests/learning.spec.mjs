@@ -85,3 +85,20 @@ test('Chapter 7: chart has twelve selectable houses and accurate source examples
  await page.locator('#ch7HouseButtons button[data-house="2"]').click();
  await expect(page.locator('#ch7HouseDetail')).toContainText('नोटमा ग्रहस्थिति दिइएको छैन');
 });
+
+test('Chapter 7: evidence-based interpretation provides accurate feedback',async({page})=>{
+ await page.goto(chapter(7));
+ await expect(page.locator('#ch7ReasonChoices input')).toHaveCount(3);
+ await page.locator('#ch7ReasonChoices input[value="1"]').check();
+ await page.locator('#ch7ReasonCheck').click();
+ await expect(page.locator('#ch7ReasonFeedback')).toContainText('सही तर्क');
+ await expect(page.locator('#ch7ReasonFeedback')).toContainText('शनि');
+ await page.locator('#ch7ReasonQuestion').selectOption('aspects');
+ await page.locator('#ch7ReasonChoices input[value="0"]').check();
+ await page.locator('#ch7ReasonCheck').click();
+ await expect(page.locator('#ch7ReasonFeedback')).toContainText('बृहस्पति');
+ await page.locator('#ch7ReasonQuestion').selectOption('limits');
+ await page.locator('#ch7ReasonChoices input[value="0"]').check();
+ await page.locator('#ch7ReasonCheck').click();
+ await expect(page.locator('#ch7ReasonFeedback')).toContainText('स्रोतसँग मिलेन');
+});
