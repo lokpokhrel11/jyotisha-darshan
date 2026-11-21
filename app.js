@@ -288,7 +288,7 @@ $('istCalculate').addEventListener('click',()=>{
  const birth=istSeconds($('istBirth').value),sun=istSeconds($('istSunrise').value),previous=$('istPrevious').value==='previous',out=$('istOutput');
  if(birth===null||sun===null){out.textContent='कृपया दुवै समय सही ढाँचामा दिनुहोस्।';return;}
  if(!previous&&birth<sun){out.textContent='जन्म समय सूर्योदयभन्दा अघि छ। अघिल्लो दिनको स्थानीय सूर्योदय प्रविष्ट गरी त्यसको विकल्प छान्नुहोस्।';return;}
- if(previous&&birth>=sun){out.textContent='अघिल्लो दिनको सूर्योदय विकल्पमा जन्मसमय आजको सूर्योदयअघिको हुनुपर्छ। सही सूर्योदय समय पुष्टि गर्नुहोस्।';return;}
+ if(previous&&birth===sun){out.textContent='जन्मसमय र प्रविष्ट अघिल्लो दिनको सूर्योदयको घडी समान देखिन्छ। यो विकल्प प्रयोग गर्दा वास्तविक अघिल्लो दिनको सूर्योदय र जन्ममिति छुट्टै पुष्टि गर्नुहोस्।';return;}
  const elapsed=birth-sun+(previous?86400:0);
  const totalVipala=elapsed*2.5; // 1 second of clock time = 2.5 vipala
  const ghadi=Math.floor(totalVipala/3600),pala=Math.floor((totalVipala%3600)/60),vipala=totalVipala%60;
