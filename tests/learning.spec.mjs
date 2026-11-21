@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const base = 'https://lokpokhrel11.github.io/jyotisha-darshan/index.html';
+const base = process.env.TEST_BASE_URL || 'https://lokpokhrel11.github.io/jyotisha-darshan/index.html';
 const chapter = (n) => `${base}?chapter=${n}&e2e=1`;
 
 test('Chapter 2: all 20 answers score, review and reset', async ({ page }) => {
