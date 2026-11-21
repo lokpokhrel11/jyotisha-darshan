@@ -1262,3 +1262,40 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter10 .ch10-choice:focus-within,#chapter11 .ch10-choice:focus-within{outline:2px solid var(--gold);outline-offset:2px}
 #chapter10 .ch10-choice input,#chapter11 .ch10-choice input{min-width:17px;min-height:17px}
 @media(max-width:480px){#chapter10 .ch10-choice,#chapter11 .ch10-choice{font-size:.94rem;line-height:1.6!important;overflow-wrap:anywhere}#chapter10 .ch-modern-hero h2,#chapter11 .ch-modern-hero h2{font-size:clamp(1.55rem,7vw,2rem)}#chapter10 .ch-modern-nav-links a,#chapter11 .ch-modern-nav-links a{min-height:50px}}
+
+/* Screenshot-led visual density correction: chapters 10 and 11, desktop and mobile */
+#chapter10,#chapter11{--ch-reading:clamp(.95rem,1.05vw,1.06rem)}
+#chapter10 .ch-modern-hero,#chapter11 .ch-modern-hero{padding:clamp(28px,3vw,45px)!important;min-height:0!important;margin-bottom:20px!important}
+#chapter10 .ch-modern-hero h2,#chapter11 .ch-modern-hero h2{font-size:clamp(1.85rem,3vw,2.65rem)!important;line-height:1.3!important;margin:12px 0!important}
+#chapter10 .ch-modern-hero>p:not(.ch9-kicker),#chapter11 .ch-modern-hero>p:not(.ch9-kicker){font-size:clamp(.95rem,1.1vw,1.09rem)!important;line-height:1.75!important;max-width:62ch!important}
+#chapter10 .ch-modern-hero-mark,#chapter11 .ch-modern-hero-mark{transform:scale(.78);transform-origin:center right;opacity:.8}
+#chapter10 .ch-modern-nav,#chapter11 .ch-modern-nav{padding:17px 20px!important;margin:16px 0!important;border-radius:15px!important}
+#chapter10 .ch-modern-nav-heading,#chapter11 .ch-modern-nav-heading{margin-bottom:10px!important}
+#chapter10 .ch-modern-nav-heading :is(h3,strong),#chapter11 .ch-modern-nav-heading :is(h3,strong){font-size:1.05rem!important}
+#chapter10 .ch-modern-nav-links,#chapter11 .ch-modern-nav-links{gap:8px!important}
+#chapter10 .ch-modern-nav-links a,#chapter11 .ch-modern-nav-links a{min-height:49px!important;padding:9px 11px!important;font-size:.9rem!important;line-height:1.35!important}
+#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{margin:0 0 20px!important;gap:9px!important}
+#chapter10 .ch-modern-path a,#chapter11 .ch-modern-path a{padding:11px 12px!important;min-height:75px!important;align-items:center!important}
+#chapter10 .ch-modern-path-number,#chapter11 .ch-modern-path-number{width:29px;height:29px;font-size:.73rem}
+#chapter10 .ch-modern-path small,#chapter11 .ch-modern-path small{font-size:.7rem;margin-bottom:1px}
+#chapter10 .ch-modern-path strong,#chapter11 .ch-modern-path strong{font-size:.82rem!important;line-height:1.35!important}
+#chapter10 .study-panel,#chapter11 .study-panel{padding:clamp(17px,2vw,25px)!important}
+#chapter10 .study-panel p,#chapter11 .study-panel p{font-size:var(--ch-reading);line-height:1.75}
+#chapter10 .study-panel h3,#chapter11 .study-panel h3{font-size:clamp(1.12rem,1.5vw,1.37rem);line-height:1.45}
+#chapter10 .ch9-step-grid,#chapter11 .ch9-step-grid{gap:12px!important;margin:16px 0 24px!important}
+#chapter10 .ch9-step-grid article,#chapter11 .ch9-step-grid article{min-height:0!important;padding:17px!important;border-radius:13px!important}
+#chapter10 .ch9-step-grid p,#chapter11 .ch9-step-grid p{font-size:var(--ch-reading)!important;line-height:1.65!important;margin:8px 0 0!important}
+#chapter10 .ch9-step-grid strong,#chapter11 .ch9-step-grid strong{font-size:1.04rem!important;line-height:1.45}
+#chapter10 .ch9-grid,#chapter11 .ch9-grid{gap:11px!important;margin:15px 0 24px!important}
+#chapter10 .ch9-grid>p,#chapter11 .ch9-grid>p{min-height:0!important;padding:16px 19px!important;font-size:var(--ch-reading)!important;line-height:1.65!important;margin:0!important}
+#chapter10 .ch9-grid>p strong,#chapter11 .ch9-grid>p strong{display:block;margin-bottom:5px;font-size:1.03rem}
+#chapter10 .ch-modern-section-head,#chapter11 .ch-modern-section-head{margin-top:26px!important}
+#chapter10 .ch-modern-visual-strip,#chapter11 .ch-modern-visual-strip{margin:12px 0 19px!important;padding:11px!important}
+#chapter10 .ch-modern-visual-strip>div,#chapter11 .ch-modern-visual-strip>div{padding:11px 9px!important}
+#chapter10 .ch10-practice,#chapter11 .ch10-practice{border-top:3px solid var(--gold)!important}
+#chapter10 .ch10-practice select,#chapter11 .ch10-practice select{min-height:46px}
+#chapter10 .ch10-quiz-panel fieldset,#chapter11 .ch10-quiz-panel fieldset{margin:13px 0!important;padding:15px!important}
+#chapter10 .ch10-choice,#chapter11 .ch10-choice{padding:11px 13px!important;min-height:43px!important;font-size:.96rem!important}
+@media(min-width:1051px){#chapter10 .ch-modern-nav-links,#chapter11 .ch-modern-nav-links{grid-template-columns:repeat(5,minmax(0,1fr))!important}#chapter11 .ch-modern-nav-links{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:700px){#chapter10 .ch-modern-hero,#chapter11 .ch-modern-hero{padding:24px 18px!important}#chapter10 .ch-modern-hero-mark,#chapter11 .ch-modern-hero-mark{display:none!important}#chapter10 .ch-modern-nav,#chapter11 .ch-modern-nav{padding:14px!important}#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{grid-template-columns:repeat(2,minmax(0,1fr))!important}#chapter10 .ch-modern-path a,#chapter11 .ch-modern-path a{min-height:68px!important}#chapter10 .ch9-grid,#chapter11 .ch9-grid{grid-template-columns:1fr!important}}
+@media(max-width:410px){#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{grid-template-columns:1fr!important}}
