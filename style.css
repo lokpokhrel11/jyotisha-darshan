@@ -1428,3 +1428,25 @@ body.chapter-focus #pathshala #lesson>.lesson-top{padding-top:8px!important}
 body.chapter-focus #pathshala #lesson>.lesson-top h3{font-size:clamp(1.5rem,2.5vw,2rem)!important}
 body.chapter-focus #pathshala #lesson .close{display:none!important}
 @media(min-width:900px){body.chapter-focus .chapter-focus-banner{padding-left:32px!important;padding-right:32px!important}body.chapter-focus #pathshala{padding-top:12px!important}}
+
+/* Editorial chapter identity: consistent with the main website landing hero */
+body.chapter-focus main>.chapter-editorial-section{padding-top:10px!important}
+body.chapter-focus .chapter-editorial-hero{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,285px);align-items:center;gap:clamp(20px,4vw,70px);min-height:300px;margin:0 0 24px;padding:clamp(26px,4vw,56px);border:1px solid #4b6770;border-radius:22px;background:linear-gradient(115deg,#102934 0%,#193644 58%,#31515d 100%);overflow:hidden;color:#f8faf8;box-shadow:0 16px 42px #00000013}
+body.chapter-focus .chapter-editorial-hero:after{content:"";position:absolute;right:-110px;top:-220px;width:490px;height:490px;border:1px solid #e8bc7438;border-radius:50%;z-index:-1;pointer-events:none}
+body.chapter-focus .chapter-editorial-copy{min-width:0}
+body.chapter-focus .chapter-editorial-kicker{color:#eac27f!important;font-size:.85rem!important;font-weight:750!important;letter-spacing:.075em;margin:0 0 15px!important}
+body.chapter-focus .chapter-editorial-hero .chapter-main-title{font-size:clamp(2.5rem,4.5vw,4.25rem)!important;line-height:1.17!important;letter-spacing:-.022em!important;font-weight:800!important;color:#fff!important;margin:0 0 18px!important;max-width:18ch}
+body.chapter-focus .chapter-editorial-copy>p:not(.chapter-editorial-kicker){color:#e0e9e9!important;font-size:clamp(1rem,1.45vw,1.18rem)!important;line-height:1.7!important;max-width:58ch!important;margin:0 0 24px!important}
+body.chapter-focus .chapter-editorial-actions{display:flex;flex-wrap:wrap;gap:12px}
+body.chapter-focus .chapter-editorial-primary{display:inline-flex;align-items:center;justify-content:center;padding:11px 19px;border-radius:9px;background:#e9c17d;color:#172d37!important;font-weight:800;font-size:.95rem;text-decoration:none;border:1px solid #e9c17d;transition:filter .15s}
+body.chapter-focus .chapter-editorial-primary:hover{filter:brightness(1.08)}
+body.chapter-focus .chapter-editorial-seal{width:min(100%,255px);aspect-ratio:1;margin-inline:auto;display:grid;place-items:center;border:1.5px solid #e6bd78a6;border-radius:50%;background:#ffffff06;box-shadow:0 0 0 17px #ffffff07,0 0 0 34px #ffffff04}
+body.chapter-focus .chapter-editorial-seal-inner{width:83%;height:83%;border:1px solid #e6bd786e;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;color:#edc581}
+body.chapter-focus .chapter-editorial-seal-inner span:first-child{font-size:.98rem;font-weight:750}
+body.chapter-focus .chapter-editorial-seal-inner strong{font-size:clamp(4.1rem,6vw,6.6rem);line-height:1.18;font-weight:800;color:#edc581;font-variant-numeric:tabular-nums}
+body.chapter-focus .chapter-editorial-seal-inner span:last-child{font-size:.8rem;letter-spacing:.02em}
+body.chapter-focus .chapter-editorial-section>.section-heading{display:none!important}
+body.chapter-focus .chapter-focus-banner{max-width:1180px!important}
+body.chapter-focus .chapter-editorial-section>.ch9-hero,body.chapter-focus .chapter-editorial-section>.ch8-hero,body.chapter-focus .chapter-editorial-section>.ch-modern-hero{margin-top:0!important}
+@media(max-width:760px){body.chapter-focus .chapter-editorial-hero{grid-template-columns:minmax(0,1fr) 112px;gap:14px;padding:25px 20px;min-height:0;border-radius:16px}body.chapter-focus .chapter-editorial-hero .chapter-main-title{font-size:clamp(2rem,7vw,3rem)!important}body.chapter-focus .chapter-editorial-seal{width:108px;box-shadow:0 0 0 7px #ffffff07}body.chapter-focus .chapter-editorial-seal-inner strong{font-size:2.75rem}body.chapter-focus .chapter-editorial-seal-inner span:first-child{font-size:.75rem}body.chapter-focus .chapter-editorial-seal-inner span:last-child{font-size:.59rem}body.chapter-focus .chapter-editorial-copy>p:not(.chapter-editorial-kicker){font-size:.95rem!important}body.chapter-focus .chapter-editorial-kicker{font-size:.73rem!important}}
+@media(max-width:460px){body.chapter-focus .chapter-editorial-hero{grid-template-columns:minmax(0,1fr) 82px;gap:9px;padding:22px 16px}body.chapter-focus .chapter-editorial-seal{width:80px}body.chapter-focus .chapter-editorial-seal-inner strong{font-size:2rem}body.chapter-focus .chapter-editorial-seal-inner span:last-child{display:none}body.chapter-focus .chapter-editorial-hero .chapter-main-title{font-size:clamp(1.8rem,8vw,2.3rem)!important}}
