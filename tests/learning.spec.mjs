@@ -229,3 +229,44 @@ test('Chapter 8 mobile lesson menu is accessible and closes after navigation',as
  await expect(toggle).toHaveAttribute('aria-expanded','false');
  await expect(page.locator('#ch8-lesson-5')).toBeVisible();
 });
+
+test('Chapter 2: incomplete submission returns to unanswered question', async ({ page }) => {
+ await page.goto(chapter(2));
+ await page.getByRole('tab',{name:'परीक्षा'}).click();
+ await page.locator('#chapter2ExamForm button[type="submit"]').click();
+ await expect(page.locator('#examResults')).toContainText('कृपया सबै २० प्रश्न');
+ await expect(page.locator('#chapter2ExamQuestions fieldset.exam-question:not([hidden])')).toHaveCount(1);
+ await expect(page.locator('#chapter2ExamQuestions fieldset.exam-question').first()).toBeFocused();
+});
+
+test('Chapter 3: incomplete submission and result navigation', async ({ page }) => {
+ await page.goto(chapter(3));
+ await page.getByRole('tab',{name:'परीक्षा'}).click();
+ await page.locator('#chapter3ExamForm button[type="submit"]').click();
+ await expect(page.locator('#chapter3Results')).toContainText('कृपया सबै १५ प्रश्न');
+ await expect(page.locator('#chapter3ExamQuestions fieldset.exam-question:not([hidden])')).toHaveCount(1);
+ await expect(page.locator('#chapter3ExamQuestions fieldset.exam-question').first()).toBeFocused();
+});
+
+test('Chapter 8: incomplete final assessment announces status and focuses first unanswered question', async ({ page }) => {
+ await page.goto(chapter(8));
+ const status=page.locator('#ch8AssessmentSummary');
+ await expect(status).toHaveAttribute('role','status');
+ await expect(status).toHaveAttribute('aria-live','polite');
+ await page.locator('#ch8Assessment button[type="submit"]').click();
+ await expect(status).toContainText('सबै प्रश्नको उत्तर');
+ await expect(page.locator('#ch8AssessmentQuestions fieldset').first()).toBeFocused();
+});
+
+test('Chapter 3: keyboard Home and End select the appropriate learning tabs', async ({ page }) => {
+ await page.goto(chapter(3));
+ const lesson=page.getByRole('tab',{name:'पाठ'});
+ const quiz=page.getByRole('tab',{name:'परीक्षा'});
+ await lesson.focus();
+ await page.keyboard.press('End');
+ await expect(quiz).toHaveAttribute('aria-selected','true');
+ await expect(quiz).toBeFocused();
+ await page.keyboard.press('Home');
+ await expect(lesson).toHaveAttribute('aria-selected','true');
+ await expect(lesson).toBeFocused();
+});
