@@ -862,3 +862,12 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter9 #ch9Quiz fieldset{margin:0 0 18px;padding:14px;border:1px solid var(--line,#b4b9b9);border-radius:10px}
 #chapter9 #ch9Quiz legend{font-weight:700;padding:0 5px}
 #chapter9 [id^="ch9-"]{scroll-margin-top:24px}
+
+/* Chapter 9 worked-example controls: inherit theme text and surfaces. */
+#chapter9 .ch9-worked-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;margin:18px 0}
+#chapter9 .ch9-worked-controls label{font-weight:700}
+#chapter9 .ch9-worked-controls select{width:100%;min-height:44px;padding:8px 10px;border:1px solid var(--line,#aeb5b8);border-radius:8px;background:var(--surface,#fff);color:inherit;font:inherit}
+#chapter9 .ch9-worked-controls select:focus-visible{outline:3px solid #a87934;outline-offset:2px}
+#chapter9 .ch9-worked-result{padding:16px;border:1px solid var(--line,#aeb5b8);border-radius:12px;background:var(--surface,transparent);color:inherit}
+#chapter9 .ch9-worked-result p{margin:9px 0 0}
+@media(max-width:600px){#chapter9 .ch9-worked-controls{grid-template-columns:1fr}}
