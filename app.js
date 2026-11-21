@@ -777,7 +777,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const base=document.getElementById('ch8Base'),steps=document.getElementById('ch8Steps'),result=document.getElementById('ch8Result'),quiz=document.getElementById('ch8Quiz');
  if(!base||!steps||!result)return;
  for(let n=1;n<=12;n++){for(const el of [base,steps]){const o=document.createElement('option');o.value=String(n);o.textContent=String(n);el.append(o)}}
- const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);const update=()=>{const a=Number(base.value),b=Number(steps.value),house=((a+b-2)%12)+1;result.textContent='भाव '+nep(a)+' बाट '+nep(b)+' गन्दा: ('+nep(a)+' + '+nep(b)+' − १) = '+nep(a+b-1)+(a+b-1>12?' → १२ घटाउँदा '+nep(house):'')+'। उत्तर: '+nep(house)+'औँ भाव।'};
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);const update=()=>{const a=Number(base.value),b=Number(steps.value),house=((a+b-2)%12)+1;result.textContent='आधार '+nep(a)+'औँ भावलाई पहिलो मानेर '+nep(b)+' स्थान गन्नुहोस्। क्रम: '+Array.from({length:b},(_,i)=>nep(((a+i-1)%12)+1)).join(' → ')+'। उत्तर: '+nep(house)+'औँ भाव।'};
  base.value='4';steps.value='3';base.addEventListener('change',update);steps.addEventListener('change',update);
  document.querySelectorAll('[data-ch8-example]').forEach(button=>button.addEventListener('click',()=>{const examples={mother:[4,3],spouse:[7,2],grandchild:[5,5],father:[4,9]};const v=examples[button.dataset.ch8Example];if(!v)return;base.value=String(v[0]);steps.value=String(v[1]);update()}));
  if(quiz)quiz.addEventListener('submit',e=>{e.preventDefault();const chosen=quiz.querySelector('input[name="ch8q"]:checked'),feedback=document.getElementById('ch8Feedback');feedback.textContent=!chosen?'पहिले उत्तर छान्नुहोस्।':chosen.value==='10'?'सही। ७ + ४ − १ = १०। जीवनसाथीको आमालाई दशौँ भावबाट हेर्ने उदाहरण हो।':'फेरि गन्नुहोस्: सातौँ भावलाई १ मानेर चार स्थान गन्नुहोस्।'});
@@ -788,7 +788,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
 (function(){
  const form=document.getElementById('ch8SourceQuiz'),feedback=document.getElementById('ch8SourceFeedback');
  if(!form||!feedback)return;
- form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8source"]:checked');feedback.textContent=!checked?'उत्तर जाँच्नुअघि एउटा विकल्प छान्नुहोस्।':checked.value==='b'?'सही। “माथिको/तलको सम्पत्ति” को अर्थ नोटमा पुष्टि गर्न बाँकी छ। सम्भावित व्याख्यालाई निश्चित नियम बनाउन हुँदैन।':'यो कथन नोटमा लेखिएको छ। अस्पष्ट र पुष्टि गर्न बाँकी रहेको वाक्य छुट्याउनुहोस्।'});
+ form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8source"]:checked');feedback.textContent=!checked?'उत्तर जाँच्नुअघि एउटा विकल्प छान्नुहोस्।':checked.value==='b'?'सही। परम्परागत प्रतीकमा राहु शिर वा माथिल्लो भाग र केतु शिरविहीन शरीर वा तल्लो भागसँग सम्बन्धित छन्। त्यसैले माथिल्लो र तल्लो तलाको व्याख्या गरिएको हो। यो वास्तविक सम्पत्ति प्राप्तिको प्रमाण होइन।':'राहु र केतुको शिर तथा शरीरसँगको प्रतीकात्मक सम्बन्ध विचार गर्नुहोस्। यो सांस्कृतिक व्याख्या हो, निश्चित भविष्यवाणी होइन।'});
 })();
 
 /* Chapter 8.5: verify the sequence in the reference notes' fourth-house reading. */
@@ -804,7 +804,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(!mars||!order||!result)return;
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  for(let i=1;i<=12;i++){const option=document.createElement('option');option.value=String(i);option.textContent=nep(i);mars.append(option)}
- const render=()=>{const a=Number(mars.value),n=Number(order.value),house=((a+n-2)%12)+1;result.textContent='मङ्गल '+nep(a)+'औँ भावमा छ। '+nep(a)+' + '+nep(n)+' − १ = '+nep(a+n-1)+(a+n-1>12?' → १२ घटाउँदा '+nep(house):'')+'। गणनाबाट '+nep(house)+'औँ भाव आउँछ। यसबाट भाइबहिनीको संख्या वा अवस्था निश्चित हुँदैन।'};
+ const render=()=>{const a=Number(mars.value),n=Number(order.value),house=((a+n-2)%12)+1;result.textContent='मङ्गल '+nep(a)+'औँ भावमा छ। त्यसलाई पहिलो मानेर '+nep(n)+' स्थान गन्दा: '+Array.from({length:n},(_,i)=>nep(((a+i-1)%12)+1)).join(' → ')+'। उत्तर: '+nep(house)+'औँ भाव। यसबाट भाइबहिनीको संख्या वा अवस्था निश्चित हुँदैन।'};
  mars.value='6';mars.addEventListener('change',render);order.addEventListener('change',render);render();
  if(quiz)quiz.addEventListener('submit',e=>{e.preventDefault();const answer=quiz.querySelector('input[name="ch8sibling"]:checked'),feedback=document.getElementById('ch8SiblingFeedback');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='8'?'सही। छैटौँबाट तेस्रो: ६ + ३ − १ = ८।':'फेरि गन्नुहोस्: छैटौँ भावलाई पहिलो मान्दा सातौँ दोस्रो र आठौँ तेस्रो हुन्छ।'});
 })();
@@ -833,7 +833,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const questions=[
  {q:'८.१: परम्परागत तालिकामा लग्नबाट बुवा कुन भावमा छन्?',a:['नवौँ','दशौँ','बाह्रौँ'],correct:1,why:'पृष्ठ ७१: लग्नबाट दशौँ; सूर्यबाट नवौँ। दुई आधार छुट्टै छन्।'},
  {q:'८.२: आमाको भाइ (मामा) चौथो भावबाट तेस्रो गन्दा कुन भाव?',a:['पाँचौँ','छैटौँ','सातौँ'],correct:1,why:'४ + ३ − १ = ६। आधार भावलाई १ मानेर गनिन्छ।'},
- {q:'८.३: “राहुले माथिको, केतुले तलको सम्पत्ति” को अर्थबारे नोटको स्थिति के छ?',a:['अर्थ पूर्ण पुष्टि भएको छ','पुष्टि गर्न बाँकी छ','वैज्ञानिक रूपमा प्रमाणित छ'],correct:1,why:'पृष्ठ ७२ मा माथिल्लो/तल्लो तला सम्भावना मात्र उल्लेख छ; अध्ययन सामग्रीसँग पुष्टि गर्नुपर्ने छ।'},
+ {q:'८.३: राहु र केतुलाई घरको माथिल्लो र तल्लो तलासँग किन जोडिएको छ?',a:['दुवै एउटै तलाका प्रतीक भएकाले','राहु शिर वा माथिल्लो भाग र केतु शिरविहीन शरीर वा तल्लो भागसँग जोडिने भएकाले','यसले सम्पत्तिको कानुनी स्वामित्व निश्चित गर्ने भएकाले'],correct:1,why:'पृष्ठ ७२ र ७६ का कथनलाई जोडेर हेर्दा राहुको शिर र केतुको शिरविहीन शरीरसँगको प्रतीकात्मक सम्बन्धले माथिल्लो र तल्लो तलाको व्याख्या गर्छ। यो प्रतीकात्मक तर्क प्रयोगकर्ताबाट स्पष्ट गरिएको हो, मूल नोटमा यही कारण शब्दशः दिइएको छैन।'},
  {q:'८.४: पारिवारिक संस्कार हेर्दा नोटमा मुख्यतः कुन भाव र स्वामी जोडिएका छन्?',a:['दोस्रो भाव र द्वितीयेश','दशौँ भाव मात्र','आठौँ भाव मात्र'],correct:0,why:'पृष्ठ ७३ मा दोस्रो भाव र द्वितीयेशको बललाई परिवारको परम्परा र संस्कारसँग जोडिएको छ।'},
  {q:'८.५: चौथो भाव हेर्नुअघि अध्ययन सामग्रीले के हेर्न भन्नुभएको छ?',a:['घातबार मात्र','लग्न र लग्नेश','छैटौँ मात्र'],correct:1,why:'पृष्ठ ७४: पहिले लग्न र लग्नेश, त्यसपछि चौथो भाव र चन्द्रमाको अवस्था।'},
  {q:'८.६: मङ्गल छैटौँमा हुँदा मङ्गलबाट तेस्रो कुन भाव?',a:['सातौँ','आठौँ','नवौँ'],correct:1,why:'६ + ३ − १ = ८। यो गणनाले वास्तविक भाइबहिनीको अवस्था निर्धारण गर्दैन।'},
