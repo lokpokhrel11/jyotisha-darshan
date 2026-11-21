@@ -1315,3 +1315,52 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   result.textContent='चरण १: '+names[a-1]+' लग्न। चरण २: दोस्रो भावमा '+names[second]+' राशि (अङ्क '+nep(second+1)+') पर्छ। चरण ३: यस राशिको स्वामी '+owners[second]+' हो। त्यसैले द्वितीयेश '+owners[second]+'। यो स्थान पहिचान हो, धनको नतिजा होइन।';
  });
 })();
+
+/* Chapter 10: source-based topic explorer and comprehension assessment. */
+(function(){
+ const topic=document.getElementById('ch10Topic'),topicResult=document.getElementById('ch10TopicResult');
+ const topics={
+  short:'तेस्रो भाव: छोटो यात्रा र स्थानीय आवागमनसँग सम्बन्धित परम्परागत अध्ययन।',
+  long:'नवौँ भाव: लामो यात्रासँग सम्बन्धित परम्परागत अध्ययन।',
+  foreign:'बाह्रौँ भाव: विदेश र टाढाको स्थानसँग सम्बन्धित परम्परागत अध्ययन।',
+  vehicle:'चौथो भाव र शुक्र: सवारी साधनसम्बन्धी परम्परागत व्याख्यामा उल्लेखित।',
+  business:'सातौँ भाव र बुध: व्यापारको परम्परागत अध्ययनमा उल्लेखित।',
+  research:'आठौँ भाव र केतु: अनुसन्धानको परम्परागत सन्दर्भ; पाँचौँ र नवौँ भाव पनि उल्लेखित।',
+  creative:'पाँचौँ भाव: विचार, लेखन र सिर्जनात्मक उत्पादनसँग जोडिएको परम्परागत व्याख्या।'
+ };
+ if(topic&&topicResult)topic.addEventListener('change',()=>{
+  topicResult.textContent=topics[topic.value]?topics[topic.value]+' यो अध्ययन-वर्गीकरण हो, व्यक्तिगत भविष्यवाणी होइन।':'विषय छानेपछि सम्बन्धित भाव यहाँ देखिन्छ।';
+ });
+ const form=document.getElementById('ch10Quiz'),feedback=document.getElementById('ch10Feedback'),review=document.getElementById('ch10Review');
+ if(!form||!feedback||!review)return;
+ const items=[
+  {name:'ch10q1',answer:'a',explanation:'वृष लग्नको दोस्रो भाव मिथुन हो र मिथुनको स्वामी बुध हो।'},
+  {name:'ch10q2',answer:'b',explanation:'अध्ययन नोटमा तेस्रो भाव छोटो यात्रा, नवौँ लामो यात्रा र बाह्रौँ विदेशसँग जोडिएको छ।'},
+  {name:'ch10q3',answer:'c',explanation:'सप्तमेश छैटौँमा जाँदा व्यापार राम्रो भन्ने कथन र सामान्य व्ययस्थान नियमबीच असङ्गति छ; स्रोतले नै पुष्टि बाँकी राखेको छ।'}
+ ];
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+ const clear=()=>{feedback.textContent='';feedback.className='ch10-feedback';review.hidden=true;review.replaceChildren()};
+ form.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))clear()});
+ form.addEventListener('reset',clear);
+ form.addEventListener('submit',event=>{
+  event.preventDefault();
+  const responses=items.map(item=>form.querySelector('input[name="'+item.name+'"]:checked'));
+  const missing=responses.findIndex(x=>!x);
+  if(missing>=0){
+   clear();feedback.className='ch10-feedback is-warning';feedback.textContent='कृपया तीनवटै प्रश्नको उत्तर छान्नुहोस्।';
+   const field=form.querySelector('input[name="'+items[missing].name+'"]').closest('fieldset');
+   field.tabIndex=-1;field.focus({preventScroll:true});return;
+  }
+  const score=responses.reduce((n,x,i)=>n+Number(x.value===items[i].answer),0);
+  feedback.className='ch10-feedback is-result';
+  feedback.textContent='नतिजा: '+nep(score)+' / ३ सही। '+(score===3?'तीनवटै उत्तर सही छन्।':'तल व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
+  items.forEach((item,i)=>{
+   const correct=responses[i].value===item.answer;
+   const card=document.createElement('div');card.className='ch10-review-card';
+   const heading=document.createElement('strong');heading.textContent='प्रश्न '+nep(i+1)+' · '+(correct?'सही उत्तर':'समीक्षा आवश्यक');
+   const explanation=document.createElement('p');explanation.textContent=item.explanation;
+   card.append(heading,explanation);review.append(card);
+  });
+  review.hidden=false;feedback.tabIndex=-1;feedback.focus({preventScroll:true});
+ });
+})();
