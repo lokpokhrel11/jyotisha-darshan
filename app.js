@@ -414,15 +414,15 @@ function yoginiBalance(){const selection=yoginiSelection(),out=$('ygBalanceOutpu
  const y=yoginis[selection.index],remaining=(b-a)/b*y[2],totalDays=Math.round(remaining*360),years=Math.floor(totalDays/360),months=Math.floor((totalDays%360)/30),days=totalDays%30;out.textContent=`${y[0]} (${y[1]}) को पूर्ण अवधि ${y[2]} वर्ष। दशा शेष = (${b} − ${a}) ÷ ${b} × ${y[2]} = ${remaining.toFixed(4)} वर्ष ≈ ${years} वर्ष ${months} महिना ${days} दिन।`;}
 $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventListener('click',yoginiBalance);yoginiCycle();yoginiBalance();
 
-(function(){const key='jyotisha-pathshala-opened-v3';let opened=[];try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))opened=[...new Set(v.filter(x=>Number.isInteger(x)&&x>=1&&x<=10))]}catch(_){}const cards=[...document.querySelectorAll('.chapter-card[data-chapter]')];function render(){cards.forEach(c=>c.classList.toggle('visited',opened.includes(Number(c.dataset.chapter))));const n=opened.length;document.getElementById('progressCount').textContent=String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' / १०';document.getElementById('progressFill').style.width=(n/10*100)+'%';document.getElementById('progressTrack').setAttribute('aria-valuenow',String(n))}cards.forEach(c=>c.addEventListener('click',()=>{const n=Number(c.dataset.chapter);if(!opened.includes(n)){opened.push(n);try{localStorage.setItem(key,JSON.stringify(opened))}catch(_){}render()}}));document.getElementById('resetProgress').addEventListener('click',()=>{if(!window.confirm('खोलिएका अध्यायको गणना र पछिल्लो अध्ययन स्थान हटाउने? परीक्षाका नतिजा सुरक्षित रहनेछन्।'))return;opened=[];try{localStorage.removeItem(key);localStorage.removeItem('jyotisha-pathshala-last-chapter-v1');localStorage.removeItem('jyotisha-pathshala-ch8-last-lesson-v1')}catch(_){}document.querySelector('.study-resume')?.remove();render()});render()})();
+(function(){const key='jyotisha-pathshala-opened-v3';let opened=[];try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))opened=[...new Set(v.filter(x=>Number.isInteger(x)&&x>=1&&x<=11))]}catch(_){}const cards=[...document.querySelectorAll('.chapter-card[data-chapter]')];function render(){cards.forEach(c=>c.classList.toggle('visited',opened.includes(Number(c.dataset.chapter))));const n=opened.length;document.getElementById('progressCount').textContent=String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' / ११';document.getElementById('progressFill').style.width=(n/11*100)+'%';document.getElementById('progressTrack').setAttribute('aria-valuenow',String(n))}cards.forEach(c=>c.addEventListener('click',()=>{const n=Number(c.dataset.chapter);if(!opened.includes(n)){opened.push(n);try{localStorage.setItem(key,JSON.stringify(opened))}catch(_){}render()}}));document.getElementById('resetProgress').addEventListener('click',()=>{if(!window.confirm('खोलिएका अध्यायको गणना र पछिल्लो अध्ययन स्थान हटाउने? परीक्षाका नतिजा सुरक्षित रहनेछन्।'))return;opened=[];try{localStorage.removeItem(key);localStorage.removeItem('jyotisha-pathshala-last-chapter-v1');localStorage.removeItem('jyotisha-pathshala-ch8-last-lesson-v1')}catch(_){}document.querySelector('.study-resume')?.remove();render()});render()})();
 
 /* v3.1 chapter-focused reading mode. All existing widgets stay mounted. */
 (function(){
  const params=new URLSearchParams(window.location.search);
  const chapter=Number(params.get('chapter'));
- if(!Number.isInteger(chapter)||chapter<1||chapter>10)return;
- const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"],"7":["chapter7"],"8":["chapter8"],"9":["chapter9"],"10":["chapter10"]};
- const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति","कुण्डली कसरी हेर्ने","नाता र भावात् भावम्","स्वभाव, शरीर र स्वास्थ्यका संकेत","धन, कमाइ, परिश्रम र यात्रा"];
+ if(!Number.isInteger(chapter)||chapter<1||chapter>11)return;
+ const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"],"7":["chapter7"],"8":["chapter8"],"9":["chapter9"],"10":["chapter10"],"11":["chapter11"]};
+ const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति","कुण्डली कसरी हेर्ने","नाता र भावात् भावम्","स्वभाव, शरीर र स्वास्थ्यका संकेत","धन, कमाइ, परिश्रम र यात्रा","सन्तान र कुण्डली मिलान"];
  const allowed=new Set(groups[chapter]);
  document.body.classList.add('chapter-focus');
  for(const section of document.querySelectorAll('main > section')){
@@ -905,7 +905,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const chapterKey='jyotisha-pathshala-last-chapter-v1';
  const lessonKey='jyotisha-pathshala-ch8-last-lesson-v1';
  const chapter=Number(new URLSearchParams(location.search).get('chapter'));
- const valid=n=>Number.isInteger(n)&&n>=1&&n<=10;
+ const valid=n=>Number.isInteger(n)&&n>=1&&n<=11;
  const ids=new Set(Array.from({length:8},(_,i)=>'ch8-lesson-'+(i+1)).concat('ch8AssessmentPanel'));
  const getSavedLesson=()=>{try{const value=localStorage.getItem(lessonKey);return ids.has(value)?value:null}catch(_){return null}};
  if(valid(chapter)){
@@ -1385,6 +1385,45 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    const explanation=document.createElement('p');explanation.textContent=item.explanation;
    card.append(heading,explanation);review.append(card);
   });
+  review.hidden=false;feedback.tabIndex=-1;feedback.focus({preventScroll:true});
+ });
+})();
+
+/* Chapter 11: inclusive zodiac counting, never a prediction about health or relationships. */
+(function(){
+ const a=document.getElementById('ch11MoonA'),b=document.getElementById('ch11MoonB'),out=document.getElementById('ch11CountResult');
+ if(!a||!b||!out)return;
+ const signs=['मेष','वृष','मिथुन','कर्कट','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'];
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+ const render=()=>{
+  const x=Number(a.value),y=Number(b.value);
+  if(!a.value||!b.value){out.textContent='दुवै चन्द्रराशि छानेपछि दुईतर्फी दूरी देखिन्छ।';return}
+  const forward=((y-x+12)%12)+1,reverse=((x-y+12)%12)+1;
+  const matched=(forward===5&&reverse===9)||(forward===9&&reverse===5);
+  out.textContent=signs[x-1]+' → '+signs[y-1]+': '+nep(forward)+'औँ स्थान। '+signs[y-1]+' → '+signs[x-1]+': '+nep(reverse)+'औँ स्थान। '+(matched?'यस जोडीलाई स्रोतको परिभाषाअनुसार नवपञ्चक भनिन्छ।':'यस जोडीमा स्रोतको नवपञ्चक (५/९) गणना मिल्दैन।')+' यो राशिदूरीको अभ्यास मात्र हो; विवाह, गर्भधारण वा स्वास्थ्यको भविष्यवाणी होइन।';
+ };
+ a.addEventListener('change',render);b.addEventListener('change',render);
+})();
+(function(){
+ const form=document.getElementById('ch11Quiz'),feedback=document.getElementById('ch11Feedback'),review=document.getElementById('ch11Review');
+ if(!form||!feedback||!review)return;
+ const questions=[
+  {name:'ch11q1',answer:'b',explanation:'नवपञ्चकको परिभाषामा दुवैको जन्म चन्द्रराशि तुलना गरिन्छ।'},
+  {name:'ch11q2',answer:'a',explanation:'मेष (१), वृष (२), मिथुन (३), कर्कट (४), सिंह (५) गरी समावेशी गणना पाँच हुन्छ।'},
+  {name:'ch11q3',answer:'c',explanation:'राशिदूरीको गणनाले प्रजनन, स्वास्थ्य वा वैवाहिक भविष्य निर्धारण गर्दैन।'}
+ ];
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+ const clear=()=>{feedback.textContent='';feedback.className='ch10-feedback';review.hidden=true;review.replaceChildren()};
+ form.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))clear()});
+ form.addEventListener('reset',clear);
+ form.addEventListener('submit',event=>{
+  event.preventDefault();
+  const selected=questions.map(q=>form.querySelector('input[name="'+q.name+'"]:checked'));
+  const missing=selected.findIndex(x=>!x);
+  if(missing!==-1){clear();feedback.textContent='कृपया तीनवटै प्रश्नको उत्तर छान्नुहोस्।';feedback.className='ch10-feedback is-warning';form.querySelector('input[name="'+questions[missing].name+'"]').focus();return}
+  const score=selected.reduce((n,x,i)=>n+Number(x.value===questions[i].answer),0);
+  feedback.className='ch10-feedback is-result';feedback.textContent='नतिजा: '+nep(score)+' / ३ सही।';
+  questions.forEach((q,i)=>{const card=document.createElement('div');card.className='ch10-review-card';const heading=document.createElement('strong');heading.textContent='प्रश्न '+nep(i+1)+' · '+(selected[i].value===q.answer?'सही उत्तर':'समीक्षा आवश्यक');const p=document.createElement('p');p.textContent=q.explanation;card.append(heading,p);review.append(card)});
   review.hidden=false;feedback.tabIndex=-1;feedback.focus({preventScroll:true});
  });
 })();
