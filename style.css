@@ -1138,3 +1138,53 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter11 .ch11-education-practice select{width:100%;max-width:460px;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:12px;font:inherit}
 #chapter11 .ch11-education-practice select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 @media(max-width:760px){#chapter11 .ch11-learning-grid{grid-template-columns:1fr}#chapter11 .ch11-lesson-heading{padding-top:12px}}
+
+/* Chapters 10–11: shared editorial visual system inspired by Chapters 8–9.
+   Scoped overrides maintain light/dark theme and preserve lesson functionality. */
+#chapter10,#chapter11{--chapter-gold:#d9ad57;--chapter-navy:#142c3b}
+#chapter10 .ch-modern-hero,#chapter11 .ch-modern-hero{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:center;min-height:275px;padding:clamp(27px,4.4vw,51px)!important;margin-bottom:22px!important;border:1px solid #5a6b70!important;border-radius:20px!important;background:radial-gradient(ellipse at 93% 8%,rgba(223,180,99,.20),transparent 37%),linear-gradient(128deg,#102b3d 0%,#1c3949 60%,#294454 100%)!important;box-shadow:0 16px 34px rgba(8,25,35,.11);color:#fdf9ee!important}
+#chapter10 .ch-modern-hero:before,#chapter11 .ch-modern-hero:before{content:"";position:absolute;inset:18px;border:1px solid rgba(225,187,109,.25);border-radius:13px;pointer-events:none}
+#chapter10 .ch-modern-hero:after,#chapter11 .ch-modern-hero:after{content:"";position:absolute;right:-80px;top:-155px;width:400px;height:400px;border:1px solid rgba(230,188,111,.23);border-radius:50%;pointer-events:none}
+#chapter10 .ch-modern-hero .ch9-kicker,#chapter11 .ch-modern-hero .ch9-kicker{position:relative;z-index:1;max-width:70%;font-size:.84rem;font-weight:800;letter-spacing:.09em;color:#f2d398!important}
+#chapter10 .ch-modern-hero h2,#chapter11 .ch-modern-hero h2{position:relative;z-index:1;max-width:75%;font-size:clamp(1.85rem,3.5vw,2.9rem);line-height:1.25;letter-spacing:-.025em;margin:12px 0!important;color:#fff!important}
+#chapter10 .ch-modern-hero>p:not(.ch9-kicker),#chapter11 .ch-modern-hero>p:not(.ch9-kicker){position:relative;z-index:1;max-width:67%;color:#e8e8e2!important;line-height:1.85;font-size:1.03rem}
+#chapter10 .ch-modern-hero .ch9-hero-meta,#chapter11 .ch-modern-hero .ch9-hero-meta{position:relative;z-index:1;max-width:75%;display:flex;flex-wrap:wrap;gap:9px;margin:19px 0 0}
+#chapter10 .ch-modern-hero .ch9-hero-meta span,#chapter11 .ch-modern-hero .ch9-hero-meta span{display:inline-flex;padding:7px 11px;border:1px solid rgba(233,204,150,.4);border-radius:99px;background:rgba(255,255,255,.06);color:#fff;font-size:.83rem}
+#chapter10 .ch-modern-hero-mark,#chapter11 .ch-modern-hero-mark{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:170px;height:170px;border:1px solid rgba(239,203,129,.48);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;color:#f1d59c;background:rgba(255,255,255,.035);box-shadow:0 0 0 12px rgba(223,185,109,.055);pointer-events:none}
+#chapter10 .ch-modern-hero-mark strong,#chapter11 .ch-modern-hero-mark strong{font-size:3.9rem;font-weight:600;line-height:1.25;color:#f4d69c}
+#chapter10 .ch-modern-hero-mark span,#chapter11 .ch-modern-hero-mark span{font-size:.9rem;letter-spacing:.11em}
+#chapter10 .ch-modern-nav,#chapter11 .ch-modern-nav{display:block!important;padding:20px!important;margin:0 0 25px!important;background:var(--white)!important;border:1px solid var(--line)!important;border-radius:17px!important;box-shadow:0 8px 24px rgba(10,29,43,.035)}
+#chapter10 .ch-modern-nav-heading,#chapter11 .ch-modern-nav-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
+#chapter10 .ch-modern-nav .ch10-contents-label,#chapter11 .ch-modern-nav .ch10-contents-label{color:var(--ink);font-weight:800;font-size:1.02rem}
+#chapter10 .ch-modern-nav-count,#chapter11 .ch-modern-nav-count{color:var(--ink);opacity:.7;font-size:.83rem}
+#chapter10 .ch-modern-nav-links,#chapter11 .ch-modern-nav-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+#chapter10 .ch-modern-nav-links a,#chapter11 .ch-modern-nav-links a{display:flex;align-items:center;gap:10px;min-height:57px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--soft);color:var(--ink);text-decoration:none;font-weight:650;font-size:.9rem;line-height:1.45;transition:transform .15s,border-color .15s,background .15s}
+#chapter10 .ch-modern-nav-links a:hover,#chapter11 .ch-modern-nav-links a:hover{transform:translateY(-2px);border-color:var(--gold);background:var(--white)}
+#chapter10 .ch-modern-nav-links a:focus-visible,#chapter11 .ch-modern-nav-links a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#chapter10 .ch-modern-nav-num,#chapter11 .ch-modern-nav-num{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:color-mix(in srgb,var(--gold) 19%,var(--white));font-size:.78rem;font-weight:800}
+#chapter10 .ch-modern-nav-arrow,#chapter11 .ch-modern-nav-arrow{margin-left:auto;color:var(--ink);opacity:.6}
+#chapter10 .study-panel,#chapter11 .study-panel{border-radius:16px;line-height:1.8}
+#chapter10 .study-panel>h3,#chapter11 .study-panel>h3{color:var(--ink);line-height:1.4}
+#chapter10 .ch9-step-grid,#chapter11 .ch9-step-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:20px 0 29px}
+#chapter10 .ch9-step,#chapter11 .ch9-step{min-width:0;display:block;padding:22px;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:15px;background:var(--white);color:var(--ink);box-shadow:0 5px 15px rgba(10,30,40,.025)}
+#chapter10 .ch9-step-number,#chapter11 .ch9-step-number{display:grid;place-items:center;width:38px;height:38px;margin-bottom:13px;border-radius:11px;background:color-mix(in srgb,var(--gold) 20%,var(--white));color:var(--ink);font-weight:850}
+#chapter10 .ch9-step strong,#chapter11 .ch9-step strong{display:block;color:var(--ink);font-size:1.04rem;margin-bottom:8px}
+#chapter10 .ch9-step p,#chapter11 .ch9-step p{line-height:1.8;color:var(--ink);margin:0}
+#chapter10 .ch9-grid,#chapter11 .ch9-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:17px 0 26px}
+#chapter10 .ch9-grid p,#chapter11 .ch9-grid p{min-width:0;margin:0;padding:20px;border:1px solid var(--line);border-radius:13px;background:var(--white);color:var(--ink);line-height:1.8}
+#chapter10 .ch9-grid strong,#chapter11 .ch9-grid strong{display:block;margin-bottom:8px;color:var(--ink);font-size:1.02rem}
+#chapter10 .ch10-practice,#chapter11 .ch10-practice{border:1px solid var(--line)!important;border-top:4px solid var(--gold)!important;background:var(--white)!important;padding:clamp(18px,3vw,29px)!important;box-shadow:0 8px 24px rgba(10,30,40,.035)}
+#chapter10 .ch10-result,#chapter11 .ch10-result{background:var(--soft)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-left:3px solid var(--gold)!important;border-radius:11px!important}
+#chapter10 .ch10-quiz-panel,#chapter11 .ch10-quiz-panel{padding:clamp(18px,3vw,29px)!important;background:var(--white)!important;border:1px solid var(--line)!important;border-top:4px solid var(--gold)!important}
+#chapter10 .ch10-quiz-panel fieldset,#chapter11 .ch10-quiz-panel fieldset{min-width:0;margin:18px 0!important;padding:18px!important;border:1px solid var(--line)!important;border-radius:13px!important;background:var(--soft)!important}
+#chapter10 .ch10-quiz-panel legend,#chapter11 .ch10-quiz-panel legend{color:var(--ink)!important;font-weight:800!important;line-height:1.6;padding:0 5px}
+#chapter10 .ch10-choice,#chapter11 .ch10-choice{display:flex!important;align-items:flex-start!important;gap:12px!important;padding:14px 15px!important;margin:9px 0!important;border:1px solid var(--line)!important;border-radius:11px!important;background:var(--white)!important;color:var(--ink)!important;line-height:1.65!important;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+#chapter10 .ch10-choice:hover,#chapter11 .ch10-choice:hover,#chapter10 .ch10-choice:focus-within,#chapter11 .ch10-choice:focus-within{border-color:var(--gold)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 13%,transparent)}
+#chapter10 .ch10-choice:has(input:checked),#chapter11 .ch10-choice:has(input:checked){border-color:var(--gold)!important;background:color-mix(in srgb,var(--gold) 11%,var(--white))!important}
+#chapter10 .ch10-choice input,#chapter11 .ch10-choice input{flex:none;margin-top:.37em;accent-color:var(--gold)}
+#chapter10 .ch10-review-card,#chapter11 .ch10-review-card{background:var(--soft)!important;color:var(--ink)!important}
+#chapter10 .ch10-quiz-panel select,#chapter11 .ch10-quiz-panel select{background:var(--white);color:var(--ink)}
+#chapter10 h3[id],#chapter11 h3[id]{scroll-margin-top:95px}
+@media(max-width:850px){#chapter10 .ch-modern-nav-links,#chapter11 .ch-modern-nav-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){#chapter10 .ch-modern-hero,#chapter11 .ch-modern-hero{min-height:0;padding:26px 24px!important}#chapter10 .ch-modern-hero h2,#chapter11 .ch-modern-hero h2,#chapter10 .ch-modern-hero>p:not(.ch9-kicker),#chapter11 .ch-modern-hero>p:not(.ch9-kicker),#chapter10 .ch-modern-hero .ch9-kicker,#chapter11 .ch-modern-hero .ch9-kicker,#chapter10 .ch-modern-hero .ch9-hero-meta,#chapter11 .ch-modern-hero .ch9-hero-meta{max-width:100%}#chapter10 .ch-modern-hero-mark,#chapter11 .ch-modern-hero-mark{display:none}#chapter10 .ch-modern-nav-links,#chapter11 .ch-modern-nav-links{grid-template-columns:1fr}#chapter10 .ch9-step-grid,#chapter11 .ch9-step-grid,#chapter10 .ch9-grid,#chapter11 .ch9-grid{grid-template-columns:1fr}#chapter10 .ch-modern-nav,#chapter11 .ch-modern-nav{padding:14px!important}}
+@media(prefers-reduced-motion:reduce){#chapter10 .ch-modern-nav-links a,#chapter11 .ch-modern-nav-links a{transition:none}}
