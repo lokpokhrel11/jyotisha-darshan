@@ -851,3 +851,14 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 .skip-to-content:focus,.skip-to-content:focus-visible{transform:translateY(0);outline:3px solid #a87934;outline-offset:2px}
 #main-content:focus{outline:none}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Chapter 9: readable source cards and in-chapter navigation in both themes. */
+#chapter9 .ch9-local-nav{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0 26px}
+#chapter9 .ch9-local-nav a{display:inline-block;padding:9px 13px;border:1px solid var(--line,#b4b9b9);border-radius:9px;background:var(--surface,transparent);color:inherit;text-decoration:none;font-weight:650}
+#chapter9 .ch9-local-nav a:hover,#chapter9 .ch9-local-nav a:focus-visible{outline:2px solid currentColor;outline-offset:2px;text-decoration:underline}
+#chapter9 .ch9-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+#chapter9 .ch9-grid p{margin:0;padding:12px;border:1px solid var(--line,#b4b9b9);border-radius:10px;background:var(--surface,transparent);color:inherit}
+#chapter9 .ch9-grid strong{display:block;margin-bottom:4px}
+#chapter9 #ch9Quiz fieldset{margin:0 0 18px;padding:14px;border:1px solid var(--line,#b4b9b9);border-radius:10px}
+#chapter9 #ch9Quiz legend{font-weight:700;padding:0 5px}
+#chapter9 [id^="ch9-"]{scroll-margin-top:24px}
