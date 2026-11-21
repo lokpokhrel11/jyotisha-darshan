@@ -171,3 +171,10 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
 .ch7-reasoning .ch7-choice:has(input:checked){border-color:var(--gold);background:#fcf5e9}
 .ch7-reason-feedback:not(:empty){padding:15px;background:#f3f6f3;border-left:3px solid var(--gold);margin-top:16px}
 .ch7-reason-feedback p{margin:8px 0 0}
+
+/* Chapter 8: inclusive counting */
+.ch8-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:15px 0}
+.ch8-controls label{display:block;font-weight:700;margin-bottom:7px}
+.ch8-controls select{width:100%;max-width:100%;padding:9px;border:1px solid var(--line);border-radius:6px}
+#ch8Result{margin:12px 0}
+@media(max-width:480px){.ch8-controls{grid-template-columns:1fr}}
