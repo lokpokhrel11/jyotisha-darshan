@@ -731,3 +731,10 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  mars.value='6';mars.addEventListener('change',render);order.addEventListener('change',render);render();
  if(quiz)quiz.addEventListener('submit',e=>{e.preventDefault();const answer=quiz.querySelector('input[name="ch8sibling"]:checked'),feedback=document.getElementById('ch8SiblingFeedback');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='8'?'सही। छैटौँबाट तेस्रो: ६ + ३ − १ = ८।':'फेरि गन्नुहोस्: छैटौँ भावलाई पहिलो मान्दा सातौँ दोस्रो र आठौँ तेस्रो हुन्छ।'});
 })();
+
+/* Chapter 8.7: identify a traditional relocation rule without predicting outcomes. */
+(function(){
+ const form=document.getElementById('ch8ResidenceQuiz'),feedback=document.getElementById('ch8ResidenceFeedback');
+ if(!form||!feedback)return;
+ form.addEventListener('submit',e=>{e.preventDefault();const answer=form.querySelector('input[name="ch8residence"]:checked');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='b'?'सही। गुरुजीका नोटमा चतुर्थेश र लग्नेश बाह्रौँ भावमा हुँदा विदेशमा स्वेच्छिक बसाइको संकेत भनिएको छ।':'फेरि जाँच्नुहोस्। नोटमा सप्तमलाई स्वदेशभित्र र बाह्रौँलाई विदेशसँग जोडिएको छ।'});
+})();
