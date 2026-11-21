@@ -610,3 +610,48 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   feedback.textContent=answer.value==='b'?'सही। मकर राशिको स्वामी शनि हो। तर उदाहरणमा दशौँ भावमा बसेको ग्रह मङ्गल हो। भावेश र भावमा बसेको ग्रह फरक हुन्।':'फेरि विचार गर्नुहोस्। दशौँ भावको राशि मकर हो, त्यसको स्वामी शनि हो। उदाहरणमा त्यहाँ मङ्गल बसेको छ।';
  });
 })();
+
+/* v4.3: Accessible North Indian-style chart, using only known placements from notes p.64. */
+(function(){
+ const svg=document.getElementById('ch7Chart'),detail=document.getElementById('ch7HouseDetail'),buttons=document.getElementById('ch7HouseButtons');
+ if(!svg||!detail||!buttons)return;
+ const ns='http://www.w3.org/2000/svg';
+ const shapes=[
+ ['200,0 0,200 200,200',115,145],
+ ['0,0 200,0 100,100',100,48],
+ ['0,0 100,100 0,200',47,103],
+ ['0,200 200,400 200,200',113,252],
+ ['0,200 100,300 0,400',45,299],
+ ['0,400 100,300 200,400',103,354],
+ ['200,400 400,200 200,200',281,253],
+ ['200,400 300,300 400,400',300,353],
+ ['400,400 300,300 400,200',353,299],
+ ['400,200 200,0 200,200',283,146],
+ ['400,200 300,100 400,0',353,100],
+ ['400,0 300,100 200,0',300,48]
+ ];
+ const planets={1:['शनि'],4:['बृहस्पति'],6:['शुक्र'],7:['चन्द्र'],10:['मङ्गल']};
+ const strengths={शनि:'नीच',बृहस्पति:'उच्च',शुक्र:'नीच',चन्द्र:'सम',मङ्गल:'उच्च'};
+ const aspects={3:['शनि'],7:['शनि'],8:['बृहस्पति'],10:['शनि','बृहस्पति'],12:['बृहस्पति']};
+ const svgNode=(tag,attrs)=>{const n=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,String(v));return n};
+ const frame=svgNode('rect',{x:1,y:1,width:398,height:398,fill:'none',stroke:'#314d58','stroke-width':2});svg.append(frame);
+ let active=1;
+ function show(house){
+  active=house;const sign=(house-1)%12,found=planets[house]||[],seen=aspects[house]||[];
+  const rows=[['भाव',String(house)],['राशि',signs[sign]+' ('+(sign+1)+')'],['भावेश',lords[sign]],['भाव प्रकार',[1,4,7,10].includes(house)?'केन्द्र':[5,9].includes(house)?'त्रिकोण':[6,8,12].includes(house)?'दुःस्थान':'अन्य'],['ग्रहस्थिति',found.length?found.map(p=>p+' ('+strengths[p]+')').join(', '):'नोटमा ग्रहस्थिति दिइएको छैन'],['यस भावमा दृष्टि',seen.length?seen.join(', '):'नोटको उदाहरणमा विशेष दृष्टि उल्लेख छैन']];
+  detail.replaceChildren();const heading=document.createElement('h4');heading.textContent='भाव '+house+' · '+signs[sign];detail.append(heading);
+  const dl=document.createElement('dl');for(const [key,value] of rows){const dt=document.createElement('dt');dt.textContent=key;const dd=document.createElement('dd');dd.textContent=value;dl.append(dt,dd)}detail.append(dl);
+  svg.querySelectorAll('[data-house]').forEach(el=>{const selected=Number(el.dataset.house)===house;el.setAttribute('aria-pressed',String(selected));el.classList.toggle('selected',selected)});
+  buttons.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.house)===house)));
+ }
+ shapes.forEach(([points,x,y],i)=>{
+  const house=i+1,group=svgNode('g',{'data-house':house,role:'button',tabindex:0,'aria-label':'भाव '+house+', '+signs[i],'aria-pressed':'false'});
+  const polygon=svgNode('polygon',{points,class:'ch7-chart-house'}),label=svgNode('text',{x,y,'text-anchor':'middle',class:'ch7-chart-label'});
+  const a=svgNode('tspan',{x,dy:0});a.textContent=String(house);const b=svgNode('tspan',{x,dy:17});b.textContent=String(i+1);
+  label.append(a,b);group.append(polygon,label);
+  if(planets[house]){const p=svgNode('text',{x,y:y+33,'text-anchor':'middle',class:'ch7-chart-planet'});p.textContent=planets[house].join('·');group.append(p)}
+  group.addEventListener('click',()=>show(house));group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(house)}});
+  svg.append(group);
+  const button=document.createElement('button');button.type='button';button.dataset.house=String(house);button.textContent='भाव '+house;button.addEventListener('click',()=>show(house));buttons.append(button);
+ });show(1);
+})();
