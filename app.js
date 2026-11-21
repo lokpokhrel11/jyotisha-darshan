@@ -123,7 +123,7 @@ updateChart();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 
 
-// Chapter 2: source-aligned introductory exercises (Guruji notes, pp. 10–15).
+// Chapter 2: source-aligned introductory exercises (the reference notes notes, pp. 10–15).
 const meanings=['शरीर, स्वभाव','धन, आफन्त','साहस, भाइबहिनी','आमा, घर','सन्तान, विद्या','रोग, शत्रु','विवाह, विदेश','मृत्यु, अवरोध','धर्म, भाग्य','बुबा, कर्म','आय, लाभ','खर्च, विदेश'];
 for(const id of ['reverseLagna','reverseRashi']){const sel=$(id);signs.forEach((s,i)=>sel.add(new Option(`${i+1} · ${s}`,String(i+1))));}
 for(let i=1;i<=12;i++)$('houseMeaning').add(new Option(`${i} औँ भाव`,String(i)));
@@ -136,7 +136,7 @@ for(const id of ['reverseLagna','reverseRashi'])$(id).addEventListener('change',
 reverseCalculate();
 
 
-// Guruji's nine-planet exaltation teaching chart, source PDF p. 12.
+// the reference notes' nine-planet exaltation teaching chart, source PDF p. 12.
 // This is a synthetic exercise, NOT a natal or astronomical chart.
 const exaltedPlanets=[
  {name:'सूर्य',house:1},{name:'चन्द्र',house:2},{name:'राहु',house:3},
@@ -158,7 +158,7 @@ $('exaltedToggle').addEventListener('click',()=>{showExalted=!showExalted;$('exa
 drawExalted();
 
 
-// v1.0 Chapter 2 formative assessment, sourced from Guruji notes pp. 11–15.
+// v1.0 Chapter 2 formative assessment, sourced from the reference notes notes pp. 11–15.
 const chapter2Questions=[
  ['२.१','उत्तर भारतीय कुण्डलीमा पहिलो भाव कहाँ हुन्छ?',['माथि बीचको हीरा','बायाँ बीचको हीरा','तल बीचको हीरा'],0,'पहिलो भाव माथि बीचको ठूलो हीरामा हुन्छ।'],
  ['२.१','चौथो भाव कहाँ हुन्छ?',['दायाँ बीच','बायाँ बीच','तल बीच'],1,'चौथो भाव बायाँ बीचको हीरा हो।'],
@@ -208,7 +208,7 @@ $('examReset').addEventListener('click',()=>{
 });
 renderChapter2Exam();
 
-// Chapter 3: explicitly mapped to Guruji's 117-page notes, PDF pp. 16–20.
+// Chapter 3: explicitly mapped to the reference notes' 117-page notes, PDF pp. 16–20.
 const navagraha=['सूर्य','चन्द्र','मङ्गल','बुध','बृहस्पति','शुक्र','शनि','राहु','केतु'];
 const planetTraitsData=[
 'हड्डी, मुटु, राजनीति, दाहिने आँखा, अग्नितत्त्व, बुबा',
@@ -714,7 +714,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8source"]:checked');feedback.textContent=!checked?'पहिले एउटा उत्तर छान्नुहोस्।':checked.value==='b'?'सही। “माथिको/तलको सम्पत्ति” को अर्थ नोटमा पुष्टि गर्न बाँकी छ। सम्भावित व्याख्यालाई निश्चित नियम बनाउन हुँदैन।':'यो कथन नोटमा लेखिएको छ। अस्पष्ट र पुष्टि गर्न बाँकी रहेको वाक्य छुट्याउनुहोस्।'});
 })();
 
-/* Chapter 8.5: verify the sequence in Guruji's fourth-house reading. */
+/* Chapter 8.5: verify the sequence in the reference notes' fourth-house reading. */
 (function(){
  const form=document.getElementById('ch8ComfortQuiz'),feedback=document.getElementById('ch8ComfortFeedback');
  if(!form||!feedback)return;
@@ -739,7 +739,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  form.addEventListener('submit',e=>{e.preventDefault();const answer=form.querySelector('input[name="ch8residence"]:checked');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='b'?'सही। अध्ययन सामग्रीमा चतुर्थेश र लग्नेश बाह्रौँ भावमा हुँदा विदेशमा स्वेच्छिक बसाइको संकेत भनिएको छ।':'फेरि जाँच्नुहोस्। नोटमा सप्तमलाई स्वदेशभित्र र बाह्रौँलाई विदेशसँग जोडिएको छ।'});
 })();
 
-/* Chapter 8.8: identify house-origin context in Guruji's example. */
+/* Chapter 8.8: identify house-origin context in the reference notes' example. */
 (function(){
  const form=document.getElementById('ch8ConflictQuiz'),feedback=document.getElementById('ch8ConflictFeedback');
  if(!form||!feedback)return;
