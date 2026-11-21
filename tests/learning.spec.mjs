@@ -151,3 +151,12 @@ test('Chapter 8: inheritance source boundaries and family traditions quiz',async
  await page.locator('#ch8SourceQuiz button[type="submit"]').click();
  await expect(page.locator('#ch8SourceFeedback')).toContainText('सही');
 });
+
+test('Chapter 8.5: fourth-house Moon lesson and quiz',async({page})=>{
+ await page.goto(chapter(8));
+ await expect(page.locator('#chapter8')).toContainText('८.५ · सुख: चौथो भाव र चन्द्र');
+ await expect(page.locator('#chapter8')).toContainText('मेषमा शनि (नीच)');
+ await page.locator('#ch8ComfortQuiz input[value="a"]').check();
+ await page.locator('#ch8ComfortQuiz button[type="submit"]').click();
+ await expect(page.locator('#ch8ComfortFeedback')).toContainText('सही');
+});
