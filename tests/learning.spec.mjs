@@ -111,3 +111,20 @@ test('Chapter 7: chart and house-lord selector are explicitly distinct',async({p
  await expect(page.locator('#ch7HouseDetail')).toContainText('मकर');
  await expect(page.locator('#ch7HouseDetail')).toContainText('मङ्गल');
 });
+
+test('Chapter 7: North Indian chart uses four central diamonds and eight corner triangles',async({page})=>{
+ await page.goto(chapter(7));
+ const expected={
+  1:'200,0 300,100 200,200 100,100',
+  4:'0,200 100,100 200,200 100,300',
+  7:'200,400 100,300 200,200 300,300',
+  10:'400,200 300,100 200,200 300,300'
+ };
+ for(const [house,points] of Object.entries(expected)){
+  await expect(page.locator('#ch7Chart [data-house="'+house+'"] polygon')).toHaveAttribute('points',points);
+ }
+ await expect(page.locator('#ch7Chart polygon.ch7-chart-house')).toHaveCount(12);
+ await page.locator('#ch7Chart [data-house="4"]').click();
+ await expect(page.locator('#ch7HouseDetail')).toContainText('कर्कट');
+ await expect(page.locator('#ch7HouseDetail')).toContainText('बृहस्पति');
+});
