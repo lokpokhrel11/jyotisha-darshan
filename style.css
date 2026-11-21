@@ -1299,3 +1299,45 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 @media(min-width:1051px){#chapter10 .ch-modern-nav-links,#chapter11 .ch-modern-nav-links{grid-template-columns:repeat(5,minmax(0,1fr))!important}#chapter11 .ch-modern-nav-links{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
 @media(max-width:700px){#chapter10 .ch-modern-hero,#chapter11 .ch-modern-hero{padding:24px 18px!important}#chapter10 .ch-modern-hero-mark,#chapter11 .ch-modern-hero-mark{display:none!important}#chapter10 .ch-modern-nav,#chapter11 .ch-modern-nav{padding:14px!important}#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{grid-template-columns:repeat(2,minmax(0,1fr))!important}#chapter10 .ch-modern-path a,#chapter11 .ch-modern-path a{min-height:68px!important}#chapter10 .ch9-grid,#chapter11 .ch9-grid{grid-template-columns:1fr!important}}
 @media(max-width:410px){#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{grid-template-columns:1fr!important}}
+
+/* Chapters 1–9: shared compact study layout. Screenshot-informed density/contrast pass. */
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9){--study-font:clamp(.94rem,1vw,1.04rem)}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9)>.section-heading{gap:14px!important;margin-bottom:18px!important;align-items:center!important}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9)>.section-heading h2{font-size:clamp(1.55rem,2.5vw,2.2rem)!important;line-height:1.32!important;margin:5px 0 8px!important}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9)>.section-heading p{font-size:var(--study-font)!important;line-height:1.65!important;margin-bottom:0!important}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.study-panel,.method-grid>div,.practice-controls,.calculator,.study-module,.exam-question,.chart-card,.tile,.lesson,.detail){border-radius:13px!important}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.study-panel,.method-grid>div,.practice-controls,.calculator,.study-module,.exam-question,.chart-card){padding:clamp(15px,1.8vw,23px)!important;margin-bottom:15px}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.study-panel,.method-grid>div,.practice-controls,.calculator,.study-module,.exam-question,.chart-card) :is(p,li){font-size:var(--study-font)!important;line-height:1.7!important}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.study-panel,.method-grid>div,.practice-controls,.calculator,.study-module,.exam-question,.chart-card) :is(h3,h4){font-size:clamp(1.08rem,1.4vw,1.33rem)!important;line-height:1.45!important;margin-bottom:9px!important}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.practice-layout,.method-grid,.cards,.ch9-grid,.ch9-step-grid){gap:12px!important;margin-bottom:18px!important}
+#pathshala .tile{padding:18px!important;min-height:0!important}
+#pathshala .tile h3{font-size:1.2rem!important;margin:8px 0!important}
+#pathshala .tile p{font-size:var(--study-font)!important;line-height:1.6!important}
+#pathshala .lesson{padding:clamp(17px,2vw,24px)!important}
+#chapter7 .chapter7-steps{margin:12px 0 20px!important}
+#chapter7 .chapter7-steps li{line-height:1.65!important}
+#chapter8 .ch8-hero,#chapter9 .ch9-hero{min-height:0!important;padding:clamp(25px,3vw,42px)!important;margin-bottom:17px!important}
+#chapter8 .ch8-hero h2,#chapter9 .ch9-hero h2{font-size:clamp(1.8rem,3vw,2.6rem)!important;line-height:1.3!important;margin:10px 0!important}
+#chapter8 .ch8-hero>p:not(.ch8-kicker),#chapter9 .ch9-hero>p:not(.ch9-kicker){font-size:clamp(.96rem,1.1vw,1.08rem)!important;line-height:1.7!important;max-width:68ch!important}
+#chapter8 .ch8-hero-meta,#chapter9 .ch9-hero-meta{gap:8px!important;margin-top:17px!important}
+#chapter8 .ch8-contents{padding:15px 18px!important;margin:14px 0 20px!important}
+#chapter8 .ch8-contents-links{gap:7px!important}
+#chapter8 .ch8-contents-links a{padding:8px 11px!important;font-size:.87rem!important;line-height:1.4!important;min-height:0!important}
+#chapter9 .ch9-learning-path{gap:9px!important;margin:13px 0 19px!important}
+#chapter9 .ch9-learning-path>*{padding:12px!important;min-height:0!important}
+#chapter9 .ch9-step-grid .ch9-step{padding:15px!important;min-height:0!important}
+#chapter9 .ch9-step-grid .ch9-step p{font-size:var(--study-font)!important;line-height:1.65!important}
+#chapter9 .ch9-grid>p{padding:15px!important;min-height:0!important;margin:0!important;font-size:var(--study-font)!important}
+#chapter9 .ch9-quiz-panel{padding:clamp(16px,2vw,24px)!important}
+#chapter9 .ch9-quiz-panel fieldset{padding:13px!important;margin:12px 0!important}
+#chapter9 .ch9-quiz-panel label{line-height:1.55!important}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(input,select,textarea){max-width:100%;min-height:42px;border-radius:9px}
+:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(input,select,textarea):focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+:root[data-theme="dark"] :is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.study-panel,.method-grid>div,.practice-controls,.calculator,.study-module,.exam-question,.chart-card,.tile,.lesson,.detail){background:#1b2e37!important;border-color:#49616a!important;color:#f0f3ee!important;box-shadow:none!important}
+:root[data-theme="dark"] :is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.study-panel,.method-grid>div,.practice-controls,.calculator,.study-module,.exam-question,.chart-card,.tile,.lesson,.detail) :is(h3,h4,strong){color:#f0f3ee!important}
+:root[data-theme="dark"] :is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.study-panel,.method-grid>div,.practice-controls,.calculator,.study-module,.exam-question,.chart-card,.tile,.lesson,.detail) :is(p,li,label){color:#d9e4e1!important}
+:root[data-theme="dark"] :is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.note,.result,.feedback){background:#263c46!important;color:#e9efeb!important;border-color:#526b73!important}
+:root[data-theme="dark"] #chapter8 .ch8-contents-links a{background:#263c46!important;border-color:#536a72!important;color:#f0f3ee!important}
+:root[data-theme="dark"] #chapter9 .ch9-learning-path>*{background:#20353e!important;border-color:#536a72!important;color:#f0f3ee!important}
+:root[data-theme="dark"] #chapter9 .ch9-quiz-panel :is(fieldset,label){border-color:#536a72!important;color:#f0f3ee!important}
+@media(max-width:700px){:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9)>.section-heading{align-items:flex-start!important;flex-direction:column!important}:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.practice-layout,.method-grid){grid-template-columns:1fr!important}#chapter8 .ch8-hero,#chapter9 .ch9-hero{padding:22px 17px!important}#chapter8 .ch8-contents{padding:12px!important}}
