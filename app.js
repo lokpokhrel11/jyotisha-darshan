@@ -1213,3 +1213,41 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  };
  status.addEventListener('change',render);house.addEventListener('change',render);render();
 })();
+
+/* Chapter 9: consolidated source-reading checklist; no personality prediction. */
+(function(){
+ const result=document.getElementById('ch9SequenceResult');
+ const moon=document.getElementById('ch9MoonStatus');
+ const asc=document.getElementById('ch9Ascendant');
+ const lordHouse=document.getElementById('ch9LordHouse');
+ const occupancy=document.querySelectorAll('input[name="ch9Occupancy"]');
+ const planet=document.getElementById('ch9OccupantPlanet');
+ const dignity=document.getElementById('ch9StrengthStatus');
+ const strengthHouse=document.getElementById('ch9StrengthHouse');
+ if(!result||!moon||!asc||!lordHouse||!occupancy.length||!planet||!dignity||!strengthHouse)return;
+ const signs=['मेष','वृष','मिथुन','कर्कट','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'];
+ const lords=['मङ्गल','शुक्र','बुध','चन्द्र','सूर्य','बुध','शुक्र','मङ्गल','बृहस्पति','शनि','शनि','बृहस्पति'];
+ const labels={exalted:'उच्च',own:'स्वगृही',neutral:'अन्य/नखुलेको',debilitated:'नीच'};
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+ const render=()=>{
+  const a=Number(asc.value),h=Number(lordHouse.value),sh=Number(strengthHouse.value);
+  const sign=signs[(a+h-2)%12],lord=lords[a-1];
+  const count=[...occupancy].find(input=>input.checked)?.value||'none';
+  const occupancyText=count==='none'?'लग्न खाली छ; लग्नेशको स्थिति हेर्नुहोस्।':count==='one'?'लग्नमा एउटा ग्रह ('+planet.value+') छ; गुरुजीको एकाधिकारसम्बन्धी नियम अध्ययन गर्नुहोस्।':'लग्नमा धेरै ग्रह छन्; ग्रहबल र दशा नहेरी प्रमुख ग्रह तय गर्न मिल्दैन। छानिएको उदाहरण ग्रह: '+planet.value+'।';
+  const strengthText='अलग अभ्यासमा छानिएको अवस्था: '+labels[dignity.value]+', भाव '+nep(sh)+'। यो छनोट माथि देखाइएको लग्नेश '+lord+' को वास्तविक राशिगत बल हो भनेर पुष्टि गरिएको छैन।';
+  const moonText=moon.value==='known'?'चन्द्रको स्थान छुट्टै जाँचिएको भनिएको छ; यस अभ्यासमा विवरण प्रविष्ट वा प्रमाणित गरिएको छैन।':'चन्द्रको अवस्था उपलब्ध छैन; गुरुजीको तीनमध्ये एउटा आवश्यक पक्ष बाँकी छ।';
+  const rows=[
+   '१. लग्न र लग्नेश: '+signs[a-1]+' लग्न; '+lord+' लग्नेश; उदाहरणमा भाव '+nep(h)+' ('+sign+')।',
+   '२. लग्नमा ग्रह: '+occupancyText,
+   '३. ग्रहबल: '+strengthText,
+   '४. चन्द्र: '+moonText,
+   'निष्कर्ष: यो अध्ययनक्रमको अभ्यास मात्र हो। दशा, दृष्टि र ग्रहहरूको पूर्ण अवस्था नदिएकाले स्वभाव वा स्वास्थ्यसम्बन्धी फलादेश निकालिएको छैन।'
+  ];
+  const list=document.createElement('ol');
+  rows.forEach((value,i)=>{const item=document.createElement('li');item.textContent=i===4?value:value.replace(/^[१-४]\. /,'');list.append(item)});
+  result.replaceChildren(list);
+ };
+ [moon,asc,lordHouse,planet,dignity,strengthHouse].forEach(el=>el.addEventListener('change',render));
+ occupancy.forEach(el=>el.addEventListener('change',render));
+ render();
+})();
