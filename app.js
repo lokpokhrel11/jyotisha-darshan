@@ -399,15 +399,15 @@ function yoginiBalance(){const selection=yoginiSelection(),out=$('ygBalanceOutpu
  const y=yoginis[selection.index],remaining=(b-a)/b*y[2],totalDays=Math.round(remaining*360),years=Math.floor(totalDays/360),months=Math.floor((totalDays%360)/30),days=totalDays%30;out.textContent=`${y[0]} (${y[1]}) को पूर्ण अवधि ${y[2]} वर्ष। दशा शेष = (${b} − ${a}) ÷ ${b} × ${y[2]} = ${remaining.toFixed(4)} वर्ष ≈ ${years} वर्ष ${months} महिना ${days} दिन।`;}
 $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventListener('click',yoginiBalance);yoginiCycle();yoginiBalance();
 
-(function(){const key='jyotisha-pathshala-opened-v3';let opened=[];try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))opened=[...new Set(v.filter(x=>Number.isInteger(x)&&x>=1&&x<=6))]}catch(_){}const cards=[...document.querySelectorAll('.chapter-card[data-chapter]')];function render(){cards.forEach(c=>c.classList.toggle('visited',opened.includes(Number(c.dataset.chapter))));const n=opened.length;document.getElementById('progressCount').textContent=n+' / ६';document.getElementById('progressFill').style.width=(n/6*100)+'%';document.getElementById('progressTrack').setAttribute('aria-valuenow',String(n))}cards.forEach(c=>c.addEventListener('click',()=>{const n=Number(c.dataset.chapter);if(!opened.includes(n)){opened.push(n);try{localStorage.setItem(key,JSON.stringify(opened))}catch(_){}render()}}));document.getElementById('resetProgress').addEventListener('click',()=>{if(!window.confirm('यस ब्राउजरमा सुरक्षित अध्ययन प्रगति हटाउने?'))return;opened=[];try{localStorage.removeItem(key)}catch(_){}render()});render()})();
+(function(){const key='jyotisha-pathshala-opened-v3';let opened=[];try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))opened=[...new Set(v.filter(x=>Number.isInteger(x)&&x>=1&&x<=7))]}catch(_){}const cards=[...document.querySelectorAll('.chapter-card[data-chapter]')];function render(){cards.forEach(c=>c.classList.toggle('visited',opened.includes(Number(c.dataset.chapter))));const n=opened.length;document.getElementById('progressCount').textContent=n+' / ७';document.getElementById('progressFill').style.width=(n/7*100)+'%';document.getElementById('progressTrack').setAttribute('aria-valuenow',String(n))}cards.forEach(c=>c.addEventListener('click',()=>{const n=Number(c.dataset.chapter);if(!opened.includes(n)){opened.push(n);try{localStorage.setItem(key,JSON.stringify(opened))}catch(_){}render()}}));document.getElementById('resetProgress').addEventListener('click',()=>{if(!window.confirm('यस ब्राउजरमा सुरक्षित अध्ययन प्रगति हटाउने?'))return;opened=[];try{localStorage.removeItem(key)}catch(_){}render()});render()})();
 
 /* v3.1 chapter-focused reading mode. All existing widgets stay mounted. */
 (function(){
  const params=new URLSearchParams(window.location.search);
  const chapter=Number(params.get('chapter'));
- if(!Number.isInteger(chapter)||chapter<1||chapter>6)return;
- const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"]};
- const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति"];
+ if(!Number.isInteger(chapter)||chapter<1||chapter>7)return;
+ const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"],"7":["chapter7"]};
+ const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति","कुण्डली कसरी हेर्ने"];
  const allowed=new Set(groups[chapter]);
  document.body.classList.add('chapter-focus');
  for(const section of document.querySelectorAll('main > section')){
@@ -420,7 +420,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const title=document.createElement('h1');title.textContent=titles[chapter];
  const actions=document.createElement('div');actions.className='chapter-pager';
  if(chapter>1){const a=document.createElement('a');a.href='index.html?chapter='+(chapter-1);a.textContent='← अघिल्लो अध्याय';actions.append(a)}
- if(chapter<6){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को अध्याय →';actions.append(a)}
+ if(chapter<7){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को अध्याय →';actions.append(a)}
  const toc=document.createElement('nav');toc.className='chapter-toc';toc.setAttribute('aria-label','यस अध्यायका विषयहरू');const tocHeading=document.createElement('strong');tocHeading.textContent='यस अध्यायमा';toc.append(tocHeading);for(const id of groups[chapter]){const section=document.getElementById(id);if(!section)continue;const heading=section.querySelector('h2,h3');const link=document.createElement('a');link.href='#'+id;link.textContent=heading?heading.textContent.trim():id;toc.append(link)}banner.append(back,eyebrow,title,actions,toc);main.prepend(banner);const bottomNav=document.createElement('nav');bottomNav.className='chapter-bottom-nav';bottomNav.setAttribute('aria-label','अध्यायको अन्त्यमा नेभिगेसन');const bottomBack=document.createElement('a');bottomBack.href='index.html#dashboard';bottomBack.className='chapter-back';bottomBack.textContent='← अध्ययन कक्षमा फर्कनुहोस्';bottomNav.append(bottomBack);main.append(bottomNav);document.title=titles[chapter]+' | ज्योतिष पाठशाला';
  document.querySelectorAll('#nav a[href^="#"]').forEach(a=>{
   const hash=a.getAttribute('href');a.setAttribute('href','index.html'+hash);
@@ -583,4 +583,30 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
  const hash=decodeURIComponent(location.hash.slice(1));
  if(groups[chapter].includes(hash)){const target=document.getElementById(hash);if(target)setOpen(target,true);}
+})();
+
+/* v4.2: Chapter 7 house-lord identification and formative assessment. */
+(function(){
+ const asc=document.getElementById('ch7Asc'),rows=document.getElementById('ch7LordRows');
+ if(!asc||!rows)return;
+ const type=n=>[1,4,7,10].includes(n)?'केन्द्र':[5,9].includes(n)?'त्रिकोण':[6,8,12].includes(n)?'दुःस्थान':'अन्य';
+ function render(){
+  const first=Number(asc.value);
+  rows.replaceChildren();
+  for(let house=1;house<=12;house++){
+   const sign=(first+house-1)%12,tr=document.createElement('tr');
+   for(const value of [String(house),signs[sign],lords[sign],type(house)]){
+    const td=document.createElement('td');td.textContent=value;tr.append(td);
+   }
+   rows.append(tr);
+  }
+ }
+ asc.addEventListener('change',render);render();
+ const quiz=document.getElementById('ch7Quiz'),feedback=document.getElementById('ch7Feedback');
+ quiz.addEventListener('submit',event=>{
+  event.preventDefault();
+  const answer=quiz.querySelector('input[name="ch7q"]:checked');
+  if(!answer){feedback.textContent='पहिले एउटा उत्तर छान्नुहोस्।';return;}
+  feedback.textContent=answer.value==='b'?'सही। मकर राशिको स्वामी शनि हो। तर उदाहरणमा दशौँ भावमा बसेको ग्रह मङ्गल हो। भावेश र भावमा बसेको ग्रह फरक हुन्।':'फेरि विचार गर्नुहोस्। दशौँ भावको राशि मकर हो, त्यसको स्वामी शनि हो। उदाहरणमा त्यहाँ मङ्गल बसेको छ।';
+ });
 })();
