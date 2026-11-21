@@ -1330,7 +1330,12 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const update=()=>{
   if(!asc.value){result.textContent='पहिले लग्न राशि छान्नुहोस्।';return}
   if(!house.value){result.textContent='द्वितीयेशको भाव छानेपछि स्रोतमा रहेको परम्परागत व्याख्या देखिन्छ।';return}
-  result.textContent=descriptions[house.value]+' यो काल्पनिक अभ्यासमा भावको परम्परागत अर्थ बुझाइएको हो। वास्तविक आय, आर्थिक अवस्था वा करिअरको अनुमान होइन।';
+  const signs=['मेष','वृष','मिथुन','कर्कट','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'];
+  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+  const lagna=Number(asc.value),position=Number(house.value);
+  const signIndex=(lagna+position-2)%12;
+  const sign=signs[signIndex];
+  result.textContent='चरण १: '+nep(position)+'औँ भावमा '+sign+' राशि पर्छ। चरण २: '+descriptions[house.value]+' यो काल्पनिक अभ्यासमा भावको परम्परागत अर्थ बुझाइएको हो। वास्तविक आय, आर्थिक अवस्था वा करिअरको अनुमान होइन।';
  };
  asc.addEventListener('change',update);house.addEventListener('change',update);
 })();
