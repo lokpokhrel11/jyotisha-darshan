@@ -585,6 +585,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    const target=list[firstMissing];
    target.setAttribute('tabindex','-1');
    target.focus({preventScroll:true});
+   target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
    return;
   }
   // The existing result panel already provides the complete answer review.
