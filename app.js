@@ -442,26 +442,32 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const toc=document.createElement('nav');toc.className='chapter-toc';toc.setAttribute('aria-label','अध्यायका पाठ र अभ्यास');const labels={pathshala:'पाठ',practice:'अभ्यास',chapter2:'पाठ',planetExample:'अभ्यास',chapter2exam:'परीक्षा',chapter3:'पाठ',chapter3exam:'परीक्षा',chapter4:'पाठ',istakala:'इष्टकाल',localSunrise:'सूर्योदय',chapter5:'पाठ',padaPractice:'चरण',dashaBalance:'दशा शेष',chapter6:'पाठ',antardasha:'अन्तर्दशा',tribhagi:'त्रिभागी',yogini:'योगिनी',chapter7:'पाठ तथा अभ्यास',chapter8:'पाठ तथा परीक्षा'};
  for(const id of groups[chapter]){if(chapter>=8)break;const section=document.getElementById(id);if(!section)continue;const heading=section.querySelector('h2,h3');const link=document.createElement('a');link.href='#'+id;link.textContent=labels[id]||(heading?heading.textContent.trim():id);toc.append(link)}
  banner.append(back,eyebrow,actions);if(toc.childElementCount&&chapter>=9)banner.append(toc);main.prepend(banner);
- // A single editorial chapter masthead replaces the detached heading and oversized introduction.
- if(chapterHeading&&heroSection){
+ // Unified chapter masthead for all available chapters. Reuse actual chapter headings, never duplicate them.
+ const sourceHero=chapter>=8?heroSection?.querySelector(':scope > .ch8-hero, :scope > .ch9-hero'):null;
+ const sourceHeading=chapterHeading||sourceHero;
+ if(sourceHeading&&heroSection){
   const masthead=document.createElement('header');masthead.className='chapter-editorial-hero';
   const copy=document.createElement('div');copy.className='chapter-editorial-copy';
   const kicker=document.createElement('p');kicker.className='chapter-editorial-kicker';kicker.textContent='ज्योतिष दर्शन · अध्याय '+String(chapter).padStart(2,'0').replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
-  const title=chapterHeading.querySelector('.chapter-main-title,h1,h2');
-  const summary=chapterHeading.querySelector('p:not(.eyebrow)');
-  copy.append(kicker);if(title)copy.append(title);if(summary)copy.append(summary);
-  const actionsRow=document.createElement('div');actionsRow.className='chapter-editorial-actions';
-  const dashboardLink=document.createElement('a');dashboardLink.href='index.html#dashboard';dashboardLink.className='chapter-editorial-primary';dashboardLink.textContent='सबै अध्यायहरू →';
-  actionsRow.append(dashboardLink);
+  const originalTitle=sourceHeading.querySelector('.chapter-main-title,h1,h2');
+  const originalSummary=sourceHeading.querySelector('p:not(.eyebrow):not(.ch8-kicker):not(.ch9-kicker)');
+  const title=document.createElement('h1');title.className='chapter-main-title';title.textContent=originalTitle?.textContent?.trim()||titles[chapter];
+  copy.append(kicker,title);
+  if(originalSummary){const summary=document.createElement('p');summary.className='chapter-editorial-summary';summary.textContent=originalSummary.textContent.trim();copy.append(summary)}
+  const actionsRow=document.createElement('nav');actionsRow.className='chapter-editorial-actions';actionsRow.setAttribute('aria-label','यस अध्यायका मुख्य विकल्प');
+  const lesson=document.createElement('a');lesson.className='chapter-editorial-primary';lesson.href='#'+(chapter===1?'lesson':'chapter'+chapter);lesson.textContent='पाठ अध्ययन गर्नुहोस् →';actionsRow.append(lesson);
+  const practiceIds={1:'practice',2:'planetExample',3:'chapter3exam',4:'istakala',5:'padaPractice',6:'antardasha',7:'chapter7',8:'ch8-quiz',9:'ch9-quiz',10:'ch10-assessment',11:'ch11-quiz'};
+  const practiceId=practiceIds[chapter];if(practiceId&&document.getElementById(practiceId)){const practice=document.createElement('a');practice.className='chapter-editorial-secondary';practice.href='#'+practiceId;practice.textContent='अभ्यास / परीक्षा →';actionsRow.append(practice)}
   copy.append(actionsRow);
-  const seal=document.createElement('div');seal.className='chapter-editorial-seal';seal.setAttribute('aria-label','अध्याय '+chapter);
+  const seal=document.createElement('div');seal.className='chapter-editorial-seal';seal.setAttribute('role','img');seal.setAttribute('aria-label','अध्याय '+chapter);
   const sealInner=document.createElement('div');sealInner.className='chapter-editorial-seal-inner';
   const sealLabel=document.createElement('span');sealLabel.textContent='अध्याय';
-  const sealNumber=document.createElement('strong');sealNumber.textContent=String(chapter).padStart(2,'0').replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+  const sealNumber=document.createElement('strong');sealNumber.textContent=String(chapter).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
   const sealFoot=document.createElement('span');sealFoot.textContent='ज्योतिष दर्शन';
   sealInner.append(sealLabel,sealNumber,sealFoot);seal.append(sealInner);
-  masthead.append(copy,seal);heroSection.insertBefore(masthead,chapterHeading);chapterHeading.remove();
-  heroSection.classList.add('chapter-editorial-section');
+  masthead.append(copy,seal);heroSection.insertBefore(masthead,sourceHeading);
+  if(sourceHero){const meta=sourceHero.querySelector('.ch8-hero-meta,.ch9-hero-meta');if(meta){const compact=document.createElement('div');compact.className='chapter-editorial-meta';compact.innerHTML=meta.innerHTML;masthead.append(compact)}}
+  sourceHeading.remove();heroSection.classList.add('chapter-editorial-section');
  }
  const bottomNav=document.createElement('nav');bottomNav.className='chapter-bottom-nav';bottomNav.setAttribute('aria-label','अध्यायको अन्त्यमा नेभिगेसन');const bottomBack=document.createElement('a');bottomBack.href='index.html#dashboard';bottomBack.className='chapter-back';bottomBack.textContent='← अध्ययन कक्षमा फर्कनुहोस्';bottomNav.append(bottomBack);if(chapter>1){const previousChapter=document.createElement('a');previousChapter.href='index.html?chapter='+(chapter-1);previousChapter.className='chapter-previous-button';previousChapter.textContent='← अघिल्लो अध्याय';previousChapter.setAttribute('aria-label','अघिल्लो अध्याय: '+titles[chapter-1]);bottomNav.append(previousChapter)}if(chapter<8){const nextChapter=document.createElement('a');nextChapter.href='index.html?chapter='+(chapter+1);nextChapter.className='chapter-next-button';nextChapter.textContent='अर्को अध्याय →';nextChapter.setAttribute('aria-label','अर्को अध्याय: '+titles[chapter+1]);bottomNav.append(nextChapter)}main.append(bottomNav);document.title=titles[chapter]+' | ज्योतिष पाठशाला';
  document.querySelectorAll('#nav a[href^="#"]').forEach(a=>{
