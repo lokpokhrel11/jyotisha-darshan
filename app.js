@@ -807,3 +807,22 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  }
  if(nav.childElementCount)banner.append(nav);
 })();
+
+/* Reader preference: explicit light/dark mode with browser-local persistence. */
+(function(){
+ const key='jyotisha-reader-theme-v1';
+ const button=document.getElementById('themeToggle');if(!button)return;
+ let saved=null;try{saved=localStorage.getItem(key)}catch(_){}
+ const preferred=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+ function apply(theme){
+  document.documentElement.dataset.theme=theme;
+  button.setAttribute('aria-pressed',String(theme==='dark'));
+  button.setAttribute('aria-label',theme==='dark'?'उज्यालो रूप प्रयोग गर्नुहोस्':'अँध्यारो रूप प्रयोग गर्नुहोस्');
+  button.textContent=theme==='dark'?'☀':'☾';
+ }
+ apply(saved==='dark'||saved==='light'?saved:preferred);
+ button.addEventListener('click',()=>{
+  const next=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  apply(next);try{localStorage.setItem(key,next)}catch(_){}
+ });
+})();
