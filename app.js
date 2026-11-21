@@ -414,6 +414,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(!allowed.has(section.id))section.classList.add('chapter-focus-hidden');
  }
  const main=document.querySelector('main');
+ const heroSection=document.getElementById(chapter===1?'pathshala':'chapter'+chapter);
+ const chapterHeading=heroSection?.querySelector(':scope > .section-heading');
+ if(chapterHeading)chapterHeading.setAttribute('data-chapter-number',String(chapter).padStart(2,'0').replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]));
  if(chapter===1){const lesson=document.getElementById('lesson');if(lesson)lesson.hidden=false;}
  const banner=document.createElement('div');banner.className='chapter-focus-banner';
  const back=document.createElement('a');back.href='index.html#dashboard';back.className='chapter-back';back.textContent='← अध्ययन कक्षमा फर्कनुहोस्';
