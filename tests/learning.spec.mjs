@@ -210,7 +210,7 @@ test('Chapter 8: final eight-question assessment gives explanations and resets',
 test('Chapter 8 design: navigation targets and public attribution policy',async({page})=>{
  await page.goto(chapter(8));
  await expect(page.locator('.ch8-hero')).toBeVisible();
- await expect(page.locator('.ch8-contents-links a')).toHaveCount(9);
+ await expect(page.locator('.ch8-contents-links a')).toHaveCount(10);
  for(let i=1;i<=8;i++)await expect(page.locator('#ch8-lesson-'+i)).toHaveCount(1);
  await expect(page.locator('#ch8AssessmentPanel')).toBeVisible();
  await expect(page.locator('#chapter8')).not.toContainText('गुरुजी');
@@ -375,7 +375,7 @@ test('Chapter 9: integrated study sequence updates without claiming Moon or stre
  await page.goto(chapter(9));
  const summary=page.locator('#ch9SequenceResult');
  await expect(summary).toContainText('मेष लग्न');
- await expect(summary).toContainText('चन्द्रको अवस्था उपलब्ध छैन');
+ await expect(summary).toContainText('चन्द्रको राशि उपलब्ध छैन');
  await page.locator('#ch9Ascendant').selectOption('5');
  await page.locator('#ch9LordHouse').selectOption('9');
  await expect(summary).toContainText('सिंह लग्न');
@@ -385,6 +385,20 @@ test('Chapter 9: integrated study sequence updates without claiming Moon or stre
  await page.locator('#ch9StrengthStatus').selectOption('debilitated');
  await expect(summary).toContainText('नीच');
  await expect(summary).toContainText('वास्तविक राशिगत बल हो भनेर पुष्टि गरिएको छैन');
- await page.locator('#ch9MoonStatus').selectOption('known');
- await expect(summary).toContainText('विवरण प्रविष्ट वा प्रमाणित गरिएको छैन');
+ await page.locator('#ch9MoonSign').selectOption('1');
+ await expect(summary).toContainText('चन्द्र मेष राशिमा र ९औँ भावमा छ');
+});
+
+
+test('Chapter 9: Moon house calculation responds to ascendant and Moon sign', async ({ page }) => {
+ await page.goto(chapter(9));
+ const result=page.locator('#ch9MoonResult');
+ await expect(result).toContainText('भाव गणना गरिएको छैन');
+ await page.locator('#ch9MoonSign').selectOption('9');
+ await expect(result).toContainText('चन्द्र रहेको भाव: ९');
+ await page.locator('#ch9Ascendant').selectOption('5');
+ await expect(result).toContainText('चन्द्र रहेको भाव: ५');
+ await page.locator('#ch9MoonSign').selectOption('1');
+ await expect(result).toContainText('चन्द्र रहेको भाव: ९');
+ await expect(page.locator('#ch9SequenceResult')).toContainText('चन्द्र मेष राशिमा र ९औँ भावमा छ');
 });
