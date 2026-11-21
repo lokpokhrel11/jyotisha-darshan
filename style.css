@@ -183,3 +183,12 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
 .ch8-comparison>div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:16px}
 .ch8-comparison h4{margin-top:0}
 @media(max-width:680px){.ch8-comparison{grid-template-columns:1fr}}
+
+/* Chapter 8 final assessment */
+.ch8-assessment-item{border:1px solid var(--line);border-radius:10px;padding:16px;margin:0 0 15px}
+.ch8-assessment-item legend{font-weight:700;padding:0 6px}
+.ch8-assessment-feedback{margin:10px 0 0;line-height:1.6}
+.ch8-assessment-feedback.is-correct{font-weight:600}
+#ch8AssessmentSummary{margin-top:16px}
+#ch8AssessmentReset{margin-left:8px}
+@media(max-width:480px){#ch8AssessmentReset{margin:10px 0 0;display:block}}
