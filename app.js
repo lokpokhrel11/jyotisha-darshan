@@ -871,7 +871,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
 })();
 
-/* Separate recorded assessment results from chapter-open history. */
+/* Assessment dashboard: distinguish unattempted, practice target, and review. */
 (function(){
  const root=document.getElementById('assessmentProgress');
  const summary=document.getElementById('assessmentProgressSummary');
@@ -879,9 +879,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(!root||!summary||!list)return;
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const exams=[
-  {chapter:2,name:'राशि र भाव',total:20,threshold:16},
-  {chapter:3,name:'ग्रह परिचय',total:15,threshold:12},
-  {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8}
+  {chapter:2,name:'राशि र भाव',total:20,threshold:16,anchor:'chapter2exam'},
+  {chapter:3,name:'ग्रह परिचय',total:15,threshold:12,anchor:'chapter3exam'},
+  {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'}
  ];
  let attempted=0,met=0;
  list.replaceChildren();
@@ -889,15 +889,24 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   let result=null;
   try{result=JSON.parse(localStorage.getItem('jyotisha-chapter'+exam.chapter+'-score')||'null')}catch(_){}
   const valid=result&&Number.isInteger(result.score)&&result.score>=0&&result.score<=exam.total&&result.total===exam.total;
-  const row=document.createElement('a');row.className='assessment-progress-row';
-  row.href='index.html?chapter='+exam.chapter+'#'+({2:'chapter2exam',3:'chapter3exam',8:'ch8AssessmentPanel'}[exam.chapter]);
-  const name=document.createElement('strong');name.textContent='अध्याय '+nep(exam.chapter)+' · '+exam.name;
+  const achieved=valid&&result.score>=exam.threshold;
+  if(valid){attempted++;if(achieved)met++;}
+  const row=document.createElement('a');
+  row.className='assessment-progress-row';
+  row.href='index.html?chapter='+exam.chapter+'#'+exam.anchor;
+  const name=document.createElement('strong');
+  name.textContent='अध्याय '+nep(exam.chapter)+' · '+exam.name;
   const status=document.createElement('span');
-  if(valid){attempted++;if(result.score>=exam.threshold)met++;status.textContent=nep(result.score)+' / '+nep(exam.total)+(result.score>=exam.threshold?' · अभ्यास लक्ष्य पूरा':' · पुनः अभ्यास गर्नुहोस्')}
-  else status.textContent='नतिजा उपलब्ध छैन · अभ्यास खोल्नुहोस् →';
-  row.append(name,status);list.append(row);
+  status.className='assessment-result-status '+(!valid?'assessment-unattempted':achieved?'assessment-achieved':'assessment-review');
+  status.textContent=!valid?'अझै मूल्याङ्कन पूरा भएको छैन':achieved?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास आवश्यक';
+  const details=document.createElement('span');
+  details.className='assessment-result-details';
+  details.textContent=valid?'प्राप्ताङ्क '+nep(result.score)+' / '+nep(exam.total)+' · लक्ष्य '+nep(exam.threshold)+' / '+nep(exam.total):'अभ्यास खोल्नुहोस् · लक्ष्य '+nep(exam.threshold)+' / '+nep(exam.total);
+  row.append(name,status,details);
+  row.setAttribute('aria-label',name.textContent+'। '+status.textContent+'। '+details.textContent);
+  list.append(row);
  }
- summary.textContent='मूल्याङ्कन पूरा गरिएका: '+nep(attempted)+' / '+nep(exams.length)+' · अभ्यास लक्ष्य पुगेका: '+nep(met);
+ summary.textContent='मूल्याङ्कन पूरा गरिएका: '+nep(attempted)+' / '+nep(exams.length)+' · अभ्यास लक्ष्य पुगेका: '+nep(met)+' · पुनः अभ्यास आवश्यक: '+nep(attempted-met);
 })();
 
 /* Assessment navigation clarity: make the final submission location explicit. */
