@@ -405,9 +405,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
 (function(){
  const params=new URLSearchParams(window.location.search);
  const chapter=Number(params.get('chapter'));
- if(!Number.isInteger(chapter)||chapter<1||chapter>7)return;
- const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"],"7":["chapter7"]};
- const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति","कुण्डली कसरी हेर्ने"];
+ if(!Number.isInteger(chapter)||chapter<1||chapter>8)return;
+ const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"],"7":["chapter7"],"8":["chapter8"]};
+ const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति","कुण्डली कसरी हेर्ने","नाता र भावात् भावम्"];
  const allowed=new Set(groups[chapter]);
  document.body.classList.add('chapter-focus');
  for(const section of document.querySelectorAll('main > section')){
@@ -693,4 +693,16 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   feedback.append(heading,explanation);
  });
  render();
+})();
+
+/* Chapter 8, part 1: count inclusively from a reference house. */
+(function(){
+ const base=document.getElementById('ch8Base'),steps=document.getElementById('ch8Steps'),result=document.getElementById('ch8Result'),quiz=document.getElementById('ch8Quiz');
+ if(!base||!steps||!result)return;
+ for(let n=1;n<=12;n++){for(const el of [base,steps]){const o=document.createElement('option');o.value=String(n);o.textContent=String(n);el.append(o)}}
+ const update=()=>{const a=Number(base.value),b=Number(steps.value),house=((a+b-2)%12)+1;result.textContent='भाव '+a+' बाट '+b+' गन्दा: ('+a+' + '+b+' − १) = '+(a+b-1)+(a+b-1>12?' → १२ घटाउँदा '+house:'')+'। उत्तर: '+house+'औँ भाव।'};
+ base.value='4';steps.value='3';base.addEventListener('change',update);steps.addEventListener('change',update);
+ document.querySelectorAll('[data-ch8-example]').forEach(button=>button.addEventListener('click',()=>{const examples={mother:[4,3],spouse:[7,2],grandchild:[5,5],father:[4,9]};const v=examples[button.dataset.ch8Example];if(!v)return;base.value=String(v[0]);steps.value=String(v[1]);update()}));
+ if(quiz)quiz.addEventListener('submit',e=>{e.preventDefault();const chosen=quiz.querySelector('input[name="ch8q"]:checked'),feedback=document.getElementById('ch8Feedback');feedback.textContent=!chosen?'पहिले उत्तर छान्नुहोस्।':chosen.value==='10'?'सही। ७ + ४ − १ = १०। जीवनसाथीको आमालाई दशौँ भावबाट हेर्ने उदाहरण हो।':'फेरि गन्नुहोस्: सातौँ भावलाई १ मानेर चार स्थान गन्नुहोस्।'});
+ update();
 })();
