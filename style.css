@@ -223,3 +223,21 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
 #chapter8 .ch8-assessment-feedback:not(:empty){padding:12px 14px;border-left:3px solid #b89559;background:#f5f7f3;border-radius:0 7px 7px 0}
 #chapter8 .ch8-controls select{min-height:44px;background:#fff}
 @media(max-width:600px){#chapter8 .ch8-hero{border-radius:12px}#chapter8 .ch8-contents{padding:15px}#chapter8 .ch8-contents-links a{font-size:.82rem}#chapter8 .study-panel{border-radius:10px}}
+
+/* Chapter 8 mobile reading comfort */
+#chapter8 .ch8-nav-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#chapter8 .ch8-nav-toggle{display:none;align-items:center;gap:8px;min-height:44px;border:1px solid #bfcfc7;border-radius:9px;background:white;color:#244652;padding:8px 12px;font-weight:700;cursor:pointer}
+#chapter8 .ch8-nav-toggle[aria-expanded="true"] span{transform:rotate(180deg)}
+#chapter8 .ch7-choice{display:flex;align-items:flex-start;gap:10px;min-height:48px;cursor:pointer}
+#chapter8 .ch7-choice input[type="radio"]{flex:0 0 auto;width:19px;height:19px;margin:3px 0 0;accent-color:#86632f}
+#chapter8 .study-panel button,#chapter8 .ch7-house-buttons button{min-height:44px}
+#chapter8 .study-panel :focus-visible,#chapter8 .ch8-contents :focus-visible{outline:3px solid #b88a46;outline-offset:3px}
+@media(max-width:680px){
+ #chapter8 .ch8-nav-toggle{display:inline-flex}
+ #chapter8 .ch8-contents-links{display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+ #chapter8 .ch8-contents-links.is-open{display:grid}
+ #chapter8 .ch8-contents-links a{display:flex;align-items:center;min-height:44px;border-radius:9px;white-space:normal}
+ #chapter8 .ch8-contents-label{margin:0}
+ #chapter8 .ch8-hero-meta span{font-size:.78rem}
+}
+@media(max-width:390px){#chapter8 .ch8-contents-links.is-open{grid-template-columns:1fr}}
