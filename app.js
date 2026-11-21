@@ -715,16 +715,16 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  let active=1;
  function show(house){
   active=house;const sign=(house-1)%12,found=planets[house]||[],seen=aspects[house]||[];
-  const rows=[['भाव',String(house)],['राशि',signs[sign]+' ('+(sign+1)+')'],['भावेश',lords[sign]],['भाव प्रकार',[1,4,7,10].includes(house)?'केन्द्र':[5,9].includes(house)?'त्रिकोण':[6,8,12].includes(house)?'दुःस्थान':'अन्य'],['ग्रहस्थिति',found.length?found.map(p=>p+' ('+strengths[p]+')').join(', '):'नोटमा ग्रहस्थिति दिइएको छैन'],['यस भावमा दृष्टि',seen.length?seen.join(', '):'नोटको उदाहरणमा विशेष दृष्टि उल्लेख छैन']];
+  const rows=[['भाव',String(house)],['राशि',signs[sign]+' ('+(sign+1)+')'],['भावेश',lords[sign]],['भाव प्रकार',[1,4,7,10].includes(house)?'केन्द्र':[5,9].includes(house)?'त्रिकोण':[6,8,12].includes(house)?'दुःस्थान':'अन्य'],['ग्रहस्थिति',found.length?found.map(p=>p+' ('+strengths[p]+')').join(', '):'नोटमा ग्रहस्थिति दिइएको छैन'],['यस भावमा दृष्टि',seen.length?seen.join(', '):'यस अभ्यासमा दिइएका शनि र बृहस्पतिका विशेष दृष्टिमध्ये कुनै यहाँ पर्दैन; अन्य ग्रहका दृष्टि यस चित्रमा गणना गरिएको छैन']];
   detail.replaceChildren();const heading=document.createElement('h4');heading.textContent='भाव '+house+' · '+signs[sign];detail.append(heading);
   const dl=document.createElement('dl');for(const [key,value] of rows){const dt=document.createElement('dt');dt.textContent=key;const dd=document.createElement('dd');dd.textContent=value;dl.append(dt,dd)}detail.append(dl);
   svg.querySelectorAll('[data-house]').forEach(el=>{const selected=Number(el.dataset.house)===house;el.setAttribute('aria-pressed',String(selected));el.classList.toggle('selected',selected)});
   buttons.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.house)===house)));
  }
  shapes.forEach(([points,x,y],i)=>{
-  const house=i+1,group=svgNode('g',{'data-house':house,role:'button',tabindex:0,'aria-label':'भाव '+house+', '+signs[i],'aria-pressed':'false'});
+  const house=i+1,group=svgNode('g',{'data-house':house,role:'button',tabindex:0,'aria-label':'भाव '+house+', राशि '+signs[i]+', '+(planets[house]?planets[house].join(' र '):'ग्रहस्थिति नखुलेको'),'aria-pressed':'false'});
   const polygon=svgNode('polygon',{points,class:'ch7-chart-house'}),label=svgNode('text',{x,y,'text-anchor':'middle',class:'ch7-chart-label'});
-  const a=svgNode('tspan',{x,dy:0});a.textContent=String(house);const b=svgNode('tspan',{x,dy:17});b.textContent=String(i+1);
+  const a=svgNode('tspan',{x,dy:0});a.textContent='भाव '+String(house);const b=svgNode('tspan',{x,dy:17});b.textContent='राशि '+String(i+1);
   label.append(a,b);group.append(polygon,label);
   if(planets[house]){const p=svgNode('text',{x,y:y+33,'text-anchor':'middle',class:'ch7-chart-planet'});p.textContent=planets[house].join('·');group.append(p)}
   group.addEventListener('click',()=>show(house));group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(house)}});
