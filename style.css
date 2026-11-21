@@ -1578,3 +1578,21 @@ html[data-theme="dark"] #practice #chartLabels .chart-house.selected text,body[d
 #practice #chartLabels .chart-house text:last-of-type{fill:#526c76!important}
 #practice #chartLabels .chart-house.selected text{fill:#9b6318!important}
 #practice #chartSelection{color:var(--ink)!important;background:var(--soft)!important}
+
+/* Chapter 13 assessment: accessible light/dark choices and responsive layout */
+#ch13-quiz .ch12-quiz fieldset{min-width:0;margin:18px 0;padding:clamp(14px,2.5vw,22px);background:var(--white);border:1px solid var(--line);border-radius:16px}
+#ch13-quiz .ch12-quiz legend{max-width:100%;padding:0 8px;color:var(--ink);font-weight:750;line-height:1.55;white-space:normal}
+#ch13-quiz .ch12-quiz label{display:flex;align-items:flex-start;gap:11px;min-width:0;padding:13px 15px;line-height:1.55;background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:11px;overflow-wrap:anywhere;transition:border-color .15s ease,background-color .15s ease}
+#ch13-quiz .ch12-quiz label input[type=radio]{flex:0 0 auto;width:18px;height:18px;margin:3px 0 0;accent-color:#ad813c}
+#ch13-quiz .ch12-quiz label:has(input:checked){background:var(--white);border-color:#b88a38;box-shadow:inset 0 0 0 1px #b88a38}
+#ch13-quiz .ch12-quiz label:focus-within{outline:3px solid #c6a365;outline-offset:2px}
+#ch13-quiz .ch12-explanation{margin-top:12px;padding:14px 16px;line-height:1.65;background:var(--soft);color:var(--ink);border-left:3px solid #b88a38}
+#ch13-quiz .ch12-explanation a{display:inline-block;color:var(--ink);font-weight:750;text-underline-offset:3px}
+#ch13Result{margin-top:16px;font-weight:750;color:var(--ink);line-height:1.6}
+:root[data-theme="dark"] #ch13-quiz .ch12-quiz fieldset{background:#1b2e37;border-color:#50646c}
+:root[data-theme="dark"] #ch13-quiz .ch12-quiz label{background:#263b45;color:#f0f3ee;border-color:#566b74}
+:root[data-theme="dark"] #ch13-quiz .ch12-quiz label:has(input:checked){background:#34444a;border-color:#e4bf7e;box-shadow:inset 0 0 0 1px #e4bf7e}
+:root[data-theme="dark"] #ch13-quiz .ch12-quiz label input[type=radio]{accent-color:#e4bf7e}
+:root[data-theme="dark"] #ch13-quiz .ch12-explanation{background:#293e47;color:#edf3f0;border-left-color:#e4bf7e}
+:root[data-theme="dark"] #ch13-quiz .ch12-explanation a{color:#f1d59d}
+@media(max-width:520px){#ch13-quiz .ch12-quiz fieldset{padding:13px}#ch13-quiz .ch12-quiz label{padding:12px;gap:9px}#ch13-quiz .ch12-quiz legend{font-size:1rem}}
