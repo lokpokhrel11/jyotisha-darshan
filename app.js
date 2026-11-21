@@ -720,3 +720,14 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(!form||!feedback)return;
  form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8comfort"]:checked');feedback.textContent=!checked?'पहिले उत्तर छान्नुहोस्।':checked.value==='a'?'सही। गुरुजीका नोटअनुसार पहिले लग्न र लग्नेश हेर्ने, त्यसपछि चौथो भाव र चन्द्रमाको अवस्था जाँच्ने।':'फेरि हेर्नुहोस्। पृष्ठ ७४ मा लग्न र लग्नेश हेरेपछि चौथो भाव जाँच्ने भनिएको छ।'});
 })();
+
+/* Chapter 8.6: Mars-reference inclusive house counting, not predictive inference. */
+(function(){
+ const mars=document.getElementById('ch8MarsHouse'),order=document.getElementById('ch8SiblingOrder'),result=document.getElementById('ch8SiblingResult'),quiz=document.getElementById('ch8SiblingQuiz');
+ if(!mars||!order||!result)return;
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+ for(let i=1;i<=12;i++){const option=document.createElement('option');option.value=String(i);option.textContent=nep(i);mars.append(option)}
+ const render=()=>{const a=Number(mars.value),n=Number(order.value),house=((a+n-2)%12)+1;result.textContent='मङ्गल '+nep(a)+'औँ भावमा छ। '+nep(a)+' + '+nep(n)+' − १ = '+nep(a+n-1)+(a+n-1>12?' → १२ घटाउँदा '+nep(house):'')+'। गणनाबाट '+nep(house)+'औँ भाव आउँछ। यसबाट भाइबहिनीको संख्या वा अवस्था निश्चित हुँदैन।'};
+ mars.value='6';mars.addEventListener('change',render);order.addEventListener('change',render);render();
+ if(quiz)quiz.addEventListener('submit',e=>{e.preventDefault();const answer=quiz.querySelector('input[name="ch8sibling"]:checked'),feedback=document.getElementById('ch8SiblingFeedback');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='8'?'सही। छैटौँबाट तेस्रो: ६ + ३ − १ = ८।':'फेरि गन्नुहोस्: छैटौँ भावलाई पहिलो मान्दा सातौँ दोस्रो र आठौँ तेस्रो हुन्छ।'});
+})();
