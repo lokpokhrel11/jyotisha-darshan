@@ -876,6 +876,46 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  pager.after(hint,jump);
 })();
 
+/* Assessment completion indicators: local, non-scoring, accessible. */
+(function(){
+ const specs=[
+  {form:'chapter2ExamForm',mount:'examProgress',name:'chapter2q',total:20},
+  {form:'chapter3ExamForm',mount:'chapter3Progress',name:'ch3q',total:15},
+  {form:'ch8Assessment',mount:'ch8AssessmentSummary',name:'ch8assessment',total:8}
+ ];
+ for(const spec of specs){
+  const form=document.getElementById(spec.form),mount=document.getElementById(spec.mount);
+  if(!form||!mount)continue;
+  const wrapper=document.createElement('div');
+  wrapper.className='assessment-completion';
+  const label=document.createElement('span');
+  label.className='assessment-completion-label';
+  const bar=document.createElement('progress');
+  bar.className='assessment-completion-bar';
+  bar.max=spec.total;bar.value=0;
+  bar.setAttribute('aria-label','उत्तर दिइएका प्रश्नको प्रगति');
+  wrapper.append(label,bar);
+  if(spec.form==='ch8Assessment')form.insertBefore(wrapper,form.querySelector('button[type="submit"]'));
+  else mount.after(wrapper);
+  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+  const update=()=>{
+   let done=0;
+   for(let i=0;i<spec.total;i++){
+    if(form.querySelector('input[name="'+spec.name+i+'"]:checked'))done++;
+   }
+   bar.value=done;
+   label.textContent='पूरा भएका प्रश्न: '+nep(done)+' / '+nep(spec.total)+(done===spec.total?' · सबै उत्तर दिइयो':'');
+  };
+  form.addEventListener('change',update);
+  form.addEventListener('reset',()=>requestAnimationFrame(update));
+  const container=spec.form==='chapter2ExamForm'?document.getElementById('chapter2ExamQuestions'):spec.form==='chapter3ExamForm'?document.getElementById('chapter3ExamQuestions'):document.getElementById('ch8AssessmentQuestions');
+  if(container&&window.MutationObserver){
+   new MutationObserver(update).observe(container,{childList:true});
+  }
+  update();
+ }
+})();
+
 /* Chapter 8 guided reading: preserve all sections, add lesson-by-lesson movement. */
 (function(){
  if(new URLSearchParams(location.search).get('chapter')!=='8')return;
