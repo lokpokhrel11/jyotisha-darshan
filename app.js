@@ -871,6 +871,41 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
 })();
 
+/* Local study continuity: remember last opened chapter, not answers or scroll position. */
+(function(){
+ const key='jyotisha-pathshala-last-chapter-v1';
+ const chapter=Number(new URLSearchParams(location.search).get('chapter'));
+ const valid=n=>Number.isInteger(n)&&n>=1&&n<=8;
+ if(valid(chapter)){
+  try{localStorage.setItem(key,String(chapter))}catch(_){}
+  return;
+ }
+ const dashboard=document.getElementById('dashboard');
+ if(!dashboard)return;
+ let last=null;
+ try{last=Number(localStorage.getItem(key))}catch(_){}
+ if(!valid(last))return;
+ const card=dashboard.querySelector('.chapter-card[data-chapter="'+last+'"]');
+ if(!card)return;
+ const panel=document.createElement('div');
+ panel.className='study-resume';
+ const text=document.createElement('div');
+ const title=document.createElement('strong');
+ title.textContent='अघिल्लो अध्ययन जारी राख्नुहोस्';
+ const desc=document.createElement('p');
+ const heading=card.querySelector('h3');
+ desc.textContent='अध्याय '+String(last).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' · '+(heading?heading.textContent:'अध्ययन');
+ text.append(title,desc);
+ const link=document.createElement('a');
+ link.className='button primary';
+ link.href='index.html?chapter='+last;
+ link.textContent='अध्ययनमा फर्कनुहोस् →';
+ panel.append(text,link);
+ const stats=dashboard.querySelector('.dashboard-stats');
+ if(stats)stats.after(panel);
+ else dashboard.prepend(panel);
+})();
+
 /* Assessment dashboard: distinguish unattempted, practice target, and review. */
 (function(){
  const root=document.getElementById('assessmentProgress');
