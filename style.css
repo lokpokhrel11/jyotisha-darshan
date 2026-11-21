@@ -118,3 +118,16 @@ input,select,textarea{max-width:100%}
 .practice-panel-chevron{flex:none;font-size:1.35em;transition:transform .15s ease}
 .practice-panel-open .practice-panel-chevron{transform:rotate(180deg)}
 .chapter-focus .section[id] > [hidden]{display:none!important}
+
+/* v4.1: short, student-first homepage; chapter sections remain mounted for learning tools. */
+body:not(.chapter-focus) main > section:not(#home):not(#dashboard){display:none!important}
+body:not(.chapter-focus) .hero{min-height:340px;padding-top:42px;padding-bottom:42px}
+body:not(.chapter-focus) .orb{width:210px}
+body:not(.chapter-focus) .orbit{width:210px;height:210px}
+body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
+.home-shortcuts{margin-top:30px}
+.home-shortcut-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.home-shortcut-grid a{display:flex;flex-direction:column;gap:5px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:9px}
+.home-shortcut-grid a:hover,.home-shortcut-grid a:focus-visible{border-color:var(--gold);box-shadow:0 3px 12px #18303a12}
+.home-shortcut-grid span{color:var(--muted);font-size:.88rem}
+@media(max-width:650px){body:not(.chapter-focus) .hero{min-height:0;padding-top:30px;padding-bottom:30px}body:not(.chapter-focus) .orb{display:none}}
