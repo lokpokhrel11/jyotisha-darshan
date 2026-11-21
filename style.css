@@ -1341,3 +1341,52 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 :root[data-theme="dark"] #chapter9 .ch9-learning-path>*{background:#20353e!important;border-color:#536a72!important;color:#f0f3ee!important}
 :root[data-theme="dark"] #chapter9 .ch9-quiz-panel :is(fieldset,label){border-color:#536a72!important;color:#f0f3ee!important}
 @media(max-width:700px){:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9)>.section-heading{align-items:flex-start!important;flex-direction:column!important}:is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(.practice-layout,.method-grid){grid-template-columns:1fr!important}#chapter8 .ch8-hero,#chapter9 .ch9-hero{padding:22px 17px!important}#chapter8 .ch8-contents{padding:12px!important}}
+
+/* Chapter 1–9 visual repair: screenshot audit, 2026-11-20. */
+body.chapter-focus .chapter-focus-banner{max-width:1240px;margin:0 auto;padding:16px 28px 10px!important;display:flex!important;flex-wrap:wrap;align-items:center;gap:9px 15px;background:transparent!important;border:0!important;min-height:0!important}
+body.chapter-focus .chapter-focus-banner .chapter-back{font-size:.83rem!important;font-weight:650!important;color:var(--gold)!important;padding:7px 0!important;border:0!important;background:transparent!important}
+body.chapter-focus .chapter-focus-banner>.eyebrow{font-size:.76rem!important;letter-spacing:.05em!important;margin:0!important;color:var(--muted)!important}
+body.chapter-focus .chapter-focus-banner>.chapter-pager{display:flex!important;gap:7px!important;margin:0 0 0 auto!important;padding:0!important;justify-content:flex-end!important}
+body.chapter-focus .chapter-focus-banner>.chapter-pager a{padding:7px 12px!important;font-size:.8rem!important;min-height:0!important;border-radius:8px!important;background:var(--white)!important;border:1px solid var(--line)!important;color:var(--ink)!important}
+body.chapter-focus .chapter-focus-banner>.chapter-toc{display:flex!important;position:static!important;flex:1 0 100%;gap:6px!important;margin:3px 0 0!important;padding:7px 0 0!important;background:transparent!important;border:0!important;flex-direction:row!important;box-shadow:none!important}
+body.chapter-focus .chapter-focus-banner>.chapter-toc a{padding:6px 12px!important;border:1px solid var(--line)!important;border-radius:8px!important;background:var(--white)!important;color:var(--ink)!important;font-size:.82rem!important;font-weight:600!important;min-height:0!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden){padding-top:22px!important;padding-bottom:25px!important;scroll-margin-top:85px}
+body.chapter-focus main>section:not(.chapter-focus-hidden)>.section-heading{margin-bottom:17px!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden)>.section-heading h2{font-size:clamp(1.55rem,2.4vw,2.15rem)!important;line-height:1.35!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden)>.section-heading p{font-size:.95rem!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden)>.section-heading .status{padding:5px 10px!important;font-size:.72rem!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.practice-layout,.method-grid){align-items:start!important;gap:15px!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.practice-controls,.chart-card,.calculator){min-height:0!important;height:auto!important;align-self:start!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.practice-controls,.chart-card,.calculator) :is(label,input,select){font-size:clamp(.91rem,1vw,1rem)!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.practice-controls,.chart-card,.calculator) :is(input,select){min-height:43px!important;padding:8px 12px!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.practice-controls,.chart-card,.calculator) label{margin:9px 0 4px!important;display:block}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.practice-controls,.chart-card,.calculator) .button{padding:10px 16px!important;min-height:43px!important;font-size:.93rem!important;margin:11px 0!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) .result{padding:12px 14px!important;margin-top:10px!important;line-height:1.65!important;font-size:.93rem!important;overflow-wrap:anywhere}
+body.chapter-focus main>section:not(.chapter-focus-hidden) .note{display:block!important;background:rgba(131,156,166,.10)!important;border-left:3px solid var(--gold)!important;border-radius:0 7px 7px 0!important;padding:9px 12px!important;margin:11px 0!important;color:var(--muted)!important;font-size:.85rem!important;line-height:1.65!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) .consult-note{background:rgba(184,143,79,.11)!important;border:1px solid rgba(184,143,79,.36)!important;border-left:3px solid var(--gold)!important;padding:14px 17px!important;margin:17px 0!important;color:var(--ink)!important;border-radius:8px!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) .consult-note :is(p,strong){color:inherit!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.study-panel,.practice-controls,.chart-card,.calculator,.method-grid>div){box-shadow:none!important;border:1px solid var(--line)!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.study-panel,.practice-controls,.chart-card,.calculator,.method-grid>div) :is(h3,h4){font-weight:700!important;letter-spacing:0!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) table{font-size:.9rem!important;line-height:1.45!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(th,td){padding:9px 12px!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) :is(fieldset,.ch7-choice){border-color:var(--line)!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) fieldset{padding:14px!important;margin:12px 0!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) legend{font-size:1rem!important;line-height:1.5!important;font-weight:700!important}
+body.chapter-focus main>section:not(.chapter-focus-hidden) .ch7-choice{padding:10px 12px!important;margin:6px 0!important;min-height:0!important;font-size:.92rem!important;line-height:1.5!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) .consult-note{background:#293b3d!important;color:#edf1ec!important;border-color:#796b4f!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) .consult-note :is(p,strong){color:#edf1ec!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) .note{background:#263b45!important;color:#dce6e5!important;border-color:#d6ad70!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.practice-controls,.chart-card,.calculator,.method-grid>div,.study-panel){background:#1b3039!important;color:#eaf0ee!important;border-color:#465d65!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.practice-controls,.chart-card,.calculator,.method-grid>div,.study-panel) :is(h3,h4,p,li,label,strong,legend){color:#eaf0ee!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) :is(input:not([type=radio]):not([type=checkbox]),select,textarea){background:#263b45!important;color:#f4f6f3!important;border:1px solid #647982!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.result,.feedback){background:#263b45!important;color:#eef2ef!important;border-color:#4b636b!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) :is(table,th,td){color:#eaf0ee!important;border-color:#465d65!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) tr:nth-child(even){background:#263b45!important}
+:root[data-theme="dark"] body.chapter-focus main>section:not(.chapter-focus-hidden) .ch7-choice{background:#263b45!important;color:#eef2ef!important}
+body.chapter-focus #chapter9 .ch9-learning-path{margin:10px 0 14px!important}
+body.chapter-focus #chapter9 .ch9-concept-strip{margin:10px 0 15px!important;gap:10px!important}
+body.chapter-focus #chapter9 .ch9-concept-strip article{padding:14px!important;min-height:0!important}
+body.chapter-focus #chapter9 .ch9-concept-strip :is(h3,p){margin-bottom:6px!important}
+body.chapter-focus #chapter7 .chapter7-steps{padding-left:25px!important;line-height:1.6!important}
+body.chapter-focus #chapter7 .chapter7-steps li{margin:3px 0!important}
+@media(max-width:700px){body.chapter-focus .chapter-focus-banner{padding:12px 16px 8px!important}body.chapter-focus .chapter-focus-banner>.chapter-pager{margin-left:0!important}body.chapter-focus .chapter-focus-banner>.chapter-toc{flex-wrap:wrap!important}body.chapter-focus main>section:not(.chapter-focus-hidden){padding:18px 17px 23px!important}body.chapter-focus main>section:not(.chapter-focus-hidden) :is(.practice-layout,.method-grid){grid-template-columns:minmax(0,1fr)!important}body.chapter-focus main>section:not(.chapter-focus-hidden) :is(th,td){padding:7px 8px!important}}
