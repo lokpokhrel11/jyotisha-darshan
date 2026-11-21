@@ -92,8 +92,11 @@ $('tithiCalculate').addEventListener('click',()=>{
  const diff=(moon-sun+360)%360;const idx=Math.floor(diff/12);const paksha=idx<15?'शुक्ल':'कृष्ण';
  const n=idx%15+1;const names=['प्रतिपदा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी','षष्ठी','सप्तमी','अष्टमी','नवमी','दशमी','एकादशी','द्वादशी','त्रयोदशी','चतुर्दशी'];
  const name=n===15?(paksha==='शुक्ल'?'पूर्णिमा':'औँसी'):names[n-1];
- const nearest=Math.round(diff/12)*12;const boundary=Math.abs(diff-nearest)<1e-9;
- $('tithiCalcResult').textContent=boundary?`अन्तर ${diff.toFixed(2)}° · यो १२° को ठीक सीमा हो। ${diff===0?'०° औँसीको सन्दर्भबिन्दु हो। ':diff===180?'१८०° पूर्णिमाको सन्दर्भबिन्दु हो। ':''}सीमापछि सुरु हुने तिथि: ${paksha} ${name}। वास्तविक पञ्चाङ्गमा सटीक समयसहित जाँच गर्नुहोस्।`:`अन्तर ${diff.toFixed(2)}° · ${paksha} पक्ष · ${name} (तिथि ${n})।`;
+ const completed=Math.floor(diff/12);const remainder=diff-completed*12;
+ const boundary=Math.abs(remainder)<1e-9||Math.abs(remainder-12)<1e-9;
+ const degreesIntoTithi=boundary?0:remainder;
+ const elapsed=boundary?'ठीक सीमामा नयाँ तिथि सुरु हुन्छ।':completed+' वटा १२° का खण्ड पूरा भएका छन्; चालू तिथिभित्र '+degreesIntoTithi.toFixed(2)+'° बितेको छ।';
+ $('tithiCalcResult').textContent='चन्द्र '+moon.toFixed(2)+'° − सूर्य '+sun.toFixed(2)+'° = '+(moon-sun).toFixed(2)+'°; ३६०° चक्रमा मिलाउँदा '+diff.toFixed(2)+'°। '+elapsed+' त्यसैले '+paksha+' '+name+' (क्रम '+n+')। '+(boundary?'यो गणितीय सीमा हो; वास्तविक तिथि परिवर्तनको घडी निकाल्न समयसहितको खगोलीय गणना चाहिन्छ।':'यो दिइएका काल्पनिक भोगांशको अभ्यास हो, आजको पञ्चाङ्ग होइन।');
 });
 // Source-verified Chapter 1 lists (PDF pp. 8–10).
 const nakNames=['अश्विनी','भरणी','कृत्तिका','रोहिणी','मृगशिरा','आर्द्रा','पुनर्वसु','पुष्य (तिष्य)','आश्लेषा','मघा','पूर्वाफाल्गुनी','उत्तराफाल्गुनी','हस्त','चित्रा','स्वाती','विशाखा','अनुराधा','ज्येष्ठा','मूल','पूर्वाषाढा','उत्तराषाढा','श्रवण','धनिष्ठा','शतभिषा','पूर्वाभाद्रपदा','उत्तराभाद्रपदा','रेवती'];
