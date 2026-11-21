@@ -913,13 +913,26 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  sections.forEach((section,i)=>{
   const footer=document.createElement('nav');
   footer.className='ch8-lesson-pager';
-  footer.setAttribute('aria-label','अध्याय ८ पाठ क्रम');
-  if(i>0){const prev=document.createElement('a');prev.href='#'+ids[i-1];prev.className='ch8-lesson-prev';prev.textContent='← '+(i===8?'पाठ ८':'अघिल्लो पाठ');footer.append(prev)}
-  if(i<8){const next=document.createElement('a');next.href='#'+ids[i+1];next.className='ch8-lesson-next';next.textContent=i===7?'समग्र मूल्याङ्कन →':'अर्को पाठ →';footer.append(next)}
+  footer.setAttribute('aria-label','अध्याय ८: पाठ '+(i===8?'मूल्याङ्कन':nep(i+1))+' को अन्त्यमा नेभिगेसन');
+  if(i>0){
+   const prev=document.createElement('a');
+   prev.href='#'+ids[i-1];prev.className='ch8-lesson-prev';
+   prev.textContent='← '+(i===8?'पाठ ८':'अघिल्लो पाठ');
+   prev.setAttribute('aria-label','पाठ '+nep(i)+' मा जानुहोस्');
+   footer.append(prev);
+  }
+  if(i<8){
+   const next=document.createElement('a');
+   next.href='#'+ids[i+1];next.className='ch8-lesson-next';
+   next.textContent=i===7?'समग्र मूल्याङ्कन →':'अर्को पाठ →';
+   next.setAttribute('aria-label',i===7?'समग्र मूल्याङ्कनमा जानुहोस्':'पाठ '+nep(i+2)+' मा जानुहोस्');
+   footer.append(next);
+  }
   section.append(footer);
   /* Keep a compact navigation row visible immediately after each lesson heading. */
   const top=footer.cloneNode(true);
   top.classList.add('ch8-lesson-pager-top');
+  top.setAttribute('aria-label','अध्याय ८: पाठ '+(i===8?'मूल्याङ्कन':nep(i+1))+' को सुरुमा नेभिगेसन');
   const heading=section.querySelector('h3');
   if(heading)heading.after(top);
  });
