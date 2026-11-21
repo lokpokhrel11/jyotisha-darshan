@@ -297,3 +297,28 @@ test('Chapter 3: result heading receives focus and reset clears previous result'
  await page.locator('#chapter3Reset').click();
  await expect(page.locator('#chapter3Results')).toBeHidden();
 });
+
+
+test('Chapter 9: dashboard entry and source-based lessons are accessible', async ({ page }) => {
+ await page.goto(base);
+ await expect(page.locator('.chapter-card[data-chapter="9"]')).toBeVisible();
+ await page.locator('.chapter-card[data-chapter="9"]').click();
+ await expect(page.locator('#chapter9')).toBeVisible();
+ await expect(page.locator('#ch9-lesson')).toBeVisible();
+ await expect(page.locator('#ch9-limits')).toBeVisible();
+ await expect(page.locator('#chapter9 .ch9-local-nav a')).toHaveCount(5);
+});
+
+test('Chapter 9: incomplete and complete source-comprehension quiz', async ({ page }) => {
+ await page.goto(chapter(9));
+ const form=page.locator('#ch9Quiz');
+ await form.getByRole('button',{name:'उत्तर जाँच्नुहोस्'}).click();
+ await expect(page.locator('#ch9Feedback')).toContainText('तीनवटै प्रश्न');
+ await expect(form.locator('fieldset').first()).toBeFocused();
+ await form.locator('input[name="ch9q"][value="a"]').check();
+ await form.locator('input[name="ch9q2"][value="b"]').check();
+ await form.locator('input[name="ch9q3"][value="c"]').check();
+ await form.getByRole('button',{name:'उत्तर जाँच्नुहोस्'}).click();
+ await expect(page.locator('#ch9Feedback')).toContainText('3/3');
+ await expect(page.locator('#ch9Feedback')).toBeFocused();
+});
