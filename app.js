@@ -456,6 +456,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const ids={lesson:['chapter2'],practice:['planetExample'],quiz:['chapter2exam']};
  const tabs=document.createElement('div');tabs.className='learning-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','अध्याय २ अध्ययन विकल्प');
  const buttons={};
+ for(const [key,sections] of Object.entries(ids))for(const id of sections){const panel=document.getElementById(id);if(panel)panel.setAttribute('role','tabpanel');}
  let active='lesson',current=0;
  const qContainer=document.getElementById('chapter2ExamQuestions');
  const pager=document.createElement('div');pager.className='exam-stepper';
@@ -483,9 +484,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(focus)buttons[name].focus();
  }
  for(const [key,label] of [['lesson','पाठ'],['practice','अभ्यास'],['quiz','परीक्षा']]){
-  const btn=document.createElement('button');btn.type='button';btn.className='learning-tab';btn.textContent=label;btn.setAttribute('role','tab');btn.setAttribute('aria-controls',ids[key][0]);btn.addEventListener('click',()=>activate(key));tabs.append(btn);buttons[key]=btn;
+  const btn=document.createElement('button');btn.type='button';btn.className='learning-tab';btn.textContent=label;btn.setAttribute('role','tab');btn.id='chapter2-tab-'+key;btn.setAttribute('aria-controls',ids[key][0]);ids[key].forEach(id=>{const panel=document.getElementById(id);if(panel)panel.setAttribute('aria-labelledby',btn.id)});btn.addEventListener('click',()=>activate(key));tabs.append(btn);buttons[key]=btn;
  }
- tabs.addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft'].includes(e.key))return;e.preventDefault();const keys=['lesson','practice','quiz'];activate(keys[(keys.indexOf(active)+(e.key==='ArrowRight'?1:2))%3],true)});
+ tabs.addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','Home','End'].includes(e.key))return;e.preventDefault();const keys=['lesson','practice','quiz'];const index=e.key==='Home'?0:e.key==='End'?keys.length-1:(keys.indexOf(active)+(e.key==='ArrowRight'?1:keys.length-1))%keys.length;activate(keys[index],true)});
  const toc=banner.querySelector('.chapter-toc');if(toc)toc.hidden=true;
  banner.append(tabs);
  prev.addEventListener('click',()=>showQuestion(current-1));
