@@ -1437,3 +1437,18 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   review.hidden=false;feedback.tabIndex=-1;feedback.focus({preventScroll:true});
  });
 })();
+
+/* Chapter 11: education categories are source descriptions, not aptitude testing. */
+(function(){
+ const select=document.getElementById('ch11EducationLevel');
+ const out=document.getElementById('ch11EducationResult');
+ if(!select||!out)return;
+ const explanations={
+  school:'विद्यालय तह: स्रोतले पञ्चम भाव र बुधको अवस्थालाई हेर्ने परम्परागत विधि बताउँछ।',
+  higher:'उच्चशिक्षा: स्रोतले नवम भाव र बृहस्पतिलाई अध्ययनको प्रतीकात्मक सन्दर्भमा राख्छ।',
+  research:'अनुसन्धान वा विद्यावारिधि: स्रोतले अष्टम भाव र केतुसँग सम्बन्ध देखाउँछ।'
+ };
+ select.addEventListener('change',()=>{
+  out.textContent=explanations[select.value]?explanations[select.value]+' यो वर्गीकरण शैक्षिक क्षमता, उपयुक्त विषय वा भविष्यको सफलता मापन गर्ने परीक्षण होइन।':'तह छानेपछि सम्बन्धित भाव र ग्रहको परम्परागत जोडी देखिन्छ।';
+ });
+})();
