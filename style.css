@@ -994,3 +994,18 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter9 .ch9-disclosure .ch9-reading-note{margin:12px 15px}
 #chapter9 .ch9-disclosure summary:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
 @media(max-width:680px){#chapter9 .ch9-step-grid{grid-template-columns:1fr;gap:9px}#chapter9 .ch9-step{display:grid;grid-template-columns:34px minmax(0,1fr);gap:0 12px;padding:13px 15px}#chapter9 .ch9-step-number{grid-row:span 2;margin:0}#chapter9 .ch9-step strong{margin:0 0 3px}#chapter9 .ch9-disclosure summary span{display:block;margin:4px 0 0}}
+
+/* Chapter 9 assessment: calm, readable result and review states in both themes. */
+#chapter9 .ch9-quiz-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:12px 0 18px}
+#chapter9 .ch9-quiz-reset{border:1px solid var(--line);background:var(--white);color:var(--ink);border-radius:9px;padding:12px 20px}
+#chapter9 .ch9-quiz-reset:hover,#chapter9 .ch9-quiz-reset:focus-visible{border-color:var(--gold);outline:2px solid var(--gold);outline-offset:2px}
+#chapter9 .ch9-quiz-feedback:empty{display:none}
+#chapter9 .ch9-quiz-feedback:not(:empty){border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:11px;background:var(--soft);color:var(--ink);padding:15px 18px;margin:16px 0;font-weight:700;line-height:1.7}
+#chapter9 .ch9-quiz-feedback.is-warning{border-left-color:var(--muted)}
+#chapter9 .ch9-explanations[hidden]{display:none}
+#chapter9 .ch9-explanations{display:grid;gap:11px;margin:15px 0 20px}
+#chapter9 .ch9-explanation{padding:16px 18px;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:11px;background:var(--white);color:var(--ink)}
+#chapter9 .ch9-explanation.is-incorrect{background:var(--soft);border-left-color:var(--muted)}
+#chapter9 .ch9-explanation strong{display:block;margin-bottom:6px;color:var(--ink)}
+#chapter9 .ch9-explanation p{margin:0;line-height:1.7;color:var(--ink)}
+@media(max-width:600px){#chapter9 .ch9-quiz-actions>*{flex:1 1 180px;text-align:center}#chapter9 .ch9-explanation{padding:13px 14px}}
