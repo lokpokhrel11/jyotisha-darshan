@@ -646,3 +646,31 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
  :root[data-theme="dark"] body.chapter-focus main form fieldset{padding:18px 13px 14px}
  :root[data-theme="dark"] body.chapter-focus main :is(form fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card) :is(label,.ch7-choice,.quiz-option,.option,.answer-option){padding:12px;gap:10px}
 }
+
+/* v71: Generated assessment options in Chapters 2 and 3 use .exam-option. */
+:root[data-theme="dark"] body.chapter-focus :is(#chapter2ExamQuestions,#chapter3ExamQuestions) .exam-question{
+ background:#20343e!important;color:#edf4f1!important;
+ border:1px solid #526d76!important;border-radius:14px;
+ padding:22px 18px 18px;margin:0 0 18px;min-width:0;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#chapter2ExamQuestions,#chapter3ExamQuestions) .exam-question legend{
+ color:#f2f4ef!important;background:#20343e!important;
+ padding:2px 8px;max-width:100%;line-height:1.65;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#chapter2ExamQuestions,#chapter3ExamQuestions) label.exam-option{
+ display:flex!important;align-items:center;gap:12px;
+ padding:13px 16px;margin:9px 0;
+ background:#2c4550!important;color:#f0f4f0!important;
+ border:1px solid #5c7780!important;border-radius:10px;
+ font-weight:550;line-height:1.65;cursor:pointer;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#chapter2ExamQuestions,#chapter3ExamQuestions) label.exam-option:hover{
+ background:#365661!important;border-color:#d6b477!important;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#chapter2ExamQuestions,#chapter3ExamQuestions) label.exam-option:has(input:checked){
+ background:#354c50!important;border-color:#e2bd7c!important;
+ box-shadow:inset 3px 0 0 #e2bd7c;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#chapter2ExamQuestions,#chapter3ExamQuestions) label.exam-option input{
+ flex:0 0 auto;width:19px;height:19px;margin:0;accent-color:#e2bd7c;
+}
