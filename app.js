@@ -855,3 +855,23 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  }
  summary.textContent='मूल्याङ्कन पूरा गरिएका: '+nep(attempted)+' / '+nep(exams.length)+' · अभ्यास लक्ष्य पुगेका: '+nep(met);
 })();
+
+/* Assessment navigation clarity: make the final submission location explicit. */
+(function(){
+ const chapter=Number(new URLSearchParams(location.search).get('chapter'));
+ const form=document.getElementById(chapter===2?'chapter2ExamForm':chapter===3?'chapter3ExamForm':'');
+ if(!form)return;
+ const pager=form.querySelector('.exam-stepper');
+ if(!pager)return;
+ const hint=document.createElement('p');
+ hint.className='exam-submit-hint';
+ hint.textContent='सबै प्रश्न पूरा गरेपछि तलको “उत्तर जाँच्नुहोस्” बटन प्रयोग गर्नुहोस्।';
+ const jump=document.createElement('button');
+ jump.type='button';jump.className='button exam-submit-jump';
+ jump.textContent='उत्तर जाँच्ने ठाउँमा जानुहोस् ↓';
+ jump.addEventListener('click',()=>{
+  const submit=form.querySelector('button[type="submit"]');
+  if(submit){submit.scrollIntoView({behavior:'smooth',block:'center'});submit.focus({preventScroll:true})}
+ });
+ pager.after(hint,jump);
+})();
