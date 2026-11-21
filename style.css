@@ -806,3 +806,17 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 :root[data-theme="dark"] #chapter8 .ch8-current-lesson>.ch8-lesson-pager-top{
  border-bottom-color:#d8b776;
 }
+
+/* v78: Mobile chapter 8 table and navigation containment. */
+#chapter8 :is(.ch8-lesson,#ch8AssessmentPanel){scroll-margin-top:105px;min-width:0}
+#chapter8 .chapter7-table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+#chapter8 .chapter7-table{min-width:380px}
+@media(max-width:480px){
+ #chapter8 .ch8-contents{padding:14px 12px}
+ #chapter8 .ch8-nav-heading{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+ #chapter8 .ch8-nav-toggle{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+ #chapter8 .ch8-contents-links.is-open{grid-template-columns:minmax(0,1fr)}
+ #chapter8 .ch8-contents-links a{min-width:0;min-height:48px;overflow-wrap:anywhere}
+ #chapter8 .study-panel{min-width:0;overflow-wrap:break-word}
+ #chapter8 :is(input,select,textarea,button){max-width:100%}
+}
