@@ -322,3 +322,17 @@ test('Chapter 9: incomplete and complete source-comprehension quiz', async ({ pa
  await expect(page.locator('#ch9Feedback')).toContainText('3/3');
  await expect(page.locator('#ch9Feedback')).toBeFocused();
 });
+
+
+test('Chapter 9: worked example follows source house-sign arithmetic', async ({ page }) => {
+ await page.goto(chapter(9));
+ await expect(page.locator('#ch9WorkedResult')).toContainText('मेष लग्न · लग्नेश मङ्गल');
+ await page.locator('#ch9Ascendant').selectOption('5');
+ await page.locator('#ch9LordHouse').selectOption('9');
+ await expect(page.locator('#ch9WorkedResult')).toContainText('सिंह लग्न · लग्नेश सूर्य');
+ await expect(page.locator('#ch9WorkedResult')).toContainText('मेष राशि (अङ्क १)');
+ await page.locator('#ch9Ascendant').selectOption('9');
+ await page.locator('#ch9LordHouse').selectOption('1');
+ await expect(page.locator('#ch9WorkedResult')).toContainText('धनु लग्न · लग्नेश बृहस्पति');
+ await expect(page.locator('#ch9WorkedResult')).toContainText('धनु राशि (अङ्क ९)');
+});
