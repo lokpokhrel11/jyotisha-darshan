@@ -248,3 +248,8 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
  body #chapter8 nav.ch8-contents .ch8-contents-links:not(.is-open){display:none!important}
  body #chapter8 nav.ch8-contents .ch8-contents-links.is-open{display:grid!important}
 }
+
+/* Explicitly exempt the in-chapter contents nav from the global mobile nav collapse. */
+@media(max-width:650px){
+ body #chapter8 nav.ch8-contents{display:block!important;position:relative;inset:auto;width:auto;max-height:none;overflow:visible;flex-direction:initial;padding:15px;margin:0 0 24px;border:1px solid #d9dfd9;background:#fafbf8}
+}
