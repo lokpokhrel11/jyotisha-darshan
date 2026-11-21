@@ -1452,3 +1452,18 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   out.textContent=explanations[select.value]?explanations[select.value]+' यो वर्गीकरण शैक्षिक क्षमता, उपयुक्त विषय वा भविष्यको सफलता मापन गर्ने परीक्षण होइन।':'तह छानेपछि सम्बन्धित भाव र ग्रहको परम्परागत जोडी देखिन्छ।';
  });
 })();
+
+/* Chapter 11: source examples for house-based relationship terminology. */
+(function(){
+ const select=document.getElementById('ch11MarriageHouse');
+ const out=document.getElementById('ch11MarriageResult');
+ if(!select||!out)return;
+ const examples={
+  '3':'तेस्रो भाव: स्रोतको काल्पनिक उदाहरणमा भाइबहिनी वा नजिकको परिचयमार्फत सम्बन्ध जोडिन सक्ने परम्परागत अर्थ दिइएको छ।',
+  '5':'पाँचौँ भाव: स्रोतको उदाहरणमा अध्ययन, परिचय वा प्रेमसम्बन्धी सन्दर्भ उल्लेख छ।',
+  '10':'दशौँ भाव: स्रोतको उदाहरणमा बुबा वा कार्यस्थलको माध्यम उल्लेख छ।'
+ };
+ select.addEventListener('change',()=>{
+  out.textContent=examples[select.value]?examples[select.value]+' यो प्रतीकात्मक पाठ-अभ्यास हो, विवाहको भविष्यवाणी होइन।':'भाव छानेपछि स्रोतमा दिइएको सम्बन्धको परम्परागत उदाहरण देखिन्छ।';
+ });
+})();
