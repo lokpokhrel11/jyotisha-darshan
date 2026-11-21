@@ -46,9 +46,9 @@ test('Chapter 3: score, review and reset', async ({ page }) => {
 });
 
 for (const width of [375, 320]) {
-  test(`Mobile ${width}px: no horizontal document overflow on chapters 1–7`, async ({ page }) => {
+  test(`Mobile ${width}px: no horizontal document overflow on chapters 1–8`, async ({ page }) => {
     await page.setViewportSize({ width, height: 780 });
-    for (let n = 1; n <= 7; n++) {
+    for (let n = 1; n <= 8; n++) {
       await page.goto(chapter(n));
       await expect(page.locator('body')).toBeVisible();
       const widths = await page.evaluate(() => ({
@@ -127,4 +127,17 @@ test('Chapter 7: North Indian chart uses four central diamonds and eight corner 
  await page.locator('#ch7Chart [data-house="4"]').click();
  await expect(page.locator('#ch7HouseDetail')).toContainText('कर्कट');
  await expect(page.locator('#ch7HouseDetail')).toContainText('बृहस्पति');
+});
+
+test('Chapter 8: inclusive kinship counting and quiz',async({page})=>{
+ await page.goto(chapter(8));
+ await expect(page.locator('#chapter8')).toBeVisible();
+ await expect(page.locator('#ch8Result')).toContainText('६औँ भाव');
+ await page.locator('[data-ch8-example="spouse"]').click();
+ await expect(page.locator('#ch8Result')).toContainText('८औँ भाव');
+ await page.locator('[data-ch8-example="father"]').click();
+ await expect(page.locator('#ch8Result')).toContainText('१२औँ भाव');
+ await page.locator('#ch8Quiz input[value="10"]').check();
+ await page.locator('#ch8Quiz button[type="submit"]').click();
+ await expect(page.locator('#ch8Feedback')).toContainText('सही');
 });
