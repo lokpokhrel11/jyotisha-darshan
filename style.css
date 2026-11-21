@@ -979,3 +979,18 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter9 .ch9-reading-note>strong,#chapter9 .ch9-evidence-note>strong,#chapter9 .ch9-source-pending>strong{display:block;font-size:.96rem;margin-bottom:8px;color:var(--ink)}
 #chapter9 .ch9-reading-note p,#chapter9 .ch9-evidence-note p,#chapter9 .ch9-source-pending p{margin:0;color:var(--ink)}
 @media(max-width:600px){#chapter9 .ch9-reading-note,#chapter9 .ch9-evidence-note,#chapter9 .ch9-source-pending{padding:14px 15px}#chapter9 .ch9-topic-pills{gap:7px}#chapter9 .ch9-topic-pills span{padding:6px 10px;font-size:.82rem}}
+
+/* Chapter 9: convert dense reading blocks into scannable learning steps. */
+#chapter9 .ch9-step-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+#chapter9 .ch9-step{padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--soft);min-width:0}
+#chapter9 .ch9-step-number{display:inline-grid;place-items:center;width:32px;height:32px;margin-bottom:12px;border-radius:50%;background:color-mix(in srgb,var(--gold) 20%,var(--white));border:1px solid color-mix(in srgb,var(--gold) 40%,var(--line));color:var(--gold);font-weight:800}
+#chapter9 .ch9-step strong{display:block;color:var(--ink);font-size:1.05rem;margin-bottom:7px}
+#chapter9 .ch9-step p{color:var(--muted);font-size:.9rem;line-height:1.65;margin:0}
+#chapter9 .ch9-disclosure{margin:15px 0;border:1px solid var(--line);border-radius:12px;background:var(--white);overflow:hidden}
+#chapter9 .ch9-disclosure summary{cursor:pointer;display:list-item;padding:14px 18px;font-weight:750;color:var(--ink);background:color-mix(in srgb,var(--gold) 6%,var(--white))}
+#chapter9 .ch9-disclosure summary::marker{color:var(--gold)}
+#chapter9 .ch9-disclosure summary span{font-size:.78rem;font-weight:500;color:var(--muted);margin-left:8px}
+#chapter9 .ch9-disclosure[open] summary{border-bottom:1px solid var(--line)}
+#chapter9 .ch9-disclosure .ch9-reading-note{margin:12px 15px}
+#chapter9 .ch9-disclosure summary:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+@media(max-width:680px){#chapter9 .ch9-step-grid{grid-template-columns:1fr;gap:9px}#chapter9 .ch9-step{display:grid;grid-template-columns:34px minmax(0,1fr);gap:0 12px;padding:13px 15px}#chapter9 .ch9-step-number{grid-row:span 2;margin:0}#chapter9 .ch9-step strong{margin:0 0 3px}#chapter9 .ch9-disclosure summary span{display:block;margin:4px 0 0}}
