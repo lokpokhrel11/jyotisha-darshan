@@ -206,3 +206,12 @@ test('Chapter 8: final eight-question assessment gives explanations and resets',
  await expect(page.locator('#ch8AssessmentSummary')).toContainText('८ प्रश्नको उत्तर छान्नुहोस्');
  await expect(page.locator('#ch8Assessment input:checked')).toHaveCount(0);
 });
+
+test('Chapter 8 design: navigation targets and public attribution policy',async({page})=>{
+ await page.goto(chapter(8));
+ await expect(page.locator('.ch8-hero')).toBeVisible();
+ await expect(page.locator('.ch8-contents-links a')).toHaveCount(9);
+ for(let i=1;i<=8;i++)await expect(page.locator('#ch8-lesson-'+i)).toHaveCount(1);
+ await expect(page.locator('#ch8AssessmentPanel')).toBeVisible();
+ await expect(page.locator('#chapter8')).not.toContainText('गुरुजी');
+});
