@@ -1120,3 +1120,21 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter11 .ch11-source-notes p{line-height:1.8}
 #chapter11 .ch10-example-tag{display:inline-block;padding:6px 11px;border-radius:20px;background:color-mix(in srgb,var(--gold) 19%,var(--white));color:var(--ink);font-weight:750;font-size:.85rem}
 @media(max-width:760px){#chapter11 .ch11-source-notes{grid-template-columns:1fr}#chapter11 .ch11-examples>span{width:100%}#chapter11 .ch11-example-button{flex:1 1 160px}}
+
+/* Chapter 11 education and ceremonial lessons */
+#chapter11 .ch11-lesson-section{margin:28px 0;scroll-margin-top:90px}
+#chapter11 .ch11-lesson-heading{padding:20px 0 13px}
+#chapter11 .ch11-lesson-heading>span{display:inline-block;color:var(--ink);font-size:.84rem;font-weight:800;letter-spacing:.025em;padding:6px 11px;border-radius:99px;background:color-mix(in srgb,var(--gold) 17%,var(--white));border:1px solid var(--line)}
+#chapter11 .ch11-lesson-heading h3{margin:12px 0 7px;color:var(--ink);font-size:clamp(1.3rem,2.4vw,1.8rem)}
+#chapter11 .ch11-lesson-heading p{max-width:75ch;line-height:1.8}
+#chapter11 .ch11-learning-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0}
+#chapter11 .ch11-learning-grid article{min-width:0;padding:20px;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:13px;background:var(--white);color:var(--ink)}
+#chapter11 .ch11-learning-grid h4{margin:11px 0 7px;color:var(--ink)}
+#chapter11 .ch11-learning-grid strong{display:block;color:var(--ink);margin:7px 0}
+#chapter11 .ch11-learning-grid p{line-height:1.75;margin:8px 0 0}
+#chapter11 .ch11-topic-number{display:inline-block;font-size:.82rem;font-weight:800;color:var(--ink);background:color-mix(in srgb,var(--gold) 16%,var(--white));padding:5px 10px;border-radius:8px}
+#chapter11 .ch11-education-practice{border-left:4px solid var(--gold)}
+#chapter11 .ch11-education-practice label{display:block;font-weight:750;color:var(--ink);margin:12px 0 8px}
+#chapter11 .ch11-education-practice select{width:100%;max-width:460px;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:12px;font:inherit}
+#chapter11 .ch11-education-practice select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:760px){#chapter11 .ch11-learning-grid{grid-template-columns:1fr}#chapter11 .ch11-lesson-heading{padding-top:12px}}
