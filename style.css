@@ -288,3 +288,18 @@ body:not(.chapter-focus) #consult,body:not(.chapter-focus) #workbench{display:no
  body.chapter-focus .chapter-focus-banner{padding-top:22px}
  body.chapter-focus .chapter-focus-banner h1{font-size:clamp(1.7rem,7vw,2.25rem)}
 }
+
+/* Stabilization: focused chapters use one primary title, with accessible section descriptions. */
+body.chapter-focus #chapter7 > .section-heading h2,
+body.chapter-focus #chapter8 > .ch8-hero h2{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+body.chapter-focus .chapter-focus-banner{isolation:isolate}
+body.chapter-focus .chapter-focus-banner .chapter-back{max-width:100%;white-space:normal;line-height:1.45}
+body.chapter-focus #chapter8 .ch8-hero{margin-top:0}
+body.chapter-focus #chapter7,body.chapter-focus #chapter8{scroll-margin-top:calc(90px + env(safe-area-inset-top,0px))}
+@media(max-width:650px){
+ body.chapter-focus .chapter-focus-banner{padding-top:24px;padding-bottom:18px}
+ body.chapter-focus .chapter-focus-banner h1{margin:8px 0 16px}
+ body.chapter-focus .chapter-pager{gap:8px}
+ body.chapter-focus #chapter8 .ch8-hero{padding:22px 18px}
+ body.chapter-focus #chapter7,body.chapter-focus #chapter8{scroll-margin-top:110px}
+}
