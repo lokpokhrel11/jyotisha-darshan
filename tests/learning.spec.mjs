@@ -46,9 +46,9 @@ test('Chapter 3: score, review and reset', async ({ page }) => {
 });
 
 for (const width of [375, 320]) {
-  test(`Mobile ${width}px: no horizontal document overflow on chapters 1–6`, async ({ page }) => {
+  test(`Mobile ${width}px: no horizontal document overflow on chapters 1–7`, async ({ page }) => {
     await page.setViewportSize({ width, height: 780 });
-    for (let n = 1; n <= 6; n++) {
+    for (let n = 1; n <= 7; n++) {
       await page.goto(chapter(n));
       await expect(page.locator('body')).toBeVisible();
       const widths = await page.evaluate(() => ({
@@ -59,3 +59,16 @@ for (const width of [375, 320]) {
     }
   });
 }
+
+test('Chapter 7: focused reading, house lords, and quiz feedback', async ({ page }) => {
+ await page.goto(chapter(7));
+ await expect(page.locator('.chapter-focus-banner h1')).toHaveText('कुण्डली कसरी हेर्ने');
+ await expect(page.locator('#chapter7')).toBeVisible();
+ await expect(page.locator('#ch7LordRows tr')).toHaveCount(12);
+ await expect(page.locator('#ch7LordRows tr').nth(9)).toContainText('शनि');
+ await page.locator('#ch7Asc').selectOption('7');
+ await expect(page.locator('#ch7LordRows tr').first()).toContainText('मङ्गल');
+ await page.locator('#ch7Quiz input[value="b"]').check();
+ await page.locator('#ch7Quiz button[type="submit"]').click();
+ await expect(page.locator('#ch7Feedback')).toContainText('सही');
+});
