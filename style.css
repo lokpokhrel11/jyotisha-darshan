@@ -871,3 +871,13 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter9 .ch9-worked-result{padding:16px;border:1px solid var(--line,#aeb5b8);border-radius:12px;background:var(--surface,transparent);color:inherit}
 #chapter9 .ch9-worked-result p{margin:9px 0 0}
 @media(max-width:600px){#chapter9 .ch9-worked-controls{grid-template-columns:1fr}}
+
+/* Chapter 9 occupancy controls: accessible, theme-neutral layout. */
+#chapter9 .ch9-occupancy{display:flex;flex-wrap:wrap;gap:10px 18px;margin:16px 0;padding:14px;border:1px solid var(--line,#aeb5b8);border-radius:10px}
+#chapter9 .ch9-occupancy legend{font-weight:700;padding:0 6px}
+#chapter9 .ch9-occupancy label{display:flex;align-items:center;gap:8px;cursor:pointer;color:inherit}
+#chapter9 .ch9-occupancy input{accent-color:var(--accent,#a87934);width:18px;height:18px}
+#chapter9 .ch9-occupancy-detail{margin:16px 0}
+#chapter9 .ch9-occupancy-detail label{display:block;font-weight:700;margin-bottom:8px}
+#chapter9 .ch9-occupancy-detail select{min-height:44px;width:100%;max-width:350px;border:1px solid var(--line,#aeb5b8);border-radius:8px;padding:9px;background:var(--surface,#fff);color:inherit;font:inherit}
+#chapter9 .ch9-occupancy-detail select:focus-visible{outline:3px solid #a87934;outline-offset:2px}
