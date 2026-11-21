@@ -770,3 +770,12 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  form.addEventListener('submit',e=>{e.preventDefault();let score=0,answered=0;questions.forEach((item,i)=>{const selected=form.querySelector('input[name="ch8assessment'+i+'"]:checked'),feedback=document.getElementById('ch8AssessmentFeedback'+i);if(selected)answered++;const right=selected&&Number(selected.value)===item.correct;if(right)score++;feedback.textContent=(!selected?'उत्तर छुटेको छ। ':right?'सही। ':'पुनः अध्ययन गर्नुहोस्। ')+item.why;feedback.classList.toggle('is-correct',!!right)});summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। उत्तर दिइएका प्रश्न: '+nep(answered)+'। '+(answered<questions.length?'छुटेका प्रश्न पनि पूरा गर्नुहोस्।':score===questions.length?'सबै सही। अब अध्याय ९ को तयारी गर्न सक्नुहुन्छ।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।')});
  reset.addEventListener('click',()=>{form.reset();questions.forEach((_,i)=>{const f=document.getElementById('ch8AssessmentFeedback'+i);f.textContent='';f.classList.remove('is-correct')});summary.textContent='८ प्रश्नको उत्तर छान्नुहोस्।'});
 })();
+
+/* Chapter 8 mobile contents: progressive enhancement; desktop links stay visible. */
+(function(){
+ const nav=document.querySelector('#chapter8 .ch8-contents'),toggle=nav?.querySelector('.ch8-nav-toggle'),links=nav?.querySelector('.ch8-contents-links');
+ if(!toggle||!links)return;
+ const setOpen=open=>{toggle.setAttribute('aria-expanded',String(open));links.classList.toggle('is-open',open);toggle.innerHTML=open?'लुकाउनुहोस् <span aria-hidden="true">⌃</span>':'सबै पाठ हेर्नुहोस् <span aria-hidden="true">⌄</span>'};
+ toggle.addEventListener('click',()=>setOpen(toggle.getAttribute('aria-expanded')!=='true'));
+ links.addEventListener('click',event=>{if(event.target.closest('a')&&window.matchMedia('(max-width:680px)').matches)setOpen(false)});
+})();
