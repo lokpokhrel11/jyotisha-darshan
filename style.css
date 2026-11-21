@@ -178,3 +178,8 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
 .ch8-controls select{width:100%;max-width:100%;padding:9px;border:1px solid var(--line);border-radius:6px}
 #ch8Result{margin:12px 0}
 @media(max-width:480px){.ch8-controls{grid-template-columns:1fr}}
+
+.ch8-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.ch8-comparison>div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:16px}
+.ch8-comparison h4{margin-top:0}
+@media(max-width:680px){.ch8-comparison{grid-template-columns:1fr}}
