@@ -421,8 +421,8 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const params=new URLSearchParams(window.location.search);
  const chapter=Number(params.get('chapter'));
  if(!Number.isInteger(chapter)||chapter<1||chapter>11)return;
- const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"],"7":["chapter7"],"8":["chapter8"],"9":["chapter9"],"10":["chapter10"],"11":["chapter11"]};
- const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति","कुण्डली कसरी हेर्ने","नाता र भावात् भावम्","स्वभाव, शरीर र स्वास्थ्यका संकेत","धन, कमाइ, परिश्रम र यात्रा","सन्तान र कुण्डली मिलान"];
+ const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"],"7":["chapter7"],"8":["chapter8"],"9":["chapter9"],"10":["chapter10"],"11":["chapter11"],"12":["chapter12"]};
+ const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति","कुण्डली कसरी हेर्ने","नाता र भावात् भावम्","स्वभाव, शरीर र स्वास्थ्यका संकेत","धन, कमाइ, परिश्रम र यात्रा","सन्तान र कुण्डली मिलान","ग्रहशान्ति र परम्परागत उपाय"];
  const allowed=new Set(groups[chapter]);
  document.body.classList.add('chapter-focus');
  for(const section of document.querySelectorAll('main > section')){
@@ -438,7 +438,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent='अध्याय '+String(chapter).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const actions=document.createElement('div');actions.className='chapter-pager';
  if(chapter>1){const a=document.createElement('a');a.href='index.html?chapter='+(chapter-1);a.textContent='← अघिल्लो';actions.append(a)}
- if(chapter<11){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को →';actions.append(a)}
+ if(chapter<12){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को →';actions.append(a)}
  const toc=document.createElement('nav');toc.className='chapter-toc';toc.setAttribute('aria-label','अध्यायका पाठ र अभ्यास');const labels={pathshala:'पाठ',practice:'अभ्यास',chapter2:'पाठ',planetExample:'अभ्यास',chapter2exam:'परीक्षा',chapter3:'पाठ',chapter3exam:'परीक्षा',chapter4:'पाठ',istakala:'इष्टकाल',localSunrise:'सूर्योदय',chapter5:'पाठ',padaPractice:'चरण',dashaBalance:'दशा शेष',chapter6:'पाठ',antardasha:'अन्तर्दशा',tribhagi:'त्रिभागी',yogini:'योगिनी',chapter7:'पाठ तथा अभ्यास',chapter8:'पाठ तथा परीक्षा'};
  for(const id of groups[chapter]){if(chapter>=8)break;const section=document.getElementById(id);if(!section)continue;const heading=section.querySelector('h2,h3');const link=document.createElement('a');link.href='#'+id;link.textContent=labels[id]||(heading?heading.textContent.trim():id);toc.append(link)}
  banner.append(back,eyebrow,actions);if(toc.childElementCount&&chapter>=9)banner.append(toc);main.prepend(banner);
@@ -456,7 +456,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(originalSummary){const summary=document.createElement('p');summary.className='chapter-editorial-summary';summary.textContent=originalSummary.textContent.trim();copy.append(summary)}
   const actionsRow=document.createElement('nav');actionsRow.className='chapter-editorial-actions';actionsRow.setAttribute('aria-label','यस अध्यायका मुख्य विकल्प');
   const lesson=document.createElement('a');lesson.className='chapter-editorial-primary';lesson.href='#'+(chapter===1?'lesson':'chapter'+chapter);lesson.textContent='पाठ अध्ययन गर्नुहोस् →';actionsRow.append(lesson);
-  const practiceIds={1:'practice',2:'planetExample',3:'chapter3exam',4:'istakala',5:'padaPractice',6:'antardasha',7:'chapter7',8:'ch8-quiz',9:'ch9-quiz',10:'ch10-assessment',11:'ch11-quiz'};
+  const practiceIds={1:'practice',2:'planetExample',3:'chapter3exam',4:'istakala',5:'padaPractice',6:'antardasha',7:'chapter7',8:'ch8-quiz',9:'ch9-quiz',10:'ch10-assessment',11:'ch11-quiz',12:'ch12-quiz'};
   const practiceId=practiceIds[chapter];if(practiceId&&document.getElementById(practiceId)){const practice=document.createElement('a');practice.className='chapter-editorial-secondary';practice.href='#'+practiceId;practice.textContent='अभ्यास / परीक्षा →';actionsRow.append(practice)}
   copy.append(actionsRow);
   const seal=document.createElement('div');seal.className='chapter-editorial-seal';seal.setAttribute('role','img');seal.setAttribute('aria-label','अध्याय '+chapter);
@@ -469,7 +469,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(sourceHero){const meta=sourceHero.querySelector('.ch8-hero-meta,.ch9-hero-meta');if(meta){const compact=document.createElement('div');compact.className='chapter-editorial-meta';compact.innerHTML=meta.innerHTML;masthead.append(compact)}}
   sourceHeading.remove();heroSection.classList.add('chapter-editorial-section');
  }
- const bottomNav=document.createElement('nav');bottomNav.className='chapter-bottom-nav';bottomNav.setAttribute('aria-label','अध्यायको अन्त्यमा नेभिगेसन');const bottomBack=document.createElement('a');bottomBack.href='index.html#dashboard';bottomBack.className='chapter-back';bottomBack.textContent='← अध्ययन कक्षमा फर्कनुहोस्';bottomNav.append(bottomBack);if(chapter>1){const previousChapter=document.createElement('a');previousChapter.href='index.html?chapter='+(chapter-1);previousChapter.className='chapter-previous-button';previousChapter.textContent='← अघिल्लो अध्याय';previousChapter.setAttribute('aria-label','अघिल्लो अध्याय: '+titles[chapter-1]);bottomNav.append(previousChapter)}if(chapter<8){const nextChapter=document.createElement('a');nextChapter.href='index.html?chapter='+(chapter+1);nextChapter.className='chapter-next-button';nextChapter.textContent='अर्को अध्याय →';nextChapter.setAttribute('aria-label','अर्को अध्याय: '+titles[chapter+1]);bottomNav.append(nextChapter)}main.append(bottomNav);document.title=titles[chapter]+' | ज्योतिष पाठशाला';
+ const bottomNav=document.createElement('nav');bottomNav.className='chapter-bottom-nav';bottomNav.setAttribute('aria-label','अध्यायको अन्त्यमा नेभिगेसन');const bottomBack=document.createElement('a');bottomBack.href='index.html#dashboard';bottomBack.className='chapter-back';bottomBack.textContent='← अध्ययन कक्षमा फर्कनुहोस्';bottomNav.append(bottomBack);if(chapter>1){const previousChapter=document.createElement('a');previousChapter.href='index.html?chapter='+(chapter-1);previousChapter.className='chapter-previous-button';previousChapter.textContent='← अघिल्लो अध्याय';previousChapter.setAttribute('aria-label','अघिल्लो अध्याय: '+titles[chapter-1]);bottomNav.append(previousChapter)}if(chapter<12){const nextChapter=document.createElement('a');nextChapter.href='index.html?chapter='+(chapter+1);nextChapter.className='chapter-next-button';nextChapter.textContent='अर्को अध्याय →';nextChapter.setAttribute('aria-label','अर्को अध्याय: '+titles[chapter+1]);bottomNav.append(nextChapter)}main.append(bottomNav);document.title=titles[chapter]+' | ज्योतिष पाठशाला';
  document.querySelectorAll('#nav a[href^="#"]').forEach(a=>{
   const hash=a.getAttribute('href');a.setAttribute('href','index.html'+hash);
  });
@@ -1498,3 +1498,6 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   out.textContent=examples[select.value]?examples[select.value]+' यो प्रतीकात्मक पाठ-अभ्यास हो, विवाहको भविष्यवाणी होइन।':'भाव छानेपछि स्रोतमा दिइएको सम्बन्धको परम्परागत उदाहरण देखिन्छ।';
  });
 })();
+
+/* Chapter 12 assessment: explanatory, non-predictive source comprehension */
+(function(){const form=document.getElementById('ch12Quiz');if(!form)return;form.addEventListener('submit',function(e){e.preventDefault();let correct=0,answered=0;for(const field of form.querySelectorAll('fieldset[data-answer]')){const selected=field.querySelector('input:checked');const good=selected&&Number(selected.value)===Number(field.dataset.answer);if(selected)answered++;if(good)correct++;field.classList.toggle('ch12-correct',!!good);field.classList.toggle('ch12-incorrect',!!selected&&!good);field.querySelector('.ch12-explanation').hidden=false;}document.getElementById('ch12Result').textContent='नतिजा: '+correct+' / ५ सही। '+(answered<5?'सबै प्रश्नको उत्तर दिएर फेरि जाँच्न सक्नुहुन्छ।':'व्याख्या पढेर आवश्यक पाठ पुनः अध्ययन गर्नुहोस्।');});})();
