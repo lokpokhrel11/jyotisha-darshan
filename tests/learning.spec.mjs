@@ -416,3 +416,32 @@ test('Chapter 9: Moon lesson precedes combined summary and controls are accessib
  await expect(page.locator('#ch9MoonSign')).toHaveAccessibleName('चन्द्र रहेको राशि');
  await expect(page.locator('#ch9Ascendant')).toHaveAccessibleName('लग्न राशि');
 });
+
+
+test('Chapter 9: narrow viewport keeps exercise controls within screen', async ({ page }) => {
+ await page.setViewportSize({width:390,height:844});
+ await page.goto(chapter(9));
+ for (const selector of ['#ch9Ascendant','#ch9LordHouse','#ch9StrengthStatus','#ch9MoonSign','#ch9SequenceResult']) {
+  const element=page.locator(selector);
+  await expect(element).toBeVisible();
+  const rect=await element.boundingBox();
+  expect(rect).not.toBeNull();
+  expect(rect.x).toBeGreaterThanOrEqual(-1);
+  expect(rect.x+rect.width).toBeLessThanOrEqual(391);
+ }
+});
+
+test('Chapter 9: light and dark modes provide readable exercise surfaces', async ({ page }) => {
+ await page.goto(chapter(9));
+ for (const theme of ['light','dark']) {
+  await page.evaluate(value => document.documentElement.setAttribute('data-theme',value),theme);
+  for (const selector of ['#ch9MoonSign','#ch9StrengthStatus','#ch9SequenceResult','#ch9WorkedResult']) {
+   const colors=await page.locator(selector).evaluate(el => {
+    const c=getComputedStyle(el);
+    return {color:c.color,background:c.backgroundColor};
+   });
+   expect(colors.color).not.toBe(colors.background);
+   expect(colors.background).not.toBe('rgba(0, 0, 0, 0)');
+  }
+ }
+});
