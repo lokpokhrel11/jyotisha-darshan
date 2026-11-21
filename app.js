@@ -1505,7 +1505,32 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
 })();
 
-/* Chapter 12 assessment: explanatory, non-predictive source comprehension */
-(function(){const form=document.getElementById('ch12Quiz');if(!form)return;form.addEventListener('submit',function(e){e.preventDefault();let correct=0,answered=0;for(const field of form.querySelectorAll('fieldset[data-answer]')){const selected=field.querySelector('input:checked');const good=selected&&Number(selected.value)===Number(field.dataset.answer);if(selected)answered++;if(good)correct++;field.classList.toggle('ch12-correct',!!good);field.classList.toggle('ch12-incorrect',!!selected&&!good);field.querySelector('.ch12-explanation').hidden=false;}document.getElementById('ch12Result').textContent='नतिजा: '+correct+' / ५ सही। '+(answered<5?'सबै प्रश्नको उत्तर दिएर फेरि जाँच्न सक्नुहुन्छ।':'व्याख्या पढेर आवश्यक पाठ पुनः अध्ययन गर्नुहोस्।');});})();
+/* Chapter 12 assessment: source comprehension with per-question feedback */
+(function(){
+ const form=document.getElementById('ch12Quiz');if(!form)return;
+ const fields=[...form.querySelectorAll('fieldset[data-answer]')];
+ const result=document.getElementById('ch12Result');
+ form.addEventListener('submit',function(e){
+  e.preventDefault();let correct=0,answered=0;
+  for(const field of fields){
+   const selected=field.querySelector('input:checked');
+   const good=!!selected&&Number(selected.value)===Number(field.dataset.answer);
+   if(selected)answered++;if(good)correct++;
+   field.classList.toggle('ch12-correct',good);
+   field.classList.toggle('ch12-incorrect',!!selected&&!good);
+   const explanation=field.querySelector('.ch12-explanation');
+   if(explanation)explanation.hidden=false;
+  }
+  result.textContent='नतिजा: '+correct+' / '+fields.length+' सही। '+(answered<fields.length?'तपाईंले '+answered+' प्रश्नको उत्तर दिनुभएको छ। बाँकी प्रश्नको उत्तर दिएर पुनः जाँच्न सक्नुहुन्छ।':'प्रत्येक प्रश्नको व्याख्या पढेर आवश्यक पाठ पुनः अध्ययन गर्नुहोस्।');
+ });
+ form.addEventListener('change',function(e){
+  const field=e.target.closest('fieldset[data-answer]');
+  if(!field)return;
+  field.classList.remove('ch12-correct','ch12-incorrect');
+  const explanation=field.querySelector('.ch12-explanation');
+  if(explanation)explanation.hidden=true;
+  result.textContent='';
+ });
+})();
 
 (function(){const dirs=[["पूर्व","सूर्य","पानी, स्नानघर, पूजा, अध्ययन"],["आग्नेय","शुक्र","भान्सा, बिजुली"],["दक्षिण","मङ्गल","शयन, भारी सामान"],["नैऋत्य","राहु","प्राविधिक सामग्री, घरमूलीको बसाइ"],["पश्चिम","शनि","भोजन, फ्रिज, वृद्धहरूको बसाइ"],["वायव्य","चन्द्र","पशुपालन, अन्नभण्डार"],["उत्तर","बुध","भण्डार, गहना, अध्ययन"],["ईशान","बृहस्पति","मन्दिर, पूजा, अध्ययन, पानी"]];const out=document.getElementById('ch13DirectionResult');document.querySelectorAll('#chapter13 [data-dir]').forEach(b=>b.addEventListener('click',()=>{const d=dirs[Number(b.dataset.dir)];out.textContent=d[0]+' · '+d[1]+' — '+d[2];document.querySelectorAll('#chapter13 [data-dir]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));}));const form=document.getElementById('ch13Quiz');if(form)form.addEventListener('submit',e=>{e.preventDefault();let score=0;form.querySelectorAll('fieldset').forEach(f=>{const a=f.querySelector('input:checked');if(a&&Number(a.value)===Number(f.dataset.answer))score++;f.querySelector('.ch12-explanation').hidden=false;});document.getElementById('ch13Result').textContent='नतिजा: '+score+' / ५ सही।';});})();
