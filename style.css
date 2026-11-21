@@ -854,10 +854,10 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 
 /* Chapter 9: readable source cards and in-chapter navigation in both themes. */
 #chapter9 .ch9-local-nav{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0 26px}
-#chapter9 .ch9-local-nav a{display:inline-block;padding:9px 13px;border:1px solid var(--line,#b4b9b9);border-radius:9px;background:var(--surface,transparent);color:inherit;text-decoration:none;font-weight:650}
+#chapter9 .ch9-local-nav a{display:inline-block;padding:9px 13px;border:1px solid var(--line,#b4b9b9);border-radius:9px;background:var(--white);color:inherit;text-decoration:none;font-weight:650}
 #chapter9 .ch9-local-nav a:hover,#chapter9 .ch9-local-nav a:focus-visible{outline:2px solid currentColor;outline-offset:2px;text-decoration:underline}
 #chapter9 .ch9-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
-#chapter9 .ch9-grid p{margin:0;padding:12px;border:1px solid var(--line,#b4b9b9);border-radius:10px;background:var(--surface,transparent);color:inherit}
+#chapter9 .ch9-grid p{margin:0;padding:12px;border:1px solid var(--line,#b4b9b9);border-radius:10px;background:var(--white);color:inherit}
 #chapter9 .ch9-grid strong{display:block;margin-bottom:4px}
 #chapter9 #ch9Quiz fieldset{margin:0 0 18px;padding:14px;border:1px solid var(--line,#b4b9b9);border-radius:10px}
 #chapter9 #ch9Quiz legend{font-weight:700;padding:0 5px}
@@ -866,9 +866,9 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 /* Chapter 9 worked-example controls: inherit theme text and surfaces. */
 #chapter9 .ch9-worked-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;margin:18px 0}
 #chapter9 .ch9-worked-controls label{font-weight:700}
-#chapter9 .ch9-worked-controls select{width:100%;min-height:44px;padding:8px 10px;border:1px solid var(--line,#aeb5b8);border-radius:8px;background:var(--surface,#fff);color:inherit;font:inherit}
+#chapter9 .ch9-worked-controls select{width:100%;min-height:44px;padding:8px 10px;border:1px solid var(--line,#aeb5b8);border-radius:8px;background:var(--white);color:inherit;font:inherit}
 #chapter9 .ch9-worked-controls select:focus-visible{outline:3px solid #a87934;outline-offset:2px}
-#chapter9 .ch9-worked-result{padding:16px;border:1px solid var(--line,#aeb5b8);border-radius:12px;background:var(--surface,transparent);color:inherit}
+#chapter9 .ch9-worked-result{padding:16px;border:1px solid var(--line,#aeb5b8);border-radius:12px;background:var(--white);color:inherit}
 #chapter9 .ch9-worked-result p{margin:9px 0 0}
 @media(max-width:600px){#chapter9 .ch9-worked-controls{grid-template-columns:1fr}}
 
@@ -879,5 +879,16 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter9 .ch9-occupancy input{accent-color:var(--accent,#a87934);width:18px;height:18px}
 #chapter9 .ch9-occupancy-detail{margin:16px 0}
 #chapter9 .ch9-occupancy-detail label{display:block;font-weight:700;margin-bottom:8px}
-#chapter9 .ch9-occupancy-detail select{min-height:44px;width:100%;max-width:350px;border:1px solid var(--line,#aeb5b8);border-radius:8px;padding:9px;background:var(--surface,#fff);color:inherit;font:inherit}
+#chapter9 .ch9-occupancy-detail select{min-height:44px;width:100%;max-width:350px;border:1px solid var(--line,#aeb5b8);border-radius:8px;padding:9px;background:var(--white);color:inherit;font:inherit}
 #chapter9 .ch9-occupancy-detail select:focus-visible{outline:3px solid #a87934;outline-offset:2px}
+
+/* Chapter 9 QA: consistent light/dark surfaces, keyboard focus, and narrow screens. */
+#chapter9 .ch9-sequence-controls select,#chapter9 #ch9MoonSign,#chapter9 #ch9StrengthStatus,#chapter9 #ch9StrengthHouse{background:var(--white);color:var(--ink);border-color:var(--line)}
+#chapter9 .ch9-worked-result,#chapter9 .ch9-grid p,#chapter9 .ch9-local-nav a{background:var(--white);color:var(--ink)}
+#chapter9 .ch9-worked-result ol{margin:0;padding-inline-start:1.55em;overflow-wrap:anywhere}
+#chapter9 .ch9-worked-result li+li{margin-top:.6rem}
+#chapter9 .ch9-sequence-controls label{display:block;font-weight:700;margin:12px 0 6px}
+#chapter9 .ch9-sequence-controls select{display:block;width:100%;max-width:420px;min-height:44px;border:1px solid var(--line);border-radius:8px;padding:9px;font:inherit}
+#chapter9 .ch9-local-nav a:focus-visible,#chapter9 .ch9-occupancy input:focus-visible,#chapter9 .ch9-sequence-controls select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+#chapter9 .ch9-worked-controls select,#chapter9 .ch9-occupancy-detail select{color:var(--ink)}
+@media(max-width:600px){#chapter9 .ch9-local-nav{gap:7px}#chapter9 .ch9-local-nav a{padding:9px 11px;overflow-wrap:anywhere}#chapter9 .ch9-worked-result{padding:13px}#chapter9 .ch9-occupancy{display:grid;grid-template-columns:1fr}}
