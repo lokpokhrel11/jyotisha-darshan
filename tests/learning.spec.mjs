@@ -270,3 +270,30 @@ test('Chapter 3: keyboard Home and End select the appropriate learning tabs', as
  await expect(lesson).toHaveAttribute('aria-selected','true');
  await expect(lesson).toBeFocused();
 });
+
+test('Chapter 2: result heading receives focus and reset clears previous result',async({page})=>{
+ await page.goto(chapter(2));
+ await page.getByRole('tab',{name:'परीक्षा'}).click();
+ for(let i=0;i<20;i++){
+  await page.locator('#chapter2ExamQuestions input[name="chapter2q'+i+'"][value="0"]').check();
+  if(i<19)await page.locator('#chapter2ExamQuestions + .exam-stepper button').last().click();
+ }
+ await page.locator('#chapter2ExamForm button[type="submit"]').click();
+ await expect(page.locator('#examResults h3')).toBeFocused();
+ await expect(page.locator('#examResults')).toBeVisible();
+ await page.locator('#examReset').click();
+ await expect(page.locator('#examResults')).toBeHidden();
+});
+
+test('Chapter 3: result heading receives focus and reset clears previous result',async({page})=>{
+ await page.goto(chapter(3));
+ await page.getByRole('tab',{name:'परीक्षा'}).click();
+ for(let i=0;i<15;i++){
+  await page.locator('#chapter3ExamQuestions input[name="ch3q'+i+'"][value="0"]').check();
+  if(i<14)await page.locator('#chapter3ExamQuestions + .exam-stepper button').last().click();
+ }
+ await page.locator('#chapter3ExamForm button[type="submit"]').click();
+ await expect(page.locator('#chapter3Results h3')).toBeFocused();
+ await page.locator('#chapter3Reset').click();
+ await expect(page.locator('#chapter3Results')).toBeHidden();
+});
