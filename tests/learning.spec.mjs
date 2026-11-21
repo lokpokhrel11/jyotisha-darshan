@@ -183,3 +183,13 @@ test('Chapter 8.7: residence and relocation lesson with source-rule quiz',async(
  await page.locator('#ch8ResidenceQuiz button[type="submit"]').click();
  await expect(page.locator('#ch8ResidenceFeedback')).toContainText('सही');
 });
+
+test('Chapter 8.8: sixth-house conflict lesson and example quiz',async({page})=>{
+ await page.goto(chapter(8));
+ await expect(page.locator('#chapter8')).toContainText('८.८ · शत्रु को हुन्छ?');
+ await expect(page.locator('#chapter8')).toContainText('छैटौँ भाव (रिपु स्थान)');
+ await expect(page.locator('#chapter8')).toContainText('धन र दाम्पत्य');
+ await page.locator('#ch8ConflictQuiz input[value="a"]').check();
+ await page.locator('#ch8ConflictQuiz button[type="submit"]').click();
+ await expect(page.locator('#ch8ConflictFeedback')).toContainText('सही');
+});
