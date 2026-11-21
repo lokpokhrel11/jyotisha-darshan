@@ -414,13 +414,14 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(!allowed.has(section.id))section.classList.add('chapter-focus-hidden');
  }
  const main=document.querySelector('main');
+ if(chapter===1){const lesson=document.getElementById('lesson');if(lesson)lesson.hidden=false;}
  const banner=document.createElement('div');banner.className='chapter-focus-banner';
  const back=document.createElement('a');back.href='index.html#dashboard';back.className='chapter-back';back.textContent='← अध्ययन कक्षमा फर्कनुहोस्';
- const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent='JYOTISHA PATHSHALA · अध्याय '+chapter;
+ const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent='ज्योतिष दर्शन · अध्याय '+String(chapter).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const title=document.createElement('h1');title.textContent=titles[chapter];
  const actions=document.createElement('div');actions.className='chapter-pager';
  if(chapter>1){const a=document.createElement('a');a.href='index.html?chapter='+(chapter-1);a.textContent='← अघिल्लो अध्याय';actions.append(a)}
- if(chapter<7){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को अध्याय →';actions.append(a)}
+ if(chapter<8){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को अध्याय →';actions.append(a)}
  const toc=document.createElement('nav');toc.className='chapter-toc';toc.setAttribute('aria-label','यस अध्यायका विषयहरू');const tocHeading=document.createElement('strong');tocHeading.textContent='यस अध्यायमा';toc.append(tocHeading);for(const id of groups[chapter]){const section=document.getElementById(id);if(!section)continue;const heading=section.querySelector('h2,h3');const link=document.createElement('a');link.href='#'+id;link.textContent=heading?heading.textContent.trim():id;toc.append(link)}banner.append(back,eyebrow,title,actions,toc);main.prepend(banner);const bottomNav=document.createElement('nav');bottomNav.className='chapter-bottom-nav';bottomNav.setAttribute('aria-label','अध्यायको अन्त्यमा नेभिगेसन');const bottomBack=document.createElement('a');bottomBack.href='index.html#dashboard';bottomBack.className='chapter-back';bottomBack.textContent='← अध्ययन कक्षमा फर्कनुहोस्';bottomNav.append(bottomBack);main.append(bottomNav);document.title=titles[chapter]+' | ज्योतिष पाठशाला';
  document.querySelectorAll('#nav a[href^="#"]').forEach(a=>{
   const hash=a.getAttribute('href');a.setAttribute('href','index.html'+hash);
