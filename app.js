@@ -1119,26 +1119,49 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  update();
 })();
 
-/* Chapter 9: source comprehension, not diagnostic inference. */
+/* Chapter 9: educational assessment with accessible, explanatory feedback. */
 (function(){
  const form=document.getElementById('ch9Quiz');
  const feedback=document.getElementById('ch9Feedback');
- if(!form||!feedback)return;
- const answers=[['ch9q','a'],['ch9q2','b'],['ch9q3','c']];
+ const review=document.getElementById('ch9Explanations');
+ if(!form||!feedback||!review)return;
+ const items=[
+  {name:'ch9q',answer:'a',explanation:'स्वभावसम्बन्धी परम्परागत अध्ययनमा लग्नेश, लग्नमा रहेका ग्रह र चन्द्रको अवस्थालाई सँगै हेर्ने भनिएको छ।'},
+  {name:'ch9q2',answer:'b',explanation:'लग्नमा ग्रह नभएको उदाहरणमा लग्नेशको स्थिति र अवस्था अध्ययनको आधार हुन्छ। यसबाट वास्तविक व्यक्तिको स्वभाव निश्चित हुँदैन।'},
+  {name:'ch9q3',answer:'c',explanation:'स्वास्थ्यसम्बन्धी ग्रहगत कथन परम्परागत स्रोतको दाबी हो, प्रमाणित चिकित्सकीय परीक्षण वा निदान होइन।'}
+ ];
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  form.addEventListener('submit',event=>{
   event.preventDefault();
-  const responses=answers.map(([name])=>form.querySelector('input[name="'+name+'"]:checked'));
+  const responses=items.map(item=>form.querySelector('input[name="'+item.name+'"]:checked'));
   const missing=responses.findIndex(value=>!value);
   if(missing!==-1){
+   feedback.className='ch9-quiz-feedback is-warning';
    feedback.textContent='कृपया तीनवटै प्रश्नको उत्तर दिनुहोस्।';
-   const field=form.querySelector('input[name="'+answers[missing][0]+'"]').closest('fieldset');
+   review.hidden=true;review.replaceChildren();
+   const field=form.querySelector('input[name="'+items[missing].name+'"]').closest('fieldset');
    field.tabIndex=-1;field.focus({preventScroll:true});
    field.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
    return;
   }
-  const score=responses.reduce((total,response,i)=>total+Number(response.value===answers[i][1]),0);
-  feedback.textContent='नतिजा: '+score+'/3। '+(score===3?'तीनवटै उत्तर सही। स्रोतको अध्ययन र चिकित्सकीय प्रमाणबीचको भिन्नता बुझ्नुभयो।':'९.१ को लग्नेशसम्बन्धी नियम र स्वास्थ्यसम्बन्धी सीमाहरू पुनः पढ्नुहोस्।');
+  const score=responses.reduce((total,response,i)=>total+Number(response.value===items[i].answer),0);
+  feedback.className='ch9-quiz-feedback '+(score===3?'is-complete':'is-review');
+  feedback.textContent='नतिजा: '+nep(score)+' / ३ सही। '+(score===3?'तीनवटै उत्तर सही छन्।':'तल प्रत्येक प्रश्नको व्याख्या पढेर पुनः अभ्यास गर्न सक्नुहुन्छ।');
+  review.replaceChildren();
+  items.forEach((item,i)=>{
+   const correct=responses[i].value===item.answer;
+   const card=document.createElement('div');card.className='ch9-explanation '+(correct?'is-correct':'is-incorrect');
+   const heading=document.createElement('strong');heading.textContent='प्रश्न '+nep(i+1)+' · '+(correct?'सही उत्तर':'समीक्षा आवश्यक');
+   const explanation=document.createElement('p');explanation.textContent=item.explanation;
+   card.append(heading,explanation);review.append(card);
+  });
+  review.hidden=false;
   feedback.tabIndex=-1;feedback.focus({preventScroll:true});
+ });
+ form.addEventListener('reset',()=>{
+  feedback.textContent='';feedback.className='ch9-quiz-feedback';
+  review.hidden=true;review.replaceChildren();
+  form.querySelectorAll('fieldset').forEach(field=>field.removeAttribute('tabindex'));
  });
 })();
 
