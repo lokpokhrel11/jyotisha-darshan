@@ -718,7 +718,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
 (function(){
  const form=document.getElementById('ch8ComfortQuiz'),feedback=document.getElementById('ch8ComfortFeedback');
  if(!form||!feedback)return;
- form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8comfort"]:checked');feedback.textContent=!checked?'पहिले उत्तर छान्नुहोस्।':checked.value==='a'?'सही। गुरुजीका नोटअनुसार पहिले लग्न र लग्नेश हेर्ने, त्यसपछि चौथो भाव र चन्द्रमाको अवस्था जाँच्ने।':'फेरि हेर्नुहोस्। पृष्ठ ७४ मा लग्न र लग्नेश हेरेपछि चौथो भाव जाँच्ने भनिएको छ।'});
+ form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8comfort"]:checked');feedback.textContent=!checked?'पहिले उत्तर छान्नुहोस्।':checked.value==='a'?'सही। अध्ययन सामग्रीअनुसार पहिले लग्न र लग्नेश हेर्ने, त्यसपछि चौथो भाव र चन्द्रमाको अवस्था जाँच्ने।':'फेरि हेर्नुहोस्। पृष्ठ ७४ मा लग्न र लग्नेश हेरेपछि चौथो भाव जाँच्ने भनिएको छ।'});
 })();
 
 /* Chapter 8.6: Mars-reference inclusive house counting, not predictive inference. */
@@ -736,7 +736,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
 (function(){
  const form=document.getElementById('ch8ResidenceQuiz'),feedback=document.getElementById('ch8ResidenceFeedback');
  if(!form||!feedback)return;
- form.addEventListener('submit',e=>{e.preventDefault();const answer=form.querySelector('input[name="ch8residence"]:checked');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='b'?'सही। गुरुजीका नोटमा चतुर्थेश र लग्नेश बाह्रौँ भावमा हुँदा विदेशमा स्वेच्छिक बसाइको संकेत भनिएको छ।':'फेरि जाँच्नुहोस्। नोटमा सप्तमलाई स्वदेशभित्र र बाह्रौँलाई विदेशसँग जोडिएको छ।'});
+ form.addEventListener('submit',e=>{e.preventDefault();const answer=form.querySelector('input[name="ch8residence"]:checked');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='b'?'सही। अध्ययन सामग्रीमा चतुर्थेश र लग्नेश बाह्रौँ भावमा हुँदा विदेशमा स्वेच्छिक बसाइको संकेत भनिएको छ।':'फेरि जाँच्नुहोस्। नोटमा सप्तमलाई स्वदेशभित्र र बाह्रौँलाई विदेशसँग जोडिएको छ।'});
 })();
 
 /* Chapter 8.8: identify house-origin context in Guruji's example. */
@@ -751,11 +751,11 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const form=document.getElementById('ch8Assessment'),mount=document.getElementById('ch8AssessmentQuestions'),summary=document.getElementById('ch8AssessmentSummary'),reset=document.getElementById('ch8AssessmentReset');
  if(!form||!mount||!summary||!reset)return;
  const questions=[
- {q:'८.१: गुरुजीको तालिकामा लग्नबाट बुवा कुन भावमा छन्?',a:['नवौँ','दशौँ','बाह्रौँ'],correct:1,why:'पृष्ठ ७१: लग्नबाट दशौँ; सूर्यबाट नवौँ। दुई आधार छुट्टै छन्।'},
+ {q:'८.१: परम्परागत तालिकामा लग्नबाट बुवा कुन भावमा छन्?',a:['नवौँ','दशौँ','बाह्रौँ'],correct:1,why:'पृष्ठ ७१: लग्नबाट दशौँ; सूर्यबाट नवौँ। दुई आधार छुट्टै छन्।'},
  {q:'८.२: आमाको भाइ (मामा) चौथो भावबाट तेस्रो गन्दा कुन भाव?',a:['पाँचौँ','छैटौँ','सातौँ'],correct:1,why:'४ + ३ − १ = ६। आधार भावलाई १ मानेर गनिन्छ।'},
- {q:'८.३: “राहुले माथिको, केतुले तलको सम्पत्ति” को अर्थबारे नोटको स्थिति के छ?',a:['अर्थ पूर्ण पुष्टि भएको छ','पुष्टि गर्न बाँकी छ','वैज्ञानिक रूपमा प्रमाणित छ'],correct:1,why:'पृष्ठ ७२ मा माथिल्लो/तल्लो तला सम्भावना मात्र उल्लेख छ; गुरुजीसँग पुष्टि गर्नुपर्ने छ।'},
+ {q:'८.३: “राहुले माथिको, केतुले तलको सम्पत्ति” को अर्थबारे नोटको स्थिति के छ?',a:['अर्थ पूर्ण पुष्टि भएको छ','पुष्टि गर्न बाँकी छ','वैज्ञानिक रूपमा प्रमाणित छ'],correct:1,why:'पृष्ठ ७२ मा माथिल्लो/तल्लो तला सम्भावना मात्र उल्लेख छ; अध्ययन सामग्रीसँग पुष्टि गर्नुपर्ने छ।'},
  {q:'८.४: पारिवारिक संस्कार हेर्दा नोटमा मुख्यतः कुन भाव र स्वामी जोडिएका छन्?',a:['दोस्रो भाव र द्वितीयेश','दशौँ भाव मात्र','आठौँ भाव मात्र'],correct:0,why:'पृष्ठ ७३ मा दोस्रो भाव र द्वितीयेशको बललाई परिवारको परम्परा र संस्कारसँग जोडिएको छ।'},
- {q:'८.५: चौथो भाव हेर्नुअघि गुरुजीले के हेर्न भन्नुभएको छ?',a:['घातबार मात्र','लग्न र लग्नेश','छैटौँ मात्र'],correct:1,why:'पृष्ठ ७४: पहिले लग्न र लग्नेश, त्यसपछि चौथो भाव र चन्द्रमाको अवस्था।'},
+ {q:'८.५: चौथो भाव हेर्नुअघि अध्ययन सामग्रीले के हेर्न भन्नुभएको छ?',a:['घातबार मात्र','लग्न र लग्नेश','छैटौँ मात्र'],correct:1,why:'पृष्ठ ७४: पहिले लग्न र लग्नेश, त्यसपछि चौथो भाव र चन्द्रमाको अवस्था।'},
  {q:'८.६: मङ्गल छैटौँमा हुँदा मङ्गलबाट तेस्रो कुन भाव?',a:['सातौँ','आठौँ','नवौँ'],correct:1,why:'६ + ३ − १ = ८। यो गणनाले वास्तविक भाइबहिनीको अवस्था निर्धारण गर्दैन।'},
  {q:'८.७: चतुर्थेश र लग्नेश बाह्रौँमा हुँदा नोटमा कुन परम्परागत संकेत छ?',a:['स्वदेशभित्र बसाइ','विदेशमा स्वेच्छिक बसाइ','घर निर्माण निश्चित'],correct:1,why:'पृष्ठ ७६ मा सप्तमलाई स्वदेशभित्र र बाह्रौँलाई विदेश बसाइसँग जोडिएको छ।'},
  {q:'८.८: मेष लग्नको छैटौँमा शुक्र दोस्रो र सातौँको स्वामी हुँदा उदाहरणले के जोड्छ?',a:['धन र दाम्पत्य','केवल दशौँ','केवल नक्षत्र'],correct:0,why:'पृष्ठ ७७: शुक्रको दोस्रो र सातौँ भावको स्वामित्वबाट धन र दाम्पत्य प्रसङ्ग जोडिएको छ।'}
