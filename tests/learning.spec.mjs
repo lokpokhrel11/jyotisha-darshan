@@ -445,3 +445,23 @@ test('Chapter 9: light and dark modes provide readable exercise surfaces', async
   }
  }
 });
+
+
+test('Chapters 8 and 9: previous-next chapter arrows and redesigned quiz', async ({ page }) => {
+ await page.goto(chapter(8));
+ await expect(page.locator('#chapter8 .chapter-pager-prev')).toHaveAttribute('href',/chapter=7/);
+ await expect(page.locator('#chapter8 .chapter-pager-next')).toHaveAttribute('href',/chapter=9/);
+ await expect(page.locator('#chapter8 .chapter-pager-prev')).toContainText('पछिल्लो अध्याय');
+ await page.goto(chapter(9));
+ await expect(page.locator('#chapter9 .ch9-hero')).toBeVisible();
+ await expect(page.locator('#chapter9 .ch9-quiz-panel')).toBeVisible();
+ await expect(page.locator('#chapter9 #ch9Quiz .ch7-choice')).toHaveCount(3);
+ await expect(page.locator('#chapter9 .chapter-pager-prev')).toHaveAttribute('href',/chapter=8/);
+ for(const theme of ['light','dark']){
+  await page.evaluate(t=>document.documentElement.setAttribute('data-theme',t),theme);
+  const quiz=page.locator('#ch9Quiz .ch7-choice').first();
+  const style=await quiz.evaluate(el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor}));
+  expect(style.color).not.toBe(style.background);
+  expect(style.background).not.toBe('rgba(0, 0, 0, 0)');
+ }
+});
