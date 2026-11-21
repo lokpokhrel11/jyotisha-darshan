@@ -892,3 +892,44 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter9 .ch9-local-nav a:focus-visible,#chapter9 .ch9-occupancy input:focus-visible,#chapter9 .ch9-sequence-controls select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 #chapter9 .ch9-worked-controls select,#chapter9 .ch9-occupancy-detail select{color:var(--ink)}
 @media(max-width:600px){#chapter9 .ch9-local-nav{gap:7px}#chapter9 .ch9-local-nav a{padding:9px 11px;overflow-wrap:anywhere}#chapter9 .ch9-worked-result{padding:13px}#chapter9 .ch9-occupancy{display:grid;grid-template-columns:1fr}}
+
+/* Chapter 8/9 visual parity: editorial hero, clear reading rhythm and elegant quiz. */
+#chapter9{max-width:1120px;margin-inline:auto;scroll-margin-top:24px}
+#chapter9 .ch9-hero{position:relative;overflow:hidden;padding:clamp(28px,5vw,60px);margin-bottom:24px;border-radius:18px;background:linear-gradient(122deg,#183743 0%,#254956 68%,#375c5d 100%);color:#f9f5ea}
+#chapter9 .ch9-hero:after{content:"०९";position:absolute;right:3%;bottom:-.35em;font-size:clamp(150px,25vw,300px);font-weight:800;line-height:1;opacity:.055;pointer-events:none}
+#chapter9 .ch9-kicker{font-size:.78rem;letter-spacing:.12em;color:#e8c995;font-weight:700;margin:0 0 15px}
+#chapter9 .ch9-hero h2{font-size:clamp(1.8rem,4vw,3.25rem);max-width:750px;line-height:1.25;color:#fff;margin:0 0 16px}
+#chapter9 .ch9-hero>p:not(.ch9-kicker){max-width:690px;color:#e3e9e7;line-height:1.75}
+#chapter9 .ch9-hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+#chapter9 .ch9-hero-meta span{padding:7px 12px;border:1px solid #ffffff44;border-radius:30px;background:#ffffff13;color:#f3e6cb;font-size:.8rem;font-weight:650}
+#chapter9 .ch9-local-nav{padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--white);box-shadow:0 6px 20px #10232e0b;margin-bottom:30px}
+#chapter9 .ch9-local-nav a{border:1px solid var(--line);border-radius:999px;background:var(--soft);padding:9px 14px;color:var(--ink);font-weight:650;transition:background .15s,border-color .15s}
+#chapter9 .ch9-local-nav a:hover{background:var(--white);border-color:var(--gold);color:var(--ink)}
+#chapter9>h3{margin:36px 0 15px;padding-left:15px;border-left:3px solid var(--gold);font-size:clamp(1.15rem,2.5vw,1.4rem);line-height:1.55;color:var(--ink)}
+#chapter9>h3 small{display:block;font-size:.72rem;font-weight:500;color:var(--muted);margin-top:4px}
+#chapter9>.study-panel{border:1px solid var(--line);border-radius:15px;background:var(--white);padding:clamp(18px,3vw,30px);box-shadow:0 5px 18px #10232e08;margin-bottom:22px}
+#chapter9 .ch9-quiz-panel{border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,36px);background:var(--white);box-shadow:0 10px 28px #10232e12}
+#chapter9 .ch9-quiz-kicker{font-size:.76rem;font-weight:800;letter-spacing:.1em;color:var(--gold);margin-bottom:7px}
+#chapter9 .ch9-quiz-panel h4{font-size:clamp(1.25rem,3vw,1.65rem);margin:0 0 9px;color:var(--ink)}
+#chapter9 .ch9-quiz-intro{color:var(--muted);margin-bottom:24px}
+#chapter9 #ch9Quiz fieldset{min-width:0;margin:0 0 20px;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--soft);color:var(--ink)}
+#chapter9 #ch9Quiz legend{font-size:1.05rem;line-height:1.6;font-weight:750;color:var(--ink);background:var(--white);padding:3px 9px;border-radius:7px;max-width:100%}
+#chapter9 #ch9Quiz .ch7-choice{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;margin:10px 0;border:1px solid var(--line);border-radius:11px;background:var(--white);color:var(--ink);font-weight:550;cursor:pointer;line-height:1.55}
+#chapter9 #ch9Quiz .ch7-choice:hover,#chapter9 #ch9Quiz .ch7-choice:focus-within{border-color:var(--gold);background:var(--white);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 22%,transparent)}
+#chapter9 #ch9Quiz .ch7-choice:has(input:checked){border-color:var(--gold);background:color-mix(in srgb,var(--gold) 10%,var(--white));box-shadow:inset 3px 0 0 var(--gold)}
+#chapter9 #ch9Quiz input[type=radio]{accent-color:var(--gold);width:19px;height:19px;flex:0 0 auto;margin-top:3px}
+#chapter9 #ch9Quiz .button.primary{border-radius:9px;background:#bd9252;color:#142632;padding:12px 22px}
+#chapter9 #ch9Feedback:not(:empty){padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);font-weight:650;margin:18px 0}
+.chapter-pager{display:flex;align-items:stretch;justify-content:space-between;gap:14px;margin-top:32px}
+.chapter-pager a{display:flex;align-items:center;gap:14px;min-height:70px;min-width:0;padding:14px 22px;border:1px solid var(--line);border-radius:13px;background:var(--white);color:var(--ink);font-size:.84rem;text-decoration:none;box-shadow:0 4px 16px #10232e0b}
+.chapter-pager a strong{display:block;font-size:1.05rem;color:var(--ink)}
+.chapter-pager a>span[aria-hidden]{font-size:1.6rem;color:var(--gold)}
+.chapter-pager a:hover,.chapter-pager a:focus-visible{border-color:var(--gold);outline:2px solid var(--gold);outline-offset:2px}
+.chapter-pager-next{margin-left:auto;text-align:right}
+@media(max-width:600px){#chapter9 .ch9-hero{padding:27px 22px;border-radius:14px}#chapter9 .ch9-local-nav{padding:12px}#chapter9 #ch9Quiz fieldset{padding:14px}#chapter9 #ch9Quiz .ch7-choice{padding:13px 12px}#chapter9 .ch9-hero:after{font-size:150px}.chapter-pager{flex-wrap:wrap}.chapter-pager a{flex:1 1 170px;padding:12px 15px}}
+:root[data-theme="dark"] #chapter9 .ch9-hero{background:linear-gradient(122deg,#19333e,#254653 68%,#305455)}
+:root[data-theme="dark"] #chapter9 #ch9Quiz fieldset{background:#20343e!important;border-color:#4d6871!important}
+:root[data-theme="dark"] #chapter9 #ch9Quiz legend{background:#20343e!important;color:#f1f0e9!important}
+:root[data-theme="dark"] #chapter9 #ch9Quiz .ch7-choice{background:#2a424c!important;color:#f0f2ee!important;border-color:#4d6871!important}
+:root[data-theme="dark"] #chapter9 #ch9Quiz .ch7-choice:has(input:checked){background:#394c4b!important;border-color:#e4bf7e!important}
+:root[data-theme="dark"] #chapter9 #ch9Quiz .ch7-choice:hover{border-color:#e4bf7e!important}
