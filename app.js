@@ -785,7 +785,37 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const feedback=document.createElement('p');feedback.className='ch8-assessment-feedback';feedback.id='ch8AssessmentFeedback'+i;feedback.setAttribute('aria-live','polite');field.append(feedback);mount.append(field);
  });
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
- form.addEventListener('submit',e=>{e.preventDefault();let score=0,answered=0;questions.forEach((item,i)=>{const selected=form.querySelector('input[name="ch8assessment'+i+'"]:checked'),feedback=document.getElementById('ch8AssessmentFeedback'+i);if(selected)answered++;const right=selected&&Number(selected.value)===item.correct;if(right)score++;feedback.textContent=(!selected?'उत्तर छुटेको छ। ':right?'सही। ':'पुनः अध्ययन गर्नुहोस्। ')+item.why;feedback.classList.toggle('is-correct',!!right)});if(answered===questions.length){try{localStorage.setItem('jyotisha-chapter8-score',JSON.stringify({score,total:questions.length}))}catch(_){}}summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। उत्तर दिइएका प्रश्न: '+nep(answered)+'। '+(answered<questions.length?'छुटेका प्रश्न पनि पूरा गर्नुहोस्।':score===questions.length?'सबै सही। अब अध्याय ९ को तयारी गर्न सक्नुहुन्छ।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।');if(answered<questions.length){const first=questions.findIndex((_,i)=>!form.querySelector('input[name="ch8assessment'+i+'"]:checked'));const target=form.querySelector('input[name="ch8assessment'+first+'"]')?.closest('fieldset');if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}}});
+ form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const answers=questions.map((_,i)=>form.querySelector('input[name="ch8assessment'+i+'"]:checked'));
+  const answered=answers.filter(Boolean).length;
+  if(answered<questions.length){
+   summary.textContent='उत्तर दिइएका प्रश्न: '+nep(answered)+' / '+nep(questions.length)+'। सबै प्रश्नको उत्तर दिएपछि मात्र नतिजा र व्याख्या देखाइन्छ।';
+   questions.forEach((_,i)=>{
+    const feedback=document.getElementById('ch8AssessmentFeedback'+i);
+    feedback.textContent='';
+    feedback.classList.remove('is-correct');
+   });
+   const first=answers.findIndex(a=>!a);
+   const target=form.querySelector('input[name="ch8assessment'+first+'"]')?.closest('fieldset');
+   if(target){
+    target.setAttribute('tabindex','-1');
+    target.focus({preventScroll:true});
+    target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+   }
+   return;
+  }
+  let score=0;
+  questions.forEach((item,i)=>{
+   const right=Number(answers[i].value)===item.correct;
+   if(right)score++;
+   const feedback=document.getElementById('ch8AssessmentFeedback'+i);
+   feedback.textContent=(right?'सही। ':'पुनः अध्ययन गर्नुहोस्। ')+item.why;
+   feedback.classList.toggle('is-correct',right);
+  });
+  try{localStorage.setItem('jyotisha-chapter8-score',JSON.stringify({score,total:questions.length}))}catch(_){}
+  summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। '+(score===questions.length?'सबै सही। अब अध्याय ९ को तयारी गर्न सक्नुहुन्छ।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।');
+ });
  reset.addEventListener('click',()=>{form.reset();questions.forEach((_,i)=>{const f=document.getElementById('ch8AssessmentFeedback'+i);f.textContent='';f.classList.remove('is-correct')});summary.textContent='८ प्रश्नको उत्तर छान्नुहोस्।'});
 })();
 
