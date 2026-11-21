@@ -527,3 +527,43 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 :root[data-theme="dark"] body.chapter-focus:has(#chapter8:not(.chapter-focus-hidden)) .chapter-focus-banner .chapter-pager a:last-child:focus-visible{
  background:#355665;border-color:#f0d19a;color:#fff;
 }
+
+/* Dark-mode readability pass across all chapters: foregrounds must follow surfaces. */
+:root[data-theme="dark"] body.chapter-focus :is(.section,.study-panel,.lesson,.study-module,.calculator,.detail,.tile,.chapter-card,.dashboard-stats,.assessment-progress,.chapter7-card,.ch8-card,.ch8-lesson) :is(p,li,dd,dt,label,legend,summary,small,span){
+ color:inherit;
+}
+:root[data-theme="dark"] :is(.section,.study-panel,.lesson,.study-module,.calculator,.detail,.tile,.chapter-card,.assessment-progress,.chapter7-card,.ch8-card,.ch8-lesson) :is(h2,h3,h4,h5,strong,b){
+ color:#edf4f0;
+}
+:root[data-theme="dark"] :is(.eyebrow,.tile-num,.chapter-index){color:#e6c18b}
+:root[data-theme="dark"] :is(.status,.coming,.muted,.dashboard-disclaimer,.chapter7-note){color:#d0dad9}
+:root[data-theme="dark"] :is(.learning-tabs,.chapter-toc,.tabs){border-color:#546b73}
+:root[data-theme="dark"] :is(.learning-tab,.tabs button,.chapter-toc a,.ch8-contents-links a){
+ color:#e9f0ed;background:#263f4b;border-color:#637a81;
+}
+:root[data-theme="dark"] :is(.learning-tab,.tabs button,.chapter-toc a,.ch8-contents-links a):hover,
+:root[data-theme="dark"] :is(.learning-tab,.tabs button,.chapter-toc a,.ch8-contents-links a):focus-visible{
+ color:#fff;background:#365665;border-color:#e3bd7b;
+}
+:root[data-theme="dark"] :is(.learning-tab[aria-selected="true"],.learning-tab.active,.tabs button.active,.tabs button[aria-selected="true"]){
+ color:#152c36;background:#e3bd7b;border-color:#e3bd7b;
+}
+:root[data-theme="dark"] :is(.button.primary,.primary){background:#e3bd7b;color:#152c36;border-color:#e3bd7b}
+:root[data-theme="dark"] :is(.button.primary,.primary):hover{background:#f0d19a;color:#152c36}
+:root[data-theme="dark"] :is(.button.outline-dark,.button.dash-outline,.button.outline,.outline-dark,.text-button){
+ color:#f2e2bf;border-color:#a4b9bc;
+}
+:root[data-theme="dark"] :is(.button.outline-dark,.button.dash-outline,.button.outline,.outline-dark):hover{
+ background:#365665;color:#fff;
+}
+:root[data-theme="dark"] :is(fieldset,details,blockquote,.study-grid,.study-panel,.exam-question,.ch8-assessment-feedback){
+ border-color:#58717a;
+}
+:root[data-theme="dark"] :is(input,select,textarea){color:#f1f6f2;background:#243943;border-color:#70878d}
+:root[data-theme="dark"] :is(input[type="radio"],input[type="checkbox"]){accent-color:#e3bd7b}
+:root[data-theme="dark"] :is(.result,.feedback,.chapter7-note,.ch8-assessment-feedback){color:#e7f0ed}
+:root[data-theme="dark"] :is(a,button,input,select,textarea,summary):focus-visible{
+ outline:3px solid #e3bd7b;outline-offset:3px;
+}
+/* Preserve intentional white type on navy chapter heroes, including their nested labels. */
+:root[data-theme="dark"] body.chapter-focus :is(.chapter-focus-banner h1,.ch8-hero h2){color:#f2f6f2}
