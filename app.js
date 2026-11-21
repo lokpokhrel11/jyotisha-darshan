@@ -579,7 +579,14 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  form.addEventListener('submit',()=>{
   const list=questions();
   const firstMissing=list.findIndex((q,i)=>!form.querySelector('input[name="ch3q'+i+'"]:checked'));
-  if(firstMissing!==-1){show(firstMissing);return;}
+  if(firstMissing!==-1){
+   show(firstMissing);
+   // The original submit handler runs first; focus only after the unanswered fieldset is visible.
+   const target=list[firstMissing];
+   target.setAttribute('tabindex','-1');
+   target.focus({preventScroll:true});
+   return;
+  }
   // The existing result panel already provides the complete answer review.
   show(current);
  });
