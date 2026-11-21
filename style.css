@@ -1071,3 +1071,39 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter10 .ch10-contents a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 #chapter10 [id^="ch10-"]{scroll-margin-top:90px}
 @media(max-width:600px){#chapter10 .ch10-contents{gap:8px;padding:13px}#chapter10 .ch10-contents-label{width:100%}#chapter10 .ch10-contents a{flex:1 1 calc(50% - 8px);justify-content:center;text-align:center;font-size:.9rem}}
+
+/* Chapter 11 inherits Chapter 10's restrained study design. */
+#chapter11 .ch9-hero{background:linear-gradient(135deg,#172b38,#253c4b);border-radius:17px;padding:clamp(22px,4vw,42px);margin-bottom:24px;color:#fff;border:1px solid #52616a}
+#chapter11 .ch9-hero h2{color:#fff;margin:9px 0 12px;font-size:clamp(1.8rem,3.4vw,2.6rem)}
+#chapter11 .ch9-hero p{color:#f2f0e9;line-height:1.75}
+#chapter11 .ch9-kicker{color:#f4d58c!important;font-weight:800}
+#chapter11 .ch9-hero-meta,#chapter11 .ch10-contents{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+#chapter11 .ch9-hero-meta span{padding:7px 12px;border:1px solid #8c8c79;border-radius:50px;color:#fff}
+#chapter11 .ch10-contents{padding:16px;border:1px solid var(--line);border-radius:13px;background:var(--soft);align-items:center}
+#chapter11 .ch10-contents-label{font-weight:800;color:var(--ink)}
+#chapter11 .ch10-contents a{padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);text-decoration:none}
+#chapter11 .ch10-contents a:hover,#chapter11 .ch10-contents a:focus-visible{border-color:var(--gold);outline-offset:3px}
+#chapter11 .ch9-step-grid,#chapter11 .ch9-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0}
+#chapter11 .ch9-step,#chapter11 .ch9-grid p{padding:19px;border:1px solid var(--line);border-radius:13px;background:var(--white);color:var(--ink);line-height:1.75;margin:0}
+#chapter11 .ch9-step-number{display:inline-grid;place-items:center;min-width:33px;height:33px;margin-bottom:10px;border-radius:50%;background:color-mix(in srgb,var(--gold) 18%,var(--white));color:var(--ink);font-weight:800}
+#chapter11 .ch9-step strong,#chapter11 .ch9-grid strong{display:block;margin-bottom:7px;color:var(--ink)}
+#chapter11 .ch9-step p{margin:0}
+#chapter11 .ch11-selector-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#chapter11 .ch10-practice{border-left:4px solid var(--gold)}
+#chapter11 .ch10-practice label{display:block;margin:13px 0 7px;color:var(--ink);font-weight:750}
+#chapter11 .ch10-practice select{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);font:inherit}
+#chapter11 .ch10-result{padding:17px;margin:16px 0;border:1px solid var(--line);border-radius:11px;background:var(--soft);color:var(--ink);line-height:1.85}
+#chapter11 .ch9-disclosure{border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);margin:18px 0;overflow:hidden}
+#chapter11 .ch9-disclosure summary{padding:17px;cursor:pointer;font-weight:750}
+#chapter11 .ch9-disclosure-body{padding:0 17px 17px}
+#chapter11 .ch10-quiz-panel fieldset{border:1px solid var(--line);border-radius:12px;padding:17px;margin:18px 0;min-width:0}
+#chapter11 .ch10-quiz-panel legend{font-weight:750;color:var(--ink);line-height:1.7}
+#chapter11 .ch10-choice{display:flex;align-items:flex-start;gap:11px;padding:13px;margin:9px 0;border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--ink);cursor:pointer}
+#chapter11 .ch10-choice:hover,#chapter11 .ch10-choice:focus-within{border-color:var(--gold)}
+#chapter11 .ch10-choice input{accent-color:var(--gold);margin-top:.4em}
+#chapter11 .ch10-quiz-actions{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+#chapter11 .ch10-reset{border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);padding:12px 18px}
+#chapter11 .ch10-feedback:empty,#chapter11 .ch10-review[hidden]{display:none}
+#chapter11 .ch10-feedback:not(:empty),#chapter11 .ch10-review-card{padding:17px;margin:12px 0;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:11px;background:var(--soft);color:var(--ink);line-height:1.75}
+#chapter11 [id^="ch11-"]{scroll-margin-top:90px}
+@media(max-width:760px){#chapter11 .ch9-step-grid,#chapter11 .ch9-grid{grid-template-columns:1fr}#chapter11 .ch11-selector-grid{grid-template-columns:1fr}#chapter11 .ch9-hero{padding:22px}}
