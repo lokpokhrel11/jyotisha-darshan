@@ -1493,3 +1493,32 @@ body.chapter-focus .chapter-editorial-section>.section-heading{display:none!impo
 #chapter13 .ch13-direction-result{margin-top:12px;padding:15px 18px;line-height:1.55}
 #chapter12 .note,#chapter13 .note{line-height:1.6}
 @media(max-width:760px){#chapter12 .ch-modern-hero>p,#chapter12 .ch-modern-hero>h2,#chapter12 .ch-modern-hero>.ch9-hero-meta,#chapter13 .ch-modern-hero>p,#chapter13 .ch-modern-hero>h2,#chapter13 .ch-modern-hero>.ch9-hero-meta{max-width:100%}#chapter12 .ch-modern-hero-mark,#chapter13 .ch-modern-hero-mark{opacity:.12;pointer-events:none}#chapter12 .ch-modern-hero,#chapter13 .ch-modern-hero{padding:26px 20px}}
+
+/* Quality pass 1: chapters 2–9, compact and readable learning layouts */
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9){scroll-margin-top:90px}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7)>.section-heading{margin-bottom:20px;gap:14px}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7)>.section-heading h2{font-size:clamp(2rem,3.5vw,3.1rem);line-height:1.25;letter-spacing:-.012em}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7)>.section-heading p{line-height:1.6}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7)>.practice-layout{gap:16px;align-items:start}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7) .practice-controls{padding:clamp(16px,2vw,24px);min-height:0}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7) .practice-controls h3{line-height:1.35;margin-top:0}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7) .result{margin-top:12px;padding:14px 16px;line-height:1.55;overflow-wrap:anywhere}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7) .note{padding:10px 13px;line-height:1.6;overflow-wrap:anywhere}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7) .calculator{min-height:0}
+#chapter7 .study-panel,#chapter8 .study-panel,#chapter9 .study-panel{min-height:0}
+#chapter8 .ch8-hero,#chapter9 .ch9-hero{min-height:0;padding:clamp(24px,3vw,40px)}
+#chapter8 .ch8-hero h2,#chapter9 .ch9-hero h2{font-size:clamp(2rem,3.8vw,3.4rem);line-height:1.25}
+#chapter8 .ch8-hero-meta,#chapter9 .ch9-hero-meta{margin-top:16px}
+#chapter8 .ch8-contents{margin:16px 0}
+#chapter8 .ch8-lesson{padding:clamp(18px,2.4vw,28px);margin-block:16px}
+#chapter9>.study-panel{padding:18px 22px;margin:16px 0}
+#chapter9>.study-panel h3{margin-top:0}
+#chapter9 .ch9-learning-path{gap:10px;margin:16px 0}
+#chapter9 .ch9-learning-path a{padding:13px 15px;min-height:0}
+#chapter9 .ch9-concept-strip{gap:12px;margin:16px 0}
+#chapter9 .ch9-concept-strip article{padding:16px;min-height:0}
+#chapter9 .ch9-step-grid{gap:12px}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(input,select,textarea){max-width:100%;color:var(--ink);background:var(--white);border-color:var(--line)}
+:is(#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9) :is(input,select,textarea):focus-visible{outline:3px solid #d4ac68;outline-offset:2px}
+@media(max-width:760px){#chapter8 .ch8-hero,#chapter9 .ch9-hero{padding:22px 18px}#chapter9 .ch9-learning-path{grid-template-columns:repeat(2,minmax(0,1fr))}#chapter9 .ch9-concept-strip{grid-template-columns:1fr}#chapter9>.study-panel{padding:17px}#chapter8 .ch8-lesson{padding:17px}}
+@media(max-width:480px){#chapter9 .ch9-learning-path{grid-template-columns:1fr}#chapter8 .ch8-hero-meta,#chapter9 .ch9-hero-meta{gap:7px}}
