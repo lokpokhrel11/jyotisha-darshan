@@ -1180,13 +1180,13 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const explanation=document.createElement('p');
   if(value==='none'){
    heading.textContent='लग्न खाली छ';
-   explanation.textContent='गुरुजीको नियमअनुसार लग्नेश कहाँ र कस्तो अवस्थामा छ हेर्नुपर्छ। माथिको लग्नेश अभ्यासमा भाव छानेर स्थानको गणना गर्न सकिन्छ। चन्द्रको अवस्था पनि छुट्टै हेर्नुपर्छ।';
+   explanation.textContent='अध्ययन नोटअनुसार लग्नेश कहाँ र कस्तो अवस्थामा छ हेर्नुपर्छ। माथिको लग्नेश अभ्यासमा भाव छानेर स्थानको गणना गर्न सकिन्छ। चन्द्रको अवस्था पनि छुट्टै हेर्नुपर्छ।';
   }else if(value==='one'){
    heading.textContent='लग्नमा एउटा ग्रह: '+planet.value;
-   explanation.textContent='गुरुजीले एउटै ग्रह हुँदा त्यसको एकाधिकार प्रभाव हुने बताएका छन्। '+planet.value+' सँग जोडिएको परम्परागत विशेषण: '+traits[planet.value]+'। यो व्यक्तिको वास्तविक स्वभावको निष्कर्ष होइन।';
+   explanation.textContent='अध्ययन नोटमा एउटै ग्रह हुँदा त्यसको एकाधिकार प्रभाव हुने बताएका छन्। '+planet.value+' सँग जोडिएको परम्परागत विशेषण: '+traits[planet.value]+'। यो व्यक्तिको वास्तविक स्वभावको निष्कर्ष होइन।';
   }else{
    heading.textContent='लग्नमा धेरै ग्रह छन्';
-   explanation.textContent='गुरुजीका अनुसार बलवान् ग्रहको प्रभाव र चलिरहेको दशा हेर्नुपर्छ। हाल छानिएको '+planet.value+' को परम्परागत विशेषण: '+traits[planet.value]+'। कुन ग्रह बलवान् हो भन्ने यो अभ्यासले निर्धारण गर्दैन।';
+   explanation.textContent='अध्ययन नोटअनुसार बलवान् ग्रहको प्रभाव र चलिरहेको दशा हेर्नुपर्छ। हाल छानिएको '+planet.value+' को परम्परागत विशेषण: '+traits[planet.value]+'। कुन ग्रह बलवान् हो भन्ने यो अभ्यासले निर्धारण गर्दैन।';
   }
   result.append(heading,explanation);
  };
@@ -1203,7 +1203,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const render=()=>{
   const h=Number(house.value);
   const kind=[1,4,7,10].includes(h)?'केन्द्र':[5,9].includes(h)?'त्रिकोण':[6,8,12].includes(h)?'दुःस्थान':'अन्य भाव';
-  const descriptions={exalted:'उच्च: गुरुजीको नोटअनुसार बलको अनुकूल सङ्केत।',own:'स्वगृही: गुरुजीको नोटअनुसार बलको अनुकूल सङ्केत।',neutral:'अन्य/नखुलेको: राशिगत बलको निष्कर्ष निकाल्न पर्याप्त विवरण छैन।',debilitated:'नीच: गुरुजीको नोटअनुसार प्रतिकूल सङ्केत।'};
+  const descriptions={exalted:'उच्च: अध्ययन नोटअनुसार बलको अनुकूल सङ्केत।',own:'स्वगृही: अध्ययन नोटअनुसार बलको अनुकूल सङ्केत।',neutral:'अन्य/नखुलेको: राशिगत बलको निष्कर्ष निकाल्न पर्याप्त विवरण छैन।',debilitated:'नीच: अध्ययन नोटअनुसार प्रतिकूल सङ्केत।'};
   const houseText=kind==='केन्द्र'||kind==='त्रिकोण'?'केन्द्र/त्रिकोणमा हुनु अनुकूल सङ्केत मानिएको छ।':kind==='दुःस्थान'?'६, ८, १२ लाई नोटमा दुःस्थान भनिएको छ; थप सन्दर्भ आवश्यक हुन्छ।':'यस भावलाई नोटको प्रमुख केन्द्र/त्रिकोण वा दुःस्थान समूहमा राखिएको छैन।';
   result.replaceChildren();
   const heading=document.createElement('strong');heading.textContent='भाव '+String(h).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' · '+kind;
@@ -1233,7 +1233,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const a=Number(asc.value),h=Number(lordHouse.value),sh=Number(strengthHouse.value);
   const sign=signs[(a+h-2)%12],lord=lords[a-1];
   const count=[...occupancy].find(input=>input.checked)?.value||'none';
-  const occupancyText=count==='none'?'लग्न खाली छ; लग्नेशको स्थिति हेर्नुहोस्।':count==='one'?'लग्नमा एउटा ग्रह ('+planet.value+') छ; गुरुजीको एकाधिकारसम्बन्धी नियम अध्ययन गर्नुहोस्।':'लग्नमा धेरै ग्रह छन्; ग्रहबल र दशा नहेरी प्रमुख ग्रह तय गर्न मिल्दैन। छानिएको उदाहरण ग्रह: '+planet.value+'।';
+  const occupancyText=count==='none'?'लग्न खाली छ; लग्नेशको स्थिति हेर्नुहोस्।':count==='one'?'लग्नमा एउटा ग्रह ('+planet.value+') छ; अध्ययन नोटको एकाधिकारसम्बन्धी नियम अध्ययन गर्नुहोस्।':'लग्नमा धेरै ग्रह छन्; ग्रहबल र दशा नहेरी प्रमुख ग्रह तय गर्न मिल्दैन। छानिएको उदाहरण ग्रह: '+planet.value+'।';
   const strengthText='अलग अभ्यासमा छानिएको अवस्था: '+labels[dignity.value]+', भाव '+nep(sh)+'। यो छनोट माथि देखाइएको लग्नेश '+lord+' को वास्तविक राशिगत बल हो भनेर पुष्टि गरिएको छैन।';
   const moonSign=Number(moon.value);
   const moonHouse=moon.value?((moonSign-a+12)%12)+1:null;
