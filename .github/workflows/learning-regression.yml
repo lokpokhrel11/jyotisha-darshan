@@ -17,6 +17,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check tests/learning.spec.mjs
       - run: npm install --no-save @playwright/test
       - run: npx playwright install --with-deps chromium
       - name: Start local website
