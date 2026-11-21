@@ -1146,7 +1146,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   }
   const score=responses.reduce((total,response,i)=>total+Number(response.value===items[i].answer),0);
   feedback.className='ch9-quiz-feedback '+(score===3?'is-complete':'is-review');
-  feedback.textContent='नतिजा: '+nep(score)+' / ३ सही। '+(score===3?'तीनवटै उत्तर सही छन्।':'तल प्रत्येक प्रश्नको व्याख्या पढेर पुनः अभ्यास गर्न सक्नुहुन्छ।');
+  feedback.textContent='नतिजा: '+nep(score)+' / ४ सही। '+(score===4?'चारवटै उत्तर सही छन्।':'तल प्रत्येक प्रश्नको व्याख्या पढेर पुनः अभ्यास गर्न सक्नुहुन्छ।');
   review.replaceChildren();
   items.forEach((item,i)=>{
    const correct=responses[i].value===item.answer;
@@ -1359,7 +1359,8 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const items=[
   {name:'ch10q1',answer:'a',explanation:'वृष लग्नको दोस्रो भाव मिथुन हो र मिथुनको स्वामी बुध हो।'},
   {name:'ch10q2',answer:'b',explanation:'अध्ययन नोटमा तेस्रो भाव छोटो यात्रा, नवौँ लामो यात्रा र बाह्रौँ विदेशसँग जोडिएको छ।'},
-  {name:'ch10q3',answer:'c',explanation:'सप्तमेश छैटौँमा जाँदा व्यापार राम्रो भन्ने कथन र सामान्य व्ययस्थान नियमबीच असङ्गति छ; स्रोतले नै पुष्टि बाँकी राखेको छ।'}
+  {name:'ch10q3',answer:'c',explanation:'सप्तमेश छैटौँमा जाँदा व्यापार राम्रो भन्ने कथन र सामान्य व्ययस्थान नियमबीच असङ्गति छ; स्रोतले नै पुष्टि बाँकी राखेको छ।'},
+  {name:'ch10q4',answer:'b',explanation:'स्रोतमा पाँचौँ भावलाई विचार, लेखन र सिर्जनात्मक उत्पादनसँग तथा आठौँलाई भौतिक उत्पादनसँग जोडिएको छ।'}
  ];
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const clear=()=>{feedback.textContent='';feedback.className='ch10-feedback';review.hidden=true;review.replaceChildren()};
@@ -1370,7 +1371,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const responses=items.map(item=>form.querySelector('input[name="'+item.name+'"]:checked'));
   const missing=responses.findIndex(x=>!x);
   if(missing>=0){
-   clear();feedback.className='ch10-feedback is-warning';feedback.textContent='कृपया तीनवटै प्रश्नको उत्तर छान्नुहोस्।';
+   clear();feedback.className='ch10-feedback is-warning';feedback.textContent='कृपया चारवटै प्रश्नको उत्तर छान्नुहोस्।';
    const field=form.querySelector('input[name="'+items[missing].name+'"]').closest('fieldset');
    field.tabIndex=-1;field.focus({preventScroll:true});return;
   }
