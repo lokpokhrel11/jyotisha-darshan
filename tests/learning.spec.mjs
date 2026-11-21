@@ -72,3 +72,16 @@ test('Chapter 7: focused reading, house lords, and quiz feedback', async ({ page
  await page.locator('#ch7Quiz button[type="submit"]').click();
  await expect(page.locator('#ch7Feedback')).toContainText('सही');
 });
+
+test('Chapter 7: chart has twelve selectable houses and accurate source examples', async ({page})=>{
+ await page.goto(chapter(7));
+ await expect(page.locator('#ch7Chart [data-house]')).toHaveCount(12);
+ await expect(page.locator('#ch7HouseButtons button')).toHaveCount(12);
+ await page.locator('#ch7HouseButtons button[data-house="10"]').click();
+ await expect(page.locator('#ch7HouseDetail')).toContainText('मकर');
+ await expect(page.locator('#ch7HouseDetail')).toContainText('शनि');
+ await expect(page.locator('#ch7HouseDetail')).toContainText('मङ्गल');
+ await expect(page.locator('#ch7HouseDetail')).toContainText('बृहस्पति');
+ await page.locator('#ch7HouseButtons button[data-house="2"]').click();
+ await expect(page.locator('#ch7HouseDetail')).toContainText('नोटमा ग्रहस्थिति दिइएको छैन');
+});
