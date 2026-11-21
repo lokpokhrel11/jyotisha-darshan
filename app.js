@@ -1403,6 +1403,14 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   out.textContent=signs[x-1]+' → '+signs[y-1]+': '+nep(forward)+'औँ स्थान। '+signs[y-1]+' → '+signs[x-1]+': '+nep(reverse)+'औँ स्थान। '+(matched?'यस जोडीलाई स्रोतको परिभाषाअनुसार नवपञ्चक भनिन्छ।':'यस जोडीमा स्रोतको नवपञ्चक (५/९) गणना मिल्दैन।')+' यो राशिदूरीको अभ्यास मात्र हो; विवाह, गर्भधारण वा स्वास्थ्यको भविष्यवाणी होइन।';
  };
  a.addEventListener('change',render);b.addEventListener('change',render);
+ document.querySelectorAll('#chapter11 .ch11-example-button').forEach(button=>{
+  button.addEventListener('click',()=>{
+   a.value=button.dataset.a;b.value=button.dataset.b;render();
+   document.querySelectorAll('#chapter11 .ch11-example-button').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+  });
+ });
+ const resetPreset=()=>document.querySelectorAll('#chapter11 .ch11-example-button').forEach(item=>item.setAttribute('aria-pressed','false'));
+ a.addEventListener('change',resetPreset);b.addEventListener('change',resetPreset);
 })();
 (function(){
  const form=document.getElementById('ch11Quiz'),feedback=document.getElementById('ch11Feedback'),review=document.getElementById('ch11Review');
