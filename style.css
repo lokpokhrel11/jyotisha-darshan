@@ -1016,3 +1016,27 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter9 #ch9Quiz fieldset{margin-bottom:25px}
 #chapter9 #ch9Quiz .ch7-choice{transition:border-color .16s ease,background-color .16s ease}
 @media(max-width:600px){#chapter9 #ch9Quiz legend{font-size:.97rem;line-height:1.6}#chapter9 .ch9-question-number{min-width:31px;min-height:28px;margin-right:8px}}
+
+/* Chapter 10: align the new chapter with Chapter 9's refined visual language. */
+#chapter10 .ch9-hero{background:linear-gradient(135deg,#172b38,#253c4b);border-radius:17px;padding:clamp(22px,4vw,42px);margin-bottom:24px;color:#fff;border:1px solid #52616a}
+#chapter10 .ch9-hero h2{color:#fff;margin:9px 0 12px;font-size:clamp(1.8rem,3.4vw,2.6rem)}
+#chapter10 .ch9-hero p{color:#f2f0e9;line-height:1.75}
+#chapter10 .ch9-kicker{color:#f4d58c!important;font-weight:800;letter-spacing:.04em}
+#chapter10 .ch9-hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+#chapter10 .ch9-hero-meta span{padding:7px 12px;border:1px solid #8c8c79;border-radius:100px;color:#fff;background:#ffffff12;font-size:.85rem}
+#chapter10 .ch9-step-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:18px 0 28px}
+#chapter10 .ch9-step{padding:20px;border:1px solid var(--line);border-radius:13px;background:var(--soft);min-width:0}
+#chapter10 .ch9-step-number{display:inline-grid;place-items:center;min-width:32px;min-height:32px;padding:5px;margin-bottom:11px;border:1px solid color-mix(in srgb,var(--gold) 40%,var(--line));border-radius:50%;background:color-mix(in srgb,var(--gold) 17%,var(--white));color:var(--ink);font-weight:800}
+#chapter10 .ch9-step strong{display:block;color:var(--ink);margin-bottom:8px}
+#chapter10 .ch9-step p{margin:0;color:var(--muted);line-height:1.7}
+#chapter10 .ch9-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0 28px}
+#chapter10 .ch9-grid p{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);line-height:1.7;margin:0}
+#chapter10 .ch9-grid strong{display:block;color:var(--ink);margin-bottom:7px}
+#chapter10 .ch10-practice{border-left:4px solid var(--gold);margin:24px 0}
+#chapter10 .ch10-practice label{display:block;margin:15px 0 7px;font-weight:700;color:var(--ink)}
+#chapter10 .ch10-practice select{width:min(100%,420px);padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);font:inherit}
+#chapter10 .ch10-result{padding:18px;margin:17px 0;border:1px solid var(--line);border-radius:11px;background:var(--soft);color:var(--ink);line-height:1.8}
+#chapter10 .ch9-disclosure{border:1px solid var(--line);border-radius:12px;background:var(--white);margin:18px 0 28px;overflow:hidden}
+#chapter10 .ch9-disclosure summary{cursor:pointer;padding:18px;color:var(--ink);font-weight:750}
+#chapter10 .ch9-disclosure-body{padding:0 18px 18px;color:var(--ink);line-height:1.75}
+@media(max-width:760px){#chapter10 .ch9-step-grid{grid-template-columns:1fr}#chapter10 .ch9-hero{padding:22px}#chapter10 .ch9-grid{grid-template-columns:1fr}}
