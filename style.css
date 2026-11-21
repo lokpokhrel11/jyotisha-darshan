@@ -441,3 +441,15 @@ body.chapter-focus #pathshala #lesson{display:block}
 :root[data-theme="dark"] body.chapter-focus :is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7)>.section-heading{background:linear-gradient(122deg,#183743,#254956 68%,#375c5d);color:#fff}
 :root[data-theme="dark"] .theme-toggle{background:#253c46;color:#f3d49b}
 @media(max-width:750px){.theme-toggle{width:38px;height:38px;margin-left:8px}}
+
+/* Dashboard assessment progress: separate from visited chapter counts. */
+.assessment-progress{margin:24px 0;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--white)}
+.assessment-progress h3{margin:0 0 8px}
+.assessment-progress>p{margin:0 0 16px}
+.assessment-progress>small{display:block;margin-top:14px;color:var(--muted)}
+.assessment-progress-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.assessment-progress-row{display:flex;flex-direction:column;gap:7px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--soft);text-decoration:none}
+.assessment-progress-row:hover,.assessment-progress-row:focus-visible{border-color:var(--gold)}
+.assessment-progress-row span{font-size:.88rem;color:var(--muted)}
+:root[data-theme="dark"] .assessment-progress{background:#1b2e37;border-color:#40545c}
+:root[data-theme="dark"] .assessment-progress-row{background:#263c46;border-color:#52666c}
