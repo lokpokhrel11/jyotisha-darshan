@@ -875,3 +875,40 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
  pager.after(hint,jump);
 })();
+
+/* Chapter 8 guided reading: preserve all sections, add lesson-by-lesson movement. */
+(function(){
+ if(new URLSearchParams(location.search).get('chapter')!=='8')return;
+ const chapter=document.getElementById('chapter8');
+ if(!chapter)return;
+ const ids=Array.from({length:8},(_,i)=>'ch8-lesson-'+(i+1)).concat('ch8AssessmentPanel');
+ const sections=ids.map(id=>document.getElementById(id));
+ if(sections.some(section=>!section))return;
+ const nav=chapter.querySelector('.ch8-contents');
+ const progress=document.createElement('p');
+ progress.className='ch8-reading-progress';
+ progress.setAttribute('role','status');
+ progress.setAttribute('aria-live','polite');
+ nav?.after(progress);
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+ const links=Array.from(chapter.querySelectorAll('.ch8-contents-links a'));
+ function update(){
+  const hash=decodeURIComponent(location.hash.slice(1));
+  const i=Math.max(0,ids.indexOf(hash));
+  progress.textContent=i===8?'समग्र मूल्याङ्कन · ८ पाठपछि': 'अध्ययन क्रम: पाठ '+nep(i+1)+' / ८';
+  links.forEach(a=>{
+   if(a.getAttribute('href')==='#'+ids[i])a.setAttribute('aria-current','location');
+   else a.removeAttribute('aria-current');
+  });
+ }
+ sections.forEach((section,i)=>{
+  const footer=document.createElement('nav');
+  footer.className='ch8-lesson-pager';
+  footer.setAttribute('aria-label','अध्याय ८ पाठ क्रम');
+  if(i>0){const prev=document.createElement('a');prev.href='#'+ids[i-1];prev.className='ch8-lesson-prev';prev.textContent='← '+(i===8?'पाठ ८':'अघिल्लो पाठ');footer.append(prev)}
+  if(i<8){const next=document.createElement('a');next.href='#'+ids[i+1];next.className='ch8-lesson-next';next.textContent=i===7?'समग्र मूल्याङ्कन →':'अर्को पाठ →';footer.append(next)}
+  section.append(footer);
+ });
+ window.addEventListener('hashchange',update);
+ update();
+})();
