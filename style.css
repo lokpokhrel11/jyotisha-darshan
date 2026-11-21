@@ -1188,3 +1188,36 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 @media(max-width:850px){#chapter10 .ch-modern-nav-links,#chapter11 .ch-modern-nav-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){#chapter10 .ch-modern-hero,#chapter11 .ch-modern-hero{min-height:0;padding:26px 24px!important}#chapter10 .ch-modern-hero h2,#chapter11 .ch-modern-hero h2,#chapter10 .ch-modern-hero>p:not(.ch9-kicker),#chapter11 .ch-modern-hero>p:not(.ch9-kicker),#chapter10 .ch-modern-hero .ch9-kicker,#chapter11 .ch-modern-hero .ch9-kicker,#chapter10 .ch-modern-hero .ch9-hero-meta,#chapter11 .ch-modern-hero .ch9-hero-meta{max-width:100%}#chapter10 .ch-modern-hero-mark,#chapter11 .ch-modern-hero-mark{display:none}#chapter10 .ch-modern-nav-links,#chapter11 .ch-modern-nav-links{grid-template-columns:1fr}#chapter10 .ch9-step-grid,#chapter11 .ch9-step-grid,#chapter10 .ch9-grid,#chapter11 .ch9-grid{grid-template-columns:1fr}#chapter10 .ch-modern-nav,#chapter11 .ch-modern-nav{padding:14px!important}}
 @media(prefers-reduced-motion:reduce){#chapter10 .ch-modern-nav-links a,#chapter11 .ch-modern-nav-links a{transition:none}}
+
+/* Chapters 10–11 second-pass refinement: intentional reading rhythm and assessment clarity. */
+#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 26px}
+#chapter10 .ch-modern-path a,#chapter11 .ch-modern-path a{min-width:0;display:flex;align-items:flex-start;gap:11px;padding:17px 13px;border-radius:13px;border:1px solid var(--line);background:var(--white);color:var(--ink);text-decoration:none;box-shadow:0 4px 15px rgba(12,30,41,.035)}
+#chapter10 .ch-modern-path a:hover,#chapter11 .ch-modern-path a:hover{border-color:var(--gold);transform:translateY(-2px)}
+#chapter10 .ch-modern-path a:focus-visible,#chapter11 .ch-modern-path a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#chapter10 .ch-modern-path-number,#chapter11 .ch-modern-path-number{flex:none;display:grid;place-items:center;width:33px;height:33px;border-radius:50%;background:color-mix(in srgb,var(--gold) 20%,var(--white));color:var(--ink);font-weight:800;font-size:.78rem}
+#chapter10 .ch-modern-path small,#chapter11 .ch-modern-path small{display:block;font-size:.73rem;letter-spacing:.06em;color:var(--ink);opacity:.68;margin-bottom:4px}
+#chapter10 .ch-modern-path strong,#chapter11 .ch-modern-path strong{display:block;font-size:.87rem;line-height:1.5;font-weight:750}
+#chapter10 .ch-modern-path-arrow,#chapter11 .ch-modern-path-arrow{margin-left:auto;opacity:.5}
+#chapter10 .ch-modern-quiz-heading,#chapter11 .ch-modern-quiz-heading{position:relative;overflow:hidden;padding:22px 23px;margin:-2px 0 23px;border-radius:13px;background:linear-gradient(110deg,#142d3d,#294653);color:#fff;border-bottom:3px solid #d9ad57}
+#chapter10 .ch-modern-quiz-heading:after,#chapter11 .ch-modern-quiz-heading:after{content:"";position:absolute;right:-35px;top:-55px;width:190px;height:190px;border:1px solid rgba(230,195,123,.25);border-radius:50%;pointer-events:none}
+#chapter10 .ch-modern-quiz-kicker,#chapter11 .ch-modern-quiz-kicker{display:block;font-size:.77rem;letter-spacing:.09em;font-weight:800;color:#e9c78c}
+#chapter10 .ch-modern-quiz-heading h4,#chapter11 .ch-modern-quiz-heading h3{color:#fff!important;font-size:clamp(1.2rem,2vw,1.55rem);margin:9px 0 7px}
+#chapter10 .ch-modern-quiz-heading p,#chapter11 .ch-modern-quiz-heading p{color:#f0f1ed!important;line-height:1.7;margin:0;max-width:60ch}
+#chapter10 .ch10-quiz-panel fieldset,#chapter11 .ch10-quiz-panel fieldset{counter-increment:question}
+#chapter10 .ch10-quiz-panel,#chapter11 .ch10-quiz-panel{counter-reset:question}
+#chapter10 .ch10-quiz-panel legend,#chapter11 .ch10-quiz-panel legend{max-width:100%;font-size:1.02rem}
+#chapter10 .ch10-quiz-panel legend:before,#chapter11 .ch10-quiz-panel legend:before{content:"Q" counter(question) "  ";font-size:.8rem;letter-spacing:.06em;color:var(--ink);opacity:.65}
+#chapter10 .ch10-choice,#chapter11 .ch10-choice{min-height:48px}
+#chapter10 .ch10-choice:has(input:checked),#chapter11 .ch10-choice:has(input:checked){box-shadow:inset 3px 0 0 var(--gold)}
+#chapter10 .ch10-quiz-actions,#chapter11 .ch10-quiz-actions{padding-top:13px;border-top:1px solid var(--line)}
+#chapter10 .ch9-grid p,#chapter11 .ch9-grid p,#chapter11 .ch11-learning-grid article{box-shadow:0 5px 16px rgba(11,28,40,.025)}
+#chapter10 .ch9-grid p:hover,#chapter11 .ch9-grid p:hover,#chapter11 .ch11-learning-grid article:hover{border-color:var(--gold)}
+#chapter10 .ch10-practice label,#chapter11 .ch10-practice label{font-weight:750;color:var(--ink)}
+#chapter10 select,#chapter11 select{max-width:100%;border-radius:10px}
+#chapter10 select:focus-visible,#chapter11 select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#chapter10 .ch9-disclosure summary,#chapter11 .ch9-disclosure summary{color:var(--ink);line-height:1.65}
+#chapter10 .ch9-disclosure[open],#chapter11 .ch9-disclosure[open]{border-color:var(--gold)}
+#chapter10 .note,#chapter11 .note{line-height:1.8}
+@media(max-width:1050px){#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{grid-template-columns:1fr;gap:8px}#chapter10 .ch-modern-path a,#chapter11 .ch-modern-path a{padding:13px}#chapter10 .ch-modern-quiz-heading,#chapter11 .ch-modern-quiz-heading{padding:18px 16px}#chapter10 .ch10-quiz-panel fieldset,#chapter11 .ch10-quiz-panel fieldset{padding:13px!important}}
+@media(prefers-reduced-motion:reduce){#chapter10 .ch-modern-path a,#chapter11 .ch-modern-path a{transform:none!important}}
