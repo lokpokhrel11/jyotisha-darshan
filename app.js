@@ -738,3 +738,10 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(!form||!feedback)return;
  form.addEventListener('submit',e=>{e.preventDefault();const answer=form.querySelector('input[name="ch8residence"]:checked');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='b'?'सही। गुरुजीका नोटमा चतुर्थेश र लग्नेश बाह्रौँ भावमा हुँदा विदेशमा स्वेच्छिक बसाइको संकेत भनिएको छ।':'फेरि जाँच्नुहोस्। नोटमा सप्तमलाई स्वदेशभित्र र बाह्रौँलाई विदेशसँग जोडिएको छ।'});
 })();
+
+/* Chapter 8.8: identify house-origin context in Guruji's example. */
+(function(){
+ const form=document.getElementById('ch8ConflictQuiz'),feedback=document.getElementById('ch8ConflictFeedback');
+ if(!form||!feedback)return;
+ form.addEventListener('submit',e=>{e.preventDefault();const answer=form.querySelector('input[name="ch8conflict"]:checked');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='a'?'सही। शुक्र दोस्रो र सातौँ भावको स्वामी भएकाले धन र दाम्पत्यको प्रसङ्ग जोडिएको छ।':'फेरि हेर्नुहोस्। शुक्रको दोस्रो र सातौँ भावको स्वामित्वसँग जोडिएका विषय पहिचान गर्नुहोस्।'});
+})();
