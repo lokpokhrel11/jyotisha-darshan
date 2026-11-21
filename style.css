@@ -415,3 +415,29 @@ body.chapter-focus .chapter-bottom-nav .chapter-previous-button:focus-visible{
 body.chapter-focus #pathshala>.cards,
 body.chapter-focus #pathshala #closeLesson{display:none!important}
 body.chapter-focus #pathshala #lesson{display:block}
+
+/* Reader mode: retain the navy/gold identity, soften long-form reading surfaces. */
+.theme-toggle{flex:0 0 auto;display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--ink);font-size:1.3rem;line-height:1}
+.theme-toggle:hover,.theme-toggle:focus-visible{border-color:var(--gold);outline-offset:3px}
+:root[data-theme="dark"]{color-scheme:dark;--ink:#e4ebe9;--muted:#b4c3c4;--gold:#e4bf7e;--cream:#101e26;--white:#1a2c35;--line:#40545c;--navy:#10222d;--soft:#233640}
+:root[data-theme="dark"] body{background:var(--cream);color:var(--ink)}
+:root[data-theme="dark"] .site-header{background:#172932f5}
+:root[data-theme="dark"] :is(.section,.section.alt,.study-panel,.calculator,.tile,.dash-stat,.chapter-card,.dashboard-settings,.home-shortcuts,.home-shortcut-grid a,.lesson,.detail,.practice-layout>div,.method-grid>div,.study-grid>div,.chapter-toc,.chapter-focus-banner,.chapter-bottom-nav,.ch8-contents,.ch8-comparison>div,.ch8-lesson,.ch8-contents-links a){
+ background-color:#1b2e37;color:#e4ebe9;border-color:#40545c;
+}
+:root[data-theme="dark"] :is(.section h2,.section h3,.section h4,.study-panel h3,.study-panel h4,.chapter-card h3,.tile h3,.calculator h3,.dashboard-subheading){color:#f0f3ee}
+:root[data-theme="dark"] :is(.section p,.section li,.study-panel p,.study-panel li,.chapter-card p,.dash-stat small,.note,.muted,.ch8-contents-label){color:#c9d4d2}
+:root[data-theme="dark"] :is(input,select,textarea,button:not(.theme-toggle):not(.primary):not(.chapter-next-button):not(.chapter-previous-button)){background-color:#243943;color:#f0f3ee;border-color:#5a7077}
+:root[data-theme="dark"] :is(input,select,textarea)::placeholder{color:#b5c3c4}
+:root[data-theme="dark"] :is(table,th,td,.chapter7-table th,.chapter7-table td){background-color:#21343e;color:#e5eeec;border-color:#49616a}
+:root[data-theme="dark"] :is(tr:nth-child(even) td,.chapter7-table tr:nth-child(even) td){background-color:#293f48}
+:root[data-theme="dark"] :is(.result,.feedback,.note,.status,.coming,.study-module,.exam-question,.chapter7-note){background-color:#273d46;color:#e6efec;border-color:#52666c}
+:root[data-theme="dark"] #chapter8 .ch8-contents{background:#1b2e37;border-color:#40545c}
+:root[data-theme="dark"] #chapter8 .study-panel{background:#1b2e37;border-color:#40545c;box-shadow:none}
+:root[data-theme="dark"] #chapter8 .study-panel :is(h3,h4){color:#f0f3ee}
+:root[data-theme="dark"] #chapter8 .ch8-contents-links a{background:#293f48;color:#f0f3ee;border-color:#52666c}
+:root[data-theme="dark"] #chapter8 .chapter7-table :is(th,td){background:#253a43;color:#e6efec}
+:root[data-theme="dark"] body.chapter-focus :is(#chapter2 .method-grid>div,#chapter3 .study-panel,#chapter7 .study-panel){background:#1b2e37;border-color:#40545c;box-shadow:none}
+:root[data-theme="dark"] body.chapter-focus :is(#pathshala,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7)>.section-heading{background:linear-gradient(122deg,#183743,#254956 68%,#375c5d);color:#fff}
+:root[data-theme="dark"] .theme-toggle{background:#253c46;color:#f3d49b}
+@media(max-width:750px){.theme-toggle{width:38px;height:38px;margin-left:8px}}
