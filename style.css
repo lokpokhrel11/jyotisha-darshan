@@ -1040,3 +1040,25 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter10 .ch9-disclosure summary{cursor:pointer;padding:18px;color:var(--ink);font-weight:750}
 #chapter10 .ch9-disclosure-body{padding:0 18px 18px;color:var(--ink);line-height:1.75}
 @media(max-width:760px){#chapter10 .ch9-step-grid{grid-template-columns:1fr}#chapter10 .ch9-hero{padding:22px}#chapter10 .ch9-grid{grid-template-columns:1fr}}
+
+/* Chapter 10: worked example and responsive quiz in both reader themes. */
+#chapter10 .ch10-example{padding:22px;margin:24px 0;border:1px solid color-mix(in srgb,var(--gold) 48%,var(--line));border-radius:14px;background:var(--soft);color:var(--ink)}
+#chapter10 .ch10-example-tag{display:inline-block;padding:6px 11px;border-radius:20px;background:color-mix(in srgb,var(--gold) 19%,var(--white));color:var(--ink);font-weight:750;font-size:.85rem}
+#chapter10 .ch10-example h3{margin:15px 0 12px;color:var(--ink)}
+#chapter10 .ch10-example li{margin:10px 0;line-height:1.75;padding-left:4px}
+#chapter10 .ch10-quiz-panel{margin:25px 0}
+#chapter10 .ch10-quiz-panel fieldset{border:1px solid var(--line);border-radius:12px;padding:17px;margin:18px 0 24px;min-width:0}
+#chapter10 .ch10-quiz-panel legend{color:var(--ink);font-weight:750;line-height:1.7;padding:0 8px}
+#chapter10 .ch10-choice{display:flex;gap:12px;align-items:flex-start;padding:14px 15px;margin:9px 0;border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--ink);line-height:1.65;cursor:pointer}
+#chapter10 .ch10-choice:hover,#chapter10 .ch10-choice:focus-within{border-color:var(--gold);background:var(--soft)}
+#chapter10 .ch10-choice input{flex:none;margin-top:.4em;accent-color:var(--gold)}
+#chapter10 .ch10-quiz-actions{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+#chapter10 .ch10-reset{border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);padding:12px 18px}
+#chapter10 .ch10-feedback:empty{display:none}
+#chapter10 .ch10-feedback:not(:empty){padding:17px;border-radius:11px;border:1px solid var(--line);border-left:4px solid var(--gold);background:var(--soft);color:var(--ink);font-weight:700;line-height:1.75}
+#chapter10 .ch10-review[hidden]{display:none}
+#chapter10 .ch10-review{display:grid;gap:11px;margin:16px 0}
+#chapter10 .ch10-review-card{padding:17px;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:11px;background:var(--white);color:var(--ink)}
+#chapter10 .ch10-review-card strong{display:block;margin-bottom:7px}
+#chapter10 .ch10-review-card p{margin:0;line-height:1.75}
+@media(max-width:600px){#chapter10 .ch10-example{padding:17px}#chapter10 .ch10-choice{padding:12px}#chapter10 .ch10-quiz-actions>*{flex:1 1 180px;text-align:center}}
