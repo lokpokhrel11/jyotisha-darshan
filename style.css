@@ -701,3 +701,25 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 :root[data-theme="dark"] body.chapter-focus :is(#ch7Quiz,#ch8SourceQuiz,#ch8ComfortQuiz,#ch8SiblingQuiz,#ch8ResidenceQuiz,#ch8ConflictQuiz,#ch8Assessment) label.ch7-choice input{
  flex:0 0 auto;width:19px;height:19px;margin:0;accent-color:#e2bd7c;
 }
+
+/* v73: Narrow-screen assessment ergonomics and explicit submission guidance. */
+.exam-submit-hint{margin:12px 0 8px;color:var(--muted);font-size:.95rem;line-height:1.65}
+.exam-submit-jump{margin:0 0 16px;min-height:44px}
+:root[data-theme="dark"] .exam-submit-hint{color:#d3dfdc}
+:root[data-theme="dark"] .exam-submit-jump{background:#e3bd7b;color:#152c36;border:1px solid #e3bd7b}
+@media(max-width:480px){
+ body.chapter-focus :is(#chapter2ExamForm,#chapter3ExamForm,#ch7Quiz,#ch8Assessment) fieldset{
+  min-width:0;max-width:100%;padding:16px 12px!important;
+ }
+ body.chapter-focus :is(#chapter2ExamForm,#chapter3ExamForm,#ch7Quiz,#ch8Assessment) legend{
+  max-width:100%;white-space:normal;overflow-wrap:anywhere;
+ }
+ body.chapter-focus :is(#chapter2ExamForm,#chapter3ExamForm,#ch7Quiz,#ch8Assessment) label{
+  min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;
+ }
+ body.chapter-focus .exam-stepper{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+ body.chapter-focus .exam-stepper button{min-height:44px;flex:1 1 130px}
+ body.chapter-focus .exam-stepper span{flex:1 1 100%;text-align:center;order:-1}
+ body.chapter-focus .exam-submit-jump{width:100%;white-space:normal}
+ body.chapter-focus :is(#chapter2ExamForm,#chapter3ExamForm,#ch8Assessment) .button{max-width:100%;white-space:normal}
+}
