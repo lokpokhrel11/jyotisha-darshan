@@ -215,3 +215,17 @@ test('Chapter 8 design: navigation targets and public attribution policy',async(
  await expect(page.locator('#ch8AssessmentPanel')).toBeVisible();
  await expect(page.locator('#chapter8')).not.toContainText('गुरुजी');
 });
+
+test('Chapter 8 mobile lesson menu is accessible and closes after navigation',async({page})=>{
+ await page.setViewportSize({width:375,height:812});
+ await page.goto(chapter(8));
+ const toggle=page.locator('.ch8-nav-toggle');
+ await expect(toggle).toBeVisible();
+ await expect(toggle).toHaveAttribute('aria-expanded','false');
+ await toggle.click();
+ await expect(toggle).toHaveAttribute('aria-expanded','true');
+ await expect(page.locator('#ch8LessonLinks a')).toHaveCount(9);
+ await page.locator('#ch8LessonLinks a[href="#ch8-lesson-5"]').click();
+ await expect(toggle).toHaveAttribute('aria-expanded','false');
+ await expect(page.locator('#ch8-lesson-5')).toBeVisible();
+});
