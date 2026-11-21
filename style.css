@@ -723,3 +723,24 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
  body.chapter-focus .exam-submit-jump{width:100%;white-space:normal}
  body.chapter-focus :is(#chapter2ExamForm,#chapter3ExamForm,#ch8Assessment) .button{max-width:100%;white-space:normal}
 }
+
+/* v74: Keep reader theme control visible and tappable in narrow headers. */
+.site-header .theme-toggle{
+ flex:0 0 42px;position:relative;z-index:12;cursor:pointer;
+ touch-action:manipulation;user-select:none;
+}
+.site-header .theme-toggle:focus-visible{
+ outline:3px solid #d6ac69;outline-offset:3px;
+}
+@media(max-width:750px){
+ .site-header{gap:10px;flex-wrap:nowrap}
+ .site-header .brand{min-width:0;flex:1 1 auto}
+ .site-header .brand strong{overflow-wrap:anywhere}
+ .site-header .menu{flex:0 0 auto}
+ .site-header .theme-toggle{flex:0 0 42px;width:42px;height:42px;margin-left:0}
+}
+@media(max-width:380px){
+ .site-header{gap:6px}
+ .site-header .brand{gap:6px}
+ .site-header .brand small{letter-spacing:.07em}
+}
