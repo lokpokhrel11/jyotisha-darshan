@@ -192,3 +192,34 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
 #ch8AssessmentSummary{margin-top:16px}
 #ch8AssessmentReset{margin-left:8px}
 @media(max-width:480px){#ch8AssessmentReset{margin:10px 0 0;display:block}}
+
+/* v5.4 Chapter 8 editorial learning design */
+#chapter8{max-width:1120px;margin-inline:auto;scroll-margin-top:24px}
+#chapter8 .ch8-hero{position:relative;overflow:hidden;padding:clamp(28px,5vw,60px);margin-bottom:20px;border-radius:18px;background:linear-gradient(122deg,#183743 0%,#254956 68%,#375c5d 100%);color:#f9f5ea}
+#chapter8 .ch8-hero:after{content:"०८";position:absolute;right:3%;bottom:-.35em;font-size:clamp(150px,25vw,300px);font-weight:800;line-height:1;opacity:.055;pointer-events:none}
+#chapter8 .ch8-kicker{font-size:.78rem;letter-spacing:.12em;color:#e8c995;font-weight:700;margin:0 0 15px}
+#chapter8 .ch8-hero h2{font-size:clamp(1.8rem,4vw,3.25rem);max-width:750px;line-height:1.25;color:#fff;margin:0 0 16px}
+#chapter8 .ch8-hero>p:not(.ch8-kicker){max-width:690px;color:#e3e9e7;line-height:1.75}
+#chapter8 .ch8-hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+#chapter8 .ch8-hero-meta span{padding:7px 12px;border:1px solid #ffffff40;border-radius:30px;color:#fff8e9;font-size:.83rem}
+#chapter8 .ch8-contents{position:relative;padding:18px 20px;margin:0 0 24px;border:1px solid #d9dfd9;border-radius:13px;background:#fafbf8}
+#chapter8 .ch8-contents-label{display:block;font-size:.83rem;font-weight:700;color:#526b70;margin-bottom:12px}
+#chapter8 .ch8-contents-links{display:flex;gap:9px;flex-wrap:wrap}
+#chapter8 .ch8-contents-links a{font-size:.88rem;padding:8px 12px;background:#fff;border:1px solid #dbe2dc;border-radius:24px;text-decoration:none;color:#244652;transition:background .15s,border-color .15s}
+#chapter8 .ch8-contents-links a:hover,#chapter8 .ch8-contents-links a:focus-visible{background:#f5e9d2;border-color:#c59b55;outline-offset:3px}
+#chapter8 .study-panel{padding:clamp(20px,3vw,34px);margin-bottom:18px;border:1px solid #dfe4de;border-radius:14px;background:#fff;box-shadow:0 4px 20px #1b35430a;scroll-margin-top:20px}
+#chapter8 .ch8-lesson{border-left:4px solid #b89559}
+#chapter8 .study-panel h3{font-size:clamp(1.2rem,2vw,1.55rem);line-height:1.4;color:#234451;margin:0 0 18px}
+#chapter8 .study-panel h4{color:#38545b;margin-top:22px}
+#chapter8 .study-panel p,#chapter8 .study-panel li{line-height:1.8}
+#chapter8 .study-panel li+li{margin-top:7px}
+#chapter8 .chapter7-table{border-radius:8px;overflow:hidden}
+#chapter8 .chapter7-table th{background:#e9efed;color:#27434b}
+#chapter8 .chapter7-table tr:nth-child(even) td{background:#f8faf8}
+#chapter8 .ch8-comparison>div{background:#f9faf7;border:1px solid #e0e7e0;border-radius:11px;padding:20px}
+#chapter8 .ch7-choice{padding:12px 14px;margin:8px 0;border:1px solid #dfe5df;border-radius:9px;background:#fff}
+#chapter8 .ch7-choice:has(input:checked){background:#fdf5e8;border-color:#ba9555}
+#chapter8 .ch8-assessment-item{background:#fbfcfa}
+#chapter8 .ch8-assessment-feedback:not(:empty){padding:12px 14px;border-left:3px solid #b89559;background:#f5f7f3;border-radius:0 7px 7px 0}
+#chapter8 .ch8-controls select{min-height:44px;background:#fff}
+@media(max-width:600px){#chapter8 .ch8-hero{border-radius:12px}#chapter8 .ch8-contents{padding:15px}#chapter8 .ch8-contents-links a{font-size:.82rem}#chapter8 .study-panel{border-radius:10px}}
