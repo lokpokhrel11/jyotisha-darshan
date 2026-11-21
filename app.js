@@ -1158,6 +1158,13 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   review.hidden=false;
   feedback.tabIndex=-1;feedback.focus({preventScroll:true});
  });
+ form.addEventListener('change',event=>{
+  if(!event.target.matches('input[type="radio"]'))return;
+  if(!feedback.textContent&&!review.childElementCount)return;
+  feedback.textContent='';
+  feedback.className='ch9-quiz-feedback';
+  review.hidden=true;review.replaceChildren();
+ });
  form.addEventListener('reset',()=>{
   feedback.textContent='';feedback.className='ch9-quiz-feedback';
   review.hidden=true;review.replaceChildren();
@@ -1165,7 +1172,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
 })();
 
-/* Chapter 9: chart-position reading from Guruji notes 2.3, 2.4 and 9.1. */
+/* Chapter 9: chart-position reading from study notes 2.3, 2.4 and 9.1. */
 (function(){
  const asc=document.getElementById('ch9Ascendant');
  const house=document.getElementById('ch9LordHouse');
