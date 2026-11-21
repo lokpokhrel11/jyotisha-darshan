@@ -380,3 +380,18 @@ body.chapter-focus #chapter7>.section-heading h2{
  body.chapter-focus #chapter7>.section-heading{padding:24px 20px;border-radius:14px}
  body.chapter-focus #chapter2>.section-heading{align-items:flex-start;flex-direction:column;gap:12px}
 }
+
+/* Chapter-end continuation button */
+body.chapter-focus .chapter-bottom-nav .chapter-next-button{
+ display:inline-flex;align-items:center;justify-content:center;min-height:48px;
+ padding:11px 22px;border-radius:10px;background:#183743;color:#fff;
+ border:1px solid #183743;font-weight:750;text-decoration:none;
+ transition:background .15s ease,transform .15s ease;
+}
+body.chapter-focus .chapter-bottom-nav .chapter-next-button:hover,
+body.chapter-focus .chapter-bottom-nav .chapter-next-button:focus-visible{
+ background:#315763;border-color:#315763;transform:translateY(-1px);
+}
+@media(max-width:600px){
+ body.chapter-focus .chapter-bottom-nav .chapter-next-button{width:100%}
+}
