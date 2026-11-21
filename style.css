@@ -1237,3 +1237,28 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter10 .ch-modern-practice-kicker span,#chapter11 .ch-modern-practice-kicker span{color:var(--ink)}
 #chapter10 .ch9-step-grid article,#chapter11 .ch9-step-grid article{height:100%}
 @media(max-width:640px){#chapter10 .ch-modern-visual-strip,#chapter11 .ch-modern-visual-strip{gap:7px;padding:9px}#chapter10 .ch-modern-visual-strip>div,#chapter11 .ch-modern-visual-strip>div{padding:13px 5px}#chapter10 .ch-modern-visual-strip>div>span,#chapter11 .ch-modern-visual-strip>div>span{width:37px;height:37px;font-size:1rem}#chapter10 .ch-modern-visual-strip strong,#chapter11 .ch-modern-visual-strip strong{font-size:.84rem}#chapter10 .ch-modern-visual-strip small,#chapter11 .ch-modern-visual-strip small{font-size:.72rem}#chapter10 .ch-modern-strip-arrow,#chapter11 .ch-modern-strip-arrow{font-size:.85rem}#chapter10 .ch-modern-section-head,#chapter11 .ch-modern-section-head{margin-top:28px}}
+
+/* Dark-theme contrast and form legibility audit, chapters 10–11. */
+:root[data-theme="dark"] #chapter10,
+:root[data-theme="dark"] #chapter11{color:var(--ink)}
+:root[data-theme="dark"] #chapter10 :is(.ch-modern-nav,.ch-modern-path a,.ch9-step,.ch9-grid p,.ch10-practice,.ch10-quiz-panel,.ch-modern-visual-strip>div),
+:root[data-theme="dark"] #chapter11 :is(.ch-modern-nav,.ch-modern-path a,.ch9-step,.ch9-grid p,.ch10-practice,.ch10-quiz-panel,.ch11-source-notes article,.ch11-learning-grid article,.ch11-education-practice,.ch-modern-visual-strip>div){background:#1b2e37!important;border-color:#49616a!important;color:#f0f3ee!important;box-shadow:none}
+:root[data-theme="dark"] #chapter10 :is(.ch-modern-nav-links a,.ch-modern-visual-strip,.ch10-quiz-panel fieldset,.ch10-result,.ch10-review-card),
+:root[data-theme="dark"] #chapter11 :is(.ch-modern-nav-links a,.ch-modern-visual-strip,.ch10-quiz-panel fieldset,.ch10-result,.ch10-review-card){background:#253a43!important;border-color:#49616a!important;color:#f0f3ee!important}
+:root[data-theme="dark"] #chapter10 .ch10-choice,
+:root[data-theme="dark"] #chapter11 .ch10-choice{background:#1b2e37!important;border-color:#536a72!important;color:#f0f3ee!important}
+:root[data-theme="dark"] #chapter10 .ch10-choice:has(input:checked),
+:root[data-theme="dark"] #chapter11 .ch10-choice:has(input:checked){background:#3d3b30!important;border-color:#e4bf7e!important;box-shadow:inset 4px 0 0 #e4bf7e,0 0 0 1px #e4bf7e!important}
+:root[data-theme="dark"] #chapter10 .ch10-choice:hover,
+:root[data-theme="dark"] #chapter11 .ch10-choice:hover{border-color:#e4bf7e!important}
+:root[data-theme="dark"] #chapter10 :is(.ch-modern-nav-num,.ch-modern-path-number,.ch9-step-number,.ch-modern-visual-strip>div>span,.ch-modern-practice-kicker),
+:root[data-theme="dark"] #chapter11 :is(.ch-modern-nav-num,.ch-modern-path-number,.ch9-step-number,.ch11-topic-number,.ch-modern-visual-strip>div>span,.ch-modern-practice-kicker,.ch10-example-tag){background:#3c453f!important;color:#f1d19a!important}
+:root[data-theme="dark"] #chapter10 :is(.ch-modern-section-head h3,.ch-modern-section-head p,.ch-modern-nav-heading,.ch-modern-path strong,.ch9-step strong,.ch9-grid strong,.ch10-quiz-panel legend),
+:root[data-theme="dark"] #chapter11 :is(.ch-modern-section-head h3,.ch-modern-section-head p,.ch-modern-nav-heading,.ch-modern-path strong,.ch9-step strong,.ch9-grid strong,.ch10-quiz-panel legend,.ch11-lesson-heading h3,.ch11-learning-grid h4){color:#f0f3ee!important}
+:root[data-theme="dark"] #chapter10 :is(select,.ch10-reset),
+:root[data-theme="dark"] #chapter11 :is(select,.ch10-reset){background:#263c46!important;color:#f0f3ee!important;border:1px solid #657c83!important}
+:root[data-theme="dark"] #chapter10 :is(.ch10-feedback:not(:empty),.ch10-review-card),
+:root[data-theme="dark"] #chapter11 :is(.ch10-feedback:not(:empty),.ch10-review-card){background:#253a43!important;color:#f0f3ee!important;border-color:#607781!important;border-left:4px solid #e4bf7e!important}
+#chapter10 .ch10-choice:focus-within,#chapter11 .ch10-choice:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+#chapter10 .ch10-choice input,#chapter11 .ch10-choice input{min-width:17px;min-height:17px}
+@media(max-width:480px){#chapter10 .ch10-choice,#chapter11 .ch10-choice{font-size:.94rem;line-height:1.6!important;overflow-wrap:anywhere}#chapter10 .ch-modern-hero h2,#chapter11 .ch-modern-hero h2{font-size:clamp(1.55rem,7vw,2rem)}#chapter10 .ch-modern-nav-links a,#chapter11 .ch-modern-nav-links a{min-height:50px}}
