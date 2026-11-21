@@ -145,3 +145,21 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
 #ch7Quiz fieldset{border:0;padding:0;margin:0 0 20px}
 #ch7Quiz legend{font-weight:700;margin-bottom:10px}
 #ch7Feedback:not(:empty){padding:12px;background:#edf3ed;border-left:3px solid var(--gold);margin-top:15px}
+
+/* v4.3 interactive chart */
+.ch7-chart-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(220px,.9fr);gap:22px;align-items:start}
+#ch7Chart{width:100%;max-width:480px;display:block;background:#fffdf8;border-radius:8px}
+.ch7-chart-house{fill:#f9f6ef;stroke:#607680;stroke-width:1.7;cursor:pointer;transition:fill .12s}
+#ch7Chart [data-house]:hover .ch7-chart-house,#ch7Chart [data-house].selected .ch7-chart-house{fill:#f1dcb7}
+#ch7Chart [data-house]:focus-visible{outline:none}
+#ch7Chart [data-house]:focus-visible .ch7-chart-house{stroke:#8c5b19;stroke-width:4}
+.ch7-chart-label{font-size:14px;font-weight:700;pointer-events:none;fill:#203c48}
+.ch7-chart-planet{font-size:11px;pointer-events:none;fill:#855722}
+.ch7-house-detail{background:#fff;border:1px solid var(--line);padding:18px;border-radius:9px}
+.ch7-house-detail dl{display:grid;grid-template-columns:minmax(100px,.8fr) 1.2fr;gap:9px;margin:0}
+.ch7-house-detail dt{font-weight:700;color:var(--muted)}
+.ch7-house-detail dd{margin:0}
+.ch7-house-buttons{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.ch7-house-buttons button{border:1px solid var(--line);background:white;border-radius:6px;padding:7px 11px}
+.ch7-house-buttons button[aria-pressed="true"]{background:#203c48;color:white}
+@media(max-width:720px){.ch7-chart-layout{grid-template-columns:minmax(0,1fr)}}
