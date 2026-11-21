@@ -1161,7 +1161,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const items=[
   {name:'ch9q',answer:'a',explanation:'स्वभावसम्बन्धी परम्परागत अध्ययनमा लग्नेश, लग्नमा रहेका ग्रह र चन्द्रको अवस्थालाई सँगै हेर्ने भनिएको छ।'},
   {name:'ch9q2',answer:'b',explanation:'लग्नमा ग्रह नभएको उदाहरणमा लग्नेशको स्थिति र अवस्था अध्ययनको आधार हुन्छ। यसबाट वास्तविक व्यक्तिको स्वभाव निश्चित हुँदैन।'},
-  {name:'ch9q3',answer:'c',explanation:'स्वास्थ्यसम्बन्धी ग्रहगत कथन परम्परागत स्रोतको दाबी हो, प्रमाणित चिकित्सकीय परीक्षण वा निदान होइन।'}
+  {name:'ch9q3',answer:'c',explanation:'स्वास्थ्यसम्बन्धी ग्रहगत कथन परम्परागत स्रोतको दाबी हो, प्रमाणित चिकित्सकीय परीक्षण वा निदान होइन।'},
+  {name:'ch9q4',answer:'a',explanation:'मेष लग्नबाट आठौँ भावमा वृश्चिक राशि पर्छ। वृश्चिकको स्वामी मङ्गल भएकाले अष्टमेश मङ्गल हो।'},
+  {name:'ch9q5',answer:'b',explanation:'अध्ययन नोटको पृष्ठ ८७ मा पञ्चक धनिष्ठाको उत्तरार्धबाट सुरु भएर शतभिषा, पूर्वाभाद्रपदा, उत्तराभाद्रपदा र रेवतीसम्म समेटिएको छ।'}
  ];
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  form.addEventListener('submit',event=>{
@@ -1170,7 +1172,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const missing=responses.findIndex(value=>!value);
   if(missing!==-1){
    feedback.className='ch9-quiz-feedback is-warning';
-   feedback.textContent='कृपया तीनवटै प्रश्नको उत्तर दिनुहोस्।';
+   feedback.textContent='कृपया पाँचवटै प्रश्नको उत्तर दिनुहोस्।';
    review.hidden=true;review.replaceChildren();
    const field=form.querySelector('input[name="'+items[missing].name+'"]').closest('fieldset');
    field.tabIndex=-1;field.focus({preventScroll:true});
@@ -1178,8 +1180,8 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    return;
   }
   const score=responses.reduce((total,response,i)=>total+Number(response.value===items[i].answer),0);
-  feedback.className='ch9-quiz-feedback '+(score===3?'is-complete':'is-review');
-  feedback.textContent='नतिजा: '+nep(score)+' / ४ सही। '+(score===4?'चारवटै उत्तर सही छन्।':'तल प्रत्येक प्रश्नको व्याख्या पढेर पुनः अभ्यास गर्न सक्नुहुन्छ।');
+  feedback.className='ch9-quiz-feedback '+(score===items.length?'is-complete':'is-review');
+  feedback.textContent='नतिजा: '+nep(score)+' / '+nep(items.length)+' सही। '+(score===items.length?'पाँचवटै उत्तर सही छन्।':'तल प्रत्येक प्रश्नको व्याख्या पढेर पुनः अभ्यास गर्न सक्नुहुन्छ।');
   review.replaceChildren();
   items.forEach((item,i)=>{
    const correct=responses[i].value===item.answer;
