@@ -410,3 +410,8 @@ body.chapter-focus .chapter-bottom-nav .chapter-previous-button:focus-visible{
 @media(max-width:600px){
  body.chapter-focus .chapter-bottom-nav .chapter-previous-button{width:100%}
 }
+
+/* Chapter 1 opens directly on the actual Panchanga lesson, not the old course-card overview. */
+body.chapter-focus #pathshala>.cards,
+body.chapter-focus #pathshala #closeLesson{display:none!important}
+body.chapter-focus #pathshala #lesson{display:block}
