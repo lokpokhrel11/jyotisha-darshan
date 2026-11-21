@@ -336,3 +336,19 @@ test('Chapter 9: worked example follows source house-sign arithmetic', async ({ 
  await expect(page.locator('#ch9WorkedResult')).toContainText('धनु लग्न · लग्नेश बृहस्पति');
  await expect(page.locator('#ch9WorkedResult')).toContainText('धनु राशि (अङ्क ९)');
 });
+
+
+test('Chapter 9: ascendant occupancy exercise handles empty, one and many planets', async ({ page }) => {
+ await page.goto(chapter(9));
+ const output=page.locator('#ch9OccupancyResult');
+ await expect(output).toContainText('लग्न खाली छ');
+ await expect(page.locator('#ch9OccupancyDetail')).toBeHidden();
+ await page.locator('input[name="ch9Occupancy"][value="one"]').check();
+ await expect(output).toContainText('लग्नमा एउटा ग्रह: सूर्य');
+ await page.locator('#ch9OccupantPlanet').selectOption('शनि');
+ await expect(output).toContainText('अनुशासित');
+ await page.locator('input[name="ch9Occupancy"][value="many"]').check();
+ await expect(output).toContainText('कुन ग्रह बलवान् हो भन्ने यो अभ्यासले निर्धारण गर्दैन');
+ await page.locator('input[name="ch9Occupancy"][value="none"]').check();
+ await expect(page.locator('#ch9OccupancyDetail')).toBeHidden();
+});
