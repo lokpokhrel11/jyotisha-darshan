@@ -1124,10 +1124,20 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const form=document.getElementById('ch9Quiz');
  const feedback=document.getElementById('ch9Feedback');
  if(!form||!feedback)return;
+ const answers=[['ch9q','a'],['ch9q2','b'],['ch9q3','c']];
  form.addEventListener('submit',event=>{
   event.preventDefault();
-  const selected=form.querySelector('input[name="ch9q"]:checked');
-  feedback.textContent=!selected?'पहिले एउटा उत्तर छान्नुहोस्।':selected.value==='a'?'सही। गुरुजीका नोट (पृष्ठ ७७) मा लग्नेश, लग्नमा ग्रह र चन्द्रको अवस्था हेर्ने भनिएको छ।':'फेरि अध्ययन गर्नुहोस्। ९.१ मा लग्नेश, लग्नमा ग्रह र चन्द्रको अवस्था उल्लेख छ।';
+  const responses=answers.map(([name])=>form.querySelector('input[name="'+name+'"]:checked'));
+  const missing=responses.findIndex(value=>!value);
+  if(missing!==-1){
+   feedback.textContent='कृपया तीनवटै प्रश्नको उत्तर दिनुहोस्।';
+   const field=form.querySelector('input[name="'+answers[missing][0]+'"]').closest('fieldset');
+   field.tabIndex=-1;field.focus({preventScroll:true});
+   field.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+   return;
+  }
+  const score=responses.reduce((total,response,i)=>total+Number(response.value===answers[i][1]),0);
+  feedback.textContent='नतिजा: '+score+'/3। '+(score===3?'तीनवटै उत्तर सही। स्रोतको अध्ययन र चिकित्सकीय प्रमाणबीचको भिन्नता बुझ्नुभयो।':'९.१ को लग्नेशसम्बन्धी नियम र स्वास्थ्यसम्बन्धी सीमाहरू पुनः पढ्नुहोस्।');
   feedback.tabIndex=-1;feedback.focus({preventScroll:true});
  });
 })();
