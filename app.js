@@ -1400,7 +1400,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const clear=()=>{feedback.textContent='';feedback.className='ch10-feedback';review.hidden=true;review.replaceChildren()};
  form.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))clear()});
- form.addEventListener('reset',clear);
+ form.addEventListener('reset',()=>{clear();form.querySelectorAll('fieldset').forEach(field=>field.removeAttribute('tabindex'))});
  form.addEventListener('submit',event=>{
   event.preventDefault();
   const responses=items.map(item=>form.querySelector('input[name="'+item.name+'"]:checked'));
@@ -1412,7 +1412,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   }
   const score=responses.reduce((n,x,i)=>n+Number(x.value===items[i].answer),0);
   feedback.className='ch10-feedback is-result';
-  feedback.textContent='नतिजा: '+nep(score)+' / ३ सही। '+(score===3?'तीनवटै उत्तर सही छन्।':'तल व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
+  feedback.textContent='नतिजा: '+nep(score)+' / '+nep(items.length)+' सही। '+(score===items.length?'चारवटै उत्तर सही छन्।':'तल प्रत्येक प्रश्नको व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
   items.forEach((item,i)=>{
    const correct=responses[i].value===item.answer;
    const card=document.createElement('div');card.className='ch10-review-card';
