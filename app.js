@@ -908,6 +908,11 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(i>0){const prev=document.createElement('a');prev.href='#'+ids[i-1];prev.className='ch8-lesson-prev';prev.textContent='← '+(i===8?'पाठ ८':'अघिल्लो पाठ');footer.append(prev)}
   if(i<8){const next=document.createElement('a');next.href='#'+ids[i+1];next.className='ch8-lesson-next';next.textContent=i===7?'समग्र मूल्याङ्कन →':'अर्को पाठ →';footer.append(next)}
   section.append(footer);
+  /* Keep a compact navigation row visible immediately after each lesson heading. */
+  const top=footer.cloneNode(true);
+  top.classList.add('ch8-lesson-pager-top');
+  const heading=section.querySelector('h3');
+  if(heading)heading.after(top);
  });
  window.addEventListener('hashchange',update);
  update();
