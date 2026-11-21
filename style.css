@@ -1062,3 +1062,12 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter10 .ch10-review-card strong{display:block;margin-bottom:7px}
 #chapter10 .ch10-review-card p{margin:0;line-height:1.75}
 @media(max-width:600px){#chapter10 .ch10-example{padding:17px}#chapter10 .ch10-choice{padding:12px}#chapter10 .ch10-quiz-actions>*{flex:1 1 180px;text-align:center}}
+
+/* Chapter 10 lesson contents: accessible, compact navigation that works across themes. */
+#chapter10 .ch10-contents{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:16px 18px;margin:0 0 24px;border:1px solid var(--line);border-radius:13px;background:var(--soft)}
+#chapter10 .ch10-contents-label{font-weight:800;color:var(--ink);margin-right:7px}
+#chapter10 .ch10-contents a{display:inline-flex;align-items:center;min-height:40px;padding:9px 13px;border-radius:9px;border:1px solid var(--line);background:var(--white);color:var(--ink);font-size:.94rem;font-weight:650;text-decoration:none;line-height:1.5}
+#chapter10 .ch10-contents a:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--white))}
+#chapter10 .ch10-contents a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+#chapter10 [id^="ch10-"]{scroll-margin-top:90px}
+@media(max-width:600px){#chapter10 .ch10-contents{gap:8px;padding:13px}#chapter10 .ch10-contents-label{width:100%}#chapter10 .ch10-contents a{flex:1 1 calc(50% - 8px);justify-content:center;text-align:center;font-size:.9rem}}
