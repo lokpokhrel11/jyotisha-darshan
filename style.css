@@ -253,3 +253,18 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
 @media(max-width:650px){
  body #chapter8 nav.ch8-contents{display:block!important;position:relative;inset:auto;width:auto;max-height:none;overflow:visible;flex-direction:initial;padding:15px;margin:0 0 24px;border:1px solid #d9dfd9;background:#fafbf8}
 }
+
+/* Shared visual language across chapters and the Study Room (v5.7). */
+:root{--learning-radius:14px;--learning-shadow:0 5px 22px #1b35430b;--learning-accent:#b89559}
+#dashboard .chapter-card{border-radius:var(--learning-radius);box-shadow:var(--learning-shadow);border-color:#dce3dc}
+#dashboard .chapter-card:focus-visible{outline:3px solid var(--learning-accent);outline-offset:3px}
+.chapter-focus main .study-module{border-radius:var(--learning-radius);background:#fafbf8;border-color:#dce3dc;padding:clamp(17px,3vw,28px)}
+.chapter-focus main .study-panel{border-radius:12px;border-color:#dce3dc;box-shadow:var(--learning-shadow);padding:clamp(18px,2.8vw,28px)}
+.chapter-focus main .study-panel h3{color:#234451;line-height:1.4}
+.chapter-focus main .study-panel input:not([type="radio"]):not([type="checkbox"]),.chapter-focus main .study-panel select{min-height:44px;max-width:100%}
+.chapter-focus main .study-panel input[type="radio"],.chapter-focus main .study-panel input[type="checkbox"]{width:auto;max-width:none;min-height:0;margin:0 8px 0 0;vertical-align:middle}
+.chapter-focus main .study-panel .ch7-choice input[type="radio"]{width:19px;height:19px;margin:3px 0 0}
+.chapter-focus main .study-panel :focus-visible{outline:3px solid var(--learning-accent);outline-offset:3px}
+.chapter-focus main .study-panel table{max-width:100%}
+.chapter-focus main .study-panel .chapter7-table-wrap{overflow-x:auto}
+@media(max-width:600px){.chapter-focus main .study-module{padding:15px}.chapter-focus main .study-panel{padding:18px}}
