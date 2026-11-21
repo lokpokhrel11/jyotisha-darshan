@@ -828,3 +828,13 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 :root[data-theme="dark"] .assessment-completion-label{color:#e0ebe7}
 :root[data-theme="dark"] .assessment-completion-bar{accent-color:#e3bd7b}
 @media(max-width:480px){.assessment-completion{max-width:100%;margin:14px 0 20px}}
+
+/* v80: Distinct dashboard assessment outcomes. */
+.assessment-progress-row .assessment-result-status{display:inline-block;width:fit-content;font-weight:700;font-size:.88rem}
+.assessment-progress-row .assessment-result-details{display:block;font-size:.84rem;opacity:.83;line-height:1.5}
+.assessment-progress-row .assessment-achieved{color:#24744c}
+.assessment-progress-row .assessment-review{color:#985e16}
+.assessment-progress-row .assessment-unattempted{color:#526878}
+[data-theme="dark"] .assessment-progress-row .assessment-achieved{color:#9cddb5}
+[data-theme="dark"] .assessment-progress-row .assessment-review{color:#f0c78e}
+[data-theme="dark"] .assessment-progress-row .assessment-unattempted{color:#b5c8d5}
