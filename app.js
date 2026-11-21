@@ -120,9 +120,9 @@ function updateChart(){
   const hit=document.createElementNS('http://www.w3.org/2000/svg','circle');
   hit.setAttribute('cx',x);hit.setAttribute('cy',y-5);hit.setAttribute('r',28);hit.setAttribute('fill','transparent');
   const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-  t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('font-size','19');t.textContent=String(r);
+  t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('font-size','25');t.style.setProperty('fill',n===selectedHouse?'#95601d':'#173b4b','important');t.style.setProperty('font-weight','800','important');t.textContent=String(r);
   const sub=document.createElementNS('http://www.w3.org/2000/svg','text');
-  sub.setAttribute('x',x);sub.setAttribute('y',y+14);sub.setAttribute('font-size','10');sub.textContent=roman[i];
+  sub.setAttribute('x',x);sub.setAttribute('y',y+14);sub.setAttribute('font-size','11');sub.style.setProperty('fill',n===selectedHouse?'#95601d':'#516a74','important');sub.style.setProperty('font-weight','700','important');sub.textContent=roman[i];
   group.append(hit,t,sub);
   const select=()=>{selectedHouse=n;updateChart();};
   group.addEventListener('click',select);
