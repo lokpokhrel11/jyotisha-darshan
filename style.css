@@ -597,3 +597,52 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 :root[data-theme="dark"] .site-header nav a{color:#edf4f1}
 :root[data-theme="dark"] #chapter8 .ch8-nav-toggle{color:#edf4f1!important}
 :root[data-theme="dark"] .chapter-bottom-nav .chapter-back{color:#edf4f1!important}
+
+/* v70: Unified dark-mode quiz surfaces and readable answer choices.
+   Fixes white fieldsets with light text and legends overlapping the cards. */
+:root[data-theme="dark"] body.chapter-focus main :is(form,fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card){
+ color:#e8eeeb;
+}
+:root[data-theme="dark"] body.chapter-focus main :is(form fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card){
+ background:#20343e!important;
+ border:1px solid #4d6871!important;
+ border-radius:14px;
+}
+:root[data-theme="dark"] body.chapter-focus main form fieldset{
+ min-width:0;margin:0 0 18px;padding:22px 20px 20px;
+}
+:root[data-theme="dark"] body.chapter-focus main :is(form fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card)>legend{
+ color:#f2f3ed!important;background:transparent!important;
+ font-weight:750;line-height:1.6;
+ padding:0 6px;max-width:100%;
+}
+:root[data-theme="dark"] body.chapter-focus main :is(form fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card) :is(label,.ch7-choice,.quiz-option,.option,.answer-option){
+ display:flex;align-items:center;gap:12px;
+ background:#2c4550!important;color:#f0f4f0!important;
+ border:1px solid #57717b!important;border-radius:10px;
+ padding:13px 16px;margin:9px 0;
+ font-weight:550;line-height:1.65;cursor:pointer;
+}
+:root[data-theme="dark"] body.chapter-focus main :is(form fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card) :is(label,.ch7-choice,.quiz-option,.option,.answer-option) :is(span,strong,b,em){
+ color:inherit!important;
+}
+:root[data-theme="dark"] body.chapter-focus main :is(form fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card) :is(label,.ch7-choice,.quiz-option,.option,.answer-option):hover{
+ background:#365661!important;border-color:#c3a16b!important;
+}
+:root[data-theme="dark"] body.chapter-focus main :is(form fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card) :is(label,.ch7-choice,.quiz-option,.option,.answer-option):has(input:checked){
+ background:#354c50!important;border-color:#e2bd7c!important;
+ box-shadow:inset 3px 0 0 #e2bd7c;
+}
+:root[data-theme="dark"] body.chapter-focus main :is(form fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card) input:is([type="radio"],[type="checkbox"]){
+ flex:0 0 auto;width:19px;height:19px;margin:0;
+ accent-color:#e2bd7c;
+}
+:root[data-theme="dark"] body.chapter-focus main :is(.ch7-reason-feedback,#ch7Feedback,.ch8-assessment-feedback,.exam-feedback,.quiz-feedback):not(:empty){
+ background:#2b444b!important;color:#f0f4f0!important;
+ border-left:3px solid #e2bd7c;
+ padding:14px 16px;border-radius:6px;
+}
+@media(max-width:600px){
+ :root[data-theme="dark"] body.chapter-focus main form fieldset{padding:18px 13px 14px}
+ :root[data-theme="dark"] body.chapter-focus main :is(form fieldset,.ch8-assessment-item,.exam-question,.quiz-question,.quiz-card) :is(label,.ch7-choice,.quiz-option,.option,.answer-option){padding:12px;gap:10px}
+}
