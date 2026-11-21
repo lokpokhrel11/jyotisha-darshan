@@ -58,7 +58,7 @@ function renderQuestion(){
  q.options.forEach((option,i)=>{const b=document.createElement('button');b.type='button';b.textContent=option;b.addEventListener('click',()=>{
   if(answered)return;answered=true;const ok=i===q.correct;if(ok)correctCount++;
   if(!unitScores[q.unit])unitScores[q.unit]={right:0,total:0};unitScores[q.unit].total++;if(ok)unitScores[q.unit].right++;
-  $('quizFeedback').textContent=(ok?'सही। ':'अहिले सही भएन। ')+q.why;
+  $('quizFeedback').textContent=(ok?'सही। ':'यो उत्तर मिलेन। ')+q.why;
   $('quizProgress').textContent=`प्रश्न ${questionIndex+1} / ${questions.length} · सही ${correctCount} · स्रोत खण्ड ${q.unit}`;
   $('quizOptions').querySelectorAll('button').forEach(x=>x.disabled=true);
   $('nextQuestion').hidden=questionIndex===questions.length-1;
@@ -168,7 +168,7 @@ function drawExalted(){const g=$('exaltedChartLabels');g.replaceChildren();house
 });}
 function revealExalted(){const p=exaltedPlanets[Number(ep.value)];$('exaltedResult').textContent=`${p.name}: ${p.house} औँ भाव, ${signs[p.house-1]} राशि (${p.house})। उच्च कुण्डलीको शिक्षण उदाहरण।`;}
 $('exaltedReveal').addEventListener('click',revealExalted);
-ep.addEventListener('change',()=>{$('exaltedResult').textContent='ग्रह फेरियो। उत्तर देखाउनुहोस्।';});
+ep.addEventListener('change',()=>{$('exaltedResult').textContent='अर्को ग्रह छानिएको छ। त्यसको उत्तर हेर्नुहोस्।';});
 $('exaltedToggle').addEventListener('click',()=>{showExalted=!showExalted;$('exaltedToggle').setAttribute('aria-pressed',String(showExalted));$('exaltedToggle').textContent=showExalted?'चार्टका ग्रह लुकाउनुहोस्':'चार्टमा सबै ग्रह देखाउनुहोस्';drawExalted();});
 drawExalted();
 
@@ -200,7 +200,7 @@ const examForm=$('chapter2ExamForm'),examQuestions=$('chapter2ExamQuestions'),ex
 function renderChapter2Exam(){examQuestions.replaceChildren();chapter2Questions.forEach((q,i)=>{const fs=document.createElement('fieldset');fs.className='exam-question';const lg=document.createElement('legend');lg.textContent=`${i+1}. [${q[0]}] ${q[1]}`;fs.append(lg);q[2].forEach((answer,j)=>{const label=document.createElement('label');label.className='exam-option';const radio=document.createElement('input');radio.type='radio';radio.name=`chapter2q${i}`;radio.value=String(j);label.append(radio,document.createTextNode(' '+answer));fs.append(label);});examQuestions.append(fs);});examResults.hidden=true;examResults.replaceChildren();updateChapter2Progress();}
 function updateChapter2Progress(){let done=0;chapter2Questions.forEach((q,i)=>{if(examForm.querySelector(`input[name="chapter2q${i}"]:checked`))done++;});$('examProgress').textContent=`उत्तर दिइएका: ${done}/${chapter2Questions.length}`;}
 examForm.addEventListener('change',updateChapter2Progress);
-examForm.addEventListener('submit',event=>{event.preventDefault();const answers=chapter2Questions.map((q,i)=>examForm.querySelector(`input[name="chapter2q${i}"]:checked`));if(answers.some(a=>!a)){examResults.hidden=false;examResults.textContent='कृपया सबै २० प्रश्नको उत्तर दिनुहोस्।';const first=answers.findIndex(a=>!a);const target=examQuestions.querySelectorAll('fieldset.exam-question')[first];if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}return;}let score=0;const summary=document.createElement('div');const title=document.createElement('h3');chapter2Questions.forEach((q,i)=>{const chosen=Number(answers[i].value);const ok=chosen===q[3];if(ok)score++;const p=document.createElement('p');p.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(p);});title.textContent=`नतिजा: ${score}/20 · ${score>=16?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;examResults.replaceChildren(title,summary);examResults.hidden=false;title.tabIndex=-1;title.focus({preventScroll:true});try{localStorage.setItem('jyotisha-chapter2-score',JSON.stringify({score,total:20}));}catch(e){}examResults.scrollIntoView({behavior:'smooth',block:'start'});});
+examForm.addEventListener('submit',event=>{event.preventDefault();const answers=chapter2Questions.map((q,i)=>examForm.querySelector(`input[name="chapter2q${i}"]:checked`));if(answers.some(a=>!a)){examResults.hidden=false;examResults.textContent='नतिजा हेर्नुअघि सबै २० प्रश्नको उत्तर दिनुहोस्।';const first=answers.findIndex(a=>!a);const target=examQuestions.querySelectorAll('fieldset.exam-question')[first];if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}return;}let score=0;const summary=document.createElement('div');const title=document.createElement('h3');chapter2Questions.forEach((q,i)=>{const chosen=Number(answers[i].value);const ok=chosen===q[3];if(ok)score++;const p=document.createElement('p');p.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(p);});title.textContent=`नतिजा: ${score}/20 · ${score>=16?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;examResults.replaceChildren(title,summary);examResults.hidden=false;title.tabIndex=-1;title.focus({preventScroll:true});try{localStorage.setItem('jyotisha-chapter2-score',JSON.stringify({score,total:20}));}catch(e){}examResults.scrollIntoView({behavior:'smooth',block:'start'});});
 // Shuffle the question objects together with their answer keys and explanations.
 // Reject an unchanged order so every reset visibly changes the sequence.
 function reshuffleChapter2Questions(){
@@ -250,7 +250,7 @@ for(const id of ['planetStatus','planetSign'])$(id).addEventListener('change',()
 const aspectOffsets={2:[4,7,8],4:[5,7,9],6:[3,7,10]};
 function calculateAspects(){const i=Number($('aspectPlanet').value),house=Number($('aspectHouse').value);if(i>=7){$('aspectResult').textContent='राहु–केतुको दृष्टि यस नोटमा स्पष्ट नभएकाले गणना स्थगित छ। [पुष्टि गर्नुपर्ने]';return;}const offsets=aspectOffsets[i]||[7];const houses=offsets.map(n=>((house+n-2)%12)+1);$('aspectResult').textContent=`${navagraha[i]} ${house} औँ भावमा हुँदा ${offsets.join(', ')} औँ दृष्टि क्रमशः ${houses.join(', ')} भावमा पर्छ। बसेको भावलाई १ मानेर गनिएको हो।`;}
 $('aspectCalculate').addEventListener('click',calculateAspects);
-for(const id of ['aspectPlanet','aspectHouse'])$(id).addEventListener('change',()=>{$('aspectResult').textContent='चयन परिवर्तन भयो। फेरि गणना गर्नुहोस्।';});calculateAspects();
+for(const id of ['aspectPlanet','aspectHouse'])$(id).addEventListener('change',()=>{$('aspectResult').textContent='छनोट बदलिएको छ। नयाँ मानका आधारमा फेरि गणना गर्नुहोस्।';});calculateAspects();
 const friendships=[
 ['चन्द्र, मङ्गल, बृहस्पति','बुध','शुक्र, शनि'],['सूर्य, बुध','मङ्गल, बृहस्पति, शुक्र, शनि','कोही छैन'],
 ['सूर्य, चन्द्र, बृहस्पति','शुक्र, शनि','बुध'],['सूर्य, शुक्र','मङ्गल, बृहस्पति, शनि','चन्द्र'],
@@ -265,7 +265,7 @@ const chapter3Form=$('chapter3ExamForm'),chapter3Container=$('chapter3ExamQuesti
 function renderChapter3(){chapter3Container.replaceChildren();chapter3Bank.forEach((q,i)=>{const fs=document.createElement('fieldset');fs.className='exam-question';const legend=document.createElement('legend');legend.textContent=`${i+1}. [${q[0]}] ${q[1]}`;fs.append(legend);q[2].forEach((a,j)=>{const label=document.createElement('label');label.className='exam-option';const input=document.createElement('input');input.type='radio';input.name=`ch3q${i}`;input.value=String(j);label.append(input,document.createTextNode(' '+a));fs.append(label);});chapter3Container.append(fs);});chapter3Results.hidden=true;chapter3Results.replaceChildren();updateChapter3Progress();}
 function updateChapter3Progress(){let count=0;chapter3Bank.forEach((q,i)=>{if(chapter3Form.querySelector(`input[name="ch3q${i}"]:checked`))count++;});$('chapter3Progress').textContent=`उत्तर दिइएका: ${count}/${chapter3Bank.length}`;}
 chapter3Form.addEventListener('change',updateChapter3Progress);
-chapter3Form.addEventListener('submit',event=>{event.preventDefault();const answers=chapter3Bank.map((q,i)=>chapter3Form.querySelector(`input[name="ch3q${i}"]:checked`));if(answers.some(a=>!a)){chapter3Results.textContent='कृपया सबै १५ प्रश्नको उत्तर दिनुहोस्।';chapter3Results.hidden=false;const first=answers.findIndex(a=>!a);const target=chapter3Container.querySelectorAll('fieldset.exam-question')[first];if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}return;}let score=0;const summary=document.createElement('div');chapter3Bank.forEach((q,i)=>{const ok=Number(answers[i].value)===q[3];if(ok)score++;const line=document.createElement('p');line.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(line);});const heading=document.createElement('h3');heading.textContent=`नतिजा: ${score}/15 · ${score>=12?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;chapter3Results.replaceChildren(heading,summary);chapter3Results.hidden=false;heading.tabIndex=-1;heading.focus({preventScroll:true});try{localStorage.setItem('jyotisha-chapter3-score',JSON.stringify({score,total:15}));}catch(e){}chapter3Results.scrollIntoView({behavior:'smooth',block:'start'});});
+chapter3Form.addEventListener('submit',event=>{event.preventDefault();const answers=chapter3Bank.map((q,i)=>chapter3Form.querySelector(`input[name="ch3q${i}"]:checked`));if(answers.some(a=>!a)){chapter3Results.textContent='नतिजा हेर्नुअघि सबै १५ प्रश्नको उत्तर दिनुहोस्।';chapter3Results.hidden=false;const first=answers.findIndex(a=>!a);const target=chapter3Container.querySelectorAll('fieldset.exam-question')[first];if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}return;}let score=0;const summary=document.createElement('div');chapter3Bank.forEach((q,i)=>{const ok=Number(answers[i].value)===q[3];if(ok)score++;const line=document.createElement('p');line.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(line);});const heading=document.createElement('h3');heading.textContent=`नतिजा: ${score}/15 · ${score>=12?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;chapter3Results.replaceChildren(heading,summary);chapter3Results.hidden=false;heading.tabIndex=-1;heading.focus({preventScroll:true});try{localStorage.setItem('jyotisha-chapter3-score',JSON.stringify({score,total:15}));}catch(e){}chapter3Results.scrollIntoView({behavior:'smooth',block:'start'});});
 $('chapter3Reset').addEventListener('click',()=>{const prev=chapter3Bank.slice();for(let i=chapter3Bank.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[chapter3Bank[i],chapter3Bank[j]]=[chapter3Bank[j],chapter3Bank[i]];}if(chapter3Bank.every((q,i)=>q===prev[i]))[chapter3Bank[0],chapter3Bank[1]]=[chapter3Bank[1],chapter3Bank[0]];chapter3Form.reset();renderChapter3();const first=chapter3Container.querySelector('fieldset');if(first){first.setAttribute('tabindex','-1');first.focus({preventScroll:true});first.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}});
 renderChapter3();
 
@@ -679,8 +679,8 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  quiz.addEventListener('submit',event=>{
   event.preventDefault();
   const answer=quiz.querySelector('input[name="ch7q"]:checked');
-  if(!answer){feedback.textContent='पहिले एउटा उत्तर छान्नुहोस्।';return;}
-  feedback.textContent=answer.value==='b'?'सही। मकर राशिको स्वामी शनि हो। तर उदाहरणमा दशौँ भावमा बसेको ग्रह मङ्गल हो। भावेश र भावमा बसेको ग्रह फरक हुन्।':'फेरि विचार गर्नुहोस्। दशौँ भावको राशि मकर हो, त्यसको स्वामी शनि हो। उदाहरणमा त्यहाँ मङ्गल बसेको छ।';
+  if(!answer){feedback.textContent='उत्तर जाँच्नुअघि एउटा विकल्प छान्नुहोस्।';return;}
+  feedback.textContent=answer.value==='b'?'सही। मकर राशिको स्वामी शनि हो। तर उदाहरणमा दशौँ भावमा बसेको ग्रह मङ्गल हो। भावेश र भावमा बसेको ग्रह फरक हुन्।':'यस उदाहरणमा दशौँ भावमा मकर राशि परेको छ, जसको स्वामी शनि हो। मङ्गल भने उक्त भावमा राखिएको ग्रह हो। भावेश र भावमा रहेको ग्रहबीचको भिन्नता विचार गर्नुहोस्।';
  });
 })();
 
@@ -759,7 +759,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  select.addEventListener('change',render);
  check.addEventListener('click',()=>{
   const selected=fieldset.querySelector('input[name="ch7reason"]:checked');feedback.replaceChildren();
-  if(!selected){feedback.textContent='पहिले एउटा निष्कर्ष छान्नुहोस्।';return}
+  if(!selected){feedback.textContent='उत्तर जाँच्नुअघि उपलब्ध निष्कर्षमध्ये एउटा छान्नुहोस्।';return}
   const task=tasks[select.value],correct=Number(selected.value)===task.correct;
   const heading=document.createElement('strong');heading.textContent=correct?'सही तर्क।':'यो निष्कर्ष स्रोतसँग मिलेन।';
   const explanation=document.createElement('p');explanation.textContent=task.why;
@@ -784,7 +784,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
 (function(){
  const form=document.getElementById('ch8SourceQuiz'),feedback=document.getElementById('ch8SourceFeedback');
  if(!form||!feedback)return;
- form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8source"]:checked');feedback.textContent=!checked?'पहिले एउटा उत्तर छान्नुहोस्।':checked.value==='b'?'सही। “माथिको/तलको सम्पत्ति” को अर्थ नोटमा पुष्टि गर्न बाँकी छ। सम्भावित व्याख्यालाई निश्चित नियम बनाउन हुँदैन।':'यो कथन नोटमा लेखिएको छ। अस्पष्ट र पुष्टि गर्न बाँकी रहेको वाक्य छुट्याउनुहोस्।'});
+ form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8source"]:checked');feedback.textContent=!checked?'उत्तर जाँच्नुअघि एउटा विकल्प छान्नुहोस्।':checked.value==='b'?'सही। “माथिको/तलको सम्पत्ति” को अर्थ नोटमा पुष्टि गर्न बाँकी छ। सम्भावित व्याख्यालाई निश्चित नियम बनाउन हुँदैन।':'यो कथन नोटमा लेखिएको छ। अस्पष्ट र पुष्टि गर्न बाँकी रहेको वाक्य छुट्याउनुहोस्।'});
 })();
 
 /* Chapter 8.5: verify the sequence in the reference notes' fourth-house reading. */
