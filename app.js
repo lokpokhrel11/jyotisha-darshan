@@ -655,3 +655,42 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const button=document.createElement('button');button.type='button';button.dataset.house=String(house);button.textContent='भाव '+house;button.addEventListener('click',()=>show(house));buttons.append(button);
  });show(1);
 })();
+
+/* v4.4: Source-grounded interpretive reasoning with explanatory feedback. */
+(function(){
+ const select=document.getElementById('ch7ReasonQuestion'),fieldset=document.getElementById('ch7ReasonChoices'),check=document.getElementById('ch7ReasonCheck'),feedback=document.getElementById('ch7ReasonFeedback');
+ if(!select||!fieldset||!check||!feedback)return;
+ const tasks={
+  lord:{prompt:'दशौँ भावको स्वामी र त्यहाँ बसेको ग्रहबारे कुन कथन सही छ?',options:[
+   'मङ्गल दशौँ भावमा छ, त्यसैले दशौँ भावको स्वामी पनि मङ्गल हो।',
+   'दशौँ भाव मकर हो, यसको स्वामी शनि हो; उदाहरणमा त्यस भावमा मङ्गल बसेको छ।',
+   'शनि पहिलो भावमा छ, त्यसैले दशौँ भावको स्वामी बृहस्पति हो।'
+  ],correct:1,why:'मेष लग्नमा दशौँ भाव मकर राशिमा पर्छ। मकरको राशिस्वामी शनि हो। पृष्ठ ६४ को अभ्यासमा मङ्गल दशौँ भावमा उच्च अवस्थामा बसेको छ। भावेश र भावमा बसेको ग्रह फरक हुन्।'},
+  aspects:{prompt:'पृष्ठ ६४ को उदाहरणमा दशौँ भावबारे कुन निष्कर्ष स्रोतले समर्थन गर्छ?',options:[
+   'शनि र बृहस्पति दुवैको दृष्टि दशौँ भावमा पर्छ, त्यसैले दुवै संकेतलाई विचार गर्नुपर्छ।',
+   'दशौँ भावमा कुनै ग्रहको दृष्टि पर्दैन।',
+   'दशौँ भावमा केवल चन्द्रको दृष्टि पर्छ।'
+  ],correct:0,why:'पहिलो भावको शनिको दशौँ दृष्टि र चौथो भावको बृहस्पतिको सातौँ दृष्टि दशौँ भावमा पुग्छ। पृष्ठ ६४ ले दुवैलाई सँगै विचार गरेको छ।'},
+  limits:{prompt:'उदाहरणमा सूर्यलगायत केही ग्रहहरूको स्थिति दिइएको छैन। अध्ययनका लागि कुन निष्कर्ष उपयुक्त छ?',options:[
+   'सूर्यको स्थिति थाहा नभए पनि सबै योग र दशाको अन्तिम फल निश्चित गर्न सकिन्छ।',
+   'खाली देखिएका सबै भावमा कुनै ग्रह छैन भन्ने प्रमाणित हुन्छ।',
+   'उपलब्ध ग्रहस्थितिबाट सीमित अभ्यास गर्न सकिन्छ, तर नदिइएका ग्रहस्थान र पूर्ण योगको निष्कर्ष अनुमान गर्नु हुँदैन।'
+  ],correct:2,why:'नोटको अभ्यास कुण्डली पूर्ण जन्मकुण्डली होइन। पृष्ठ ६४ मा सूर्यको स्थान नदिइएको उल्लेख छ। त्यसैले उपलब्ध प्रमाणभन्दा बाहिरको ग्रहस्थिति वा योग अनुमान गर्नु उचित हुँदैन।'}
+ };
+ function render(){
+  const task=tasks[select.value];fieldset.replaceChildren();
+  const legend=document.createElement('legend');legend.textContent=task.prompt;fieldset.append(legend);
+  task.options.forEach((option,i)=>{const label=document.createElement('label');label.className='ch7-choice';const radio=document.createElement('input');radio.type='radio';radio.name='ch7reason';radio.value=String(i);label.append(radio,document.createTextNode(' '+option));fieldset.append(label)});
+  feedback.replaceChildren();
+ }
+ select.addEventListener('change',render);
+ check.addEventListener('click',()=>{
+  const selected=fieldset.querySelector('input[name="ch7reason"]:checked');feedback.replaceChildren();
+  if(!selected){feedback.textContent='पहिले एउटा निष्कर्ष छान्नुहोस्।';return}
+  const task=tasks[select.value],correct=Number(selected.value)===task.correct;
+  const heading=document.createElement('strong');heading.textContent=correct?'सही तर्क।':'यो निष्कर्ष स्रोतसँग मिलेन।';
+  const explanation=document.createElement('p');explanation.textContent=task.why;
+  feedback.append(heading,explanation);
+ });
+ render();
+})();
