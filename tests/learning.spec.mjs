@@ -141,3 +141,13 @@ test('Chapter 8: inclusive kinship counting and quiz',async({page})=>{
  await page.locator('#ch8Quiz button[type="submit"]').click();
  await expect(page.locator('#ch8Feedback')).toContainText('सही');
 });
+
+test('Chapter 8: inheritance source boundaries and family traditions quiz',async({page})=>{
+ await page.goto(chapter(8));
+ await expect(page.locator('#chapter8')).toContainText('८.३ · पैतृक सम्पत्ति');
+ await expect(page.locator('#chapter8')).toContainText('८.४ · पारिवारिक संस्कार');
+ await expect(page.locator('#chapter8')).toContainText('[पुष्टि गर्नुपर्ने]');
+ await page.locator('#ch8SourceQuiz input[value="b"]').check();
+ await page.locator('#ch8SourceQuiz button[type="submit"]').click();
+ await expect(page.locator('#ch8SourceFeedback')).toContainText('सही');
+});
