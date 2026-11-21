@@ -268,3 +268,23 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
 .chapter-focus main .study-panel table{max-width:100%}
 .chapter-focus main .study-panel .chapter7-table-wrap{overflow-x:auto}
 @media(max-width:600px){.chapter-focus main .study-module{padding:15px}.chapter-focus main .study-panel{padding:18px}}
+
+/* v5.8 stabilization: header overlap, direct Chapter 1 entry, settings, placeholders */
+body:not(.chapter-focus) .hero{position:relative;padding-top:clamp(70px,8vw,110px);min-height:460px}
+body:not(.chapter-focus) .hero-inner{position:relative;z-index:2}
+body.chapter-focus .chapter-focus-banner{position:relative;top:auto;z-index:1;padding-top:28px}
+body.chapter-focus .chapter-focus-banner .chapter-back{position:static;display:inline-flex;margin-bottom:16px}
+body.chapter-focus .chapter-focus-banner h1{margin:8px 0 20px;line-height:1.35}
+body.chapter-focus #chapter8 .ch8-hero{margin-top:12px}
+body.chapter-focus #pathshala>.cards,body.chapter-focus #pathshala>.section-heading{display:none}
+body.chapter-focus #pathshala #lesson{display:block}
+.dashboard-settings{margin:20px 0;padding:12px 18px;border:1px solid #dce3dc;border-radius:12px;background:#fff}
+.dashboard-settings summary{cursor:pointer;color:#38545b;font-weight:650}
+.dashboard-settings p{margin:12px 0}
+.dashboard-settings .button{min-height:44px}
+body:not(.chapter-focus) #consult,body:not(.chapter-focus) #workbench{display:none!important}
+@media(max-width:650px){
+ body:not(.chapter-focus) .hero{padding-top:58px;padding-bottom:48px;min-height:0}
+ body.chapter-focus .chapter-focus-banner{padding-top:22px}
+ body.chapter-focus .chapter-focus-banner h1{font-size:clamp(1.7rem,7vw,2.25rem)}
+}
