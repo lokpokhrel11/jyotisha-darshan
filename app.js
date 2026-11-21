@@ -897,8 +897,12 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const i=Math.max(0,ids.indexOf(hash));
   progress.textContent=i===8?'समग्र मूल्याङ्कन · ८ पाठपछि': 'अध्ययन क्रम: पाठ '+nep(i+1)+' / ८';
   links.forEach(a=>{
-   if(a.getAttribute('href')==='#'+ids[i])a.setAttribute('aria-current','location');
+   const active=a.getAttribute('href')==='#'+ids[i];
+   if(active)a.setAttribute('aria-current','location');
    else a.removeAttribute('aria-current');
+  });
+  sections.forEach((section,index)=>{
+   section.classList.toggle('ch8-current-lesson',index===i);
   });
  }
  sections.forEach((section,i)=>{
@@ -914,6 +918,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const heading=section.querySelector('h3');
   if(heading)heading.after(top);
  });
+ chapter.addEventListener('click',event=>{if(event.target.closest('a[href^="#ch8-"]')||event.target.closest('a[href="#ch8AssessmentPanel"]'))queueMicrotask(update)});
  window.addEventListener('hashchange',update);
  update();
 })();
