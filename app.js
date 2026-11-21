@@ -399,7 +399,7 @@ function yoginiBalance(){const selection=yoginiSelection(),out=$('ygBalanceOutpu
  const y=yoginis[selection.index],remaining=(b-a)/b*y[2],totalDays=Math.round(remaining*360),years=Math.floor(totalDays/360),months=Math.floor((totalDays%360)/30),days=totalDays%30;out.textContent=`${y[0]} (${y[1]}) को पूर्ण अवधि ${y[2]} वर्ष। दशा शेष = (${b} − ${a}) ÷ ${b} × ${y[2]} = ${remaining.toFixed(4)} वर्ष ≈ ${years} वर्ष ${months} महिना ${days} दिन।`;}
 $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventListener('click',yoginiBalance);yoginiCycle();yoginiBalance();
 
-(function(){const key='jyotisha-pathshala-opened-v3';let opened=[];try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))opened=[...new Set(v.filter(x=>Number.isInteger(x)&&x>=1&&x<=8))]}catch(_){}const cards=[...document.querySelectorAll('.chapter-card[data-chapter]')];function render(){cards.forEach(c=>c.classList.toggle('visited',opened.includes(Number(c.dataset.chapter))));const n=opened.length;document.getElementById('progressCount').textContent=String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' / ८';document.getElementById('progressFill').style.width=(n/8*100)+'%';document.getElementById('progressTrack').setAttribute('aria-valuenow',String(n))}cards.forEach(c=>c.addEventListener('click',()=>{const n=Number(c.dataset.chapter);if(!opened.includes(n)){opened.push(n);try{localStorage.setItem(key,JSON.stringify(opened))}catch(_){}render()}}));document.getElementById('resetProgress').addEventListener('click',()=>{if(!window.confirm('यस ब्राउजरमा सुरक्षित अध्ययन प्रगति हटाउने?'))return;opened=[];try{localStorage.removeItem(key)}catch(_){}render()});render()})();
+(function(){const key='jyotisha-pathshala-opened-v3';let opened=[];try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))opened=[...new Set(v.filter(x=>Number.isInteger(x)&&x>=1&&x<=8))]}catch(_){}const cards=[...document.querySelectorAll('.chapter-card[data-chapter]')];function render(){cards.forEach(c=>c.classList.toggle('visited',opened.includes(Number(c.dataset.chapter))));const n=opened.length;document.getElementById('progressCount').textContent=String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' / ८';document.getElementById('progressFill').style.width=(n/8*100)+'%';document.getElementById('progressTrack').setAttribute('aria-valuenow',String(n))}cards.forEach(c=>c.addEventListener('click',()=>{const n=Number(c.dataset.chapter);if(!opened.includes(n)){opened.push(n);try{localStorage.setItem(key,JSON.stringify(opened))}catch(_){}render()}}));document.getElementById('resetProgress').addEventListener('click',()=>{if(!window.confirm('यस ब्राउजरमा सुरक्षित अध्ययन प्रगति हटाउने?'))return;opened=[];try{localStorage.removeItem(key);localStorage.removeItem('jyotisha-pathshala-last-chapter-v1');localStorage.removeItem('jyotisha-pathshala-ch8-last-lesson-v1')}catch(_){}document.querySelector('.study-resume')?.remove();render()});render()})();
 
 /* v3.1 chapter-focused reading mode. All existing widgets stay mounted. */
 (function(){
@@ -893,8 +893,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
     const link=event.target.closest('a[href^="#"]');
     if(link)remember(decodeURIComponent(link.hash.slice(1)));
    });
-   const initial=decodeURIComponent(location.hash.slice(1));
-   if(ids.has(initial))remember(initial);
+   const rememberHash=()=>{const id=decodeURIComponent(location.hash.slice(1));if(ids.has(id))remember(id)};
+   window.addEventListener('hashchange',rememberHash);
+   rememberHash();
   }
   return;
  }
