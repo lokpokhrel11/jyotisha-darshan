@@ -966,3 +966,16 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter9 .ch9-concept-strip a:hover,#chapter9 .ch9-concept-strip a:focus-visible{border-bottom-color:var(--gold);outline-offset:3px}
 #chapter9 .ch9-concept-strip a span{font-size:1.2rem}
 @media(max-width:700px){#chapter9 .ch9-concept-strip{grid-template-columns:1fr;gap:10px}#chapter9 .ch9-concept-strip article{display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:14px;padding:17px}#chapter9 .ch9-concept-icon{grid-row:span 3;margin:0}#chapter9 .ch9-concept-strip p{min-height:0;margin-bottom:9px}#chapter9 .ch9-concept-strip h3{margin-bottom:4px}}
+
+/* Chapter 9: scan-friendly source passages, preserving substantive cautions. */
+#chapter9 .ch9-topic-summary{margin:0 0 22px}
+#chapter9 .ch9-topic-tag{font-size:.78rem;font-weight:800;letter-spacing:.03em;color:var(--gold);margin-bottom:12px}
+#chapter9 .ch9-topic-pills{display:flex;flex-wrap:wrap;gap:9px}
+#chapter9 .ch9-topic-pills span{display:inline-flex;align-items:center;min-height:38px;padding:7px 14px;border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line));border-radius:999px;background:color-mix(in srgb,var(--gold) 9%,var(--white));color:var(--ink);font-size:.88rem;font-weight:650}
+#chapter9 .ch9-reading-note,#chapter9 .ch9-evidence-note,#chapter9 .ch9-source-pending{padding:17px 20px;border-radius:12px;margin:14px 0;line-height:1.75}
+#chapter9 .ch9-reading-note{background:var(--soft);border-left:4px solid var(--gold)}
+#chapter9 .ch9-evidence-note{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--muted)}
+#chapter9 .ch9-source-pending{background:color-mix(in srgb,var(--gold) 8%,var(--white));border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line))}
+#chapter9 .ch9-reading-note>strong,#chapter9 .ch9-evidence-note>strong,#chapter9 .ch9-source-pending>strong{display:block;font-size:.96rem;margin-bottom:8px;color:var(--ink)}
+#chapter9 .ch9-reading-note p,#chapter9 .ch9-evidence-note p,#chapter9 .ch9-source-pending p{margin:0;color:var(--ink)}
+@media(max-width:600px){#chapter9 .ch9-reading-note,#chapter9 .ch9-evidence-note,#chapter9 .ch9-source-pending{padding:14px 15px}#chapter9 .ch9-topic-pills{gap:7px}#chapter9 .ch9-topic-pills span{padding:6px 10px;font-size:.82rem}}
