@@ -303,3 +303,80 @@ body.chapter-focus #chapter7,body.chapter-focus #chapter8{scroll-margin-top:calc
  body.chapter-focus #chapter8 .ch8-hero{padding:22px 18px}
  body.chapter-focus #chapter7,body.chapter-focus #chapter8{scroll-margin-top:110px}
 }
+
+/* Shared Chapter 8-inspired editorial design for focused Chapters 1–7.
+   Reuses existing semantic headings, panels and functional controls. */
+body.chapter-focus:has(#chapter8:not(.chapter-focus-hidden)){} /* no layout change to Chapter 8 */
+body.chapter-focus #pathshala,
+body.chapter-focus #chapter2,
+body.chapter-focus #chapter3,
+body.chapter-focus #chapter4,
+body.chapter-focus #chapter5,
+body.chapter-focus #chapter6,
+body.chapter-focus #chapter7{max-width:1120px;margin-inline:auto}
+body.chapter-focus #pathshala>.section-heading,
+body.chapter-focus #chapter2>.section-heading,
+body.chapter-focus #chapter3>.section-heading,
+body.chapter-focus #chapter4>.section-heading,
+body.chapter-focus #chapter5>.section-heading,
+body.chapter-focus #chapter6>.section-heading,
+body.chapter-focus #chapter7>.section-heading{
+ position:relative;overflow:hidden;display:flex;align-items:center;
+ padding:clamp(28px,5vw,54px);margin-bottom:24px;border:0;border-radius:18px;
+ background:linear-gradient(122deg,#183743 0%,#254956 68%,#375c5d 100%);color:#f9f5ea;
+}
+body.chapter-focus #pathshala>.section-heading:after,
+body.chapter-focus #chapter2>.section-heading:after,
+body.chapter-focus #chapter3>.section-heading:after,
+body.chapter-focus #chapter4>.section-heading:after,
+body.chapter-focus #chapter5>.section-heading:after,
+body.chapter-focus #chapter6>.section-heading:after,
+body.chapter-focus #chapter7>.section-heading:after{
+ content:attr(data-chapter-number);position:absolute;right:3%;bottom:-.3em;
+ font-size:clamp(130px,22vw,270px);font-weight:800;line-height:1;
+ opacity:.055;pointer-events:none;
+}
+body.chapter-focus #pathshala>.section-heading h2,
+body.chapter-focus #chapter2>.section-heading h2,
+body.chapter-focus #chapter3>.section-heading h2,
+body.chapter-focus #chapter4>.section-heading h2,
+body.chapter-focus #chapter5>.section-heading h2,
+body.chapter-focus #chapter6>.section-heading h2,
+body.chapter-focus #chapter7>.section-heading h2{
+ font-size:clamp(1.8rem,4vw,3.1rem);color:#fff;line-height:1.3;margin:0 0 14px;
+}
+body.chapter-focus #pathshala>.section-heading .eyebrow,
+body.chapter-focus #chapter2>.section-heading .eyebrow,
+body.chapter-focus #chapter3>.section-heading .eyebrow,
+body.chapter-focus #chapter4>.section-heading .eyebrow,
+body.chapter-focus #chapter5>.section-heading .eyebrow,
+body.chapter-focus #chapter6>.section-heading .eyebrow,
+body.chapter-focus #chapter7>.section-heading .eyebrow{color:#e8c995}
+body.chapter-focus #pathshala>.section-heading p:not(.eyebrow),
+body.chapter-focus #chapter2>.section-heading p:not(.eyebrow),
+body.chapter-focus #chapter3>.section-heading p:not(.eyebrow),
+body.chapter-focus #chapter4>.section-heading p:not(.eyebrow),
+body.chapter-focus #chapter5>.section-heading p:not(.eyebrow),
+body.chapter-focus #chapter6>.section-heading p:not(.eyebrow),
+body.chapter-focus #chapter7>.section-heading p:not(.eyebrow){color:#e3e9e7;max-width:690px}
+body.chapter-focus #chapter2>.section-heading .status{color:#fff8e9;border:1px solid #ffffff55;background:#ffffff18}
+body.chapter-focus #chapter2 .method-grid>div,
+body.chapter-focus #chapter3 .study-panel,
+body.chapter-focus #chapter7 .study-panel{
+ border:1px solid #dfe4de;border-radius:14px;background:#fff;
+ box-shadow:0 4px 20px #1b35430a;
+}
+body.chapter-focus #chapter7>.section-heading h2{
+ position:static!important;width:auto;height:auto;padding:0;margin:0 0 14px;
+ overflow:visible;clip:auto;white-space:normal;border:0;
+}
+@media(max-width:650px){
+ body.chapter-focus #pathshala>.section-heading,
+ body.chapter-focus #chapter2>.section-heading,
+ body.chapter-focus #chapter3>.section-heading,
+ body.chapter-focus #chapter4>.section-heading,
+ body.chapter-focus #chapter5>.section-heading,
+ body.chapter-focus #chapter6>.section-heading,
+ body.chapter-focus #chapter7>.section-heading{padding:24px 20px;border-radius:14px}
+ body.chapter-focus #chapter2>.section-heading{align-items:flex-start;flex-direction:column;gap:12px}
+}
