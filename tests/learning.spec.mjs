@@ -102,3 +102,12 @@ test('Chapter 7: evidence-based interpretation provides accurate feedback',async
  await page.locator('#ch7ReasonCheck').click();
  await expect(page.locator('#ch7ReasonFeedback')).toContainText('स्रोतसँग मिलेन');
 });
+
+test('Chapter 7: chart and house-lord selector are explicitly distinct',async({page})=>{
+ await page.goto(chapter(7));
+ await expect(page.locator('#chapter7')).toContainText('मेष लग्नको स्थिर अभ्यास उदाहरण');
+ await page.locator('#ch7Asc').selectOption('7');
+ await page.locator('#ch7HouseButtons button[data-house="10"]').click();
+ await expect(page.locator('#ch7HouseDetail')).toContainText('मकर');
+ await expect(page.locator('#ch7HouseDetail')).toContainText('मङ्गल');
+});
