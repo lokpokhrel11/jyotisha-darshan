@@ -10,8 +10,23 @@ const anga=[
 ];
 const $=id=>document.getElementById(id);
 $('year').textContent=new Date().getFullYear();
-$('menu').addEventListener('click',()=>{const open=$('nav').classList.toggle('open');$('menu').setAttribute('aria-expanded',String(open));});
-$('nav').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{$('nav').classList.remove('open');$('menu').setAttribute('aria-expanded','false');}));
+const menuButton=$('menu'),mainNav=$('nav');
+function setMenuOpen(open){
+ mainNav.classList.toggle('open',open);
+ menuButton.setAttribute('aria-expanded',String(open));
+ menuButton.setAttribute('aria-label',open?'विषय सूची बन्द गर्नुहोस्':'विषय सूची खोल्नुहोस्');
+}
+menuButton.addEventListener('click',()=>setMenuOpen(menuButton.getAttribute('aria-expanded')!=='true'));
+mainNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenuOpen(false)));
+document.addEventListener('keydown',event=>{
+ if(event.key==='Escape'&&menuButton.getAttribute('aria-expanded')==='true'){
+  setMenuOpen(false);
+  menuButton.focus();
+ }
+});
+document.addEventListener('pointerdown',event=>{
+ if(menuButton.getAttribute('aria-expanded')==='true'&&!mainNav.contains(event.target)&&!menuButton.contains(event.target))setMenuOpen(false);
+});
 function showAnga(i){$('angaTabs').querySelectorAll('button').forEach((b,j)=>{b.classList.toggle('selected',i===j);b.setAttribute('aria-pressed',String(i===j));});const a=anga[i];$('angaDetail').innerHTML=`<strong>${a.name}</strong> · ${a.count}<p>${a.desc}</p>`;}
 anga.forEach((a,i)=>{const b=document.createElement('button');b.textContent=a.name;b.addEventListener('click',()=>showAnga(i));$('angaTabs').append(b);});showAnga(0);
 $('openLesson').addEventListener('click',()=>{$('lesson').hidden=false;$('lesson').scrollIntoView({behavior:'smooth',block:'start'});});
