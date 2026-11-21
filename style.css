@@ -1009,3 +1009,10 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter9 .ch9-explanation strong{display:block;margin-bottom:6px;color:var(--ink)}
 #chapter9 .ch9-explanation p{margin:0;line-height:1.7;color:var(--ink)}
 @media(max-width:600px){#chapter9 .ch9-quiz-actions>*{flex:1 1 180px;text-align:center}#chapter9 .ch9-explanation{padding:13px 14px}}
+
+/* Chapter 9 assessment question hierarchy: legible in light and dark modes. */
+#chapter9 #ch9Quiz legend{display:table;max-width:100%;padding:7px 10px;line-height:1.65;font-size:1.04rem}
+#chapter9 .ch9-question-number{display:inline-flex;align-items:center;justify-content:center;min-width:35px;min-height:31px;margin-right:11px;padding:3px 7px;border-radius:8px;background:color-mix(in srgb,var(--gold) 17%,var(--white));border:1px solid color-mix(in srgb,var(--gold) 42%,var(--line));color:var(--ink);font-weight:800;font-size:.88rem}
+#chapter9 #ch9Quiz fieldset{margin-bottom:25px}
+#chapter9 #ch9Quiz .ch7-choice{transition:border-color .16s ease,background-color .16s ease}
+@media(max-width:600px){#chapter9 #ch9Quiz legend{font-size:.97rem;line-height:1.6}#chapter9 .ch9-question-number{min-width:31px;min-height:28px;margin-right:8px}}
