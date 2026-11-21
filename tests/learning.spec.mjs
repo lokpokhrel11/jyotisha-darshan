@@ -193,3 +193,16 @@ test('Chapter 8.8: sixth-house conflict lesson and example quiz',async({page})=>
  await page.locator('#ch8ConflictQuiz button[type="submit"]').click();
  await expect(page.locator('#ch8ConflictFeedback')).toContainText('सही');
 });
+
+test('Chapter 8: final eight-question assessment gives explanations and resets',async({page})=>{
+ await page.goto(chapter(8));
+ await expect(page.locator('#ch8AssessmentQuestions fieldset')).toHaveCount(8);
+ const answers=['1','1','1','0','1','1','1','0'];
+ for(let i=0;i<answers.length;i++)await page.locator('input[name="ch8assessment'+i+'"][value="'+answers[i]+'"]').check();
+ await page.locator('#ch8Assessment button[type="submit"]').click();
+ await expect(page.locator('#ch8AssessmentSummary')).toContainText('८ / ८');
+ await expect(page.locator('#ch8AssessmentFeedback0')).toContainText('पृष्ठ ७१');
+ await page.locator('#ch8AssessmentReset').click();
+ await expect(page.locator('#ch8AssessmentSummary')).toContainText('८ प्रश्नको उत्तर छान्नुहोस्');
+ await expect(page.locator('#ch8Assessment input:checked')).toHaveCount(0);
+});
