@@ -530,6 +530,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const mapping=maps[chapter];
  const tabs=document.createElement('div');tabs.className='learning-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','अध्याय '+chapter+' अध्ययन विकल्प');
  const buttons={};let active='lesson';
+ for(const ids of Object.values(mapping))ids.forEach(id=>{const section=document.getElementById(id);if(section)section.setAttribute('role','tabpanel')});
  function activate(name,focus=false){
   active=name;
   for(const [key,ids] of Object.entries(mapping)){
@@ -540,15 +541,16 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  }
  for(const [key,label] of Object.entries({lesson:'पाठ',practice:'अभ्यास',quiz:'परीक्षा'})){
   if(!mapping[key])continue;
-  const btn=document.createElement('button');btn.type='button';btn.className='learning-tab';btn.textContent=label;btn.setAttribute('role','tab');btn.setAttribute('aria-controls',mapping[key][0]);btn.addEventListener('click',()=>activate(key));tabs.append(btn);buttons[key]=btn;
+  const btn=document.createElement('button');btn.type='button';btn.className='learning-tab';btn.textContent=label;btn.setAttribute('role','tab');btn.id='chapter'+chapter+'-tab-'+key;btn.setAttribute('aria-controls',mapping[key][0]);mapping[key].forEach(id=>{const section=document.getElementById(id);if(section)section.setAttribute('aria-labelledby',btn.id)});btn.addEventListener('click',()=>activate(key));tabs.append(btn);buttons[key]=btn;
  }
  const keys=Object.keys(mapping);
- tabs.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();activate(keys[(keys.indexOf(active)+(e.key==='ArrowRight'?1:keys.length-1))%keys.length],true)});
+ tabs.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const index=e.key==='Home'?0:e.key==='End'?keys.length-1:(keys.indexOf(active)+(e.key==='ArrowRight'?1:keys.length-1))%keys.length;activate(keys[index],true)});
  const toc=banner.querySelector('.chapter-toc');if(toc)toc.hidden=true;
  banner.append(tabs);
- const hash=location.hash.slice(1);
- const matching=Object.entries(mapping).find(([,ids])=>ids.includes(hash));
- activate(matching?matching[0]:'lesson');
+ const syncHash=()=>{const hash=decodeURIComponent(location.hash.slice(1));const matching=Object.entries(mapping).find(([,ids])=>ids.includes(hash));if(matching)activate(matching[0]);};
+ activate('lesson');
+ syncHash();
+ window.addEventListener('hashchange',syncHash);
 })();
 
 
