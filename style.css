@@ -453,3 +453,28 @@ body.chapter-focus #pathshala #lesson{display:block}
 .assessment-progress-row span{font-size:.88rem;color:var(--muted)}
 :root[data-theme="dark"] .assessment-progress{background:#1b2e37;border-color:#40545c}
 :root[data-theme="dark"] .assessment-progress-row{background:#263c46;border-color:#52666c}
+
+/* Chapter navigation: explicit contrast in both reader themes. */
+body.chapter-focus .chapter-bottom-nav :is(.chapter-previous-button,.chapter-next-button){
+ font-family:inherit;font-size:1rem;font-weight:750;line-height:1.45;
+ letter-spacing:0;color:#fff;background:#183743;border:1px solid #183743;
+ text-shadow:none;
+}
+body.chapter-focus .chapter-bottom-nav :is(.chapter-previous-button,.chapter-next-button):hover,
+body.chapter-focus .chapter-bottom-nav :is(.chapter-previous-button,.chapter-next-button):focus-visible{
+ color:#fff;background:#315763;border-color:#315763;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-bottom-nav .chapter-previous-button{
+ background:#263f4b;border-color:#b6c6c8;color:#f4f5ef;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-bottom-nav .chapter-next-button{
+ background:#e3bd7b;border-color:#e3bd7b;color:#152c36;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-bottom-nav .chapter-previous-button:hover,
+:root[data-theme="dark"] body.chapter-focus .chapter-bottom-nav .chapter-previous-button:focus-visible{
+ background:#355665;border-color:#f0d19a;color:#fff;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-bottom-nav .chapter-next-button:hover,
+:root[data-theme="dark"] body.chapter-focus .chapter-bottom-nav .chapter-next-button:focus-visible{
+ background:#f0d19a;border-color:#f0d19a;color:#142c38;
+}
