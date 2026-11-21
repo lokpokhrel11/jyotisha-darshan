@@ -173,3 +173,13 @@ test('Chapter 8.6: sibling lesson and Mars-reference house calculation',async({p
  await page.locator('#ch8SiblingQuiz button[type="submit"]').click();
  await expect(page.locator('#ch8SiblingFeedback')).toContainText('सही');
 });
+
+test('Chapter 8.7: residence and relocation lesson with source-rule quiz',async({page})=>{
+ await page.goto(chapter(8));
+ await expect(page.locator('#chapter8')).toContainText('८.७ · घर, जग्गा र बसाइ');
+ await expect(page.locator('#chapter8')).toContainText('बाध्यात्मक बसाइ');
+ await expect(page.locator('#chapter8')).toContainText('स्वेच्छिक बसाइ');
+ await page.locator('#ch8ResidenceQuiz input[value="b"]').check();
+ await page.locator('#ch8ResidenceQuiz button[type="submit"]').click();
+ await expect(page.locator('#ch8ResidenceFeedback')).toContainText('सही');
+});
