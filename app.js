@@ -477,7 +477,21 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  next.addEventListener('click',()=>showQuestion(current+1));
  qContainer.addEventListener('change',()=>{if(current<questions().length-1){next.classList.add('ready-next')}});
  const form=document.getElementById('chapter2ExamForm');
- form.addEventListener('submit',()=>{questions().forEach(q=>{q.hidden=false;q.classList.remove('question-hidden')});pager.hidden=true;});
+ form.addEventListener('submit',()=>{
+  const list=questions();
+  const firstMissing=list.findIndex(q=>!q.querySelector('input[type="radio"]:checked'));
+  if(firstMissing!==-1){
+   pager.hidden=false;
+   showQuestion(firstMissing);
+   const target=list[firstMissing];
+   target.setAttribute('tabindex','-1');
+   target.focus({preventScroll:true});
+   target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+   return;
+  }
+  list.forEach(q=>{q.hidden=false;q.classList.remove('question-hidden')});
+  pager.hidden=true;
+ });
  document.getElementById('examReset').addEventListener('click',()=>queueMicrotask(()=>{pager.hidden=false;showQuestion(0)}));
  // Preserve deep links to the exercise and assessment when opening a chapter.
  const hash=location.hash.slice(1);
