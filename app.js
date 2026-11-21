@@ -1420,7 +1420,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   {name:'ch11q2',answer:'a',explanation:'मेष (१), वृष (२), मिथुन (३), कर्कट (४), सिंह (५) गरी समावेशी गणना पाँच हुन्छ।'},
   {name:'ch11q3',answer:'c',explanation:'राशिदूरीको गणनाले प्रजनन, स्वास्थ्य वा वैवाहिक भविष्य निर्धारण गर्दैन।'},
   {name:'ch11q4',answer:'a',explanation:'स्रोतमा दुवैको नाडी एउटै (आद्य–आद्य, मध्य–मध्य वा अन्त्य–अन्त्य) भए नाडी दोष भनिएको छ।'},
-  {name:'ch11q5',answer:'b',explanation:'मङ्गल दोषको गणना र परिहारका नियम स्रोतमा एकरूप छैनन्; ती वैज्ञानिक रूपमा प्रमाणित वैवाहिक भविष्यवाणी होइनन्।'}
+  {name:'ch11q5',answer:'b',explanation:'मङ्गल दोषको गणना र परिहारका नियम स्रोतमा एकरूप छैनन्; ती वैज्ञानिक रूपमा प्रमाणित वैवाहिक भविष्यवाणी होइनन्।'},
+  {name:'ch11q6',answer:'a',explanation:'स्रोतको शिक्षा तालिकामा उच्चशिक्षा नवम भाव र बृहस्पतिसँग जोडिएको छ।'},
+  {name:'ch11q7',answer:'b',explanation:'स्रोतमा सप्तमेश दशौँ भावमा हुँदा बुबा वा कार्यस्थलमार्फत परिचयको उदाहरण छ।'}
  ];
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const clear=()=>{feedback.textContent='';feedback.className='ch10-feedback';review.hidden=true;review.replaceChildren()};
@@ -1430,9 +1432,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   event.preventDefault();
   const selected=questions.map(q=>form.querySelector('input[name="'+q.name+'"]:checked'));
   const missing=selected.findIndex(x=>!x);
-  if(missing!==-1){clear();feedback.textContent='कृपया पाँचवटै प्रश्नको उत्तर छान्नुहोस्।';feedback.className='ch10-feedback is-warning';form.querySelector('input[name="'+questions[missing].name+'"]').focus();return}
+  if(missing!==-1){clear();feedback.textContent='कृपया सातवटै प्रश्नको उत्तर छान्नुहोस्।';feedback.className='ch10-feedback is-warning';form.querySelector('input[name="'+questions[missing].name+'"]').focus();return}
   const score=selected.reduce((n,x,i)=>n+Number(x.value===questions[i].answer),0);
-  feedback.className='ch10-feedback is-result';feedback.textContent='नतिजा: '+nep(score)+' / ५ सही।';
+  feedback.className='ch10-feedback is-result';feedback.textContent='नतिजा: '+nep(score)+' / ७ सही।';
   questions.forEach((q,i)=>{const card=document.createElement('div');card.className='ch10-review-card';const heading=document.createElement('strong');heading.textContent='प्रश्न '+nep(i+1)+' · '+(selected[i].value===q.answer?'सही उत्तर':'समीक्षा आवश्यक');const p=document.createElement('p');p.textContent=q.explanation;card.append(heading,p);review.append(card)});
   review.hidden=false;feedback.tabIndex=-1;feedback.focus({preventScroll:true});
  });
