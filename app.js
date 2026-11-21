@@ -1163,3 +1163,33 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  };
  asc.addEventListener('change',render);house.addEventListener('change',render);render();
 })();
+
+/* Chapter 9: occupancy-based reading rules from Guruji notes 9.1. */
+(function(){
+ const root=document.getElementById('chapter9');
+ const result=document.getElementById('ch9OccupancyResult');
+ const detail=document.getElementById('ch9OccupancyDetail');
+ const planet=document.getElementById('ch9OccupantPlanet');
+ if(!root||!result||!detail||!planet)return;
+ const traits={'सूर्य':'नेतृत्व, आत्मसम्मान, अधिकार','चन्द्र':'भावुक, कल्पनाशील, परिवर्तनशील मन','मङ्गल':'तीखो, छिटो, कहिलेकाहीँ झगडालु','बुध':'चलाख, तार्किक, बोल्न सिपालु','बृहस्पति':'शुद्ध, धार्मिक, उदार','शुक्र':'सौन्दर्यप्रेमी, कलात्मक, सुखप्रिय','शनि':'अनुशासित, गम्भीर, धैर्यवान्','राहु':'घमण्डी, जिद्दी, असामान्य बाटो रोज्ने','केतु':'हिचकिचाउने, अलमलमा पर्ने, अन्तर्मुखी'};
+ const render=()=>{
+  const value=root.querySelector('input[name="ch9Occupancy"]:checked')?.value||'none';
+  detail.hidden=value==='none';
+  result.replaceChildren();
+  const heading=document.createElement('strong');
+  const explanation=document.createElement('p');
+  if(value==='none'){
+   heading.textContent='लग्न खाली छ';
+   explanation.textContent='गुरुजीको नियमअनुसार लग्नेश कहाँ र कस्तो अवस्थामा छ हेर्नुपर्छ। माथिको लग्नेश अभ्यासमा भाव छानेर स्थानको गणना गर्न सकिन्छ। चन्द्रको अवस्था पनि छुट्टै हेर्नुपर्छ।';
+  }else if(value==='one'){
+   heading.textContent='लग्नमा एउटा ग्रह: '+planet.value;
+   explanation.textContent='गुरुजीले एउटै ग्रह हुँदा त्यसको एकाधिकार प्रभाव हुने बताएका छन्। '+planet.value+' सँग जोडिएको परम्परागत विशेषण: '+traits[planet.value]+'। यो व्यक्तिको वास्तविक स्वभावको निष्कर्ष होइन।';
+  }else{
+   heading.textContent='लग्नमा धेरै ग्रह छन्';
+   explanation.textContent='गुरुजीका अनुसार बलवान् ग्रहको प्रभाव र चलिरहेको दशा हेर्नुपर्छ। हाल छानिएको '+planet.value+' को परम्परागत विशेषण: '+traits[planet.value]+'। कुन ग्रह बलवान् हो भन्ने यो अभ्यासले निर्धारण गर्दैन।';
+  }
+  result.append(heading,explanation);
+ };
+ root.querySelectorAll('input[name="ch9Occupancy"]').forEach(input=>input.addEventListener('change',render));
+ planet.addEventListener('change',render);render();
+})();
