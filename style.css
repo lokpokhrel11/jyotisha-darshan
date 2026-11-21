@@ -1221,3 +1221,19 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 @media(max-width:1050px){#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){#chapter10 .ch-modern-path,#chapter11 .ch-modern-path{grid-template-columns:1fr;gap:8px}#chapter10 .ch-modern-path a,#chapter11 .ch-modern-path a{padding:13px}#chapter10 .ch-modern-quiz-heading,#chapter11 .ch-modern-quiz-heading{padding:18px 16px}#chapter10 .ch10-quiz-panel fieldset,#chapter11 .ch10-quiz-panel fieldset{padding:13px!important}}
 @media(prefers-reduced-motion:reduce){#chapter10 .ch-modern-path a,#chapter11 .ch-modern-path a{transform:none!important}}
+
+/* Concept-first reading units for chapters 10 and 11 */
+#chapter10 .ch-modern-section-head,#chapter11 .ch-modern-section-head{position:relative;margin:37px 0 16px;padding:0 0 13px 19px;border-left:4px solid var(--gold);scroll-margin-top:100px}
+#chapter10 .ch-modern-section-head>span,#chapter11 .ch-modern-section-head>span{display:block;margin-bottom:5px;font-size:.79rem;font-weight:800;letter-spacing:.065em;color:var(--ink);opacity:.7}
+#chapter10 .ch-modern-section-head h3,#chapter11 .ch-modern-section-head h3{margin:0 0 7px;color:var(--ink);font-size:clamp(1.25rem,2.2vw,1.7rem);line-height:1.35}
+#chapter10 .ch-modern-section-head p,#chapter11 .ch-modern-section-head p{margin:0;color:var(--ink);line-height:1.7;max-width:70ch}
+#chapter10 .ch-modern-visual-strip,#chapter11 .ch-modern-visual-strip{display:flex;align-items:stretch;gap:12px;margin:19px 0 23px;padding:17px;border-radius:16px;border:1px solid var(--line);background:var(--soft)}
+#chapter10 .ch-modern-visual-strip>div,#chapter11 .ch-modern-visual-strip>div{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;padding:17px 10px;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:12px;background:var(--white);color:var(--ink)}
+#chapter10 .ch-modern-visual-strip>div>span,#chapter11 .ch-modern-visual-strip>div>span{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:color-mix(in srgb,var(--gold) 20%,var(--white));font-size:1.25rem;font-weight:850;color:var(--ink)}
+#chapter10 .ch-modern-visual-strip strong,#chapter11 .ch-modern-visual-strip strong{font-size:1rem;line-height:1.45;color:var(--ink)}
+#chapter10 .ch-modern-visual-strip small,#chapter11 .ch-modern-visual-strip small{font-size:.83rem;color:var(--ink);opacity:.75}
+#chapter10 .ch-modern-strip-arrow,#chapter11 .ch-modern-strip-arrow{align-self:center;font-size:1.3rem;color:var(--ink);opacity:.5}
+#chapter10 .ch-modern-practice-kicker,#chapter11 .ch-modern-practice-kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;margin:0 0 10px;border-radius:99px;background:color-mix(in srgb,var(--gold) 18%,var(--white));color:var(--ink);font-size:.83rem;font-weight:800}
+#chapter10 .ch-modern-practice-kicker span,#chapter11 .ch-modern-practice-kicker span{color:var(--ink)}
+#chapter10 .ch9-step-grid article,#chapter11 .ch9-step-grid article{height:100%}
+@media(max-width:640px){#chapter10 .ch-modern-visual-strip,#chapter11 .ch-modern-visual-strip{gap:7px;padding:9px}#chapter10 .ch-modern-visual-strip>div,#chapter11 .ch-modern-visual-strip>div{padding:13px 5px}#chapter10 .ch-modern-visual-strip>div>span,#chapter11 .ch-modern-visual-strip>div>span{width:37px;height:37px;font-size:1rem}#chapter10 .ch-modern-visual-strip strong,#chapter11 .ch-modern-visual-strip strong{font-size:.84rem}#chapter10 .ch-modern-visual-strip small,#chapter11 .ch-modern-visual-strip small{font-size:.72rem}#chapter10 .ch-modern-strip-arrow,#chapter11 .ch-modern-strip-arrow{font-size:.85rem}#chapter10 .ch-modern-section-head,#chapter11 .ch-modern-section-head{margin-top:28px}}
