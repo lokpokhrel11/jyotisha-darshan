@@ -896,6 +896,11 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const hash=decodeURIComponent(location.hash.slice(1));
   const i=Math.max(0,ids.indexOf(hash));
   progress.textContent=i===8?'समग्र मूल्याङ्कन · ८ पाठपछि': 'अध्ययन क्रम: पाठ '+nep(i+1)+' / ८';
+  const toggle=chapter.querySelector('.ch8-nav-toggle');
+  if(toggle){
+   const current=i===8?'मूल्याङ्कन':'पाठ '+nep(i+1)+' / ८';
+   toggle.setAttribute('aria-label','पाठ सूची खोल्नुहोस् वा बन्द गर्नुहोस्। हाल: '+current);
+  }
   links.forEach(a=>{
    const active=a.getAttribute('href')==='#'+ids[i];
    if(active)a.setAttribute('aria-current','location');
