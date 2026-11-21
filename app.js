@@ -118,14 +118,14 @@ function updateChart(){
   const n=i+1,r=(l+i-1)%12+1;
   const group=document.createElementNS('http://www.w3.org/2000/svg','g');
   group.setAttribute('role','button');group.setAttribute('tabindex','0');
-  group.setAttribute('aria-label',`${n} औँ भाव, ${signs[r-1]} राशि`);
+  group.setAttribute('aria-label',`${n} औँ भाव, ${signs[r-1]} राशि${n===selectedHouse?', हाल चयन गरिएको':''}`);
   group.setAttribute('class','chart-house'+(n===selectedHouse?' selected':''));
   const hit=document.createElementNS('http://www.w3.org/2000/svg','circle');
   hit.setAttribute('cx',x);hit.setAttribute('cy',y-5);hit.setAttribute('r',28);hit.setAttribute('fill','transparent');
   const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-  t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('font-size','25');t.style.setProperty('fill',n===selectedHouse?'#95601d':'#173b4b','important');t.style.setProperty('font-weight','800','important');t.textContent=String(r);
+  t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('font-size',n===selectedHouse?'28':'25');t.setAttribute('fill','currentColor');t.style.setProperty('font-weight','800','important');t.textContent=String(r);
   const sub=document.createElementNS('http://www.w3.org/2000/svg','text');
-  sub.setAttribute('x',x);sub.setAttribute('y',y+14);sub.setAttribute('font-size','11');sub.style.setProperty('fill',n===selectedHouse?'#95601d':'#516a74','important');sub.style.setProperty('font-weight','700','important');sub.textContent=roman[i];
+  sub.setAttribute('x',x);sub.setAttribute('y',y+14);sub.setAttribute('font-size','11');sub.setAttribute('fill','currentColor');sub.style.setProperty('font-weight','700','important');sub.textContent=roman[i];
   group.append(hit,t,sub);
   const select=()=>{selectedHouse=n;updateChart();};
   group.addEventListener('click',select);
@@ -189,12 +189,12 @@ const chapter2Questions=[
  ['२.३','धनु राशिको स्वामी को हो?',['शनि','बृहस्पति','चन्द्र'],1,'राशि ९ र १२ बृहस्पतिका घर हुन्।'],
  ['२.३','राहु र केतुका राशिस्वामी सम्बन्धमा यस पाठको नियम कुन हो?',['दुवैका दुई-दुई घर छन्','यस तहमा आफ्ना घर मानिँदैनन्','दुवै सिंहका स्वामी हुन्'],1,'यस पाठको प्रारम्भिक राशिस्वामी तालिकामा राहु र केतुलाई आफ्नै राशिको स्वामी मानिएको छैन; यस विषयमा परम्परागत मतभेद पनि पाइन्छ।'],
  ['२.४','सिंह लग्नमा पहिलो भावमा कुन राशि हुन्छ?',['मेष','सिंह','कन्या'],1,'लग्न राशि नै पहिलो भावमा रहन्छ।'],
- ['२.४','सिंह लग्नमा नवौँ भावमा कुन राशि पर्छ?',['मेष','मीन','धनु'],0,'५ + ९ − १ = १३, १२ घटाउँदा १ अर्थात् मेष।'],
- ['२.४','सिंह लग्नमा धनु राशिमा बसेको ग्रह कुन भावमा हुन्छ?',['पाँचौँ','नवौँ','दोस्रो'],0,'९ − ५ + १ = ५।'],
- ['२.४','वृश्चिक लग्नमा छैटौँ भावमा कुन राशि हुन्छ?',['मेष','मीन','मिथुन'],0,'८ + ६ − १ = १३ → १, मेष।'],
+ ['२.४','सिंह लग्नमा नवौँ भावमा कुन राशि पर्छ?',['मेष','मीन','धनु'],0,'सिंहलाई पहिलो मानेर क्रमशः कन्या दोस्रो, तुला तेस्रो हुँदै गन्दा नवौँमा मेष पर्छ।'],
+ ['२.४','सिंह लग्नमा धनु राशिमा बसेको ग्रह कुन भावमा हुन्छ?',['पाँचौँ','नवौँ','दोस्रो'],0,'सिंहबाट गन्दा सिंह पहिलो, कन्या दोस्रो, तुला तेस्रो, वृश्चिक चौथो र धनु पाँचौँ भावमा पर्छ।'],
+ ['२.४','वृश्चिक लग्नमा छैटौँ भावमा कुन राशि हुन्छ?',['मेष','मीन','मिथुन'],0,'वृश्चिक पहिलो, धनु दोस्रो, मकर तेस्रो, कुम्भ चौथो, मीन पाँचौँ र मेष छैटौँ भावमा पर्छ।'],
  ['२.५','सन्तान र विद्या कुन भावका मुख्य शब्द हुन्?',['तेस्रो','पाँचौँ','आठौँ'],1,'यस पाठको प्रारम्भिक तालिकामा पाँचौँ भाव सन्तान र विद्यासँग जोडिएको छ।'],
  ['२.५','केन्द्र भावहरूको सही समूह कुन हो?',['१, ४, ७, १०','१, ५, ९','६, ८, १२'],0,'यस पाठका चार केन्द्र १, ४, ७, १० हुन्।'],
- ['२.५','यस पाठमा त्रिकोण कुन भावलाई भन्नुभएको छ?',['१, ५, ९','५, ९','४, ७, १०'],1,'यो स्रोतको विशिष्ट सूची हो: ५ र ९।'],
+ ['२.५','यस पाठमा त्रिकोण कुन भावलाई भन्नुभएको छ?',['१, ५, ९','५, ९','४, ७, १०'],1,'यस पाठको अभ्यास-सूचीमा ५ र ९ लाई त्रिकोण भनेर राखिएको छ। अन्य परम्परागत वर्गीकरणमा लग्न (१) पनि त्रिकोणमा समावेश हुन सक्छ।'],
  ['उच्च कुण्डली','मेष लग्नको शिक्षण उच्च कुण्डलीमा बृहस्पति कहाँ छ?',['चौथो भाव कर्कट','नवौँ भाव धनु','दशौँ भाव मकर'],0,'स्रोतको चित्रमा बृहस्पति कर्कट अर्थात् चौथो भावमा छ।'],
  ['उच्च कुण्डली','यस शिक्षण उच्च कुण्डलीमा कुन भाव खाली छ?',['पाँचौँ','सातौँ','दशौँ'],0,'पाँचौँ, आठौँ र एघारौँ भाव खाली छन्।'],
  ['उच्च कुण्डली','यस शिक्षण उच्च कुण्डलीमा मङ्गल कहाँ छ?',['पहिलो भाव मेष','दशौँ भाव मकर','छैटौँ भाव कन्या'],1,'मङ्गल मकर राशिमा दशौँ भावमा छ।']
