@@ -674,3 +674,30 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 :root[data-theme="dark"] body.chapter-focus :is(#chapter2ExamQuestions,#chapter3ExamQuestions) label.exam-option input{
  flex:0 0 auto;width:19px;height:19px;margin:0;accent-color:#e2bd7c;
 }
+
+/* v72: Finish quiz-specific surfaces for Ch 7 and Ch 8, including dynamically built assessment. */
+:root[data-theme="dark"] body.chapter-focus :is(#ch7Quiz,#ch8SourceQuiz,#ch8ComfortQuiz,#ch8SiblingQuiz,#ch8ResidenceQuiz,#ch8ConflictQuiz,#ch8Assessment) fieldset{
+ background:#20343e!important;color:#edf4f1!important;
+ border:1px solid #526d76!important;border-radius:14px;
+ min-width:0;margin:0 0 18px;padding:22px 18px 18px;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#ch7Quiz,#ch8SourceQuiz,#ch8ComfortQuiz,#ch8SiblingQuiz,#ch8ResidenceQuiz,#ch8ConflictQuiz,#ch8Assessment) fieldset legend{
+ background:#20343e!important;color:#f2f4ef!important;
+ padding:2px 8px;max-width:100%;line-height:1.65;font-weight:750;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#ch7Quiz,#ch8SourceQuiz,#ch8ComfortQuiz,#ch8SiblingQuiz,#ch8ResidenceQuiz,#ch8ConflictQuiz,#ch8Assessment) label.ch7-choice{
+ display:flex!important;align-items:center;gap:12px;
+ background:#2c4550!important;color:#f0f4f0!important;
+ border:1px solid #5c7780!important;border-radius:10px;
+ padding:13px 16px;margin:9px 0;line-height:1.65;cursor:pointer;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#ch7Quiz,#ch8SourceQuiz,#ch8ComfortQuiz,#ch8SiblingQuiz,#ch8ResidenceQuiz,#ch8ConflictQuiz,#ch8Assessment) label.ch7-choice:hover{
+ background:#365661!important;border-color:#d6b477!important;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#ch7Quiz,#ch8SourceQuiz,#ch8ComfortQuiz,#ch8SiblingQuiz,#ch8ResidenceQuiz,#ch8ConflictQuiz,#ch8Assessment) label.ch7-choice:has(input:checked){
+ background:#354c50!important;border-color:#e2bd7c!important;
+ box-shadow:inset 3px 0 0 #e2bd7c;
+}
+:root[data-theme="dark"] body.chapter-focus :is(#ch7Quiz,#ch8SourceQuiz,#ch8ComfortQuiz,#ch8SiblingQuiz,#ch8ResidenceQuiz,#ch8ConflictQuiz,#ch8Assessment) label.ch7-choice input{
+ flex:0 0 auto;width:19px;height:19px;margin:0;accent-color:#e2bd7c;
+}
