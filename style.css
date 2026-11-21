@@ -744,3 +744,39 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
  .site-header .brand{gap:6px}
  .site-header .brand small{letter-spacing:.07em}
 }
+
+/* v75: Chapter 8 guided reading, without hiding source material. */
+#chapter8 .ch8-reading-progress{margin:14px 0 20px;font-weight:700;font-size:.92rem;color:#53626b}
+#chapter8 .ch8-contents-links a[aria-current="location"]{
+ border-color:#b18a4b;background:#efe3cc;color:#172b38;font-weight:750;
+}
+#chapter8 .ch8-lesson-pager{
+ display:flex;align-items:center;justify-content:space-between;
+ flex-wrap:wrap;gap:12px;margin-top:24px;padding-top:18px;
+ border-top:1px solid #c7d0d0;
+}
+#chapter8 .ch8-lesson-pager a{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:44px;padding:11px 17px;border-radius:10px;
+ border:1px solid #a9b8bb;text-decoration:none;
+ font-weight:700;line-height:1.5;
+}
+#chapter8 .ch8-lesson-pager .ch8-lesson-next{
+ margin-left:auto;background:#203d4b;color:#fff;border-color:#203d4b;
+}
+#chapter8 .ch8-lesson-pager a:focus-visible{outline:3px solid #c49a58;outline-offset:3px}
+:root[data-theme="dark"] #chapter8 .ch8-reading-progress{color:#d3dfdc}
+:root[data-theme="dark"] #chapter8 .ch8-contents-links a[aria-current="location"]{
+ background:#4a4334;color:#f8e6c4;border-color:#d8b776;
+}
+:root[data-theme="dark"] #chapter8 .ch8-lesson-pager{border-color:#526d76}
+:root[data-theme="dark"] #chapter8 .ch8-lesson-pager a{
+ color:#eaf2ef;background:#28424d;border-color:#6b838b;
+}
+:root[data-theme="dark"] #chapter8 .ch8-lesson-pager .ch8-lesson-next{
+ color:#172b38;background:#e3bd7b;border-color:#e3bd7b;
+}
+@media(max-width:480px){
+ #chapter8 .ch8-lesson-pager a{flex:1 1 100%}
+ #chapter8 .ch8-lesson-pager .ch8-lesson-next{margin-left:0}
+}
