@@ -160,3 +160,16 @@ test('Chapter 8.5: fourth-house Moon lesson and quiz',async({page})=>{
  await page.locator('#ch8ComfortQuiz button[type="submit"]').click();
  await expect(page.locator('#ch8ComfortFeedback')).toContainText('सही');
 });
+
+test('Chapter 8.6: sibling lesson and Mars-reference house calculation',async({page})=>{
+ await page.goto(chapter(8));
+ await expect(page.locator('#chapter8')).toContainText('८.६ · भाइबहिनी');
+ await expect(page.locator('#ch8SiblingResult')).toContainText('८औँ भाव');
+ await page.locator('#ch8MarsHouse').selectOption('12');
+ await expect(page.locator('#ch8SiblingResult')).toContainText('२औँ भाव');
+ await page.locator('#ch8SiblingOrder').selectOption('5');
+ await expect(page.locator('#ch8SiblingResult')).toContainText('४औँ भाव');
+ await page.locator('#ch8SiblingQuiz input[value="8"]').check();
+ await page.locator('#ch8SiblingQuiz button[type="submit"]').click();
+ await expect(page.locator('#ch8SiblingFeedback')).toContainText('सही');
+});
