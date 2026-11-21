@@ -871,19 +871,37 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
 })();
 
-/* Local study continuity: remember last opened chapter, not answers or scroll position. */
+/* Browser-local study continuity: remember explicitly selected Chapter 8 lesson. */
 (function(){
- const key='jyotisha-pathshala-last-chapter-v1';
+ const chapterKey='jyotisha-pathshala-last-chapter-v1';
+ const lessonKey='jyotisha-pathshala-ch8-last-lesson-v1';
  const chapter=Number(new URLSearchParams(location.search).get('chapter'));
  const valid=n=>Number.isInteger(n)&&n>=1&&n<=8;
+ const ids=new Set(Array.from({length:8},(_,i)=>'ch8-lesson-'+(i+1)).concat('ch8AssessmentPanel'));
+ const getSavedLesson=()=>{try{const value=localStorage.getItem(lessonKey);return ids.has(value)?value:null}catch(_){return null}};
  if(valid(chapter)){
-  try{localStorage.setItem(key,String(chapter))}catch(_){}
+  try{localStorage.setItem(chapterKey,String(chapter))}catch(_){}
+  if(chapter===8){
+   const nav=document.querySelector('#chapter8 .ch8-contents-links');
+   const remember=id=>{if(ids.has(id))try{localStorage.setItem(lessonKey,id)}catch(_){}};
+   if(nav)nav.addEventListener('click',event=>{
+    const link=event.target.closest('a[href^="#"]');
+    if(link)remember(decodeURIComponent(link.hash.slice(1)));
+   });
+   const quick=document.querySelector('.chapter-learning-links');
+   if(quick)quick.addEventListener('click',event=>{
+    const link=event.target.closest('a[href^="#"]');
+    if(link)remember(decodeURIComponent(link.hash.slice(1)));
+   });
+   const initial=decodeURIComponent(location.hash.slice(1));
+   if(ids.has(initial))remember(initial);
+  }
   return;
  }
  const dashboard=document.getElementById('dashboard');
  if(!dashboard)return;
  let last=null;
- try{last=Number(localStorage.getItem(key))}catch(_){}
+ try{last=Number(localStorage.getItem(chapterKey))}catch(_){}
  if(!valid(last))return;
  const card=dashboard.querySelector('.chapter-card[data-chapter="'+last+'"]');
  if(!card)return;
@@ -894,12 +912,14 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  title.textContent='अघिल्लो अध्ययन जारी राख्नुहोस्';
  const desc=document.createElement('p');
  const heading=card.querySelector('h3');
- desc.textContent='अध्याय '+String(last).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' · '+(heading?heading.textContent:'अध्ययन');
+ const lesson=last===8?getSavedLesson():null;
+ const lessonLink=lesson?document.querySelector('#chapter8 .ch8-contents-links a[href="#'+lesson+'"]'):null;
+ desc.textContent='अध्याय '+String(last).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' · '+(heading?heading.textContent:'अध्ययन')+(lessonLink?' · '+lessonLink.textContent:'');
  text.append(title,desc);
  const link=document.createElement('a');
  link.className='button primary';
- link.href='index.html?chapter='+last;
- link.textContent='अध्ययनमा फर्कनुहोस् →';
+ link.href='index.html?chapter='+last+(lesson?'#'+lesson:'');
+ link.textContent=lesson?'पछिल्लो पाठमा फर्कनुहोस् →':'अध्ययनमा फर्कनुहोस् →';
  panel.append(text,link);
  const stats=dashboard.querySelector('.dashboard-stats');
  if(stats)stats.after(panel);
