@@ -1316,6 +1316,24 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
 })();
 
+/* Chapter 10: interpret selected hypothetical placements without making predictions. */
+(function(){
+ const asc=document.getElementById('ch10Ascendant');
+ const house=document.getElementById('ch10LordHouse');
+ const result=document.getElementById('ch10LordHouseResult');
+ if(!asc||!house||!result)return;
+ const descriptions={
+  '6':'स्रोतको उदाहरणमा छैटौँ भावलाई नोकरी, सेवा वा दैनिक कामसँग जोडिएको छ।',
+  '12':'स्रोतमा बाह्रौँ भावलाई विदेश वा टाढाको स्थानसँग जोडिएको छ; खर्चको विषय पनि उल्लेख छ।',
+  '2':'द्वितीयेश दोस्रो भावमै हुँदा स्वगृही हुने संरचना बन्छ; स्रोतमा आफ्नै स्रोत र परिवारसँग सम्बन्धित परम्परागत व्याख्या दिइएको छ।'
+ };
+ const update=()=>{
+  if(!asc.value){result.textContent='पहिले लग्न राशि छान्नुहोस्।';return}
+  if(!house.value){result.textContent='द्वितीयेशको भाव छानेपछि स्रोतमा रहेको परम्परागत व्याख्या देखिन्छ।';return}
+  result.textContent=descriptions[house.value]+' यो काल्पनिक अभ्यासमा भावको परम्परागत अर्थ बुझाइएको हो। वास्तविक आय, आर्थिक अवस्था वा करिअरको अनुमान होइन।';
+ };
+ asc.addEventListener('change',update);house.addEventListener('change',update);
+})();
 /* Chapter 10: source-based topic explorer and comprehension assessment. */
 (function(){
  const topic=document.getElementById('ch10Topic'),topicResult=document.getElementById('ch10TopicResult');
