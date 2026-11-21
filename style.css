@@ -933,3 +933,25 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 :root[data-theme="dark"] #chapter9 #ch9Quiz .ch7-choice{background:#2a424c!important;color:#f0f2ee!important;border-color:#4d6871!important}
 :root[data-theme="dark"] #chapter9 #ch9Quiz .ch7-choice:has(input:checked){background:#394c4b!important;border-color:#e4bf7e!important}
 :root[data-theme="dark"] #chapter9 #ch9Quiz .ch7-choice:hover{border-color:#e4bf7e!important}
+
+/* Chapter 9 editorial rhythm: restrained gold markers, visual steps, clearer cards. */
+#chapter9 .ch9-learning-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 24px}
+#chapter9 .ch9-learning-path a{display:flex;align-items:center;gap:12px;padding:17px 14px;border:1px solid var(--line);border-radius:14px;background:var(--white);color:var(--ink);text-decoration:none;min-width:0;box-shadow:0 4px 14px #10232e09}
+#chapter9 .ch9-learning-path a:hover,#chapter9 .ch9-learning-path a:focus-visible{border-color:var(--gold);outline:2px solid var(--gold);outline-offset:2px}
+#chapter9 .ch9-path-num{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:color-mix(in srgb,var(--gold) 17%,var(--white));color:var(--gold);font-size:1.06rem;font-weight:800;border:1px solid color-mix(in srgb,var(--gold) 38%,var(--line))}
+#chapter9 .ch9-learning-path strong{display:block;font-size:.94rem;line-height:1.35}
+#chapter9 .ch9-learning-path small{display:block;color:var(--muted);font-size:.76rem;margin-top:5px;line-height:1.4}
+#chapter9>h3{position:relative;padding:4px 0 4px 18px;border-left:4px solid var(--gold);margin-top:42px}
+#chapter9>h3::first-letter{color:var(--gold)}
+#chapter9>.study-panel:not(.ch9-quiz-panel)>p:first-child{font-size:1rem;line-height:1.8;max-width:78ch}
+#chapter9>.study-panel:not(.ch9-quiz-panel)>h3:first-child{color:var(--gold);margin-bottom:12px}
+#chapter9 .ch9-grid p{border-left:3px solid var(--gold);padding:17px 18px;line-height:1.65}
+#chapter9 .ch9-grid strong{color:var(--gold);font-weight:750}
+#chapter9 .ch9-worked-result{border-left:4px solid var(--gold);padding:19px 22px;background:color-mix(in srgb,var(--gold) 5%,var(--white));line-height:1.75}
+#chapter9 .ch9-worked-result strong{color:var(--gold)}
+#chapter9 .ch9-local-nav a[href='#ch9-practice']{border-color:color-mix(in srgb,var(--gold) 60%,var(--line));background:color-mix(in srgb,var(--gold) 12%,var(--white));font-weight:750}
+#chapter9 .ch9-quiz-panel{border-top:4px solid var(--gold)}
+#chapter9 .ch9-quiz-kicker{color:var(--gold)}
+#chapter9 .ch9-quiz-panel .note{border-top:1px solid var(--line);padding-top:15px;margin-top:22px}
+@media(max-width:900px){#chapter9 .ch9-learning-path{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){#chapter9 .ch9-learning-path{gap:9px}#chapter9 .ch9-learning-path a{align-items:flex-start;gap:8px;padding:12px 10px}#chapter9 .ch9-path-num{width:32px;height:32px;flex-basis:32px;font-size:.85rem;border-radius:9px}#chapter9 .ch9-learning-path strong{font-size:.83rem}#chapter9 .ch9-learning-path small{font-size:.7rem}#chapter9 .ch9-worked-result{padding:14px}}
