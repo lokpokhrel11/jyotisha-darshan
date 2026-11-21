@@ -131,3 +131,17 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
 .home-shortcut-grid a:hover,.home-shortcut-grid a:focus-visible{border-color:var(--gold);box-shadow:0 3px 12px #18303a12}
 .home-shortcut-grid span{color:var(--muted);font-size:.88rem}
 @media(max-width:650px){body:not(.chapter-focus) .hero{min-height:0;padding-top:30px;padding-bottom:30px}body:not(.chapter-focus) .orb{display:none}}
+
+/* v4.2 Chapter 7 chart-reading lesson */
+.chapter-seven{max-width:1100px;margin-inline:auto}
+.chapter7-steps{padding-left:1.6rem;display:grid;gap:10px;margin-bottom:30px}
+.chapter7-steps li{padding-left:7px}
+.chapter7-table-wrap{overflow-x:auto;max-width:100%;margin:15px 0 24px}
+.chapter7-table{width:100%;border-collapse:collapse;background:white;min-width:380px}
+.chapter7-table th,.chapter7-table td{text-align:left;padding:10px 12px;border:1px solid var(--line)}
+.chapter7-table th{background:#e9eee9}
+.chapter7-note{font-size:.91rem;color:var(--muted);margin-top:12px}
+.ch7-choice{display:block;padding:10px 0;cursor:pointer}
+#ch7Quiz fieldset{border:0;padding:0;margin:0 0 20px}
+#ch7Quiz legend{font-weight:700;margin-bottom:10px}
+#ch7Feedback:not(:empty){padding:12px;background:#edf3ed;border-left:3px solid var(--gold);margin-top:15px}
