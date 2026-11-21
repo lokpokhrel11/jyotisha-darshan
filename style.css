@@ -518,3 +518,12 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 @media(max-width:600px){
  body.chapter-focus .chapter-focus-banner .chapter-pager a{flex:1 1 175px;min-width:0;text-align:center}
 }
+
+/* The last link in Chapter 8 is Previous, not Next. */
+:root[data-theme="dark"] body.chapter-focus:has(#chapter8:not(.chapter-focus-hidden)) .chapter-focus-banner .chapter-pager a:last-child{
+ background:#263f4b;border-color:#b6c6c8;color:#f4f5ef;
+}
+:root[data-theme="dark"] body.chapter-focus:has(#chapter8:not(.chapter-focus-hidden)) .chapter-focus-banner .chapter-pager a:last-child:hover,
+:root[data-theme="dark"] body.chapter-focus:has(#chapter8:not(.chapter-focus-hidden)) .chapter-focus-banner .chapter-pager a:last-child:focus-visible{
+ background:#355665;border-color:#f0d19a;color:#fff;
+}
