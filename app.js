@@ -1141,3 +1141,25 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   feedback.tabIndex=-1;feedback.focus({preventScroll:true});
  });
 })();
+
+/* Chapter 9: chart-position reading from Guruji notes 2.3, 2.4 and 9.1. */
+(function(){
+ const asc=document.getElementById('ch9Ascendant');
+ const house=document.getElementById('ch9LordHouse');
+ const result=document.getElementById('ch9WorkedResult');
+ if(!asc||!house||!result)return;
+ const names=['मेष','वृष','मिथुन','कर्कट','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'];
+ const owners=['मङ्गल','शुक्र','बुध','चन्द्र','सूर्य','बुध','शुक्र','मङ्गल','बृहस्पति','शनि','शनि','बृहस्पति'];
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+ const render=()=>{
+  const a=Number(asc.value),h=Number(house.value);
+  if(!Number.isInteger(a)||a<1||a>12||!Number.isInteger(h)||h<1||h>12)return;
+  const sign=(a+h-2)%12;
+  result.replaceChildren();
+  const heading=document.createElement('strong');heading.textContent=names[a-1]+' लग्न · लग्नेश '+owners[a-1];
+  const steps=document.createElement('p');steps.textContent='चरण १: '+names[a-1]+' राशिको स्वामी '+owners[a-1]+' हो। चरण २: काल्पनिक उदाहरणमा '+owners[a-1]+' '+nep(h)+'औँ भावमा छ। चरण ३: त्यो भावमा '+names[sign]+' राशि (अङ्क '+nep(sign+1)+') पर्छ।';
+  const note=document.createElement('p');note.textContent='अध्याय ९.१ अनुसार लग्नेश कहाँ छ भन्ने अध्ययनको पहिलो आधार यही हो। स्वभावबारे निष्कर्ष निकाल्न लग्नमा ग्रह र चन्द्रको अवस्था पनि हेर्नुपर्ने भनिएको छ।';
+  result.append(heading,steps,note);
+ };
+ asc.addEventListener('change',render);house.addEventListener('change',render);render();
+})();
