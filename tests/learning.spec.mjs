@@ -352,3 +352,20 @@ test('Chapter 9: ascendant occupancy exercise handles empty, one and many planet
  await page.locator('input[name="ch9Occupancy"][value="none"]').check();
  await expect(page.locator('#ch9OccupancyDetail')).toBeHidden();
 });
+
+
+test('Chapter 9: strength indicators distinguish sign dignity from house class', async ({ page }) => {
+ await page.goto(chapter(9));
+ const result=page.locator('#ch9StrengthResult');
+ await expect(result).toContainText('उच्च');
+ await expect(result).toContainText('केन्द्र');
+ await page.locator('#ch9StrengthStatus').selectOption('debilitated');
+ await page.locator('#ch9StrengthHouse').selectOption('9');
+ await expect(result).toContainText('नीच');
+ await expect(result).toContainText('त्रिकोण');
+ await expect(result).toContainText('दुई छुट्टाछुट्टै सङ्केत');
+ await page.locator('#ch9StrengthHouse').selectOption('8');
+ await expect(result).toContainText('दुःस्थान');
+ await page.locator('#ch9StrengthStatus').selectOption('neutral');
+ await expect(result).toContainText('पर्याप्त विवरण छैन');
+});
