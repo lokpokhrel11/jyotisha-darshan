@@ -745,3 +745,28 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(!form||!feedback)return;
  form.addEventListener('submit',e=>{e.preventDefault();const answer=form.querySelector('input[name="ch8conflict"]:checked');feedback.textContent=!answer?'पहिले उत्तर छान्नुहोस्।':answer.value==='a'?'सही। शुक्र दोस्रो र सातौँ भावको स्वामी भएकाले धन र दाम्पत्यको प्रसङ्ग जोडिएको छ।':'फेरि हेर्नुहोस्। शुक्रको दोस्रो र सातौँ भावको स्वामित्वसँग जोडिएका विषय पहिचान गर्नुहोस्।'});
 })();
+
+/* Chapter 8 comprehensive assessment: source comprehension, not divination. */
+(function(){
+ const form=document.getElementById('ch8Assessment'),mount=document.getElementById('ch8AssessmentQuestions'),summary=document.getElementById('ch8AssessmentSummary'),reset=document.getElementById('ch8AssessmentReset');
+ if(!form||!mount||!summary||!reset)return;
+ const questions=[
+ {q:'८.१: गुरुजीको तालिकामा लग्नबाट बुवा कुन भावमा छन्?',a:['नवौँ','दशौँ','बाह्रौँ'],correct:1,why:'पृष्ठ ७१: लग्नबाट दशौँ; सूर्यबाट नवौँ। दुई आधार छुट्टै छन्।'},
+ {q:'८.२: आमाको भाइ (मामा) चौथो भावबाट तेस्रो गन्दा कुन भाव?',a:['पाँचौँ','छैटौँ','सातौँ'],correct:1,why:'४ + ३ − १ = ६। आधार भावलाई १ मानेर गनिन्छ।'},
+ {q:'८.३: “राहुले माथिको, केतुले तलको सम्पत्ति” को अर्थबारे नोटको स्थिति के छ?',a:['अर्थ पूर्ण पुष्टि भएको छ','पुष्टि गर्न बाँकी छ','वैज्ञानिक रूपमा प्रमाणित छ'],correct:1,why:'पृष्ठ ७२ मा माथिल्लो/तल्लो तला सम्भावना मात्र उल्लेख छ; गुरुजीसँग पुष्टि गर्नुपर्ने छ।'},
+ {q:'८.४: पारिवारिक संस्कार हेर्दा नोटमा मुख्यतः कुन भाव र स्वामी जोडिएका छन्?',a:['दोस्रो भाव र द्वितीयेश','दशौँ भाव मात्र','आठौँ भाव मात्र'],correct:0,why:'पृष्ठ ७३ मा दोस्रो भाव र द्वितीयेशको बललाई परिवारको परम्परा र संस्कारसँग जोडिएको छ।'},
+ {q:'८.५: चौथो भाव हेर्नुअघि गुरुजीले के हेर्न भन्नुभएको छ?',a:['घातबार मात्र','लग्न र लग्नेश','छैटौँ मात्र'],correct:1,why:'पृष्ठ ७४: पहिले लग्न र लग्नेश, त्यसपछि चौथो भाव र चन्द्रमाको अवस्था।'},
+ {q:'८.६: मङ्गल छैटौँमा हुँदा मङ्गलबाट तेस्रो कुन भाव?',a:['सातौँ','आठौँ','नवौँ'],correct:1,why:'६ + ३ − १ = ८। यो गणनाले वास्तविक भाइबहिनीको अवस्था निर्धारण गर्दैन।'},
+ {q:'८.७: चतुर्थेश र लग्नेश बाह्रौँमा हुँदा नोटमा कुन परम्परागत संकेत छ?',a:['स्वदेशभित्र बसाइ','विदेशमा स्वेच्छिक बसाइ','घर निर्माण निश्चित'],correct:1,why:'पृष्ठ ७६ मा सप्तमलाई स्वदेशभित्र र बाह्रौँलाई विदेश बसाइसँग जोडिएको छ।'},
+ {q:'८.८: मेष लग्नको छैटौँमा शुक्र दोस्रो र सातौँको स्वामी हुँदा उदाहरणले के जोड्छ?',a:['धन र दाम्पत्य','केवल दशौँ','केवल नक्षत्र'],correct:0,why:'पृष्ठ ७७: शुक्रको दोस्रो र सातौँ भावको स्वामित्वबाट धन र दाम्पत्य प्रसङ्ग जोडिएको छ।'}
+ ];
+ questions.forEach((item,i)=>{
+  const field=document.createElement('fieldset');field.className='ch8-assessment-item';
+  const legend=document.createElement('legend');legend.textContent=(i+1)+'. '+item.q;field.append(legend);
+  item.a.forEach((option,j)=>{const label=document.createElement('label');label.className='ch7-choice';const input=document.createElement('input');input.type='radio';input.name='ch8assessment'+i;input.value=String(j);label.append(input,document.createTextNode(' '+option));field.append(label)});
+  const feedback=document.createElement('p');feedback.className='ch8-assessment-feedback';feedback.id='ch8AssessmentFeedback'+i;feedback.setAttribute('aria-live','polite');field.append(feedback);mount.append(field);
+ });
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+ form.addEventListener('submit',e=>{e.preventDefault();let score=0,answered=0;questions.forEach((item,i)=>{const selected=form.querySelector('input[name="ch8assessment'+i+'"]:checked'),feedback=document.getElementById('ch8AssessmentFeedback'+i);if(selected)answered++;const right=selected&&Number(selected.value)===item.correct;if(right)score++;feedback.textContent=(!selected?'उत्तर छुटेको छ। ':right?'सही। ':'पुनः अध्ययन गर्नुहोस्। ')+item.why;feedback.classList.toggle('is-correct',!!right)});summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। उत्तर दिइएका प्रश्न: '+nep(answered)+'। '+(answered<questions.length?'छुटेका प्रश्न पनि पूरा गर्नुहोस्।':score===questions.length?'सबै सही। अब अध्याय ९ को तयारी गर्न सक्नुहुन्छ।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।')});
+ reset.addEventListener('click',()=>{form.reset();questions.forEach((_,i)=>{const f=document.getElementById('ch8AssessmentFeedback'+i);f.textContent='';f.classList.remove('is-correct')});summary.textContent='८ प्रश्नको उत्तर छान्नुहोस्।'});
+})();
