@@ -1107,3 +1107,16 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 #chapter11 .ch10-feedback:not(:empty),#chapter11 .ch10-review-card{padding:17px;margin:12px 0;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:11px;background:var(--soft);color:var(--ink);line-height:1.75}
 #chapter11 [id^="ch11-"]{scroll-margin-top:90px}
 @media(max-width:760px){#chapter11 .ch9-step-grid,#chapter11 .ch9-grid{grid-template-columns:1fr}#chapter11 .ch11-selector-grid{grid-template-columns:1fr}#chapter11 .ch9-hero{padding:22px}}
+
+/* Chapter 11 worked examples and source notes, with theme-safe colors. */
+#chapter11 .ch11-examples{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:18px 0 12px}
+#chapter11 .ch11-examples>span{font-weight:750;color:var(--ink);margin-right:4px}
+#chapter11 .ch11-example-button{font:inherit;font-size:.9rem;line-height:1.5;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--ink);cursor:pointer}
+#chapter11 .ch11-example-button:hover,#chapter11 .ch11-example-button:focus-visible{border-color:var(--gold);outline-offset:3px}
+#chapter11 .ch11-example-button[aria-pressed="true"]{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 17%,var(--white));font-weight:800}
+#chapter11 .ch11-source-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0}
+#chapter11 .ch11-source-notes article{padding:21px;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:13px;background:var(--white);color:var(--ink)}
+#chapter11 .ch11-source-notes h4{margin:14px 0 9px;color:var(--ink)}
+#chapter11 .ch11-source-notes p{line-height:1.8}
+#chapter11 .ch10-example-tag{display:inline-block;padding:6px 11px;border-radius:20px;background:color-mix(in srgb,var(--gold) 19%,var(--white));color:var(--ink);font-weight:750;font-size:.85rem}
+@media(max-width:760px){#chapter11 .ch11-source-notes{grid-template-columns:1fr}#chapter11 .ch11-examples>span{width:100%}#chapter11 .ch11-example-button{flex:1 1 160px}}
