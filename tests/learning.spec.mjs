@@ -224,7 +224,7 @@ test('Chapter 8 mobile lesson menu is accessible and closes after navigation',as
  await expect(toggle).toHaveAttribute('aria-expanded','false');
  await toggle.click();
  await expect(toggle).toHaveAttribute('aria-expanded','true');
- await expect(page.locator('#ch8LessonLinks a')).toHaveCount(9);
+ await expect(page.locator('#ch8LessonLinks a')).toHaveCount(10);
  await page.locator('#ch8LessonLinks a[href="#ch8-lesson-5"]').click();
  await expect(toggle).toHaveAttribute('aria-expanded','false');
  await expect(page.locator('#ch8-lesson-5')).toBeVisible();
@@ -401,4 +401,18 @@ test('Chapter 9: Moon house calculation responds to ascendant and Moon sign', as
  await page.locator('#ch9MoonSign').selectOption('1');
  await expect(result).toContainText('चन्द्र रहेको भाव: ९');
  await expect(page.locator('#ch9SequenceResult')).toContainText('चन्द्र मेष राशिमा र ९औँ भावमा छ');
+});
+
+
+test('Chapter 9: Moon lesson precedes combined summary and controls are accessible', async ({ page }) => {
+ await page.goto(chapter(9));
+ const moon=page.locator('#ch9-moon');
+ const sequence=page.locator('#ch9-sequence');
+ await expect(moon).toBeVisible();
+ await expect(sequence).toBeVisible();
+ const moonBeforeSequence=await moon.evaluate(el => Boolean(el.compareDocumentPosition(document.getElementById('ch9-sequence')) & Node.DOCUMENT_POSITION_FOLLOWING));
+ expect(moonBeforeSequence).toBe(true);
+ await expect(page.locator('#chapter9 .ch9-local-nav a')).toHaveCount(10);
+ await expect(page.locator('#ch9MoonSign')).toHaveAccessibleName('चन्द्र रहेको राशि');
+ await expect(page.locator('#ch9Ascendant')).toHaveAccessibleName('लग्न राशि');
 });
