@@ -58,9 +58,9 @@ function renderQuestion(){
  q.options.forEach((option,i)=>{const b=document.createElement('button');b.type='button';b.textContent=option;b.addEventListener('click',()=>{
   if(answered)return;answered=true;const ok=i===q.correct;if(ok)correctCount++;
   if(!unitScores[q.unit])unitScores[q.unit]={right:0,total:0};unitScores[q.unit].total++;if(ok)unitScores[q.unit].right++;
-  $('quizFeedback').textContent=(ok?'सही। ':'यो उत्तर मिलेन। ')+q.why;
+  $('quizFeedback').textContent=(ok?'सही उत्तर। ':'सही उत्तर «'+q.options[q.correct]+'» हो। ')+q.why;
   $('quizProgress').textContent=`प्रश्न ${questionIndex+1} / ${questions.length} · सही ${correctCount} · स्रोत खण्ड ${q.unit}`;
-  $('quizOptions').querySelectorAll('button').forEach(x=>x.disabled=true);
+  $('quizOptions').querySelectorAll('button').forEach((x,j)=>{x.disabled=true;if(j===q.correct){x.classList.add('correct-answer');x.setAttribute('aria-label',x.textContent+' — सही उत्तर')}else if(j===i){x.classList.add('incorrect-answer')}});
   $('nextQuestion').hidden=questionIndex===questions.length-1;
   if(questionIndex===questions.length-1){
    const passed=correctCount>=12;
@@ -72,7 +72,7 @@ function renderQuestion(){
  });$('quizOptions').append(b);});$('nextQuestion').hidden=true;
 }
 $('nextQuestion').addEventListener('click',()=>{questionIndex++;renderQuestion()});
-$('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;unitScores={};$('restartQuiz').hidden=true;$('unitBreakdown').textContent='';renderQuestion()});
+$('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;unitScores={};$('restartQuiz').hidden=true;$('unitBreakdown').textContent='';$('savedProgress').textContent='';renderQuestion()});
 try{const prev=JSON.parse(localStorage.getItem('jd-chapter1-v05')||'null');if(prev){$('savedProgress').textContent=`अघिल्लो अभ्यास: ${prev.score}/${prev.total} · ${prev.completed?'मापदण्ड पूरा':'पुनः अभ्यास आवश्यक'}`;}}catch(e){}
 renderQuestion();
 // Chapter 1 expanded learning tools. Angles are hypothetical teaching inputs.
@@ -83,8 +83,8 @@ $('tithiNumber').addEventListener('change',showTithiGroup);showTithiGroup();
 function validAngle(id){const v=Number($(id).value);return $(id).value.trim()!==''&&Number.isFinite(v)&&v>=0&&v<360?v:null;}
 $('nakCalculate').addEventListener('click',()=>{
  const d=validAngle('nakDegree');if(d===null){$('nakResult').textContent='० देखि ३६० भन्दा कम अंश लेख्नुहोस्।';return;}
- const n=Math.floor(d/(360/27))+1;const pad=Math.floor((d-(n-1)*(360/27))/(360/108))+1;
- $('nakResult').textContent=`नक्षत्र क्रम ${Math.min(n,27)} · पाउ ${Math.min(pad,4)}। यो २७ नक्षत्रको समान खण्डमा आधारित अभ्यास हो।`;
+ const globalPada=Math.floor((d+1e-10)/(360/108));const n=Math.floor(globalPada/4)+1;const pad=globalPada%4+1;
+ $('nakResult').textContent=`कुल भोगांश ${d.toFixed(2)}° ÷ ३°२०′ (एक पाउ) गर्दा ${globalPada} पूरा पाउ बितेका छन्। त्यसैले नक्षत्र क्रम ${n} र त्यसको ${pad} औँ पाउ चलिरहेको छ। यो २७ नक्षत्रको समान कोणीय विभाजनमा आधारित अभ्यास हो।`;
 });
 $('tithiCalculate').addEventListener('click',()=>{
  const sun=validAngle('sunLongitude'),moon=validAngle('moonLongitude');
