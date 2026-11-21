@@ -241,3 +241,10 @@ body:not(.chapter-focus) .hero h1{font-size:clamp(2rem,4vw,3.3rem)}
  #chapter8 .ch8-hero-meta span{font-size:.78rem}
 }
 @media(max-width:390px){#chapter8 .ch8-contents-links.is-open{grid-template-columns:1fr}}
+
+/* Mobile navigation visibility override: base display:none must not win. */
+@media screen and (max-width:680px){
+ body #chapter8 nav.ch8-contents button.ch8-nav-toggle{display:inline-flex!important;visibility:visible}
+ body #chapter8 nav.ch8-contents .ch8-contents-links:not(.is-open){display:none!important}
+ body #chapter8 nav.ch8-contents .ch8-contents-links.is-open{display:grid!important}
+}
