@@ -478,3 +478,43 @@ body.chapter-focus .chapter-bottom-nav :is(.chapter-previous-button,.chapter-nex
 :root[data-theme="dark"] body.chapter-focus .chapter-bottom-nav .chapter-next-button:focus-visible{
  background:#f0d19a;border-color:#f0d19a;color:#142c38;
 }
+
+/* Contrast repair: chapter header pager was white-on-white in dark mode. */
+body.chapter-focus .chapter-focus-banner .chapter-pager a{
+ display:inline-flex;align-items:center;justify-content:center;min-height:48px;
+ padding:11px 20px;border-radius:10px;
+ background:#183743;border:1px solid #183743;color:#fff;
+ font-family:inherit;font-size:1rem;font-weight:750;line-height:1.45;
+ text-decoration:none;text-shadow:none;
+}
+body.chapter-focus .chapter-focus-banner .chapter-pager a:hover,
+body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
+ background:#315763;border-color:#315763;color:#fff;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-pager a:first-child{
+ background:#263f4b;border-color:#b6c6c8;color:#f4f5ef;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-pager a:last-child{
+ background:#e3bd7b;border-color:#e3bd7b;color:#152c36;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-pager a:first-child:hover,
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-pager a:first-child:focus-visible{
+ background:#355665;border-color:#f0d19a;color:#fff;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-pager a:last-child:hover,
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-pager a:last-child:focus-visible{
+ background:#f0d19a;border-color:#f0d19a;color:#142c38;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-toc strong{
+ color:#d0dcda;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-toc a{
+ background:#263f4b;color:#f4f5ef;border-color:#6d8589;
+}
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-toc a:hover,
+:root[data-theme="dark"] body.chapter-focus .chapter-focus-banner .chapter-toc a:focus-visible{
+ background:#365764;color:#fff;border-color:#e3bd7b;
+}
+@media(max-width:600px){
+ body.chapter-focus .chapter-focus-banner .chapter-pager a{flex:1 1 175px;min-width:0;text-align:center}
+}
