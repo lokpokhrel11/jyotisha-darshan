@@ -706,3 +706,10 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(quiz)quiz.addEventListener('submit',e=>{e.preventDefault();const chosen=quiz.querySelector('input[name="ch8q"]:checked'),feedback=document.getElementById('ch8Feedback');feedback.textContent=!chosen?'पहिले उत्तर छान्नुहोस्।':chosen.value==='10'?'सही। ७ + ४ − १ = १०। जीवनसाथीको आमालाई दशौँ भावबाट हेर्ने उदाहरण हो।':'फेरि गन्नुहोस्: सातौँ भावलाई १ मानेर चार स्थान गन्नुहोस्।'});
  update();
 })();
+
+/* Chapter 8: distinguishing stated rules from unresolved source wording. */
+(function(){
+ const form=document.getElementById('ch8SourceQuiz'),feedback=document.getElementById('ch8SourceFeedback');
+ if(!form||!feedback)return;
+ form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="ch8source"]:checked');feedback.textContent=!checked?'पहिले एउटा उत्तर छान्नुहोस्।':checked.value==='b'?'सही। “माथिको/तलको सम्पत्ति” को अर्थ नोटमा पुष्टि गर्न बाँकी छ। सम्भावित व्याख्यालाई निश्चित नियम बनाउन हुँदैन।':'यो कथन नोटमा लेखिएको छ। अस्पष्ट र पुष्टि गर्न बाँकी रहेको वाक्य छुट्याउनुहोस्।'});
+})();
