@@ -814,7 +814,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    feedback.classList.toggle('is-correct',right);
   });
   try{localStorage.setItem('jyotisha-chapter8-score',JSON.stringify({score,total:questions.length}))}catch(_){}
-  summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। '+(score===questions.length?'सबै सही। अब अध्याय ९ को तयारी गर्न सक्नुहुन्छ।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।');
+  summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। '+(score===questions.length?'सबै उत्तर सही छन्। अध्याय ८ को पुनरावलोकन पूरा भयो।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।');
  });
  reset.addEventListener('click',()=>{form.reset();questions.forEach((_,i)=>{const f=document.getElementById('ch8AssessmentFeedback'+i);f.textContent='';f.classList.remove('is-correct')});summary.textContent='८ प्रश्नको उत्तर छान्नुहोस्।'});
 })();
