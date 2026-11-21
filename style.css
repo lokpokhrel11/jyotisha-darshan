@@ -780,3 +780,11 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
  #chapter8 .ch8-lesson-pager a{flex:1 1 100%}
  #chapter8 .ch8-lesson-pager .ch8-lesson-next{margin-left:0}
 }
+
+/* v76: Immediate Chapter 8 lesson controls for long lesson panels. */
+#chapter8 .ch8-lesson-pager-top{
+ margin:12px 0 22px;padding:0 0 16px;
+ border-top:0;border-bottom:1px solid #c7d0d0;
+}
+#chapter8 .ch8-lesson-pager-top a{font-size:.9rem}
+:root[data-theme="dark"] #chapter8 .ch8-lesson-pager-top{border-bottom-color:#526d76}
