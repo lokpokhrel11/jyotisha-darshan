@@ -1542,3 +1542,10 @@ body.chapter-focus #pathshala .study-panel .result{min-height:0!important;paddin
 body.chapter-focus #pathshala :is(input,select,textarea){max-width:100%!important;min-height:42px!important}
 body.chapter-focus #pathshala :is(input,select,textarea):focus-visible{outline:3px solid #d4ac68;outline-offset:2px}
 @media(max-width:700px){body.chapter-focus #pathshala>.lesson{padding:16px!important}body.chapter-focus #pathshala .study-grid{grid-template-columns:minmax(0,1fr)!important}body.chapter-focus #pathshala .tabs button{flex:1 1 auto!important}}
+
+/* Cross-reference to the standalone Akshara Chakra in Chapter 1 */
+.akshara-reference-link{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 22px;margin:0 0 18px;background:linear-gradient(110deg,#0d3542,#1c4d57);color:#fff;border:1px solid #b88c4d;border-radius:15px}
+.akshara-reference-link strong{font-size:1.2rem;color:#f4d29a}
+.akshara-reference-link p{margin:4px 0 0;color:#e4ebea;line-height:1.5}
+.akshara-reference-link .button{white-space:nowrap;text-decoration:none}
+@media(max-width:680px){.akshara-reference-link{flex-direction:column;align-items:stretch;padding:16px}.akshara-reference-link .button{text-align:center;white-space:normal}}
