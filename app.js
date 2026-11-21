@@ -265,7 +265,7 @@ const chapter3Form=$('chapter3ExamForm'),chapter3Container=$('chapter3ExamQuesti
 function renderChapter3(){chapter3Container.replaceChildren();chapter3Bank.forEach((q,i)=>{const fs=document.createElement('fieldset');fs.className='exam-question';const legend=document.createElement('legend');legend.textContent=`${i+1}. [${q[0]}] ${q[1]}`;fs.append(legend);q[2].forEach((a,j)=>{const label=document.createElement('label');label.className='exam-option';const input=document.createElement('input');input.type='radio';input.name=`ch3q${i}`;input.value=String(j);label.append(input,document.createTextNode(' '+a));fs.append(label);});chapter3Container.append(fs);});chapter3Results.hidden=true;chapter3Results.replaceChildren();updateChapter3Progress();}
 function updateChapter3Progress(){let count=0;chapter3Bank.forEach((q,i)=>{if(chapter3Form.querySelector(`input[name="ch3q${i}"]:checked`))count++;});$('chapter3Progress').textContent=`उत्तर दिइएका: ${count}/${chapter3Bank.length}`;}
 chapter3Form.addEventListener('change',updateChapter3Progress);
-chapter3Form.addEventListener('submit',event=>{event.preventDefault();const answers=chapter3Bank.map((q,i)=>chapter3Form.querySelector(`input[name="ch3q${i}"]:checked`));if(answers.some(a=>!a)){chapter3Results.textContent='कृपया सबै १५ प्रश्नको उत्तर दिनुहोस्।';chapter3Results.hidden=false;const first=answers.findIndex(a=>!a);const target=chapter3Container.querySelectorAll('fieldset.exam-question')[first];if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}return;}let score=0;const summary=document.createElement('div');chapter3Bank.forEach((q,i)=>{const ok=Number(answers[i].value)===q[3];if(ok)score++;const line=document.createElement('p');line.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(line);});const heading=document.createElement('h3');heading.textContent=`नतिजा: ${score}/15 · ${score>=12?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;chapter3Results.replaceChildren(heading,summary);chapter3Results.hidden=false;try{localStorage.setItem('jyotisha-chapter3-score',JSON.stringify({score,total:15}));}catch(e){}chapter3Results.scrollIntoView({behavior:'smooth',block:'start'});});
+chapter3Form.addEventListener('submit',event=>{event.preventDefault();const answers=chapter3Bank.map((q,i)=>chapter3Form.querySelector(`input[name="ch3q${i}"]:checked`));if(answers.some(a=>!a)){chapter3Results.textContent='कृपया सबै १५ प्रश्नको उत्तर दिनुहोस्।';chapter3Results.hidden=false;const first=answers.findIndex(a=>!a);const target=chapter3Container.querySelectorAll('fieldset.exam-question')[first];if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}return;}let score=0;const summary=document.createElement('div');chapter3Bank.forEach((q,i)=>{const ok=Number(answers[i].value)===q[3];if(ok)score++;const line=document.createElement('p');line.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(line);});const heading=document.createElement('h3');heading.textContent=`नतिजा: ${score}/15 · ${score>=12?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;chapter3Results.replaceChildren(heading,summary);chapter3Results.hidden=false;heading.tabIndex=-1;heading.focus({preventScroll:true});try{localStorage.setItem('jyotisha-chapter3-score',JSON.stringify({score,total:15}));}catch(e){}chapter3Results.scrollIntoView({behavior:'smooth',block:'start'});});
 $('chapter3Reset').addEventListener('click',()=>{const prev=chapter3Bank.slice();for(let i=chapter3Bank.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[chapter3Bank[i],chapter3Bank[j]]=[chapter3Bank[j],chapter3Bank[i]];}if(chapter3Bank.every((q,i)=>q===prev[i]))[chapter3Bank[0],chapter3Bank[1]]=[chapter3Bank[1],chapter3Bank[0]];chapter3Form.reset();renderChapter3();const first=chapter3Container.querySelector('fieldset');if(first){first.setAttribute('tabindex','-1');first.focus({preventScroll:true});first.scrollIntoView({behavior:'smooth',block:'start'});}});
 renderChapter3();
 
@@ -460,7 +460,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  let active='lesson',current=0;
  const qContainer=document.getElementById('chapter2ExamQuestions');
  const pager=document.createElement('div');pager.className='exam-stepper';
- const counter=document.createElement('span');counter.setAttribute('aria-live','polite');
+ const counter=document.createElement('span');counter.setAttribute('role','status');counter.setAttribute('aria-live','polite');
  const prev=document.createElement('button');prev.type='button';prev.textContent='← अघिल्लो प्रश्न';
  const next=document.createElement('button');next.type='button';next.textContent='अर्को प्रश्न →';
  pager.append(prev,counter,next);
@@ -561,7 +561,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(!form||!container)return;
  const pager=document.createElement('div');pager.className='exam-stepper';
  const prev=document.createElement('button');prev.type='button';prev.textContent='← अघिल्लो प्रश्न';
- const counter=document.createElement('span');counter.setAttribute('aria-live','polite');
+ const counter=document.createElement('span');counter.setAttribute('role','status');counter.setAttribute('aria-live','polite');
  const next=document.createElement('button');next.type='button';next.textContent='अर्को प्रश्न →';
  pager.append(prev,counter,next);container.after(pager);
  let current=0;
@@ -832,7 +832,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    feedback.classList.toggle('is-correct',right);
   });
   try{localStorage.setItem('jyotisha-chapter8-score',JSON.stringify({score,total:questions.length}))}catch(_){}
-  summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। '+(score===questions.length?'सबै उत्तर सही छन्। अध्याय ८ को पुनरावलोकन पूरा भयो।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।');
+  summary.setAttribute('role','status');summary.setAttribute('aria-live','polite');summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। '+(score===questions.length?'सबै उत्तर सही छन्। अध्याय ८ को पुनरावलोकन पूरा भयो।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।');
  });
  reset.addEventListener('click',()=>{form.reset();questions.forEach((_,i)=>{const f=document.getElementById('ch8AssessmentFeedback'+i);f.textContent='';f.classList.remove('is-correct')});summary.textContent='८ प्रश्नको उत्तर छान्नुहोस्।'});
 })();
