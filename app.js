@@ -1217,7 +1217,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
 /* Chapter 9: consolidated source-reading checklist; no personality prediction. */
 (function(){
  const result=document.getElementById('ch9SequenceResult');
- const moon=document.getElementById('ch9MoonStatus');
+ const moon=document.getElementById('ch9MoonSign');
  const asc=document.getElementById('ch9Ascendant');
  const lordHouse=document.getElementById('ch9LordHouse');
  const occupancy=document.querySelectorAll('input[name="ch9Occupancy"]');
@@ -1235,7 +1235,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const count=[...occupancy].find(input=>input.checked)?.value||'none';
   const occupancyText=count==='none'?'लग्न खाली छ; लग्नेशको स्थिति हेर्नुहोस्।':count==='one'?'लग्नमा एउटा ग्रह ('+planet.value+') छ; गुरुजीको एकाधिकारसम्बन्धी नियम अध्ययन गर्नुहोस्।':'लग्नमा धेरै ग्रह छन्; ग्रहबल र दशा नहेरी प्रमुख ग्रह तय गर्न मिल्दैन। छानिएको उदाहरण ग्रह: '+planet.value+'।';
   const strengthText='अलग अभ्यासमा छानिएको अवस्था: '+labels[dignity.value]+', भाव '+nep(sh)+'। यो छनोट माथि देखाइएको लग्नेश '+lord+' को वास्तविक राशिगत बल हो भनेर पुष्टि गरिएको छैन।';
-  const moonText=moon.value==='known'?'चन्द्रको स्थान छुट्टै जाँचिएको भनिएको छ; यस अभ्यासमा विवरण प्रविष्ट वा प्रमाणित गरिएको छैन।':'चन्द्रको अवस्था उपलब्ध छैन; गुरुजीको तीनमध्ये एउटा आवश्यक पक्ष बाँकी छ।';
+  const moonSign=Number(moon.value);
+  const moonHouse=moon.value?((moonSign-a+12)%12)+1:null;
+  const moonText=moonHouse?'चन्द्र '+signs[moonSign-1]+' राशिमा र '+nep(moonHouse)+'औँ भावमा छ। यो स्थानको गणना मात्र हो; बल, दृष्टि र दशा जाँचिएको छैन।':'चन्द्रको राशि उपलब्ध छैन; अध्ययनको एउटा आवश्यक पक्ष बाँकी छ।';
   const rows=[
    '१. लग्न र लग्नेश: '+signs[a-1]+' लग्न; '+lord+' लग्नेश; उदाहरणमा भाव '+nep(h)+' ('+sign+')।',
    '२. लग्नमा ग्रह: '+occupancyText,
@@ -1250,4 +1252,21 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  [moon,asc,lordHouse,planet,dignity,strengthHouse].forEach(el=>el.addEventListener('change',render));
  occupancy.forEach(el=>el.addEventListener('change',render));
  render();
+})();
+
+/* Chapter 9: derive Moon house from selected Moon sign and ascendant. */
+(function(){
+ const asc=document.getElementById('ch9Ascendant');
+ const moon=document.getElementById('ch9MoonSign');
+ const result=document.getElementById('ch9MoonResult');
+ if(!asc||!moon||!result)return;
+ const signs=['मेष','वृष','मिथुन','कर्कट','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'];
+ const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+ const render=()=>{
+  if(!moon.value){result.textContent='चन्द्रको राशि नछानिएकाले भाव गणना गरिएको छैन।';return;}
+  const a=Number(asc.value),m=Number(moon.value);
+  const house=((m-a+12)%12)+1;
+  result.textContent='लग्न: '+signs[a-1]+'। चन्द्र: '+signs[m-1]+'। चन्द्र रहेको भाव: '+nep(house)+'। सूत्र: चन्द्र राशि अङ्क − लग्न राशि अङ्क + १ (आवश्यक भए १२ जोड्ने)।';
+ };
+ asc.addEventListener('change',render);moon.addEventListener('change',render);render();
 })();
