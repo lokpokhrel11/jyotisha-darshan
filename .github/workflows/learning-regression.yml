@@ -38,8 +38,8 @@ jobs:
         if: always()
         run: |
           echo '## Jyotisha Darshan browser regression' >> "$GITHUB_STEP_SUMMARY"
-          echo "Commit: \`$GITHUB_SHA\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "Test step: \`\${{ steps.browser-tests.outcome }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Commit: `$GITHUB_SHA`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Test step: `${{ steps.browser-tests.outcome }}`" >> "$GITHUB_STEP_SUMMARY"
           echo 'Download the diagnostic artifact for the HTML report, screenshots, and test log when available.' >> "$GITHUB_STEP_SUMMARY"
       - if: failure()
         uses: actions/upload-artifact@v4
