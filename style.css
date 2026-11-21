@@ -567,3 +567,33 @@ body.chapter-focus .chapter-focus-banner .chapter-pager a:focus-visible{
 }
 /* Preserve intentional white type on navy chapter heroes, including their nested labels. */
 :root[data-theme="dark"] body.chapter-focus :is(.chapter-focus-banner h1,.ch8-hero h2){color:#f2f6f2}
+
+/* Critical contrast fix: Chapter 8 comparison cards and other white-only nested surfaces.
+   Earlier inherited light text while keeping #fff backgrounds. */
+:root[data-theme="dark"] :is(
+ #chapter8 .ch8-comparison>div,
+ #chapter8 .ch7-choice,
+ #chapter8 .ch8-controls select,
+ #chapter8 .ch8-nav-toggle,
+ #chapter1Expanded details,
+ .practice-controls,.chart-card,.ch7-house-detail,
+ .ch7-reasoning .ch7-choice,.ch7-house-buttons button,
+ .quiz-options button,.exam-stepper button,
+ .chapter-bottom-nav .chapter-back,
+ .menu,.dash-outline
+){
+ background:#253b45!important;
+ color:#edf4f1!important;
+ border-color:#627b82!important;
+}
+:root[data-theme="dark"] #chapter8 .ch8-comparison>div :is(h4,p,li,strong,span){
+ color:#edf4f1!important;
+}
+:root[data-theme="dark"] #chapter8 .ch8-comparison>div li::marker{color:#dcb979}
+:root[data-theme="dark"] :is(.practice-controls,.chart-card,.ch7-house-detail,.ch7-reasoning .ch7-choice,#chapter1Expanded details) :is(p,li,summary,label,h3,h4,strong,span){
+ color:#edf4f1;
+}
+:root[data-theme="dark"] .site-header nav{background:#1a2e38;color:#edf4f1;border-color:#526a72}
+:root[data-theme="dark"] .site-header nav a{color:#edf4f1}
+:root[data-theme="dark"] #chapter8 .ch8-nav-toggle{color:#edf4f1!important}
+:root[data-theme="dark"] .chapter-bottom-nav .chapter-back{color:#edf4f1!important}
