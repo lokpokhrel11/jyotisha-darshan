@@ -288,10 +288,10 @@ $('istCalculate').addEventListener('click',()=>{
  const birth=istSeconds($('istBirth').value),sun=istSeconds($('istSunrise').value),previous=$('istPrevious').value==='previous',out=$('istOutput');
  if(birth===null||sun===null){out.textContent='कृपया दुवै समय सही ढाँचामा दिनुहोस्।';return;}
  if(!previous&&birth<sun){out.textContent='जन्म समय सूर्योदयभन्दा अघि छ। अघिल्लो दिनको स्थानीय सूर्योदय प्रविष्ट गरी त्यसको विकल्प छान्नुहोस्।';return;}
- if(previous&&birth===sun){out.textContent='जन्मसमय र प्रविष्ट अघिल्लो दिनको सूर्योदयको घडी समान देखिन्छ। यो विकल्प प्रयोग गर्दा वास्तविक अघिल्लो दिनको सूर्योदय र जन्ममिति छुट्टै पुष्टि गर्नुहोस्।';return;}
+ if(previous&&birth>=sun){out.textContent='अघिल्लो दिनको सूर्योदय विकल्पमा जन्मको घडी आजको सूर्योदयभन्दा अघि हुनुपर्छ। आजको सूर्योदय छुट्टै प्रविष्ट नगरिएकाले यो जाँच घडीको तुलनामा आधारित छ; मिति र वास्तविक सूर्योदय पनि पुष्टि गर्नुहोस्।';return;}
  const elapsed=birth-sun+(previous?86400:0);
- const totalVipala=elapsed*2.5; // 1 second of clock time = 2.5 vipala
- const ghadi=Math.floor(totalVipala/3600),pala=Math.floor((totalVipala%3600)/60),vipala=totalVipala%60;
+ const halfVipala=elapsed*5; // 1 clock second = 2.5 vipala; integer half-vipala units avoid floating-point boundaries
+ const ghadi=Math.floor(halfVipala/7200),pala=Math.floor((halfVipala%7200)/120),vipala=(halfVipala%120)/2;
  out.textContent=`बितेको समय: ${Math.floor(elapsed/3600)} घण्टा ${Math.floor(elapsed%3600/60)} मिनेट ${elapsed%60} सेकेन्ड। इष्टकाल = ${ghadi} घडी ${pala} पला ${Number(vipala.toFixed(2))} विपला।`;
 });
 $('istCalculate').click();
