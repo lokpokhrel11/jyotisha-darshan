@@ -420,7 +420,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
 (function(){
  const params=new URLSearchParams(window.location.search);
  const chapter=Number(params.get('chapter'));
- if(!Number.isInteger(chapter)||chapter<1||chapter>11)return;
+ if(!Number.isInteger(chapter)||chapter<1||chapter>12)return;
  const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"],"7":["chapter7"],"8":["chapter8"],"9":["chapter9"],"10":["chapter10"],"11":["chapter11"],"12":["chapter12"]};
  const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति","कुण्डली कसरी हेर्ने","नाता र भावात् भावम्","स्वभाव, शरीर र स्वास्थ्यका संकेत","धन, कमाइ, परिश्रम र यात्रा","सन्तान र कुण्डली मिलान","ग्रहशान्ति र परम्परागत उपाय"];
  const allowed=new Set(groups[chapter]);
