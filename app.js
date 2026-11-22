@@ -1243,7 +1243,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   {chapter:4,name:'इष्टकाल र समय रूपान्तरण',total:4,threshold:3,anchor:'ch4ExampleQuiz'},
   {chapter:5,name:'भयात, भभोग र दशा शेष',total:5,threshold:4,anchor:'ch5-assessment'},
   {chapter:6,name:'विंशोत्तरी दशाको क्रम',total:5,threshold:4,anchor:'ch6-assessment'},
-  {chapter:7,name:'कुण्डली कसरी हेर्ने',total:1,threshold:1,anchor:'ch7Quiz'},
+  {chapter:7,name:'कुण्डली कसरी हेर्ने',total:8,threshold:7,anchor:'ch7Quiz'},
   {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'},
   {chapter:9,name:'स्वभाव, शरीर र स्वास्थ्यका सङ्केत',total:5,threshold:4,anchor:'ch9-practice'},
   {chapter:10,name:'धन, आय, कर्म र यात्रा',total:4,threshold:3,anchor:'ch10-assessment'},
