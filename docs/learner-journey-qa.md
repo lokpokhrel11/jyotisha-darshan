@@ -56,3 +56,10 @@ This section records **static inspection only**, not a passing browser test.
 | 13 | 10 | 8 | `jyotisha-chapter13-score` |
 
 **Findings:** Every listed score key has a corresponding write path in `app.js`. The Chapter 7 dashboard total was corrected from 1 to 8 in commit `f8e009f`. Chapters 4–13 include reset/change invalidation paths. Question totals for dynamically generated banks and the pedagogical appropriateness of targets still require runtime and instructional review. In particular, Chapter 8 currently requires 8/8; retain this as a documented design choice until reviewed, not an independently validated standard.
+
+## Chapters 9–13 assessment source review (2026-11-22)
+
+- Chapters 9, 10 and 11: verified that every configured answer key corresponds to a form question with the expected three option values (`a`, `b`, `c`). Their question counts are 5, 4 and 7 respectively.
+- Chapters 9–13: inspected code paths that remove stored assessment results on answer changes and form resets. This guards against stale achievement indicators.
+- Chapters 9–11: explanations include limitations on treating traditional astrological interpretations as established health, marriage or life-outcome predictions. Chapter 10 explicitly flags an unresolved tension between two traditional business-related rules instead of presenting both as simultaneously certain.
+- **Outstanding:** verify the actual semantic correctness of every option in Chapters 12–13 against the study source, execute submissions/resets on desktop and mobile browsers, and test screen-reader focus/feedback. This source review is not a browser QA pass or a claim of scientific validation of Jyotiṣa.
