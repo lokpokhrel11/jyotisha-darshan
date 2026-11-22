@@ -1941,3 +1941,34 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
     min-width:0;
   }
 }
+
+
+/* Phase 6.17: chapter 5–6 assessment controls must not inherit full-width study-panel input styling. */
+:is(#ch5AssessmentForm,#ch6AssessmentForm) input[type="radio"]{
+ width:auto;
+ height:auto;
+ flex:0 0 auto;
+ margin:4px 0 0;
+ padding:0;
+ accent-color:var(--accent,#a47b34);
+}
+:is(#ch5AssessmentForm,#ch6AssessmentForm) .exam-question{
+ min-width:0;
+ overflow-wrap:break-word;
+}
+:is(#ch5AssessmentForm,#ch6AssessmentForm) .exam-question label{
+ min-height:44px;
+ align-items:flex-start;
+ cursor:pointer;
+ font-weight:400;
+ line-height:1.55;
+}
+:is(#ch5AssessmentForm,#ch6AssessmentForm) .exam-question label:focus-within{
+ outline:2px solid currentColor;
+ outline-offset:3px;
+ border-radius:4px;
+}
+@media(max-width:760px){
+ :is(#ch5AssessmentForm,#ch6AssessmentForm) .exam-question{padding:14px 12px;margin:12px 0}
+ :is(#ch5AssessmentForm,#ch6AssessmentForm) .exam-question legend{line-height:1.6}
+}
