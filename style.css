@@ -2206,3 +2206,10 @@ body.chapter-focus .chapter-editorial-hero[id]{scroll-margin-top:var(--chapter-a
 @media(max-width:760px){
  body.chapter-focus{--chapter-anchor-offset:calc(88px + env(safe-area-inset-top, 0px))}
 }
+
+/* Self-reported chapter reading marker; distinct from scored assessments. */
+.chapter-read-toggle{display:inline-flex;align-items:center;justify-content:center;margin-top:14px;padding:11px 16px;max-width:100%;min-height:44px;white-space:normal;text-align:center;border:1px solid #b18b4d;border-radius:10px;background:#fffaf0;color:#654719;font:inherit;font-weight:650;cursor:pointer}
+.chapter-read-toggle:hover,.chapter-read-toggle:focus-visible{outline:2px solid #b18b4d;outline-offset:2px}
+.chapter-read-toggle[aria-pressed="true"]{background:#e9f2e8;border-color:#5c8166;color:#285239}
+:root[data-theme="dark"] .chapter-read-toggle{background:#293b42;color:#ffe3a7;border-color:#c09b5c}
+:root[data-theme="dark"] .chapter-read-toggle[aria-pressed="true"]{background:#25463c;color:#d6f3dc;border-color:#86b99a}
