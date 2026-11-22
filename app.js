@@ -938,7 +938,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const chapterKey='jyotisha-pathshala-last-chapter-v1';
  const lessonKey='jyotisha-pathshala-ch8-last-lesson-v1';
  const chapter=Number(new URLSearchParams(location.search).get('chapter'));
- const valid=n=>Number.isInteger(n)&&n>=1&&n<=11;
+ const valid=n=>Number.isInteger(n)&&n>=1&&n<=13;
  const ids=new Set(Array.from({length:8},(_,i)=>'ch8-lesson-'+(i+1)).concat('ch8AssessmentPanel'));
  const getSavedLesson=()=>{try{const value=localStorage.getItem(lessonKey);return ids.has(value)?value:null}catch(_){return null}};
  if(valid(chapter)){
