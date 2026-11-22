@@ -1721,3 +1721,54 @@ html[data-theme="dark"] #practice #chartLabels .chart-house.selected text,body[d
 :root[data-theme="dark"] #chapter12>.study-panel:not(.ch12-intro){background:#223e44;color:#f0f0e9;border-color:#607b76;border-inline-start-color:#d7b477}
 :root[data-theme="dark"] #chapter12>.study-panel:not(.ch12-intro)>h4:first-child{color:#f3eee3;border-color:#5c7473}
 @media(max-width:640px){#chapter12 #ch12-mantras blockquote[lang="sa"]{padding:13px 12px;line-height:1.9}#chapter12 #ch12-mantras .ch12-two>article{padding:15px}#chapter12 #ch12-kalsarpa .ch12-names span{padding:9px 10px}}
+
+
+/* Chapter 13: long-form Vastu reading hierarchy and accessible interactive study. */
+#chapter13{--v13-edge:#d6ded7;--v13-ink:#233f48;--v13-gold:#a57b3d;--v13-paper:#fffdf9;--v13-sage:#f0f6f1;--v13-cream:#fbf4e8}
+#chapter13>.study-panel{background:var(--v13-cream);border:1px solid #e5d4b6;border-left:5px solid var(--v13-gold);padding:clamp(18px,2.6vw,28px);border-radius:16px;margin-block:20px}
+#chapter13 .ch12-topic{position:relative;margin-block:clamp(24px,4vw,42px);padding:clamp(20px,3vw,34px);background:var(--v13-paper);border:1px solid var(--v13-edge);border-radius:19px;box-shadow:0 7px 22px rgba(15,46,50,.06);min-width:0;scroll-margin-top:92px}
+#chapter13 .ch12-topic:nth-of-type(even){background:var(--v13-sage)}
+#chapter13 .ch12-topic::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:linear-gradient(#c39a57,#7e9c8e);border-radius:19px 0 0 19px}
+#chapter13 .ch12-topic>.ch12-kicker{border-bottom:1px solid var(--v13-edge);padding-bottom:12px;margin-bottom:16px;color:#7b5827}
+#chapter13 .ch12-topic>h3{font-size:clamp(1.3rem,2.1vw,1.7rem);line-height:1.4;color:var(--v13-ink);margin:8px 0 17px}
+#chapter13 .ch12-topic p{line-height:1.83;max-width:78ch}
+#chapter13 .ch12-topic :is(h4,h5){line-height:1.48;color:var(--v13-ink);margin-top:1.3em;margin-bottom:.6em}
+#chapter13 .ch12-topic .study-panel{margin-block:20px;background:var(--v13-cream);border:1px solid #e3d2b2;border-left:4px solid var(--v13-gold);border-radius:13px;padding:clamp(16px,2.1vw,24px)}
+#chapter13 .ch12-topic .study-panel>h4:first-child{margin-top:0}
+#chapter13 .ch12-topic .note{padding:14px 17px;margin-block:18px;border-radius:11px}
+#chapter13 .ch12-table-scroll{border:1px solid #c3d0c8;border-radius:13px;margin-block:20px;background:#fff;box-shadow:0 3px 12px rgba(14,43,47,.05)}
+#chapter13 .ch12-table thead th{position:sticky;top:0;z-index:1}
+#chapter13 .ch12-table tbody tr:nth-child(even){background:#f0f6f2}
+#chapter13 .ch12-table tbody tr:hover{background:#fff0d8}
+#chapter13 #ch13-map .ch13-direction-grid{gap:10px;margin-block:20px}
+#chapter13 #ch13-map .ch13-direction-grid button{border:1px solid #aebfb8;border-radius:12px;background:#f4f8f4;min-height:78px;transition:background-color .15s,border-color .15s}
+#chapter13 #ch13-map .ch13-direction-grid button:hover{background:#fff2da;border-color:#b58a4b}
+#chapter13 #ch13-map .ch13-direction-grid button:focus-visible{outline:3px solid #b98940;outline-offset:3px}
+#chapter13 #ch13-map .ch13-direction-result{border:1px solid #cbb48b;border-left:5px solid #b38b4c;border-radius:13px;background:#fff8e9;padding:clamp(16px,2vw,23px);line-height:1.75}
+#chapter13 #ch13-study .ch12-two>article{border:1px solid #cbdad1;border-radius:13px;background:#f5f9f5;padding:clamp(16px,2vw,23px)}
+#chapter13 #ch13-soil .ch12-steps>article{border:1px solid #d8d4c5;border-radius:13px;background:#fffaf0;padding:15px;min-width:0}
+#chapter13 #ch13-soil .ch12-steps>article b{color:#8b622b}
+#chapter13 #ch13-door .ch12-detail{border:1px solid #c9d6d0;border-radius:12px;background:#f5f8f4;padding:15px 19px;margin-block:19px}
+#chapter13 #ch13-door .ch12-detail summary{cursor:pointer;font-weight:750;line-height:1.55}
+#chapter13 #ch13-door .ch12-detail summary:focus-visible{outline:3px solid #b58b48;outline-offset:3px}
+#chapter13 #ch13-quiz .ch12-quiz fieldset{border:1px solid #cbd7d0;border-radius:14px;background:#fffdf9;padding:clamp(15px,2vw,22px);margin-block:17px}
+#chapter13 #ch13-quiz .ch12-quiz legend{font-weight:750;line-height:1.6;color:var(--v13-ink);padding:0 6px}
+#chapter13 #ch13-quiz .ch12-quiz label{line-height:1.65}
+#chapter13 #ch13-quiz .ch12-quiz input:focus-visible{outline:3px solid #bd9450;outline-offset:3px}
+:root[data-theme="dark"] #chapter13{--v13-edge:#526d70;--v13-ink:#f1f2e9;--v13-gold:#e4bb78;--v13-paper:#193640;--v13-sage:#23424a;--v13-cream:#303e40}
+:root[data-theme="dark"] #chapter13 .ch12-topic{color:#f0f2ed;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+:root[data-theme="dark"] #chapter13 .ch12-topic>.ch12-kicker{color:#f0cb89}
+:root[data-theme="dark"] #chapter13 .ch12-topic .study-panel{color:#f0f0e7;border-color:#857455;border-left-color:#e4bb78}
+:root[data-theme="dark"] #chapter13 .ch12-table-scroll{background:#1b3942;border-color:#617d7c}
+:root[data-theme="dark"] #chapter13 .ch12-table tbody tr:nth-child(even){background:#28454c}
+:root[data-theme="dark"] #chapter13 .ch12-table tbody tr:hover{background:#465244}
+:root[data-theme="dark"] #chapter13 #ch13-map .ch13-direction-grid button,
+:root[data-theme="dark"] #chapter13 #ch13-study .ch12-two>article,
+:root[data-theme="dark"] #chapter13 #ch13-door .ch12-detail{background:#2a464c;color:#f1eee5;border-color:#607c78}
+:root[data-theme="dark"] #chapter13 #ch13-map .ch13-direction-grid button:hover{background:#46523f;border-color:#d7b477}
+:root[data-theme="dark"] #chapter13 #ch13-map .ch13-direction-result,
+:root[data-theme="dark"] #chapter13 #ch13-soil .ch12-steps>article,
+:root[data-theme="dark"] #chapter13 #ch13-quiz .ch12-quiz fieldset{background:#293e43;color:#f1eee5;border-color:#8a7857}
+:root[data-theme="dark"] #chapter13 #ch13-soil .ch12-steps>article b{color:#efc987}
+@media(max-width:640px){#chapter13 .ch12-topic{padding:19px 16px 21px;margin-block:20px}#chapter13 .ch12-topic p{line-height:1.76}#chapter13 .ch12-topic .study-panel{padding:15px 13px}#chapter13 .ch12-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}#chapter13 #ch13-quiz .ch12-quiz fieldset{padding:15px 12px}}
+@media(prefers-reduced-motion:reduce){#chapter13 #ch13-map .ch13-direction-grid button{transition:none}}
