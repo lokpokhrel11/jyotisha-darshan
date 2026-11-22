@@ -95,7 +95,7 @@ test('Chapter 7: focused reading, house lords, and quiz feedback', async ({ page
  await expect(page.locator('#ch7LordRows tr').nth(9)).toContainText('शनि');
  await page.locator('#ch7Asc').selectOption('7');
  await expect(page.locator('#ch7LordRows tr').first()).toContainText('मङ्गल');
- for(const [i,answer] of [1,1,0,0,1,2,1,1].entries()) await page.locator(`#ch7Quiz input[name="ch7q${i}"][value="${answer}"]`).check();
+ for(const [i,answer] of [1,1,0,0,1,2,1,2].entries()) await page.locator(`#ch7Quiz input[name="ch7q${i}"][value="${answer}"]`).check();
  await page.locator('#ch7Quiz button[type="submit"]').click();
  await expect(page.locator('#ch7Feedback')).toContainText('प्राप्त अङ्क:');
 });
