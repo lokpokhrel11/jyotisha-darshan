@@ -37,10 +37,11 @@ The export has 11 allowlisted files. Publish the export directory alone. It excl
 | Public static preview and export | Passed. Verified available sections, local file and fragment references, manifest, worker behavior, and 911 sampled signatures from restricted lesson text and JavaScript against every exported file. A signature comparison can miss paraphrased or rearranged text. |
 | Public Chromium 156 and Playwright 1.58.2 at 390 × 844 and 1280 × 844 | Passed. Six calculators including blank input validation, perfect scores on both assessments and retries, dashboard persistence, Chapter 2 deep linking, keyboard skip and menu focus, dark mode, अक्षरचक्र degree lookup and course link, horizontal overflow, console errors, and restricted route and asset checks. |
 | Legacy worker migration fixture | Passed. Chromium first served a cached legacy asset. The replacement at the same scope purged the legacy cache, preserved unrelated cache storage, unregistered, and the legacy asset returned 404. |
-| Clean Git rehearsal | Passed. A freshly initialized local repository, populated solely from the export, had one root commit and 13 reachable objects: one commit, one tree, and 11 blobs. `git fsck --full --no-reflogs` passed. Export tree: `7fad7d16f87847aec0abcee46aed5a514cdc6e95`. No remote was connected. |
+| Clean Git rehearsal | Passed. A freshly initialized local repository, populated solely from the export, had one root commit and 13 reachable objects: one commit, one tree, and 11 blobs. `git fsck --full --no-reflogs` passed. Export tree: `9aba1ba8e401f795f0302a77534c5785e2a1425c`. No remote was connected. |
 | Full-course legacy source checks | Static structure passed. Nine of ten Node test files passed. The sunrise boundary assertion expects 05:49 for 06:00 minus 07:16, while the implementation correctly rounds to 05:53. The failure reproduced on untouched staging. |
 | Full-course legacy browser smoke | Chapter 5 exam deep-link scrolling failed at 390px on both the review checkout and untouched staging. That route is outside the public export. |
 | Full-course learning regression | 48 of 48 passed against the untouched staging checkout. |
+| Existing GitHub Actions smoke workflow | The PR check stopped during setup. Its Playwright 1.58.2 install does not support the current Ubuntu 26.04 runner. The public release checks ran locally with system Chromium. |
 
 Public testing covered Chromium and keyboard interactions. Screen-reader and cross-browser verification were outside this run. The results above were generated locally.
 

@@ -237,7 +237,7 @@ function reshuffleChapter2Questions(){
 }
 $('examReset').addEventListener('click',()=>{
   examForm.reset();
-  
+
   reshuffleChapter2Questions();
   renderChapter2Exam();
   // Return to the beginning so the cleared selections are immediately visible.
