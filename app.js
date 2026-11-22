@@ -348,6 +348,7 @@ $('istCalculate').click();
    lines.push(`${item.name}: ${ok?'सही':'फेरि जाँच्नुहोस्'}। ${ok?'':`स्रोतको गोलाकार मानअनुसार उत्तर ${item.answer[0]} घडी ${item.answer[1]} पला ${item.answer[2]} विपला हो।`}`);
   });
   feedback.textContent=`नतिजा: ${correct}/4। ${lines.join(' ')}`;
+  try{localStorage.setItem('jyotisha-chapter4-score',JSON.stringify({score:correct,total:cases.length}))}catch(_){}
  });
  form.addEventListener('reset',()=>{feedback.textContent='';});
 })();
@@ -1163,6 +1164,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   {chapter:7,name:'कुण्डली कसरी हेर्ने',total:1,threshold:1,anchor:'ch7Quiz'},
   {chapter:2,name:'राशि र भाव',total:20,threshold:16,anchor:'chapter2exam'},
   {chapter:3,name:'ग्रह परिचय',total:15,threshold:12,anchor:'chapter3exam'},
+  {chapter:4,name:'इष्टकाल र समय रूपान्तरण',total:4,threshold:3,anchor:'ch4ExampleQuiz'},
   {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'},
   {chapter:9,name:'स्वभाव, शरीर र स्वास्थ्यका सङ्केत',total:5,threshold:4,anchor:'ch9-practice'},
   {chapter:10,name:'धन, आय, कर्म र यात्रा',total:4,threshold:3,anchor:'ch10-assessment'},
