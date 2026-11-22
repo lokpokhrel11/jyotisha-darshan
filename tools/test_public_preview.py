@@ -13,12 +13,12 @@ assert 'src="public-preview.js"' in html
 assert 'renderChapter2Exam' in js
 assert 'renderQuestion' in js
 assert 'chapter3Bank' not in js
-assert not re.search(r'chapter(?:[3-9]|1[0-3])\\b',js)
+assert not re.search(r'chapter(?:[3-9]|1[0-3])\b',js)
 assert 'public-course.html' in html
 assert 'public-preview.html?chapter=1' in course
 assert 'public-preview.html?chapter=2' in course
-ids=set(re.findall(r'\\bid="([^"]+)"',html))
-used=set(re.findall(r"\\$\\('([^']+)'\\)",js))
+ids=set(re.findall(r'\bid="([^"]+)"',html))
+used=set(re.findall(r"\$\('([^']+)'\)",js))
 assert not (used-ids), f'Missing elements: {sorted(used-ids)}'
 assert 'href="index.html?chapter=4' not in html
 print('Static staging checks passed. Browser and history audits are still required.')
