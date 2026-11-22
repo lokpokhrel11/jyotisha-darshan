@@ -513,3 +513,25 @@ test('All chapters: chapter navigation links resolve to existing chapter destina
     }
   }
 });
+
+
+test('Mobile chapter footer links meet minimum 44px touch height in both themes', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  for (const theme of ['light', 'dark']) {
+    for (let n = 1; n <= 13; n++) {
+      await page.goto(chapter(n));
+      await page.evaluate(value => document.documentElement.setAttribute('data-theme', value), theme);
+      const links = page.locator('main > .chapter-bottom-nav a');
+      await expect(links.first()).toBeVisible();
+      const targets = await links.evaluateAll(nodes => nodes.map(el => {
+        const r = el.getBoundingClientRect();
+        const style = getComputedStyle(el);
+        return { text: el.textContent.trim(), height: r.height, width: r.width, visible: style.display !== 'none' && style.visibility !== 'hidden' };
+      }));
+      for (const target of targets.filter(item => item.visible)) {
+        expect(target.height, `Chapter ${n}, ${theme}: undersized footer touch target "${target.text}"`).toBeGreaterThanOrEqual(43.5);
+        expect(target.width, `Chapter ${n}, ${theme}: narrow footer touch target "${target.text}"`).toBeGreaterThanOrEqual(43.5);
+      }
+    }
+  }
+});
