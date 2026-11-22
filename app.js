@@ -1082,7 +1082,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। '+(score===questions.length?'सबै उत्तर सही छन्। अध्याय ८ को पुनरावलोकन पूरा भयो।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।');
  });
  form.addEventListener('change',e=>{if(!e.target.matches('input[type="radio"]'))return;const index=Number(e.target.name.replace('ch8assessment',''));if(!Number.isInteger(index)||index<0||index>=questions.length)return;const f=document.getElementById('ch8AssessmentFeedback'+index);f.textContent='';f.classList.remove('is-correct');summary.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';});
- reset.addEventListener('click',()=>{form.reset();questions.forEach((_,i)=>{const f=document.getElementById('ch8AssessmentFeedback'+i);f.textContent='';f.classList.remove('is-correct')});summary.textContent='८ प्रश्नको उत्तर छान्नुहोस्।'});
+ reset.addEventListener('click',()=>{form.reset();questions.forEach((_,i)=>{const f=document.getElementById('ch8AssessmentFeedback'+i);f.textContent='';f.classList.remove('is-correct')});summary.textContent='८ प्रश्नको उत्तर छान्नुहोस्।';try{localStorage.removeItem('jyotisha-chapter8-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));});
 })();
 
 /* Chapter 8 mobile contents: progressive enhancement; desktop links stay visible. */
