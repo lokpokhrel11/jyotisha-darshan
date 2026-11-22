@@ -1677,6 +1677,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const render=()=>{
   const x=Number(a.value),y=Number(b.value);
   if(!a.value||!b.value){out.textContent='दुवै चन्द्रराशि छानेपछि दुईतर्फी दूरी देखिन्छ।';return}
+  if(!Number.isInteger(x)||x<1||x>12||!Number.isInteger(y)||y<1||y>12){out.textContent='मान्य चन्द्रराशि छान्नुहोस्।';return}
   const forward=((y-x+12)%12)+1,reverse=((x-y+12)%12)+1;
   const matched=(forward===5&&reverse===9)||(forward===9&&reverse===5);
   const sequence=(start,count)=>Array.from({length:count},(_,i)=>signs[(start-1+i)%12]+' ('+nep(i+1)+')').join(' → ');
@@ -1706,7 +1707,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  ];
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const clear=()=>{feedback.textContent='';feedback.className='ch10-feedback';review.hidden=true;review.replaceChildren()};
- form.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))clear()});
+ form.addEventListener('change',event=>{if(!event.target.matches('input[type="radio"]'))return;clear();try{localStorage.removeItem('jyotisha-chapter11-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'))});
  form.addEventListener('reset',()=>{clear();try{localStorage.removeItem('jyotisha-chapter11-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));feedback.removeAttribute('tabindex')});
  form.addEventListener('submit',event=>{
   event.preventDefault();
