@@ -352,6 +352,11 @@ $('istCalculate').click();
   window.dispatchEvent(new Event('jyotisha-assessment-updated'));
  });
  form.addEventListener('reset',()=>{feedback.textContent='';});
+ form.addEventListener('input',event=>{
+  if(event.target.matches('input[name^="ch4-example-"]')&&feedback.textContent){
+   feedback.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';
+  }
+ });
 })();
 // Chapter 4 local sunrise, minute-rounded signed offset per study notes.
 $('lsCalculate').addEventListener('click',()=>{
