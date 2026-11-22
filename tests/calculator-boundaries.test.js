@@ -25,17 +25,28 @@ assert.equal(bh('60/00'), 3600);
 assert.equal(bh('60/01'), null);
 assert.equal(bh('61/00'), null);
 assert.equal(bh('14/60'), null);
-const pada = (a,b) => {
- if (!(b>0 && a>=0 && a<b)) return 'boundary';
- const k=[1,2,3].find(k=>a*4===b*k);
- return k ? 'exact-quarter' : Math.floor(a*4/b)+1;
+// Run the actual chapter 5 pada click handler with minimal DOM controls.
+const padaFields = {
+ padaBhayat: {value:'00/00'}, padaBhavog: {value:'60/00'},
+ padaOutput: {textContent:''},
+ padaCalculate: {addEventListener(event, handler){if(event==='click')this.handler=handler;},click(){this.handler();}}
 };
-assert.equal(pada(0,3600),1);
-assert.equal(pada(900,3600),'exact-quarter');
-assert.equal(pada(1800,3600),'exact-quarter');
-assert.equal(pada(2700,3600),'exact-quarter');
-assert.equal(pada(3599,3600),4);
-assert.equal(pada(3600,3600),'boundary');
+const padaContext=vm.createContext({$:id=>padaFields[id]});
+vm.runInContext(extract("$('padaCalculate').addEventListener", '// Chapter 5.7:'),padaContext);
+const padaResult=(elapsed,total)=>{
+ padaFields.padaBhayat.value=elapsed;
+ padaFields.padaBhavog.value=total;
+ padaFields.padaCalculate.click();
+ return padaFields.padaOutput.textContent;
+};
+assert.match(padaResult('00/00','60/00'),/पहिलो/);
+assert.match(padaResult('15/00','60/00'),/सीमामा/);
+assert.match(padaResult('30/00','60/00'),/सीमामा/);
+assert.match(padaResult('45/00','60/00'),/सीमामा/);
+assert.match(padaResult('59/59','60/00'),/चौथो/);
+assert.match(padaResult('60/00','60/00'),/सीमा-क्षण/);
+assert.match(padaResult('60/00','59/59'),/ठूलो/);
+assert.match(padaResult('14/00','57/01'),/१४ घडी १५ पला १५ विपला/);
 const balanceDays=(elapsed,total,years)=>Math.round((total-elapsed)/total*years*360);
 assert.equal(balanceDays(0,3600,7),2520);
 assert.equal(balanceDays(3599,3600,7),1);
