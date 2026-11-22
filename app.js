@@ -1076,7 +1076,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const completionEl=document.getElementById('studyCompletionNote');
  if(openedEl&&attemptedEl&&achievedEl){
   let opened=[];
-  try{const saved=JSON.parse(localStorage.getItem('jyotisha-pathshala-opened-v1')||'[]');if(Array.isArray(saved))opened=saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=13)}catch(_){}
+  try{const saved=JSON.parse(localStorage.getItem('jyotisha-pathshala-opened-v3')||'[]');if(Array.isArray(saved))opened=saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=13)}catch(_){}
   openedEl.textContent=nep(new Set(opened).size)+' / १३';
   attemptedEl.textContent=nep(attempted)+' / '+nep(exams.length);
   achievedEl.textContent=nep(met)+' / '+nep(exams.length);
