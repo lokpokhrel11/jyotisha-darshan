@@ -2179,3 +2179,17 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  #chapter12 .ch12-quiz :is(button,input[type="submit"],input[type="reset"]){max-width:100%}
  #chapter12 #ch12Result,#chapter12 .ch12-explanation{overflow-wrap:anywhere}
 }
+
+/* Chapter 13: consistent mobile quiz and direction-selector accessibility. */
+#chapter13 .ch12-quiz fieldset{min-width:0}
+#chapter13 .ch12-quiz label{display:flex;align-items:center;gap:10px;min-height:48px;box-sizing:border-box;overflow-wrap:anywhere}
+#chapter13 .ch12-quiz label:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+#chapter13 .ch12-quiz legend{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+#chapter13 [data-dir]{min-height:46px;white-space:normal}
+#chapter13 [data-dir]:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(max-width:600px){
+ #chapter13 .ch12-quiz fieldset{padding:14px 12px}
+ #chapter13 .ch12-quiz label{padding:13px 12px;line-height:1.6}
+ #chapter13 .ch12-quiz :is(button,input[type="submit"],input[type="reset"]){min-height:46px;max-width:100%;white-space:normal}
+ #chapter13 #ch13DirectionResult,#chapter13 #ch13Result,#chapter13 .ch12-explanation{overflow-wrap:anywhere}
+}
