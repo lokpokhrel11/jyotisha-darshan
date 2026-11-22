@@ -618,7 +618,15 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(chapter<13){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को अध्याय →';actions.append(a)}
  const toc=document.createElement('nav');toc.className='chapter-toc';toc.setAttribute('aria-label','अध्यायका पाठ र अभ्यास');const labels={pathshala:'पञ्चाङ्गका आधार',practice:'पञ्चाङ्ग अभ्यास',chapter2:'राशि र भाव',planetExample:'ग्रहसम्बन्धी अभ्यास',chapter2exam:'राशि र भाव परीक्षा',chapter3:'नवग्रहको परिचय',chapter3exam:'नवग्रह परीक्षा',chapter4:'समय गणना',istakala:'इष्टकाल',localSunrise:'सूर्योदय',chapter5:'नक्षत्र गणना',padaPractice:'नक्षत्र चरण',dashaBalance:'दशा शेष',chapter6:'दशा पद्धति',antardasha:'अन्तर्दशा',tribhagi:'त्रिभागी',yogini:'योगिनी',chapter7:'पाठ तथा अभ्यास',chapter8:'पाठ तथा परीक्षा'};
  for(const id of groups[chapter]){if(chapter>=8)break;const section=document.getElementById(id);if(!section)continue;const heading=section.querySelector('h2,h3');const link=document.createElement('a');link.href='#'+id;link.textContent=labels[id]||(heading?heading.textContent.trim():id);toc.append(link)}
- banner.append(back,eyebrow,actions);if(toc.childElementCount)banner.append(toc);main.prepend(banner);
+ banner.append(back,eyebrow,actions);if(toc.childElementCount)banner.append(toc);
+ // Voluntary lesson-reading marker; separate from assessment and certification.
+ const readingKey='jyotisha-chapters-read-v1';
+ const readControl=document.createElement('button');readControl.type='button';readControl.className='chapter-read-toggle';
+ readControl.setAttribute('aria-label','यस अध्यायको पाठ अध्ययन गरेको अभिलेख');
+ const getRead=()=>{try{const v=JSON.parse(localStorage.getItem(readingKey)||'[]');return Array.isArray(v)?v.filter(n=>Number.isInteger(n)&&n>=1&&n<=13):[]}catch(_){return []}};
+ const renderRead=()=>{const checked=getRead().includes(chapter);readControl.textContent=checked?'✓ अध्ययन गरेको चिन्ह लगाइएको छ · हटाउनुहोस्':'□ यो अध्याय अध्ययन गरेको चिन्ह लगाउनुहोस्';readControl.setAttribute('aria-pressed',String(checked))};
+ readControl.addEventListener('click',()=>{const values=new Set(getRead());if(values.has(chapter))values.delete(chapter);else values.add(chapter);try{localStorage.setItem(readingKey,JSON.stringify([...values].sort((a,b)=>a-b)))}catch(_){}renderRead();window.dispatchEvent(new Event('jyotisha-reading-updated'))});
+ renderRead();banner.append(readControl);main.prepend(banner);
  // Unified chapter masthead for all available chapters. Reuse actual chapter headings, never duplicate them.
  const sourceHero=chapter>=8?heroSection?.querySelector(':scope > .ch8-hero, :scope > .ch9-hero'):null;
  const sourceHeading=chapterHeading||sourceHero;
@@ -1259,18 +1267,21 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   attemptedEl.textContent=nep(attempted)+' / '+nep(exams.length);
   achievedEl.textContent=nep(met)+' / '+nep(exams.length);
   if(completionEl){
+   let marked=[];try{const saved=JSON.parse(localStorage.getItem('jyotisha-chapters-read-v1')||'[]');if(Array.isArray(saved))marked=saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=13)}catch(_){}
+   const markedCount=new Set(marked).size;
    const openedCount=new Set(opened).size;
    const nextStep=openedCount<13?'बाँकी अध्याय अध्ययनका लागि खोल्न सक्नुहुन्छ।':attempted<exams.length?'अब बाँकी मुख्य मूल्याङ्कन पूरा गर्न सक्नुहुन्छ।':met<exams.length?'लक्ष्य नपुगेका मूल्याङ्कन पुनः अभ्यास गर्न सक्नुहुन्छ।':'सबै मुख्य मूल्याङ्कनका अभ्यास लक्ष्य पुगेका छन्।';
-   completionEl.textContent='अध्याय खोलिएका: '+nep(openedCount)+' / १३। मुख्य मूल्याङ्कन पूरा: '+nep(attempted)+' / १३। अभ्यास लक्ष्य पुगेका: '+nep(met)+' / १३। '+nextStep+' यी सूचकले पाठ पूरा भएको वा प्रमाणपत्र प्राप्त गर्ने योग्यता प्रमाणित गर्दैनन्।';
+   completionEl.textContent='आफैँ अध्ययन गरेको चिन्ह लगाइएका: '+nep(markedCount)+' / १३। अध्याय खोलिएका: '+nep(openedCount)+' / १३। मुख्य मूल्याङ्कन पूरा: '+nep(attempted)+' / १३। अभ्यास लक्ष्य पुगेका: '+nep(met)+' / १३। '+nextStep+' यी सूचकले पाठ पूरा भएको वा प्रमाणपत्र प्राप्त गर्ने योग्यता प्रमाणित गर्दैनन्।';
   }
  }
 
  }
  refreshAssessmentDashboard();
  window.addEventListener('jyotisha-assessment-updated',refreshAssessmentDashboard);
+ window.addEventListener('jyotisha-reading-updated',refreshAssessmentDashboard);
  window.addEventListener('pageshow',refreshAssessmentDashboard);
  window.addEventListener('storage',event=>{
-  if(event.key===null||event.key==='jd-chapter1-v05'||/^jyotisha-chapter(?:[1-9]|1[0-3])-score$/.test(event.key)||event.key==='jyotisha-pathshala-opened-v3')refreshAssessmentDashboard();
+  if(event.key===null||event.key==='jd-chapter1-v05'||/^jyotisha-chapter(?:[1-9]|1[0-3])-score$/.test(event.key)||event.key==='jyotisha-pathshala-opened-v3'||event.key==='jyotisha-chapters-read-v1')refreshAssessmentDashboard();
  });
 })();
 
