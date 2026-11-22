@@ -428,18 +428,23 @@ $('padaCalculate').addEventListener('click',()=>{
 $('padaCalculate').click();
 
 // Chapter 5.7: Vimshottari balance. Input is ghadi/pala, output uses 360-day pedagogical year.
+const dbPreset=document.getElementById('dbPresetRohini');
+if(dbPreset)dbPreset.addEventListener('click',()=>{
+ $('dbBhayat').value='14/40';$('dbBhavog').value='55/58';$('dbLord').value='moon';$('dbCalculate').click();
+});
 const dbYears={sun:6,moon:10,mars:7,rahu:18,jupiter:16,saturn:19,mercury:17,ketu:7,venus:20};
 $('dbCalculate').addEventListener('click',()=>{
- const parse=(s)=>{const m=/^\s*(\d+)\s*\/\s*(\d+)\s*$/.exec(s);if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return Number.isInteger(g)&&Number.isInteger(p)&&g>=0&&g<=60&&p>=0&&p<60&&(g<60||p===0)?g*60+p:null;};
+ const parse=(s)=>{const m=/^\s*(\d+)\s*\/\s*(\d+)\s*$/.exec(s);if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return Number.isInteger(g)&&Number.isInteger(p)&&g>=0&&g<=120&&p>=0&&p<60&&(g<120||p===0)?g*60+p:null;};
  const a=parse($('dbBhayat').value),b=parse($('dbBhavog').value),out=$('dbOutput'),years=dbYears[$('dbLord').value];
  if(a===null||b===null||b<=0||a<0||!years){out.textContent='घडी/पला सही लेख्नुहोस् (जस्तै 14/40)। भभोग शून्यभन्दा ठूलो हुनुपर्छ।';return;}
- if(a===b){out.textContent='भयात र भभोग बराबर छन्। यो नक्षत्र परिवर्तनको सीमा-क्षण हो; जन्म नक्षत्र पुष्टि गरेपछि मात्र दशा शेष निकाल्नुहोस्।';return;}
+ if(a===b){out.textContent='भयात र भभोग बराबर छन्। नक्षत्रको अन्त्य-सीमामा शेष शून्य हुन्छ; अर्को नक्षत्र र दशास्वामी पञ्चाङ्गबाट पुष्टि गरेपछि मात्र जन्मदशा निर्धारण गर्नुहोस्।';return;}
+ if(a>=3600){out.textContent='भयात एक सूर्योदय-दिनको ६० घडीभन्दा कम हुनुपर्छ।';return;}
  if(a>b){out.textContent='भयात भभोगभन्दा ठूलो छ। पञ्चाङ्गका मान र नक्षत्रको अवस्था जाँच्नुहोस्।';return;}
  const fraction=(b-a)/b,remaining=years*fraction;
  // Use nearest day for a stable, transparent pedagogical conversion.
  const totalDays=Math.round(remaining*360),y=Math.floor(totalDays/360),mo=Math.floor(totalDays%360/30),d=totalDays%30;
  const roundingNote=totalDays===0&&remaining>0?' ध्यान दिनुहोस्: वास्तविक शेष शून्य होइन; एक दिनभन्दा कम अवधि नजिकको पूर्ण दिनमा गोलाकार गर्दा ० दिन देखिएको हो।':'';
- out.textContent=`बाँकी नक्षत्र-अंश: ${b-a}/${b} = ${(fraction*100).toFixed(2)}%। महादशा अवधि: ${years} वर्ष। दशा शेष: ${remaining.toFixed(4)} वर्ष ≈ ${y} वर्ष ${mo} महिना ${d} दिन (३६०-दिने वर्षमा, नजिकको दिनमा गोलाकार)।${roundingNote}`;
+ out.textContent=`बाँकी नक्षत्र-अंश: ${Math.floor((b-a)/60)}/${String((b-a)%60).padStart(2,'0')} (${b-a} पला) ÷ ${b} पला = ${(fraction*100).toFixed(2)}%। महादशा अवधि: ${years} वर्ष। दशा शेष: ${remaining.toFixed(4)} वर्ष ≈ ${y} वर्ष ${mo} महिना ${d} दिन (३६०-दिने वर्षमा, नजिकको दिनमा गोलाकार)।${roundingNote}`;
 });
 $('dbCalculate').click();
 
