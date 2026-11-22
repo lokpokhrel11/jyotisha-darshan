@@ -60,6 +60,33 @@ for (const width of [375, 320]) {
   });
 }
 
+
+for (const width of [320, 375, 430, 768]) {
+  test(`Mobile ${width}px: chapters 9–13 have no document overflow or stacked sticky navigation`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 780 });
+    for (let n = 9; n <= 13; n++) {
+      await page.goto(chapter(n));
+      await expect(page.locator(`#chapter${n}`)).toBeVisible();
+      const audit = await page.evaluate(() => {
+        const viewport = document.documentElement.clientWidth;
+        const content = document.documentElement.scrollWidth;
+        const banner = document.querySelector('.chapter-focus-banner');
+        const bannerPosition = banner ? getComputedStyle(banner).position : null;
+        const overflowing = [...document.querySelectorAll('main button, main input, main select, main fieldset')]
+          .filter(el => {
+            const rect = el.getBoundingClientRect();
+            const style = getComputedStyle(el);
+            return style.display !== 'none' && style.visibility !== 'hidden' && rect.width && (rect.right > innerWidth + 3 || rect.left < -3);
+          }).slice(0, 5).map(el => el.id || el.className || el.tagName);
+        return { viewport, content, bannerPosition, overflowing };
+      });
+      expect(audit.content, `Chapter ${n} document overflow at ${width}px`).toBeLessThanOrEqual(audit.viewport + 2);
+      if (width <= 760) expect(audit.bannerPosition, `Chapter ${n} sticky banner at ${width}px`).not.toBe('sticky');
+      expect(audit.overflowing, `Chapter ${n} controls outside ${width}px viewport`).toEqual([]);
+    }
+  });
+}
+
 test('Chapter 7: focused reading, house lords, and quiz feedback', async ({ page }) => {
  await page.goto(chapter(7));
  await expect(page.locator('.chapter-focus-banner h1')).toHaveText('कुण्डली कसरी हेर्ने');
