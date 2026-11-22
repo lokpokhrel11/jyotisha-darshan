@@ -5,11 +5,13 @@ on:
     branches: [main]
     paths:
       - 'app.js'
+      - 'index.html'
       - 'tests/**'
       - '.github/workflows/calculator-tests.yml'
   pull_request:
     paths:
       - 'app.js'
+      - 'index.html'
       - 'tests/**'
       - '.github/workflows/calculator-tests.yml'
   workflow_dispatch:
@@ -48,3 +50,5 @@ jobs:
         run: node tests/chapter11-navapanchaka.test.js
       - name: Validate Chapter 11 assessment
         run: node tests/chapter11-assessment.test.js
+      - name: Validate Chapter 12 and 13 assessments
+        run: node tests/chapter12-13-assessment.test.js
