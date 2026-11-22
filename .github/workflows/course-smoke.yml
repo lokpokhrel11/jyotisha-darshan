@@ -5,6 +5,8 @@ on:
       - 'index.html'
       - 'app.js'
       - 'tests/site-smoke.cjs'
+      - 'tests/browser-smoke.cjs'
+      - 'tests/browser-smoke.cjs'
       - '.github/workflows/course-smoke.yml'
   pull_request:
     paths:
@@ -24,3 +26,11 @@ jobs:
         run: node --check app.js
       - name: Validate course structure
         run: node tests/site-smoke.cjs
+      - name: Install browser test dependencies
+        run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Run Chromium browser tests
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/jyotisha-http.log 2>&1 &
+          node tests/browser-smoke.cjs
