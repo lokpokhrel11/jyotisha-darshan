@@ -399,6 +399,18 @@ $('bhCalculate').addEventListener('click',()=>{
  bhPanel.textContent=bhFmt(bh);bbPanel.textContent=bhFmt(bb);
 });$('bhCalculate').click();
 
+// Chapter 5 pada presets: one verified Rohini example and one synthetic exact-boundary test.
+for(const [id,bhayat,bhavog] of [
+ ['padaPresetRohini','14/40','55/58'],
+ ['padaPresetBoundary','07/30','30/00']
+]){
+ const button=document.getElementById(id);
+ if(button)button.addEventListener('click',()=>{
+  $('padaBhayat').value=bhayat;
+  $('padaBhavog').value=bhavog;
+  $('padaCalculate').click();
+ });
+}
 // Chapter 5: use vipala integer arithmetic to avoid floating point boundaries.
 $('padaCalculate').addEventListener('click',()=>{
  const out=$('padaOutput');const parse=(s)=>{const m=/^\s*(\d{1,2})\s*[/：:]\s*(\d{1,2})\s*$/.exec(s);if(!m)return null;const g=+m[1],p=+m[2];return g<=60&&p<60&&(g<60||p===0)?(g*60+p)*60:null;};
