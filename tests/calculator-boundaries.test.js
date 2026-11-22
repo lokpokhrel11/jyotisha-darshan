@@ -41,8 +41,17 @@ assert.equal(balanceDays(0,3600,7),2520);
 assert.equal(balanceDays(3599,3600,7),1);
 assert.equal(balanceDays(3599,3600,1),0);
 assert.equal(balanceDays(1800,3600,20),3600);
-const yoginiIndex=n=>(n+2)%8;
+// Exercise the website's actual Yogini selector, rather than duplicating its formula.
+const yoginiContext = vm.createContext({$: id => ({value: yoginiContext.nakshatra})});
+vm.runInContext(extract('function yoginiSelection()', 'function yoginiCycle()'), yoginiContext);
+const yoginiIndex = n => {
+ yoginiContext.nakshatra = String(n);
+ const selection = vm.runInContext('yoginiSelection()', yoginiContext);
+ return selection === null ? null : selection.index;
+};
 assert.equal(yoginiIndex(1),3);
 assert.equal(yoginiIndex(5),7); // remainder zero selects Sankata
 assert.equal(yoginiIndex(27),5);
+assert.equal(yoginiIndex(0),null);
+assert.equal(yoginiIndex(28),null);
 console.log('Calculator boundary checks passed (time, ghadi/pala, pada, dasha, Yogini).');
