@@ -26,6 +26,20 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:8765/index.html';
     const overflow = await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
     assert(!overflow,'Horizontal overflow on chapter '+chapter+' at '+width+'px');
    }
+   // Verify hash navigation works after the page has already loaded.
+   await page.goto(base+'?chapter=5#chapter5',{waitUntil:'domcontentloaded'});
+   await page.locator('#chapter5-tab-lesson').waitFor();
+   await page.evaluate(()=>{location.hash='ch5-assessment'});
+   await page.waitForFunction(()=>document.querySelector('#chapter5-tab-practice')?.getAttribute('aria-selected')==='true');
+   assert(await page.locator('#ch5-assessment').isVisible(),'Hash-change assessment link remains hidden');
+
+   // Exercise the actual reader theme toggle through its stored setting.
+   await page.evaluate(()=>localStorage.setItem('jyotisha-reader-theme-v1','dark'));
+   await page.reload({waitUntil:'domcontentloaded'});
+   assert.equal(await page.locator('html').getAttribute('data-theme'),'dark',
+     'Saved dark mode not restored at '+width+'px');
+   await page.evaluate(()=>localStorage.setItem('jyotisha-reader-theme-v1','light'));
+
    await page.goto(base+'?chapter=2#chapter2exam',{waitUntil:'domcontentloaded'});
    assert.equal(await page.locator('#chapter2-tab-quiz').getAttribute('aria-selected'),'true',
      'Chapter 2 quiz deep link did not activate quiz tab');
