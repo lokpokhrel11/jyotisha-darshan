@@ -1607,3 +1607,30 @@ html[data-theme="dark"] #practice #chartLabels .chart-house.selected text,body[d
 #chapter13 .ch12-path{display:flex;flex-wrap:wrap;gap:8px;max-width:100%}
 #chapter13 .ch12-path a{max-width:100%;overflow-wrap:anywhere}
 @media(max-width:600px){#chapter13 .ch12-path a{flex:1 1 calc(50% - 8px);text-align:center}#chapter13 .ch12-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}#chapter13 .ch12-steps{max-width:100%}}
+
+
+/* Chapter 7 chart: readable controls and contrast in both reader themes. */
+#chapter7 .ch7-chart-layout > div{min-width:0}
+#chapter7 #ch7Chart{height:auto;aspect-ratio:1/1;max-width:480px;margin-inline:auto}
+#chapter7 .ch7-chart-label{font-size:15px}
+#chapter7 .ch7-chart-planet{font-size:13px;font-weight:700}
+#chapter7 .ch7-house-buttons button{min-height:40px;cursor:pointer}
+#chapter7 .ch7-house-buttons button:focus-visible{outline:3px solid #b78432;outline-offset:2px}
+:root[data-theme="dark"] #chapter7 #ch7Chart{background:#172b38}
+:root[data-theme="dark"] #chapter7 .ch7-chart-house{fill:#233e4c;stroke:#a8bdc5}
+:root[data-theme="dark"] #chapter7 #ch7Chart [data-house]:hover .ch7-chart-house,
+:root[data-theme="dark"] #chapter7 #ch7Chart [data-house].selected .ch7-chart-house{fill:#66502f}
+:root[data-theme="dark"] #chapter7 .ch7-chart-label{fill:#f4f0e7}
+:root[data-theme="dark"] #chapter7 .ch7-chart-planet{fill:#f5c978}
+:root[data-theme="dark"] #chapter7 .ch7-house-detail{background:#203746;color:#f2eee6;border-color:#627b87}
+:root[data-theme="dark"] #chapter7 .ch7-house-detail dt{color:#c6d5dc}
+:root[data-theme="dark"] #chapter7 .ch7-house-buttons button{background:#263f4c;color:#f2eee6;border-color:#728b97}
+:root[data-theme="dark"] #chapter7 .ch7-house-buttons button[aria-pressed="true"]{background:#a77935;color:#101d25;border-color:#e3b86d}
+@media(max-width:520px){
+ #chapter7 .ch7-chart-layout{gap:14px}
+ #chapter7 .ch7-house-detail{padding:14px}
+ #chapter7 .ch7-house-detail dl{grid-template-columns:minmax(80px,.8fr) minmax(0,1.2fr)}
+ #chapter7 .ch7-house-detail dd{overflow-wrap:anywhere}
+ #chapter7 .ch7-house-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+ #chapter7 .ch7-house-buttons button{padding:8px 2px;font-size:.85rem}
+}
