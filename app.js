@@ -433,9 +433,36 @@ if(dbPreset)dbPreset.addEventListener('click',()=>{
  $('dbBhayat').value='14/40';$('dbBhavog').value='55/58';$('dbLord').value='moon';$('dbCalculate').click();
 });
 const dbYears={sun:6,moon:10,mars:7,rahu:18,jupiter:16,saturn:19,mercury:17,ketu:7,venus:20};
+let dbCalculatedTransfer=null;
+const dbTransferButton=document.getElementById('dbTransferToCycle');
+if(dbTransferButton){
+ dbTransferButton.addEventListener('click',()=>{
+  if(!dbCalculatedTransfer)return;
+  $('cycleLord').value=dbCalculatedTransfer.lord;
+  $('cycleBalance').value=String(dbCalculatedTransfer.years);
+  $('cycleNakshatra').value='';
+  $('cycleNakshatraHelp').textContent='अध्याय ५ बाट दशास्वामी र दशा शेष सारिएको छ। जन्म नक्षत्रको मिलान आवश्यक भए पुनः पुष्टि गर्नुहोस्।';
+  renderCycle();
+  $('dbTransferHelp').textContent='दशा शेष अध्याय ६ मा सारियो। तलको महादशा क्रम हेर्नुहोस्।';
+  if(typeof showChapter==='function')showChapter(6);
+  else document.getElementById('chapter6')?.scrollIntoView({behavior:'smooth'});
+ });
+ for(const id of ['dbBhayat','dbBhavog','dbLord']){
+  $(id).addEventListener('input',()=>{
+   dbCalculatedTransfer=null;dbTransferButton.disabled=true;
+   $('dbTransferHelp').textContent='मान परिवर्तन भएको छ। नयाँ दशा शेष गणना गरेर मात्र सार्नुहोस्।';
+  });
+  $(id).addEventListener('change',()=>{
+   dbCalculatedTransfer=null;dbTransferButton.disabled=true;
+  });
+ }
+}
+
 $('dbCalculate').addEventListener('click',()=>{
  const parse=(s)=>{const m=/^\s*(\d+)\s*\/\s*(\d+)\s*$/.exec(s);if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return Number.isInteger(g)&&Number.isInteger(p)&&g>=0&&g<=120&&p>=0&&p<60&&(g<120||p===0)?g*60+p:null;};
  const a=parse($('dbBhayat').value),b=parse($('dbBhavog').value),out=$('dbOutput'),years=dbYears[$('dbLord').value];
+ dbCalculatedTransfer=null;
+ if(dbTransferButton)dbTransferButton.disabled=true;
  if(a===null||b===null||b<=0||a<0||!years){out.textContent='घडी/पला सही लेख्नुहोस् (जस्तै 14/40)। भभोग शून्यभन्दा ठूलो हुनुपर्छ।';return;}
  if(a===b){out.textContent='भयात र भभोग बराबर छन्। नक्षत्रको अन्त्य-सीमामा शेष शून्य हुन्छ; अर्को नक्षत्र र दशास्वामी पञ्चाङ्गबाट पुष्टि गरेपछि मात्र जन्मदशा निर्धारण गर्नुहोस्।';return;}
  if(a>=3600){out.textContent='भयात एक सूर्योदय-दिनको ६० घडीभन्दा कम हुनुपर्छ।';return;}
@@ -444,6 +471,8 @@ $('dbCalculate').addEventListener('click',()=>{
  // Use nearest day for a stable, transparent pedagogical conversion.
  const totalDays=Math.round(remaining*360),y=Math.floor(totalDays/360),mo=Math.floor(totalDays%360/30),d=totalDays%30;
  const roundingNote=totalDays===0&&remaining>0?' ध्यान दिनुहोस्: वास्तविक शेष शून्य होइन; एक दिनभन्दा कम अवधि नजिकको पूर्ण दिनमा गोलाकार गर्दा ० दिन देखिएको हो।':'';
+ dbCalculatedTransfer={lord:$('dbLord').value,years:remaining};
+ if(dbTransferButton){dbTransferButton.disabled=false;$('dbTransferHelp').textContent='गणना पूरा भयो। अध्याय ६ मा यही दशास्वामी र शेष अवधि सार्न सकिन्छ।';}
  out.textContent=`बाँकी नक्षत्र-अंश: ${Math.floor((b-a)/60)}/${String((b-a)%60).padStart(2,'0')} (${b-a} पला) ÷ ${b} पला = ${(fraction*100).toFixed(2)}%। महादशा अवधि: ${years} वर्ष। दशा शेष: ${remaining.toFixed(4)} वर्ष ≈ ${y} वर्ष ${mo} महिना ${d} दिन (३६०-दिने वर्षमा, नजिकको दिनमा गोलाकार)।${roundingNote}`;
 });
 $('dbCalculate').click();
