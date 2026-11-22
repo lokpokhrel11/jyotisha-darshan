@@ -1504,9 +1504,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(!status||!house||!result)return;
  const render=()=>{
   const h=Number(house.value);
-  const kind=[1,4,7,10].includes(h)?'केन्द्र':[5,9].includes(h)?'त्रिकोण':[6,8,12].includes(h)?'दुःस्थान':'अन्य भाव';
+  const kind=h===1?'केन्द्र र त्रिकोण':[4,7,10].includes(h)?'केन्द्र':[5,9].includes(h)?'त्रिकोण':[6,8,12].includes(h)?'दुःस्थान':'अन्य भाव';
   const descriptions={exalted:'उच्च: अध्ययन नोटअनुसार बलको अनुकूल सङ्केत।',own:'स्वगृही: अध्ययन नोटअनुसार बलको अनुकूल सङ्केत।',neutral:'अन्य/नखुलेको: राशिगत बलको निष्कर्ष निकाल्न पर्याप्त विवरण छैन।',debilitated:'नीच: अध्ययन नोटअनुसार प्रतिकूल सङ्केत।'};
-  const houseText=kind==='केन्द्र'||kind==='त्रिकोण'?'केन्द्र/त्रिकोणमा हुनु अनुकूल सङ्केत मानिएको छ।':kind==='दुःस्थान'?'६, ८, १२ लाई नोटमा दुःस्थान भनिएको छ; थप सन्दर्भ आवश्यक हुन्छ।':'यस भावलाई नोटको प्रमुख केन्द्र/त्रिकोण वा दुःस्थान समूहमा राखिएको छैन।';
+  const houseText=kind==='केन्द्र र त्रिकोण'||kind==='केन्द्र'||kind==='त्रिकोण'?'केन्द्र वा त्रिकोणमा हुनु परम्परागत रूपमा अनुकूल सङ्केत मानिएको छ।':kind==='दुःस्थान'?'६, ८, १२ लाई नोटमा दुःस्थान भनिएको छ; थप सन्दर्भ आवश्यक हुन्छ।':'यस भावलाई नोटको प्रमुख केन्द्र/त्रिकोण वा दुःस्थान समूहमा राखिएको छैन।';
   result.replaceChildren();
   const heading=document.createElement('strong');heading.textContent='भाव '+String(h).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' · '+kind;
   const line=document.createElement('p');line.textContent=descriptions[status.value]+' '+houseText;
