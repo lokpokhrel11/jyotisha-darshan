@@ -349,13 +349,15 @@ $('bhCalculate').addEventListener('click',()=>{
 $('padaCalculate').addEventListener('click',()=>{
  const out=$('padaOutput');const parse=(s)=>{const m=/^\s*(\d{1,2})\s*[/：:]\s*(\d{1,2})\s*$/.exec(s);if(!m)return null;const g=+m[1],p=+m[2];return g<=60&&p<60&&(g<60||p===0)?(g*60+p)*60:null;};
  const a=parse($('padaBhayat').value),b=parse($('padaBhavog').value);
- if(a===null||b===null||b<=0||a<0||a>=b){out.textContent='मान्य घडी/पला दिनुहोस्। भभोग ० भन्दा ठूलो र भयात ० देखि भभोगभन्दा सानो हुनुपर्छ।';return;}
+ if(a===null||b===null||b<=0||a<0){out.textContent='मान्य घडी/पला दिनुहोस्। भभोग शून्यभन्दा ठूलो हुनुपर्छ।';return;}
+ if(a===b){out.textContent='भयात र भभोग बराबर छन्। यो नक्षत्र परिवर्तनको सीमा-क्षण हो; पञ्चाङ्गबाट पुष्टि नगरी चरण तोकिँदैन।';return;}
+ if(a>b){out.textContent='भयात भभोगभन्दा ठूलो छ। दुवै मान र नक्षत्रको अवस्था पुनः जाँच्नुहोस्।';return;}
  const boundary=[1,2,3].find(k=>a*4===b*k);const stage=Math.floor(a*4/b)+1;
  const fmt=(n)=>{const g=Math.floor(n/3600),p=Math.floor((n%3600)/60),v=n%60;return `${g} घडी ${p} पला ${v} विपला`;};
  // Quarter boundaries can contain a fractional vipala; preserve ghadi/pala units.
  const exactFmt=n=>{const g=Math.floor(n/3600),p=Math.floor((n-g*3600)/60),v=Number((n-g*3600-p*60).toFixed(2));return `${g} घडी ${p} पला ${v} विपला`;};
  const bounds=[1,2,3,4].map(k=>`${k} औँ सीमा: ${exactFmt(b*k/4)}`).join(' | ');
- out.textContent=boundary?`भयात ${fmt(a)} ठ्याक्कै ${boundary} औँ चरणको अन्त्य-सीमामा छ। सीमा-क्षणको परम्परागत निर्धारण पुष्टि नगरी निश्चित चरण तोकिएको छैन। एक चरण: ${exactFmt(b/4)}। ${bounds}`:`चरण: ${['पहिलो','दोस्रो','तेस्रो','चौथो'][stage-1]} (${stage}/४)। भयात: ${fmt(a)}। एक चरण: ${exactFmt(b/4)}। ${bounds}`;
+ out.textContent=boundary?`भयात ${fmt(a)} ठ्याक्कै ${boundary} औँ चरणको अन्त्य-सीमामा छ। सीमा-क्षणको परम्परागत निर्धारण पुष्टि नगरी निश्चित चरण तोकिएको छैन। एक चरण: ${exactFmt(b/4)}। ${bounds}`:`चरण: ${['पहिलो','दोस्रो','तेस्रो','चौथो'][stage-1]} (${stage}/४)। भयात: ${fmt(a)}। ${a===0?'भयात शून्य भएकाले गणनात्मक रूपमा पहिलो चरणको आरम्भ मानिएको छ। ':''}एक चरण: ${exactFmt(b/4)}। ${bounds}`;
 });
 $('padaCalculate').click();
 
