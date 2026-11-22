@@ -2196,3 +2196,13 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
 
 /* Ensure mobile menu hover/focus remains legible in dark mode. */
 :root[data-theme="dark"] .site-header nav a:hover,:root[data-theme="dark"] .site-header nav a:focus-visible{background:#304752;color:#fff5df;outline-offset:2px}
+
+/* Chapter anchor offsets: account for the sticky site header on all screen sizes.
+   Scoped to chapter reading views so calculator and table scrolling remain unchanged. */
+body.chapter-focus{--chapter-anchor-offset:110px}
+body.chapter-focus main>section[id],
+body.chapter-focus main>section[id] [id],
+body.chapter-focus .chapter-editorial-hero[id]{scroll-margin-top:var(--chapter-anchor-offset)}
+@media(max-width:760px){
+ body.chapter-focus{--chapter-anchor-offset:calc(88px + env(safe-area-inset-top, 0px))}
+}
