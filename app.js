@@ -1718,7 +1718,10 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const fields=[...form.querySelectorAll('fieldset[data-answer]')];
  const result=document.getElementById('ch12Result');
  form.addEventListener('submit',function(e){
-  e.preventDefault();let correct=0,answered=0;
+  e.preventDefault();
+  const unanswered=fields.find(field=>!field.querySelector('input:checked'));
+  if(unanswered){result.textContent='सबै प्रश्नको उत्तर छानेपछि मात्र नतिजा जाँच्न सकिन्छ। कृपया बाँकी प्रश्न पूरा गर्नुहोस्।';unanswered.querySelector('input')?.focus();return;}
+  let correct=0,answered=0;
   for(const field of fields){
    const selected=field.querySelector('input:checked');
    const good=!!selected&&Number(selected.value)===Number(field.dataset.answer);
@@ -1729,7 +1732,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    if(explanation)explanation.hidden=false;
   }
   const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
-  if(answered===fields.length)try{localStorage.setItem('jyotisha-chapter12-score',JSON.stringify({score:correct,total:fields.length}))}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));
+  try{localStorage.setItem('jyotisha-chapter12-score',JSON.stringify({score:correct,total:fields.length}))}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));
   result.textContent='नतिजा: '+nep(correct)+' / '+nep(fields.length)+' सही। '+(answered<fields.length?'उत्तर दिइएका प्रश्न: '+nep(answered)+'। बाँकी '+nep(fields.length-answered)+' प्रश्न पनि पूरा गर्नुहोस्।':'प्रत्येक उत्तरको व्याख्या पढेर आवश्यक पाठ पुनः अध्ययन गर्नुहोस्।');
  });
  form.addEventListener('change',function(e){
