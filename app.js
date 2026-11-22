@@ -314,6 +314,41 @@ $('istCalculate').addEventListener('click',()=>{
 });
 $('istCalculate').click();
 
+// Chapter 4: self-check for the four worked examples in master notes §4.6.
+(function(){
+ const form=$('ch4ExampleQuiz'),root=$('ch4ExampleQuestions'),feedback=$('ch4ExampleFeedback');
+ if(!form||!root||!feedback)return;
+ const cases=[
+  {name:'दमौली',date:'२०८३ असार ४',answer:[19,25,0]},
+  {name:'पाल्पा',date:'२०८३ साउन ४',answer:[13,55,0]},
+  {name:'पोखरा',date:'२०८३ साउन १',answer:[6,27,30]},
+  {name:'मोरङ (सूर्योदयअघिको शिक्षण उदाहरण)',date:'२०८३ असार २०',answer:[54,35,0]}
+ ];
+ cases.forEach((item,i)=>{
+  const fieldset=document.createElement('fieldset');fieldset.className='exam-question';
+  const legend=document.createElement('legend');legend.textContent=`${i+1}. ${item.name} · ${item.date}`;fieldset.append(legend);
+  ['घडी','पला','विपला'].forEach((unit,j)=>{
+   const label=document.createElement('label');label.textContent=unit+' ';
+   const input=document.createElement('input');input.type='number';input.min='0';input.max=j===0?'59':'59';input.step='1';input.required=true;input.name=`ch4-example-${i}-${j}`;input.inputMode='numeric';input.style.maxWidth='7rem';input.setAttribute('aria-label',item.name+' '+unit);
+   if(j===2)input.value='0';
+   label.append(input);fieldset.append(label);
+  });
+  root.append(fieldset);
+ });
+ form.addEventListener('submit',event=>{
+  event.preventDefault();
+  if(!form.reportValidity())return;
+  let correct=0;const lines=[];
+  cases.forEach((item,i)=>{
+   const entered=item.answer.map((_,j)=>Number(form.elements.namedItem(`ch4-example-${i}-${j}`).value));
+   const ok=entered.every((v,j)=>Number.isInteger(v)&&v===item.answer[j]);
+   if(ok)correct++;
+   lines.push(`${item.name}: ${ok?'सही':'फेरि जाँच्नुहोस्'}। ${ok?'':`स्रोतको गोलाकार मानअनुसार उत्तर ${item.answer[0]} घडी ${item.answer[1]} पला ${item.answer[2]} विपला हो।`}`);
+  });
+  feedback.textContent=`नतिजा: ${correct}/4। ${lines.join(' ')}`;
+ });
+ form.addEventListener('reset',()=>{feedback.textContent='';});
+})();
 // Chapter 4 local sunrise, minute-rounded signed offset per study notes.
 $('lsCalculate').addEventListener('click',()=>{
  const t=$('lsCalendar').value,m=/^([+-])(\d{1,2}):(\d{2})$/.exec($('lsOffset').value.trim()),out=$('lsResult');
