@@ -46,7 +46,7 @@ assert.match(padaResult('45/00','60/00'),/सीमामा/);
 assert.match(padaResult('59/59','60/00'),/चौथो/);
 assert.match(padaResult('60/00','60/00'),/सीमा-क्षण/);
 assert.match(padaResult('60/00','59/59'),/ठूलो/);
-assert.match(padaResult('14/00','57/01'),/14 घडी 15 पला 15\\.25 विपला/);
+assert.match(padaResult('14/00','57/01'),/14 घडी 15 पला 15 विपला/);
 // Exercise the actual Vimshottari balance click handler.
 const dashaFields={
  dbBhayat:{value:'00/00'},dbBhavog:{value:'60/00'},dbLord:{value:'ketu'},
