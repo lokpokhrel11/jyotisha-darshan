@@ -390,7 +390,7 @@ $('bhCalculate').addEventListener('click',()=>{
  const i=bhRead($('bhIst').value),e=bhRead($('bhToday').value),o=bhRead($('bhOther').value),out=$('bhOutput'),bhPanel=$('bhBhayat'),bbPanel=$('bhBhavog');
  bhPanel.textContent='—';bbPanel.textContent='—';
  if([i,e,o].some(v=>v===null)||i>=3600||e>=3600||o>=3600){out.textContent='कृपया ००/०० देखि ५९/५९ सम्मका घडी/पला सही ढाँचामा राख्नुहोस्।';return;}
- if(i===e){out.textContent='इष्टकाल र अन्त्य-मान बराबर छन्। यो सीमा-क्षणका लागि पञ्चाङ्गको थप जाँच आवश्यक छ।';return;}
+ if(i===e){out.textContent='इष्टकाल र अन्त्य-मान बराबर छन्। संशोधित अध्ययन नोटको खण्ड ५.३ अनुसार यो अवस्था १ (आजकै नक्षत्र) अन्तर्गत राखिन्छ। सीमा-क्षण भएकाले वास्तविक पञ्चाङ्गको समय-शुद्धता पनि जाँच्नुहोस्।';return;}
  const a=i>e,choice=$('bhCase').value;
  if((choice==='ka'&&!a)||(choice==='kha'&&a)){out.textContent=`चयन गरिएको अवस्था ${choice==='ka'?'क':'ख'} र प्रविष्ट मान मेल खाँदैनन्। इष्टकाल र E तुलना गरी अवस्था सच्याउनुहोस्।`;return;}
  const bh=a?i-e:3600-o+i,bb=a?3600-e+o:3600-o+e;
