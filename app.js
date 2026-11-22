@@ -308,9 +308,11 @@ $('istCalculate').addEventListener('click',()=>{
  if(!previous&&birth<sun){out.textContent='जन्म समय सूर्योदयभन्दा अघि छ। अघिल्लो दिनको स्थानीय सूर्योदय प्रविष्ट गरी त्यसको विकल्प छान्नुहोस्।';return;}
  if(previous&&birth>=sun){out.textContent='अघिल्लो दिनको सूर्योदय विकल्पमा जन्मको घडी आजको सूर्योदयभन्दा अघि हुनुपर्छ। आजको सूर्योदय छुट्टै प्रविष्ट नगरिएकाले यो जाँच घडीको तुलनामा आधारित छ; मिति र वास्तविक सूर्योदय पनि पुष्टि गर्नुहोस्।';return;}
  const elapsed=birth-sun+(previous?86400:0);
+ // The sunrise-based day has 60 ghadi; reject impossible date/sunrise combinations.
+ if(elapsed<0||elapsed>=86400){out.textContent='इष्टकाल ० देखि ६० घडीभन्दा कम हुनुपर्छ। अघिल्लो दिनको सूर्योदय, जन्म मिति र समय फेरि जाँच्नुहोस्।';return;}
  const halfVipala=elapsed*5; // 1 clock second = 2.5 vipala; integer half-vipala units avoid floating-point boundaries
  const ghadi=Math.floor(halfVipala/7200),pala=Math.floor((halfVipala%7200)/120),vipala=(halfVipala%120)/2;
- out.textContent=`बितेको समय: ${Math.floor(elapsed/3600)} घण्टा ${Math.floor(elapsed%3600/60)} मिनेट ${elapsed%60} सेकेन्ड। इष्टकाल = ${ghadi} घडी ${pala} पला ${Number(vipala.toFixed(2))} विपला।`;
+ out.textContent=`${previous?'सूर्योदयअघिको जन्म: जन्म घडीमा २४ घण्टा जोडेर अघिल्लो दिनको प्रविष्ट स्थानीय सूर्योदय घटाइएको छ। ':'उही दिनको स्थानीय सूर्योदयबाट समय गनिएको छ। '}बितेको समय: ${Math.floor(elapsed/3600)} घण्टा ${Math.floor(elapsed%3600/60)} मिनेट ${elapsed%60} सेकेन्ड। इष्टकाल = ${ghadi} घडी ${pala} पला ${Number(vipala.toFixed(2))} विपला।${previous?' यो नतिजा अघिल्लो दिनको सूर्योदय सही प्रविष्ट गरिएको अवस्थामा मात्र मान्य हुन्छ।':''}`;
 });
 $('istCalculate').click();
 
