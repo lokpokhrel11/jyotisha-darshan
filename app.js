@@ -718,6 +718,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   event.preventDefault();
   const answer=quiz.querySelector('input[name="ch7q"]:checked');
   if(!answer){feedback.textContent='उत्तर जाँच्नुअघि एउटा विकल्प छान्नुहोस्।';return;}
+  try{localStorage.setItem('jyotisha-chapter7-score',JSON.stringify({score:answer.value==='b'?1:0,total:1}))}catch(_){}
   feedback.textContent=answer.value==='b'?'सही। मकर राशिको स्वामी शनि हो। तर उदाहरणमा दशौँ भावमा बसेको ग्रह मङ्गल हो। भावेश र भावमा बसेको ग्रह फरक हुन्।':'यस उदाहरणमा दशौँ भावमा मकर राशि परेको छ, जसको स्वामी शनि हो। मङ्गल भने उक्त भावमा राखिएको ग्रह हो। भावेश र भावमा रहेको ग्रहबीचको भिन्नता विचार गर्नुहोस्।';
  });
  quiz.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))feedback.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ उत्तर जाँच्नुहोस्।';});
@@ -1034,6 +1035,8 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(!root||!summary||!list)return;
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const exams=[
+  {chapter:1,name:'पञ्चाङ्गका आधार',total:15,threshold:12,anchor:'practice',storage:'jd-chapter1-v05'},
+  {chapter:7,name:'कुण्डली कसरी हेर्ने',total:1,threshold:1,anchor:'ch7Quiz'},
   {chapter:2,name:'राशि र भाव',total:20,threshold:16,anchor:'chapter2exam'},
   {chapter:3,name:'ग्रह परिचय',total:15,threshold:12,anchor:'chapter3exam'},
   {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'},
@@ -1047,7 +1050,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  list.replaceChildren();
  for(const exam of exams){
   let result=null;
-  try{result=JSON.parse(localStorage.getItem('jyotisha-chapter'+exam.chapter+'-score')||'null')}catch(_){}
+  try{result=JSON.parse(localStorage.getItem(exam.storage||'jyotisha-chapter'+exam.chapter+'-score')||'null')}catch(_){}
   const valid=result&&Number.isInteger(result.score)&&result.score>=0&&result.score<=exam.total&&result.total===exam.total;
   const achieved=valid&&result.score>=exam.threshold;
   if(valid){attempted++;if(achieved)met++;}
@@ -1067,6 +1070,19 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   list.append(row);
  }
  summary.textContent='मूल्याङ्कन पूरा गरिएका: '+nep(attempted)+' / '+nep(exams.length)+' · अभ्यास लक्ष्य पुगेका: '+nep(met)+' · पुनः अभ्यास आवश्यक: '+nep(attempted-met);
+ const openedEl=document.getElementById('studyOpenedCount');
+ const attemptedEl=document.getElementById('studyAttemptedCount');
+ const achievedEl=document.getElementById('studyAchievedCount');
+ const completionEl=document.getElementById('studyCompletionNote');
+ if(openedEl&&attemptedEl&&achievedEl){
+  let opened=[];
+  try{const saved=JSON.parse(localStorage.getItem('jyotisha-pathshala-opened-v1')||'[]');if(Array.isArray(saved))opened=saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=13)}catch(_){}
+  openedEl.textContent=nep(new Set(opened).size)+' / १३';
+  attemptedEl.textContent=nep(attempted)+' / '+nep(exams.length);
+  achievedEl.textContent=nep(met)+' / '+nep(exams.length);
+  if(completionEl)completionEl.textContent='अभ्यास लक्ष्य पूरा गर्नु र अध्यायको सम्पूर्ण अध्ययन पूरा गर्नु एउटै कुरा होइन। औपचारिक पाठ-समापन मापदण्ड अझै लागू गरिएको छैन।';
+ }
+
 })();
 
 /* Assessment navigation clarity: make the final submission location explicit. */
