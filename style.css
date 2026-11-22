@@ -1820,3 +1820,21 @@ html[data-theme="dark"] #practice #chartLabels .chart-house.selected text,body[d
 :root[data-theme="dark"] #chapter11 .ch11-topic-number,
 :root[data-theme="dark"] #chapter11 #ch11-intro .ch9-step-number{color:#f0cb88}
 @media(max-width:640px){#chapter11 #ch11-terms{padding:15px 16px}#chapter11 #ch11-count{padding:18px 15px}#chapter11 .ch11-lesson-section .ch11-learning-grid>article{padding:16px}#chapter11 .ch11-lesson-section .ch9-disclosure-body{padding:14px}}
+
+
+/* Single navigation layer for chapter-focused reading: legacy bottom pagers
+   must not compete with the unified top breadcrumb and chapter masthead. */
+body.chapter-focus main>section .chapter-pager,
+body.chapter-focus main>section .ch12-end-nav{display:none!important}
+body.chapter-focus .chapter-focus-banner{position:relative!important;top:auto!important;z-index:1!important}
+body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
+@media(max-width:760px){
+ body.chapter-focus .chapter-focus-banner{display:flex!important;flex-wrap:wrap!important;gap:8px!important;align-items:center!important;padding:10px 14px!important;min-height:0!important}
+ body.chapter-focus .chapter-focus-banner>.chapter-back{flex:0 1 auto!important}
+ body.chapter-focus .chapter-focus-banner>.eyebrow{flex:0 0 auto!important;margin:0!important}
+ body.chapter-focus .chapter-focus-banner>.chapter-pager{flex:0 1 auto!important;margin-left:auto!important;display:flex!important;gap:6px!important}
+ body.chapter-focus .chapter-focus-banner>.chapter-pager a{min-height:44px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:9px 11px!important}
+ body.chapter-focus .chapter-editorial-hero{margin-top:8px!important}
+ body.chapter-focus .chapter-editorial-actions a{min-height:44px;display:inline-flex;align-items:center}
+ body.chapter-focus .chapter-focus-banner>.chapter-toc{display:none!important}
+}
