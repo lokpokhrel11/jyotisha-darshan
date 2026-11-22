@@ -34,3 +34,5 @@ jobs:
         run: node tests/calculator-boundaries.test.js
       - name: Run chapter 6 cycle regression tests
         run: node tests/chapter6-cycles.test.js
+      - name: Validate Chapter 7 assessment
+        run: node tests/chapter7-assessment.test.js
