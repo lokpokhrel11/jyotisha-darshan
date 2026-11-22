@@ -1608,6 +1608,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const signs=['मेष','वृष','मिथुन','कर्कट','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'];
   const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
   const lagna=Number(asc.value),position=Number(house.value);
+  if(!Number.isInteger(lagna)||lagna<1||lagna>12||![2,6,12].includes(position)){result.textContent='मान्य लग्न राशि र द्वितीयेशको भाव छान्नुहोस्।';return}
   const signIndex=(lagna+position-2)%12;
   const sign=signs[signIndex];
   const secondIndex=lagna%12;const lord=['मङ्गल','शुक्र','बुध','चन्द्र','सूर्य','बुध','शुक्र','मङ्गल','बृहस्पति','शनि','शनि','बृहस्पति'][secondIndex];
