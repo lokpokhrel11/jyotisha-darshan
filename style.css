@@ -1972,3 +1972,30 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  :is(#ch5AssessmentForm,#ch6AssessmentForm) .exam-question{padding:14px 12px;margin:12px 0}
  :is(#ch5AssessmentForm,#ch6AssessmentForm) .exam-question legend{line-height:1.6}
 }
+
+
+/* Phase 6.18: explicit dark surfaces for assessment panels and answer choices. */
+:root[data-theme="dark"] #chapter9 .ch9-quiz-panel,
+:root[data-theme="dark"] #chapter10 .ch10-quiz-panel fieldset,
+:root[data-theme="dark"] #chapter11 .ch10-quiz-panel fieldset{
+ background:#1b2e37;
+ color:#e6efec;
+ border-color:#52666c;
+ box-shadow:none;
+}
+:root[data-theme="dark"] #chapter9 .ch9-quiz-panel h4,
+:root[data-theme="dark"] #chapter10 .ch10-quiz-panel legend,
+:root[data-theme="dark"] #chapter11 .ch10-quiz-panel legend{
+ color:#f0f3ee;
+}
+:root[data-theme="dark"] #chapter10 .ch10-choice,
+:root[data-theme="dark"] #chapter11 .ch10-choice{
+ background:#253a43;
+ color:#e6efec;
+ border-color:#52666c;
+}
+:root[data-theme="dark"] #chapter10 .ch10-choice:focus-within,
+:root[data-theme="dark"] #chapter11 .ch10-choice:focus-within{
+ outline:2px solid #ebc889;
+ outline-offset:2px;
+}
