@@ -597,3 +597,16 @@ test('Phone: chapter 9 quiz supports touch selection, validation and scoring', a
   await form.getByRole('button', { name: 'उत्तर जाँच्नुहोस्' }).click();
   await expect(page.locator('#ch9Feedback')).toContainText('५ / ५');
 });
+
+
+test('Phone: chapter 8 kinship calculator and source quiz respond to touch', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto(chapter(8));
+  await page.locator('[data-ch8-example="spouse"]').click();
+  await expect(page.locator('#ch8Result')).toContainText('८औँ भाव');
+  const answer = page.locator('#ch8SourceQuiz input[value="b"]');
+  await answer.check();
+  await expect(answer).toBeChecked();
+  await page.locator('#ch8SourceQuiz button[type="submit"]').click();
+  await expect(page.locator('#ch8SourceFeedback')).toContainText('सही');
+});
