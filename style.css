@@ -120,7 +120,7 @@ input,select,textarea{max-width:100%}
 .chapter-focus .section[id] > [hidden]{display:none!important}
 
 /* v4.1: short, student-first homepage; chapter sections remain mounted for learning tools. */
-body:not(.chapter-focus) main > section:not(#home):not(#dashboard){display:none!important}
+body:not(.chapter-focus) main > section:not(#home):not(#dashboard):not(#homeCalculators){display:none!important}
 body:not(.chapter-focus) .hero{min-height:340px;padding-top:42px;padding-bottom:42px}
 body:not(.chapter-focus) .orb{width:210px}
 body:not(.chapter-focus) .orbit{width:210px;height:210px}
