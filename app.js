@@ -269,7 +269,7 @@ function renderChapter3(){chapter3Container.replaceChildren();chapter3Bank.forEa
 function updateChapter3Progress(){let count=0;chapter3Bank.forEach((q,i)=>{if(chapter3Form.querySelector(`input[name="ch3q${i}"]:checked`))count++;});$('chapter3Progress').textContent=`उत्तर दिइएका: ${count}/${chapter3Bank.length}`;}
 chapter3Form.addEventListener('change',event=>{updateChapter3Progress();if(event.target.matches('input[type="radio"]')){chapter3Results.hidden=true;chapter3Results.replaceChildren();}});
 chapter3Form.addEventListener('submit',event=>{event.preventDefault();const answers=chapter3Bank.map((q,i)=>chapter3Form.querySelector(`input[name="ch3q${i}"]:checked`));if(answers.some(a=>!a)){chapter3Results.textContent=`नतिजा हेर्नुअघि बाँकी ${answers.filter(a=>!a).length} प्रश्नको उत्तर दिनुहोस्।`;chapter3Results.hidden=false;const first=answers.findIndex(a=>!a);const target=chapter3Container.querySelectorAll('fieldset.exam-question')[first];if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}return;}let score=0;const summary=document.createElement('div');chapter3Bank.forEach((q,i)=>{const ok=Number(answers[i].value)===q[3];if(ok)score++;const line=document.createElement('p');line.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(line);});const heading=document.createElement('h3');heading.textContent=`नतिजा: ${score}/15 · ${score>=12?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;chapter3Results.replaceChildren(heading,summary);chapter3Results.hidden=false;heading.tabIndex=-1;heading.focus({preventScroll:true});try{localStorage.setItem('jyotisha-chapter3-score',JSON.stringify({score,total:15}));}catch(e){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));chapter3Results.scrollIntoView({behavior:'smooth',block:'start'});});
-$('chapter3Reset').addEventListener('click',()=>{const prev=chapter3Bank.slice();for(let i=chapter3Bank.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[chapter3Bank[i],chapter3Bank[j]]=[chapter3Bank[j],chapter3Bank[i]];}if(chapter3Bank.every((q,i)=>q===prev[i]))[chapter3Bank[0],chapter3Bank[1]]=[chapter3Bank[1],chapter3Bank[0]];chapter3Form.reset();renderChapter3();const first=chapter3Container.querySelector('fieldset');if(first){first.setAttribute('tabindex','-1');first.focus({preventScroll:true});first.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}});
+$('chapter3Reset').addEventListener('click',()=>{const prev=chapter3Bank.slice();for(let i=chapter3Bank.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[chapter3Bank[i],chapter3Bank[j]]=[chapter3Bank[j],chapter3Bank[i]];}if(chapter3Bank.every((q,i)=>q===prev[i]))[chapter3Bank[0],chapter3Bank[1]]=[chapter3Bank[1],chapter3Bank[0]];chapter3Form.reset();try{localStorage.removeItem('jyotisha-chapter3-score')}catch(e){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));renderChapter3();const first=chapter3Container.querySelector('fieldset');if(first){first.setAttribute('tabindex','-1');first.focus({preventScroll:true});first.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}});
 renderChapter3();
 
 // Chapter 4–5: edited calculator inputs invalidate the previously displayed calculation.
@@ -351,10 +351,12 @@ $('istCalculate').click();
   try{localStorage.setItem('jyotisha-chapter4-score',JSON.stringify({score:correct,total:cases.length}))}catch(_){}
   window.dispatchEvent(new Event('jyotisha-assessment-updated'));
  });
- form.addEventListener('reset',()=>{feedback.textContent='';});
+ const invalidateChapter4=()=>{try{localStorage.removeItem('jyotisha-chapter4-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));};
+ form.addEventListener('reset',()=>{feedback.textContent='';invalidateChapter4();});
  form.addEventListener('input',event=>{
-  if(event.target.matches('input[name^="ch4-example-"]')&&feedback.textContent){
-   feedback.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';
+  if(event.target.matches('input[name^="ch4-example-"]')){
+   invalidateChapter4();
+   if(feedback.textContent)feedback.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';
   }
  });
 })();
