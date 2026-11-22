@@ -1598,7 +1598,12 @@ html[data-theme="dark"] #practice #chartLabels .chart-house.selected text,body[d
 @media(max-width:520px){#ch13-quiz .ch12-quiz fieldset{padding:13px}#ch13-quiz .ch12-quiz label{padding:12px;gap:9px}#ch13-quiz .ch12-quiz legend{font-size:1rem}}
 
 /* Chapter 13 assessment: explicit, accessible feedback in both reader themes. */
-#ch13-quiz .ch12-quiz label.quiz-correct{border-color:#367b59;box-shadow:inset 0 0 0 1px #367b59}
-#ch13-quiz .ch12-quiz label.quiz-incorrect{border-color:#b35445;box-shadow:inset 0 0 0 1px #b35445}
-:root[data-theme="dark"] #ch13-quiz .ch12-quiz label.quiz-correct{border-color:#8bd1aa;box-shadow:inset 0 0 0 1px #8bd1aa}
-:root[data-theme="dark"] #ch13-quiz .ch12-quiz label.quiz-incorrect{border-color:#f0a092;box-shadow:inset 0 0 0 1px #f0a092}
+#ch13-quiz .ch12-quiz label.quiz-correct:has(input:checked){border-color:#367b59;box-shadow:inset 0 0 0 1px #367b59}
+#ch13-quiz .ch12-quiz label.quiz-incorrect:has(input:checked){border-color:#b35445;box-shadow:inset 0 0 0 1px #b35445}
+:root[data-theme="dark"] #ch13-quiz .ch12-quiz label.quiz-correct:has(input:checked){border-color:#8bd1aa;box-shadow:inset 0 0 0 1px #8bd1aa}
+:root[data-theme="dark"] #ch13-quiz .ch12-quiz label.quiz-incorrect:has(input:checked){border-color:#f0a092;box-shadow:inset 0 0 0 1px #f0a092}
+
+/* Keep the chapter 13 topic index usable on narrow screens. */
+#chapter13 .ch12-path{display:flex;flex-wrap:wrap;gap:8px;max-width:100%}
+#chapter13 .ch12-path a{max-width:100%;overflow-wrap:anywhere}
+@media(max-width:600px){#chapter13 .ch12-path a{flex:1 1 calc(50% - 8px);text-align:center}#chapter13 .ch12-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}#chapter13 .ch12-steps{max-width:100%}}
