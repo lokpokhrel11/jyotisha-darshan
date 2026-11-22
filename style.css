@@ -2213,3 +2213,17 @@ body.chapter-focus .chapter-editorial-hero[id]{scroll-margin-top:var(--chapter-a
 .chapter-read-toggle[aria-pressed="true"]{background:#e9f2e8;border-color:#5c8166;color:#285239}
 :root[data-theme="dark"] .chapter-read-toggle{background:#293b42;color:#ffe3a7;border-color:#c09b5c}
 :root[data-theme="dark"] .chapter-read-toggle[aria-pressed="true"]{background:#25463c;color:#d6f3dc;border-color:#86b99a}
+
+/* Dashboard and reading controls: narrow-screen readability and keyboard focus. */
+.assessment-progress-row{min-width:0;overflow-wrap:anywhere;line-height:1.55}
+.assessment-progress-row:focus-visible{outline:3px solid var(--gold,#b18b4d);outline-offset:3px}
+.chapter-read-toggle{overflow-wrap:anywhere;line-height:1.5}
+@media(max-width:600px){
+ .assessment-progress{min-width:0;padding:16px 12px}
+ .assessment-progress-row{padding:14px 12px;gap:6px}
+ .assessment-progress-row :is(strong,span){overflow-wrap:anywhere}
+ body.chapter-focus .chapter-focus-banner>.chapter-read-toggle{display:flex;width:100%;max-width:100%;margin-top:12px;padding:12px 14px}
+ .study-milestones{min-width:0}
+ .study-completion-note{overflow-wrap:anywhere;line-height:1.7}
+}
+@media(prefers-reduced-motion:reduce){.chapter-read-toggle,.assessment-progress-row{transition:none!important}}
