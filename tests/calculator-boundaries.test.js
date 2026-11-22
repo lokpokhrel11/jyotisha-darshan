@@ -85,7 +85,7 @@ assert.match(dashaResult('00/00','60/00'),/७ वर्ष|7 वर्ष/);
 assert.match(dashaResult('30/00','60/00','venus'),/10\.0000 वर्ष/);
 assert.match(dashaResult('59/59','60/00'),/0\.0019 वर्ष/);
 assert.match(dashaResult('60/00','60/00'),/अन्त्य-सीमामा शेष शून्य/);
-assert.match(dashaResult('60/00','59/59'),/ठूलो/);
+assert.match(dashaResult('60/00','59/59'),/६० घडीभन्दा कम/);
 assert.match(dashaResult('14/60','60/00'),/सही लेख्नुहोस्/);
 // Exercise the website's actual Yogini selector, rather than duplicating its formula.
 const yoginiContext = vm.createContext({$: id => ({value: yoginiContext.nakshatra})});
