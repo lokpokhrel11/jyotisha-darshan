@@ -565,3 +565,35 @@ test('Mobile quizzes: radio answers remain inside viewport and labels are usable
     }
   }
 });
+
+
+test('Phone: chapter 7 quiz supports touch answer selection and submission', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto(chapter(7));
+  const form = page.locator('#ch7Quiz');
+  await expect(form).toBeVisible();
+  for (const [i, answer] of [1, 1, 0, 0, 1, 2, 1, 2].entries()) {
+    const radio = form.locator(`input[name="ch7q${i}"][value="${answer}"]`);
+    await radio.check();
+    await expect(radio).toBeChecked();
+  }
+  await form.locator('button[type="submit"]').click();
+  await expect(page.locator('#ch7Feedback')).toContainText('प्राप्त अङ्क:');
+  const width = await page.evaluate(() => ({ content: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
+  expect(width.content).toBeLessThanOrEqual(width.viewport + 2);
+});
+
+test('Phone: chapter 9 quiz supports touch selection, validation and scoring', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto(chapter(9));
+  const form = page.locator('#ch9Quiz');
+  await form.getByRole('button', { name: 'उत्तर जाँच्नुहोस्' }).click();
+  await expect(page.locator('#ch9Feedback')).toContainText('पाँचवटै प्रश्न');
+  for (const [name, answer] of [['ch9q','a'],['ch9q2','b'],['ch9q3','c'],['ch9q4','a'],['ch9q5','b']]) {
+    const radio = form.locator(`input[name="${name}"][value="${answer}"]`);
+    await radio.check();
+    await expect(radio).toBeChecked();
+  }
+  await form.getByRole('button', { name: 'उत्तर जाँच्नुहोस्' }).click();
+  await expect(page.locator('#ch9Feedback')).toContainText('५ / ५');
+});
