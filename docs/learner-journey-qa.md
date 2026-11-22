@@ -34,3 +34,25 @@ Status: **NOT YET EXECUTED in a live browser**. This document defines reproducib
 ## Release gate
 
 Do not mark this QA protocol passed until the live-browser checklist has been executed and any defects are resolved. Browser-local progress is not a secure student record and must not be used for payment access control or verified certificates.
+
+## Source-level assessment audit (2026-11-22)
+
+This section records **static inspection only**, not a passing browser test.
+
+| Chapter | Dashboard total | Practice target | Score key |
+|---|---:|---:|---|
+| 1 | 15 | 12 | `jd-chapter1-v05` |
+| 2 | 20 | 16 | `jyotisha-chapter2-score` |
+| 3 | 15 | 12 | `jyotisha-chapter3-score` |
+| 4 | 4 | 3 | `jyotisha-chapter4-score` |
+| 5 | 5 | 4 | `jyotisha-chapter5-score` |
+| 6 | 5 | 4 | `jyotisha-chapter6-score` |
+| 7 | 8 | 7 | `jyotisha-chapter7-score` |
+| 8 | 8 | 8 | `jyotisha-chapter8-score` |
+| 9 | 5 | 4 | `jyotisha-chapter9-score` |
+| 10 | 4 | 3 | `jyotisha-chapter10-score` |
+| 11 | 7 | 6 | `jyotisha-chapter11-score` |
+| 12 | 5 | 4 | `jyotisha-chapter12-score` |
+| 13 | 10 | 8 | `jyotisha-chapter13-score` |
+
+**Findings:** Every listed score key has a corresponding write path in `app.js`. The Chapter 7 dashboard total was corrected from 1 to 8 in commit `f8e009f`. Chapters 4–13 include reset/change invalidation paths. Question totals for dynamically generated banks and the pedagogical appropriateness of targets still require runtime and instructional review. In particular, Chapter 8 currently requires 8/8; retain this as a documented design choice until reviewed, not an independently validated standard.
