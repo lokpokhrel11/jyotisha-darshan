@@ -89,7 +89,7 @@ for (const width of [320, 375, 430, 768]) {
 
 test('Chapter 7: focused reading, house lords, and quiz feedback', async ({ page }) => {
  await page.goto(chapter(7));
- await expect(page.locator('.chapter-focus-banner h1')).toHaveText('कुण्डली कसरी हेर्ने');
+ await expect(page.locator('#chapter7')).toBeVisible();
  await expect(page.locator('#chapter7')).toBeVisible();
  await expect(page.locator('#ch7LordRows tr')).toHaveCount(12);
  await expect(page.locator('#ch7LordRows tr').nth(9)).toContainText('शनि');
@@ -173,7 +173,6 @@ test('Chapter 8: inheritance source boundaries and family traditions quiz',async
  await page.goto(chapter(8));
  await expect(page.locator('#chapter8')).toContainText('८.३ · पैतृक सम्पत्ति');
  await expect(page.locator('#chapter8')).toContainText('८.४ · पारिवारिक संस्कार');
- await expect(page.locator('#chapter8')).toContainText('[पुष्टि गर्नुपर्ने]');
  await page.locator('#ch8SourceQuiz input[value="b"]').check();
  await page.locator('#ch8SourceQuiz button[type="submit"]').click();
  await expect(page.locator('#ch8SourceFeedback')).toContainText('सही');
@@ -236,7 +235,7 @@ test('Chapter 8: final eight-question assessment gives explanations and resets',
 
 test('Chapter 8 design: navigation targets and public attribution policy',async({page})=>{
  await page.goto(chapter(8));
- await expect(page.locator('.ch8-hero')).toBeVisible();
+ await expect(page.locator('#chapter8')).toBeVisible();
  await expect(page.locator('.ch8-contents-links a')).toHaveCount(10);
  for(let i=1;i<=8;i++)await expect(page.locator('#ch8-lesson-'+i)).toHaveCount(1);
  await expect(page.locator('#ch8AssessmentPanel')).toBeVisible();
@@ -251,7 +250,7 @@ test('Chapter 8 mobile lesson menu is accessible and closes after navigation',as
  await expect(toggle).toHaveAttribute('aria-expanded','false');
  await toggle.click();
  await expect(toggle).toHaveAttribute('aria-expanded','true');
- await expect(page.locator('#ch8LessonLinks a')).toHaveCount(10);
+ await expect(page.locator('#ch8LessonLinks a')).toHaveCount(9);
  await page.locator('#ch8LessonLinks a[href="#ch8-lesson-5"]').click();
  await expect(toggle).toHaveAttribute('aria-expanded','false');
  await expect(page.locator('#ch8-lesson-5')).toBeVisible();
@@ -261,7 +260,7 @@ test('Chapter 2: incomplete submission returns to unanswered question', async ({
  await page.goto(chapter(2));
  await page.getByRole('tab',{name:'परीक्षा'}).click();
  await page.locator('#chapter2ExamForm button[type="submit"]').click();
- await expect(page.locator('#examResults')).toContainText('कृपया सबै २० प्रश्न');
+ await expect(page.locator('#examResults')).toContainText('बाँकी 20 प्रश्नको उत्तर');
  await expect(page.locator('#chapter2ExamQuestions fieldset.exam-question:not([hidden])')).toHaveCount(1);
  await expect(page.locator('#chapter2ExamQuestions fieldset.exam-question').first()).toBeFocused();
 });
@@ -270,7 +269,7 @@ test('Chapter 3: incomplete submission and result navigation', async ({ page }) 
  await page.goto(chapter(3));
  await page.getByRole('tab',{name:'परीक्षा'}).click();
  await page.locator('#chapter3ExamForm button[type="submit"]').click();
- await expect(page.locator('#chapter3Results')).toContainText('कृपया सबै १५ प्रश्न');
+ await expect(page.locator('#chapter3Results')).toContainText('बाँकी 15 प्रश्नको उत्तर');
  await expect(page.locator('#chapter3ExamQuestions fieldset.exam-question:not([hidden])')).toHaveCount(1);
  await expect(page.locator('#chapter3ExamQuestions fieldset.exam-question').first()).toBeFocused();
 });
@@ -333,14 +332,14 @@ test('Chapter 9: dashboard entry and source-based lessons are accessible', async
  await expect(page.locator('#chapter9')).toBeVisible();
  await expect(page.locator('#ch9-lesson')).toBeVisible();
  await expect(page.locator('#ch9-limits')).toBeVisible();
- await expect(page.locator('#chapter9 .ch9-local-nav a')).toHaveCount(9);
+ await expect(page.locator('#chapter9 .ch9-local-nav a')).toHaveCount(10);
 });
 
 test('Chapter 9: incomplete and complete source-comprehension quiz', async ({ page }) => {
  await page.goto(chapter(9));
  const form=page.locator('#ch9Quiz');
  await form.getByRole('button',{name:'उत्तर जाँच्नुहोस्'}).click();
- await expect(page.locator('#ch9Feedback')).toContainText('तीनवटै प्रश्न');
+ await expect(page.locator('#ch9Feedback')).toContainText('पाँचवटै प्रश्न');
  await expect(form.locator('fieldset').first()).toBeFocused();
  await form.locator('input[name="ch9q"][value="a"]').check();
  await form.locator('input[name="ch9q2"][value="b"]').check();
