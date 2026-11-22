@@ -598,6 +598,17 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const params=new URLSearchParams(window.location.search);
  const chapter=Number(params.get('chapter'));
  if(!Number.isInteger(chapter)||chapter<1||chapter>13)return;
+ // Count direct chapter links and bookmarks as opened, not as completed reading.
+ try{
+  const key='jyotisha-pathshala-opened-v3';
+  const stored=JSON.parse(localStorage.getItem(key)||'[]');
+  const opened=new Set(Array.isArray(stored)?stored.filter(n=>Number.isInteger(n)&&n>=1&&n<=13):[]);
+  if(!opened.has(chapter)){
+   opened.add(chapter);
+   localStorage.setItem(key,JSON.stringify([...opened].sort((a,b)=>a-b)));
+   window.dispatchEvent(new Event('jyotisha-progress-updated'));
+  }
+ }catch(_){/* Private browsing may restrict storage; chapter access still works. */}
  const groups={"1":["pathshala","practice"],"2":["chapter2","planetExample","chapter2exam"],"3":["chapter3","chapter3exam"],"4":["chapter4","istakala","localSunrise"],"5":["chapter5","padaPractice","dashaBalance"],"6":["chapter6","antardasha","tribhagi","yogini"],"7":["chapter7"],"8":["chapter8"],"9":["chapter9"],"10":["chapter10"],"11":["chapter11"],"12":["chapter12"],"13":["chapter13"]};
  const titles=["","पञ्चाङ्गका आधार","राशि र भाव","ग्रह परिचय","समय गणित","नक्षत्र गणना","दशा पद्धति","कुण्डली कसरी हेर्ने","नाता र भावात् भावम्","स्वभाव, शरीर र स्वास्थ्यका संकेत","धन, कमाइ, परिश्रम र यात्रा","सन्तान र कुण्डली मिलान","ग्रहशान्ति र परम्परागत उपाय","वास्तु: दिशा र परम्परा"];
  const allowed=new Set(groups[chapter]);
