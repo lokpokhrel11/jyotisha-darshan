@@ -444,8 +444,9 @@ if(dbTransferButton){
   $('cycleNakshatraHelp').textContent='अध्याय ५ बाट दशास्वामी र दशा शेष सारिएको छ। जन्म नक्षत्रको मिलान आवश्यक भए पुनः पुष्टि गर्नुहोस्।';
   renderCycle();
   $('dbTransferHelp').textContent='दशा शेष अध्याय ६ मा सारियो। तलको महादशा क्रम हेर्नुहोस्।';
-  if(typeof showChapter==='function')showChapter(6);
-  else document.getElementById('chapter6')?.scrollIntoView({behavior:'smooth'});
+  const chapter6=document.getElementById('chapter6');
+  if(chapter6){chapter6.classList.remove('chapter-focus-hidden');chapter6.scrollIntoView({behavior:'smooth',block:'start'});}
+  // Keep the current page mounted so the calculated value survives the transfer.
  });
  for(const id of ['dbBhayat','dbBhavog','dbLord']){
   $(id).addEventListener('input',()=>{
