@@ -32,12 +32,12 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:8765/index.html';
    await page.locator('#lsDistrict option').last().waitFor();
    assert.equal(await page.locator('#lsDistrict option').count(),78,'77 districts plus placeholder expected');
    await page.locator('#lsDistrict').selectOption({label:'काठमाडौँ (काठमाडौँ)'});
-   assert.equal(await page.locator('#lsOffset').inputValue(),'-03:44','Kathmandu table longitude offset');
+   assert.equal(await page.locator('#lsOffset').inputValue(),'+00:00','Kathmandu baseline offset');
    await page.locator('#lsDistrict').selectOption({label:'झापा (चन्द्रगढी)'});
-   assert.equal(await page.locator('#lsOffset').inputValue(),'+07:16','Jhapa table longitude offset');
+   assert.equal(await page.locator('#lsOffset').inputValue(),'+11:00','Jhapa relative-to-Kathmandu offset');
    await page.locator('#lsDistrict').selectOption({label:'तनहुँ (दमौली)'});
-   assert.equal(await page.locator('#lsOffset').inputValue(),'-07:52','Damauli worked-example offset');
-   assert(await page.locator('#lsResult').innerText(),'District selection should calculate sunrise');
+   assert.equal(await page.locator('#lsOffset').inputValue(),'-04:08','Damauli relative-to-Kathmandu offset');
+   assert((await page.locator('#lsResult').innerText()).includes('05:14'),'Damauli local sunrise should be 05:14');
 
    // Verify hash navigation works after the page has already loaded.
    await page.goto(base+'?chapter=5#chapter5',{waitUntil:'domcontentloaded'});
