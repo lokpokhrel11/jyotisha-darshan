@@ -28,6 +28,17 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:8765/index.html';
     const overflow = await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
     assert(!overflow,'Horizontal overflow on chapter '+chapter+' at '+width+'px');
    }
+   await page.goto(base+'?chapter=4#localSunrise',{waitUntil:'domcontentloaded'});
+   await page.locator('#lsDistrict option').last().waitFor();
+   assert.equal(await page.locator('#lsDistrict option').count(),78,'77 districts plus placeholder expected');
+   await page.locator('#lsDistrict').selectOption({label:'काठमाडौँ (काठमाडौँ)'});
+   assert.equal(await page.locator('#lsOffset').inputValue(),'-03:44','Kathmandu table longitude offset');
+   await page.locator('#lsDistrict').selectOption({label:'झापा (चन्द्रगढी)'});
+   assert.equal(await page.locator('#lsOffset').inputValue(),'+07:16','Jhapa table longitude offset');
+   await page.locator('#lsDistrict').selectOption({label:'तनहुँ (दमौली)'});
+   assert.equal(await page.locator('#lsOffset').inputValue(),'-07:52','Damauli worked-example offset');
+   assert(await page.locator('#lsResult').innerText(),'District selection should calculate sunrise');
+
    // Verify hash navigation works after the page has already loaded.
    await page.goto(base+'?chapter=5#chapter5',{waitUntil:'domcontentloaded'});
    await page.locator('#chapter5-tab-lesson').waitFor();
