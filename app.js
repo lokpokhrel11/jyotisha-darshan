@@ -1036,7 +1036,12 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const exams=[
   {chapter:2,name:'राशि र भाव',total:20,threshold:16,anchor:'chapter2exam'},
   {chapter:3,name:'ग्रह परिचय',total:15,threshold:12,anchor:'chapter3exam'},
-  {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'}
+  {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'},
+  {chapter:9,name:'स्वभाव, शरीर र स्वास्थ्यका सङ्केत',total:5,threshold:4,anchor:'ch9-quiz'},
+  {chapter:10,name:'धन, आय, कर्म र यात्रा',total:4,threshold:3,anchor:'ch10-assessment'},
+  {chapter:11,name:'सन्तान र कुण्डली मिलान',total:7,threshold:6,anchor:'ch11-quiz'},
+  {chapter:12,name:'ग्रहशान्ति र परम्परागत उपाय',total:5,threshold:4,anchor:'ch12-quiz'},
+  {chapter:13,name:'वास्तु: दिशा र परम्परागत प्रयोग',total:10,threshold:8,anchor:'ch13-quiz'}
  ];
  let attempted=0,met=0;
  list.replaceChildren();
@@ -1217,6 +1222,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    return;
   }
   const score=responses.reduce((total,response,i)=>total+Number(response.value===items[i].answer),0);
+  try{localStorage.setItem('jyotisha-chapter9-score',JSON.stringify({score,total:items.length}))}catch(_){}
   feedback.className='ch9-quiz-feedback '+(score===items.length?'is-complete':'is-review');
   feedback.textContent='नतिजा: '+nep(score)+' / '+nep(items.length)+' सही। '+(score===items.length?'पाँचवटै उत्तर सही छन्।':'तल प्रत्येक प्रश्नको व्याख्या पढेर पुनः अभ्यास गर्न सक्नुहुन्छ।');
   review.replaceChildren();
@@ -1449,6 +1455,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   }
   review.replaceChildren();
   const score=responses.reduce((n,x,i)=>n+Number(x.value===items[i].answer),0);
+  try{localStorage.setItem('jyotisha-chapter10-score',JSON.stringify({score,total:items.length}))}catch(_){}
   feedback.className='ch10-feedback is-result';
   feedback.textContent='नतिजा: '+nep(score)+' / '+nep(items.length)+' सही। '+(score===items.length?'चारवटै उत्तर सही छन्।':'तल प्रत्येक प्रश्नको व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
   items.forEach((item,i)=>{
@@ -1508,6 +1515,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(missing!==-1){clear();feedback.textContent='कृपया सातवटै प्रश्नको उत्तर छान्नुहोस्।';feedback.className='ch10-feedback is-warning';form.querySelector('input[name="'+questions[missing].name+'"]').focus();return}
   review.replaceChildren();
   const score=selected.reduce((n,x,i)=>n+Number(x.value===questions[i].answer),0);
+  try{localStorage.setItem('jyotisha-chapter11-score',JSON.stringify({score,total:questions.length}))}catch(_){}
   feedback.className='ch10-feedback is-result';feedback.textContent='नतिजा: '+nep(score)+' / '+nep(questions.length)+' सही। '+(score===questions.length?'सातवटै उत्तर सही छन्।':'तलका व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
   questions.forEach((q,i)=>{const card=document.createElement('div');card.className='ch10-review-card';const heading=document.createElement('strong');heading.textContent='प्रश्न '+nep(i+1)+' · '+(selected[i].value===q.answer?'सही उत्तर':'समीक्षा आवश्यक');const p=document.createElement('p');p.textContent=q.explanation;card.append(heading,p);review.append(card)});
   review.hidden=false;feedback.tabIndex=-1;feedback.focus({preventScroll:true});
@@ -1561,6 +1569,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    if(explanation)explanation.hidden=false;
   }
   const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
+  if(answered===fields.length)try{localStorage.setItem('jyotisha-chapter12-score',JSON.stringify({score:correct,total:fields.length}))}catch(_){}
   result.textContent='नतिजा: '+nep(correct)+' / '+nep(fields.length)+' सही। '+(answered<fields.length?'उत्तर दिइएका प्रश्न: '+nep(answered)+'। बाँकी '+nep(fields.length-answered)+' प्रश्न पनि पूरा गर्नुहोस्।':'प्रत्येक उत्तरको व्याख्या पढेर आवश्यक पाठ पुनः अध्ययन गर्नुहोस्।');
  });
  form.addEventListener('change',function(e){
@@ -1573,7 +1582,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
 })();
 
-(function(){const dirs=[["पूर्व","सूर्य","पानी, स्नानघर, पूजा, अध्ययन"],["आग्नेय","शुक्र","भान्सा, बिजुली"],["दक्षिण","मङ्गल","शयन, भारी सामान"],["नैऋत्य","राहु","प्राविधिक सामग्री, घरमूलीको बसाइ"],["पश्चिम","शनि","भोजन, फ्रिज, वृद्धहरूको बसाइ"],["वायव्य","चन्द्र","पशुपालन, अन्नभण्डार"],["उत्तर","बुध","भण्डार, गहना, अध्ययन"],["ईशान","बृहस्पति","मन्दिर, पूजा, अध्ययन, पानी"]];const out=document.getElementById('ch13DirectionResult');document.querySelectorAll('#chapter13 [data-dir]').forEach(b=>b.addEventListener('click',()=>{const d=dirs[Number(b.dataset.dir)];out.textContent=d[0]+' · '+d[1]+' — '+d[2];document.querySelectorAll('#chapter13 [data-dir]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));}));const form=document.getElementById('ch13Quiz');if(form)form.addEventListener('submit',e=>{e.preventDefault();const fields=[...form.querySelectorAll('fieldset')];const unanswered=fields.filter(f=>!f.querySelector('input:checked'));const result=document.getElementById('ch13Result');if(unanswered.length){result.textContent='अझै '+String(unanswered.length).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' प्रश्नको उत्तर दिन बाँकी छ। सबै प्रश्नको उत्तर दिएपछि जाँच्नुहोस्।';unanswered[0].querySelector('input')?.focus();return;}let score=0;fields.forEach(f=>{const chosen=f.querySelector('input:checked');const correct=Number(chosen.value)===Number(f.dataset.answer);if(correct)score++;f.querySelectorAll('label').forEach(label=>{const input=label.querySelector('input');label.classList.toggle('quiz-correct',Number(input.value)===Number(f.dataset.answer));label.classList.toggle('quiz-incorrect',input===chosen&&!correct);});f.querySelector('.ch12-explanation').hidden=false;});const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);result.textContent='नतिजा: '+nep(score)+' / '+nep(fields.length)+' सही। तल प्रत्येक उत्तरको कारण पढ्न सक्नुहुन्छ।';});if(form)form.addEventListener('change',e=>{const field=e.target.closest('fieldset[data-answer]');if(!field)return;field.querySelectorAll('label').forEach(label=>label.classList.remove('quiz-correct','quiz-incorrect'));const explanation=field.querySelector('.ch12-explanation');if(explanation)explanation.hidden=true;document.getElementById('ch13Result').textContent='उत्तर परिवर्तन गरिएको छ। सबै उत्तर जाँच्न फेरि बटन थिच्नुहोस्।';});})();
+(function(){const dirs=[["पूर्व","सूर्य","पानी, स्नानघर, पूजा, अध्ययन"],["आग्नेय","शुक्र","भान्सा, बिजुली"],["दक्षिण","मङ्गल","शयन, भारी सामान"],["नैऋत्य","राहु","प्राविधिक सामग्री, घरमूलीको बसाइ"],["पश्चिम","शनि","भोजन, फ्रिज, वृद्धहरूको बसाइ"],["वायव्य","चन्द्र","पशुपालन, अन्नभण्डार"],["उत्तर","बुध","भण्डार, गहना, अध्ययन"],["ईशान","बृहस्पति","मन्दिर, पूजा, अध्ययन, पानी"]];const out=document.getElementById('ch13DirectionResult');document.querySelectorAll('#chapter13 [data-dir]').forEach(b=>b.addEventListener('click',()=>{const d=dirs[Number(b.dataset.dir)];out.textContent=d[0]+' · '+d[1]+' — '+d[2];document.querySelectorAll('#chapter13 [data-dir]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));}));const form=document.getElementById('ch13Quiz');if(form)form.addEventListener('submit',e=>{e.preventDefault();const fields=[...form.querySelectorAll('fieldset')];const unanswered=fields.filter(f=>!f.querySelector('input:checked'));const result=document.getElementById('ch13Result');if(unanswered.length){result.textContent='अझै '+String(unanswered.length).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)])+' प्रश्नको उत्तर दिन बाँकी छ। सबै प्रश्नको उत्तर दिएपछि जाँच्नुहोस्।';unanswered[0].querySelector('input')?.focus();return;}let score=0;fields.forEach(f=>{const chosen=f.querySelector('input:checked');const correct=Number(chosen.value)===Number(f.dataset.answer);if(correct)score++;f.querySelectorAll('label').forEach(label=>{const input=label.querySelector('input');label.classList.toggle('quiz-correct',Number(input.value)===Number(f.dataset.answer));label.classList.toggle('quiz-incorrect',input===chosen&&!correct);});f.querySelector('.ch12-explanation').hidden=false;});const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);try{localStorage.setItem('jyotisha-chapter13-score',JSON.stringify({score,total:fields.length}))}catch(_){}result.textContent='नतिजा: '+nep(score)+' / '+nep(fields.length)+' सही। तल प्रत्येक उत्तरको कारण पढ्न सक्नुहुन्छ।';});if(form)form.addEventListener('change',e=>{const field=e.target.closest('fieldset[data-answer]');if(!field)return;field.querySelectorAll('label').forEach(label=>label.classList.remove('quiz-correct','quiz-incorrect'));const explanation=field.querySelector('.ch12-explanation');if(explanation)explanation.hidden=true;document.getElementById('ch13Result').textContent='उत्तर परिवर्तन गरिएको छ। सबै उत्तर जाँच्न फेरि बटन थिच्नुहोस्।';});})();
 
 /* Chapter 8 short checks: clear outdated feedback after an answer changes. */
 (function(){
