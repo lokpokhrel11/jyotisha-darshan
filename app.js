@@ -1639,7 +1639,8 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(!a.value||!b.value){out.textContent='दुवै चन्द्रराशि छानेपछि दुईतर्फी दूरी देखिन्छ।';return}
   const forward=((y-x+12)%12)+1,reverse=((x-y+12)%12)+1;
   const matched=(forward===5&&reverse===9)||(forward===9&&reverse===5);
-  out.textContent=signs[x-1]+' → '+signs[y-1]+': '+nep(forward)+'औँ स्थान। '+signs[y-1]+' → '+signs[x-1]+': '+nep(reverse)+'औँ स्थान। '+(matched?'यस जोडीलाई स्रोतको परिभाषाअनुसार नवपञ्चक भनिन्छ।':'यस जोडीमा स्रोतको नवपञ्चक (५/९) गणना मिल्दैन।')+' यो राशिदूरीको अभ्यास मात्र हो; विवाह, गर्भधारण वा स्वास्थ्यको भविष्यवाणी होइन।';
+  const sequence=(start,count)=>Array.from({length:count},(_,i)=>signs[(start-1+i)%12]+' ('+nep(i+1)+')').join(' → ');
+  out.textContent=signs[x-1]+' बाट '+signs[y-1]+' सम्म: '+sequence(x,forward)+'। '+signs[y-1]+' बाट '+signs[x-1]+' सम्म: '+sequence(y,reverse)+'। नतिजा: '+nep(forward)+'/'+nep(reverse)+'। '+(matched?'यस जोडीलाई स्रोतको परिभाषाअनुसार नवपञ्चक भनिन्छ।':'यस जोडीमा स्रोतको नवपञ्चक (५/९) गणना मिल्दैन।')+' दुवै दिशामा राशिचक्रको स्वाभाविक क्रममै गनिएको हो। यो राशिदूरीको अभ्यास मात्र हो; विवाह, गर्भधारण वा स्वास्थ्यको भविष्यवाणी होइन।';
  };
  a.addEventListener('change',render);b.addEventListener('change',render);
  document.querySelectorAll('#chapter11 .ch11-example-button').forEach(button=>{
