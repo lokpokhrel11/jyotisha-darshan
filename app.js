@@ -218,6 +218,7 @@ function reshuffleChapter2Questions(){
 }
 $('examReset').addEventListener('click',()=>{
   examForm.reset();
+  try{localStorage.removeItem('jyotisha-chapter2-score')}catch(e){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));
   reshuffleChapter2Questions();
   renderChapter2Exam();
   // Return to the beginning so the cleared selections are immediately visible.
@@ -889,7 +890,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   explanations.forEach(line=>{const item=document.createElement('li');item.textContent=line.slice(line.indexOf('. ')+2);list.append(item)});
   feedback.append(summary,list);
  });
- quiz.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))feedback.textContent='उत्तर परिवर्तन गरिएको छ। सबै उत्तर जाँच्नुहोस्।';});
+ quiz.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]')){try{localStorage.removeItem('jyotisha-chapter7-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));feedback.textContent='उत्तर परिवर्तन गरिएको छ। सबै उत्तर जाँच्नुहोस्।';}});
 })();
 
 /* v4.3: Accessible North Indian-style chart, using only known placements from notes p.64. */
@@ -1850,8 +1851,8 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   try{localStorage.setItem('jyotisha-chapter5-score',JSON.stringify({score,total:questions.length}))}catch(_){}
   window.dispatchEvent(new Event('jyotisha-assessment-updated'));
  });
- form.addEventListener('reset',()=>{questions.forEach((_,i)=>{const el=document.getElementById('ch5why'+i);el.textContent='';el.hidden=true});result.textContent='';});
- form.addEventListener('change',()=>{result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';questions.forEach((_,i)=>{document.getElementById('ch5why'+i).hidden=true})});
+ form.addEventListener('reset',()=>{try{localStorage.removeItem('jyotisha-chapter5-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));questions.forEach((_,i)=>{const el=document.getElementById('ch5why'+i);el.textContent='';el.hidden=true});result.textContent='';});
+ form.addEventListener('change',()=>{try{localStorage.removeItem('jyotisha-chapter5-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';questions.forEach((_,i)=>{document.getElementById('ch5why'+i).hidden=true})});
 })();
 
 /* Chapter 6: concept and sequence checks from the Vimshottari lesson. */
@@ -1890,6 +1891,6 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   try{localStorage.setItem('jyotisha-chapter6-score',JSON.stringify({score,total:questions.length}))}catch(_){}
   window.dispatchEvent(new Event('jyotisha-assessment-updated'));
  });
- form.addEventListener('reset',()=>{questions.forEach((_,i)=>{const e=document.getElementById('ch6why'+i);e.textContent='';e.hidden=true});result.textContent='';});
- form.addEventListener('change',()=>{result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';questions.forEach((_,i)=>{document.getElementById('ch6why'+i).hidden=true})});
+ form.addEventListener('reset',()=>{try{localStorage.removeItem('jyotisha-chapter6-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));questions.forEach((_,i)=>{const e=document.getElementById('ch6why'+i);e.textContent='';e.hidden=true});result.textContent='';});
+ form.addEventListener('change',()=>{try{localStorage.removeItem('jyotisha-chapter6-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';questions.forEach((_,i)=>{document.getElementById('ch6why'+i).hidden=true})});
 })();
