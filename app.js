@@ -272,6 +272,24 @@ chapter3Form.addEventListener('submit',event=>{event.preventDefault();const answ
 $('chapter3Reset').addEventListener('click',()=>{const prev=chapter3Bank.slice();for(let i=chapter3Bank.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[chapter3Bank[i],chapter3Bank[j]]=[chapter3Bank[j],chapter3Bank[i]];}if(chapter3Bank.every((q,i)=>q===prev[i]))[chapter3Bank[0],chapter3Bank[1]]=[chapter3Bank[1],chapter3Bank[0]];chapter3Form.reset();renderChapter3();const first=chapter3Container.querySelector('fieldset');if(first){first.setAttribute('tabindex','-1');first.focus({preventScroll:true});first.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}});
 renderChapter3();
 
+// Chapter 4–5: edited calculator inputs invalidate the previously displayed calculation.
+(function(){
+ const groups=[
+  [['ch4Hours','ch4Minutes'],'ch4Output'],
+  [['istBirth','istSunrise','istPrevious'],'istOutput'],
+  [['lsCalendar','lsOffset'],'lsResult'],
+  [['bhCase','bhIst','bhToday','bhOther'],'bhOutput'],
+  [['padaBhayat','padaBhavog'],'padaOutput'],
+  [['dbBhayat','dbBhavog','dbLord'],'dbOutput']
+ ];
+ for(const [inputs,outputId] of groups){
+  const output=document.getElementById(outputId);
+  if(!output)continue;
+  const invalidate=()=>{output.textContent='मान परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि गणना गर्नुहोस्।';};
+  for(const id of inputs){const input=document.getElementById(id);if(input)input.addEventListener(input.matches('select,input[type="checkbox"],input[type="radio"]')?'change':'input',invalidate);}
+ }
+})();
+
 // Chapter 4 unit conversion: integer seconds preserve exact vipala values.
 $('ch4Calculate').addEventListener('click',()=>{
  const hr=Number($('ch4Hours').value),mn=Number($('ch4Minutes').value),out=$('ch4Output');
