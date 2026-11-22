@@ -1874,3 +1874,10 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  :root[data-theme="dark"] #chapter13 .ch12-table-scroll{background:#203a43;border-color:#536e73}
 }
 @media(min-width:761px){.mobile-table-hint{display:none}}
+
+
+/* Distinct, non-certifying dashboard learning indicators. */
+.study-milestones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0 8px}
+.study-milestones>.dash-stat{min-width:0}
+.study-completion-note{font-size:.88rem;line-height:1.6;margin:5px 0 18px;color:var(--muted)}
+@media(max-width:720px){.study-milestones{grid-template-columns:1fr;gap:9px}.study-milestones>.dash-stat{padding:14px 16px}}
