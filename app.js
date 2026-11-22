@@ -319,11 +319,15 @@ $('lsCalculate').addEventListener('click',()=>{
  const t=$('lsCalendar').value,m=/^([+-])(\d{1,2}):(\d{2})$/.exec($('lsOffset').value.trim()),out=$('lsResult');
  const calendar=istSeconds(t);
  if(calendar===null||!m||Number(m[2])>59||Number(m[3])>59){out.textContent='पात्रोको समय र वेलान्तर जाँच्नुहोस्। वेलान्तरको ढाँचा +07:16 वा -07:52 हो।';return;}
- const signed=(m[1]==='-'?-1:1),rounded=Number(m[2])+(Number(m[3])>=30?1:0);
- const adjusted=Math.round(calendar/60)-4-signed*rounded;
+ const signed=(m[1]==='-'?-1:1);
+ const offsetSeconds=signed*(Number(m[2])*60+Number(m[3]));
+ // Apply the exact seconds first, then round the final local sunrise once.
+ // Rounding the calendar time and offset independently can shift the result by a minute.
+ const exactLocalSeconds=calendar-4*60-offsetSeconds;
+ const adjusted=Math.floor((exactLocalSeconds+30)/60);
  if(adjusted<0||adjusted>=1440){out.textContent='यस अभ्यासको मान्य दायराबाहिर समय आयो। पात्रोको सूर्योदय र वेलान्तर पुनः जाँच्नुहोस्।';return;}
  const hh=String(Math.floor(adjusted/60)).padStart(2,'0'),mm=String(adjusted%60).padStart(2,'0');
- out.textContent=`वेलान्तर ${m[1]}${rounded} मिनेट (गोलाकार)। पात्रोको सूर्योदय − ४ मिनेट − (${m[1]}${rounded} मिनेट) = स्थानीय सूर्योदय ${hh}:${mm}। यो समय इष्टकाल अभ्यासमा प्रविष्ट गर्नुहोस्।`;
+ out.textContent=`वेलान्तर ${m[1]}${m[2]} मिनेट ${m[3]} सेकेन्ड। पात्रोको सूर्योदय − ४ मिनेट − (वेलान्तर) = स्थानीय सूर्योदय ${hh}:${mm} (अन्तिम परिणाम नजिकको मिनेटमा गोलाकार)। यो समय इष्टकाल अभ्यासमा प्रविष्ट गर्नुहोस्।`;
 });
 $('lsCalculate').click();
 
