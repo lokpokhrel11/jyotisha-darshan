@@ -1270,7 +1270,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    let marked=[];try{const saved=JSON.parse(localStorage.getItem('jyotisha-chapters-read-v1')||'[]');if(Array.isArray(saved))marked=saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=13)}catch(_){}
    const markedCount=new Set(marked).size;
    const openedCount=new Set(opened).size;
-   const nextStep=openedCount<13?'बाँकी अध्याय अध्ययनका लागि खोल्न सक्नुहुन्छ।':attempted<exams.length?'अब बाँकी मुख्य मूल्याङ्कन पूरा गर्न सक्नुहुन्छ।':met<exams.length?'लक्ष्य नपुगेका मूल्याङ्कन पुनः अभ्यास गर्न सक्नुहुन्छ।':'सबै मुख्य मूल्याङ्कनका अभ्यास लक्ष्य पुगेका छन्।';
+   const nextStep=openedCount<13?'बाँकी अध्याय खोल्दै अध्ययन अघि बढाउन सक्नुहुन्छ।':markedCount<13?'अध्ययन गरिसकेका अध्यायमा अध्ययन गरेको चिन्ह लगाउन सक्नुहुन्छ।':attempted<exams.length?'अब बाँकी मुख्य मूल्याङ्कन पूरा गर्न सक्नुहुन्छ।':met<exams.length?'लक्ष्य नपुगेका मूल्याङ्कन पुनः अभ्यास गर्न सक्नुहुन्छ।':'सबै मुख्य मूल्याङ्कनका अभ्यास लक्ष्य पुगेका छन्।';
    completionEl.textContent='आफैँ अध्ययन गरेको चिन्ह लगाइएका: '+nep(markedCount)+' / १३। अध्याय खोलिएका: '+nep(openedCount)+' / १३। मुख्य मूल्याङ्कन पूरा: '+nep(attempted)+' / १३। अभ्यास लक्ष्य पुगेका: '+nep(met)+' / १३। '+nextStep+' यी सूचकले पाठ पूरा भएको वा प्रमाणपत्र प्राप्त गर्ने योग्यता प्रमाणित गर्दैनन्।';
   }
  }
