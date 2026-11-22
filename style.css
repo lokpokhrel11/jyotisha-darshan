@@ -1634,3 +1634,55 @@ html[data-theme="dark"] #practice #chartLabels .chart-house.selected text,body[d
  #chapter7 .ch7-house-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
  #chapter7 .ch7-house-buttons button{padding:8px 2px;font-size:.85rem}
 }
+
+
+/* Chapters 11–12 editorial reading system: preserve the full lesson text. */
+#chapter11,#chapter12{--longread-gold:#a47632;--longread-ink:#213d48;--longread-edge:#d7deda;--longread-paper:#fffdfa;--longread-tint:#f0f6f3;--longread-sand:#fbf4e7}
+#chapter11 :is(.study-panel,.ch11-lesson-section,.ch9-step-grid,.ch-modern-section-head,.ch10-practice),
+#chapter12 :is(.study-panel,.ch12-topic){scroll-margin-top:92px}
+#chapter11>.study-panel,#chapter12>.study-panel{border-left:5px solid var(--longread-gold);background:var(--longread-sand);border-radius:16px;padding:clamp(18px,2.6vw,28px)}
+#chapter11 .ch11-lesson-section,#chapter12 .ch12-topic{
+ position:relative;margin-block:clamp(24px,4vw,42px);padding:clamp(20px,3.2vw,36px);
+ border:1px solid var(--longread-edge);border-radius:19px;background:var(--longread-paper);
+ box-shadow:0 7px 24px rgba(16,47,54,.055);min-width:0
+}
+#chapter11 .ch11-lesson-section:nth-of-type(even),#chapter12 .ch12-topic:nth-of-type(even){background:var(--longread-tint)}
+#chapter11 .ch11-lesson-section::before,#chapter12 .ch12-topic::before{
+ content:"";position:absolute;inset:0 auto 0 0;width:5px;background:linear-gradient(#c49b57,#7e9b90);border-radius:19px 0 0 19px
+}
+#chapter11 .ch11-lesson-heading,#chapter12 .ch12-topic>.ch12-kicker{border-bottom:1px solid var(--longread-edge);padding-bottom:13px;margin-bottom:20px}
+#chapter11 .ch11-lesson-heading h3,#chapter12 .ch12-topic>h3{
+ color:var(--longread-ink);font-size:clamp(1.3rem,2.1vw,1.7rem);line-height:1.38;letter-spacing:0;margin-top:7px
+}
+#chapter11 .ch11-lesson-section p,#chapter12 .ch12-topic p{line-height:1.85;max-width:78ch}
+#chapter11 .ch11-lesson-section :is(h4,h5),#chapter12 .ch12-topic :is(h4,h5){line-height:1.45;margin-top:1.3em;margin-bottom:.6em;color:var(--longread-ink)}
+#chapter11 .ch11-lesson-section .study-panel,#chapter12 .ch12-topic .study-panel{
+ background:var(--longread-sand);border:1px solid #e7d5b5;border-left:4px solid var(--longread-gold);
+ border-radius:13px;padding:clamp(16px,2vw,23px);margin-block:19px
+}
+#chapter11 .ch11-lesson-section .table-wrap,#chapter12 .ch12-table-scroll{
+ border:1px solid #bfcfc9;border-radius:13px;box-shadow:0 3px 10px rgba(12,44,49,.045);margin-block:19px
+}
+#chapter11 .ch11-lesson-section .ch11-learning-grid>*,#chapter12 .ch12-steps>*,#chapter12 .ch12-two>*{min-width:0}
+#chapter11 .ch11-lesson-section :is(.note,.ch10-result),#chapter12 .ch12-topic :is(.note,.ch12-highlight){
+ border-radius:11px;padding:14px 17px;margin-block:17px
+}
+#chapter11 :is(.ch-modern-nav,.ch-modern-path),#chapter12 .ch12-path{margin-bottom:clamp(20px,3vw,30px)}
+#chapter11 :is(.ch11-lesson-section,.study-panel),#chapter12 :is(.ch12-topic,.study-panel){overflow-wrap:break-word}
+:root[data-theme="dark"] #chapter11,:root[data-theme="dark"] #chapter12{
+ --longread-gold:#e5bb76;--longread-ink:#f1f1e8;--longread-edge:#526b71;
+ --longread-paper:#193640;--longread-tint:#203e48;--longread-sand:#303d3d
+}
+:root[data-theme="dark"] #chapter11 .ch11-lesson-section,
+:root[data-theme="dark"] #chapter12 .ch12-topic{color:#edf2ee;border-color:var(--longread-edge);box-shadow:0 8px 22px rgba(0,0,0,.14)}
+:root[data-theme="dark"] #chapter11 .ch11-lesson-section .study-panel,
+:root[data-theme="dark"] #chapter12 .ch12-topic .study-panel{border-color:#88734f;border-left-color:var(--longread-gold);color:#f1eee7}
+:root[data-theme="dark"] #chapter11 .ch11-lesson-section :is(h3,h4,h5),
+:root[data-theme="dark"] #chapter12 .ch12-topic :is(h3,h4,h5){color:var(--longread-ink)}
+@media(max-width:640px){
+ #chapter11 .ch11-lesson-section,#chapter12 .ch12-topic{margin-block:20px;padding:19px 16px 20px}
+ #chapter11 .ch11-lesson-section p,#chapter12 .ch12-topic p{line-height:1.78}
+ #chapter11 .ch11-lesson-section .study-panel,#chapter12 .ch12-topic .study-panel{padding:15px 13px}
+ #chapter11 .ch11-lesson-section .table-wrap,#chapter12 .ch12-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+@media(prefers-reduced-motion:reduce){#chapter11 *,#chapter12 *{scroll-behavior:auto!important}}
