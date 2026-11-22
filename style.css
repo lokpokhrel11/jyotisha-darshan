@@ -2193,3 +2193,6 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  #chapter13 .ch12-quiz :is(button,input[type="submit"],input[type="reset"]){min-height:46px;max-width:100%;white-space:normal}
  #chapter13 #ch13DirectionResult,#chapter13 #ch13Result,#chapter13 .ch12-explanation{overflow-wrap:anywhere}
 }
+
+/* Ensure mobile menu hover/focus remains legible in dark mode. */
+:root[data-theme="dark"] .site-header nav a:hover,:root[data-theme="dark"] .site-header nav a:focus-visible{background:#304752;color:#fff5df;outline-offset:2px}
