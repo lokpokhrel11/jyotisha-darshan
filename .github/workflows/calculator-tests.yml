@@ -40,3 +40,5 @@ jobs:
         run: node tests/chapter8-house-counting.test.js
       - name: Validate Chapter 9 sign and Moon-house calculations
         run: node tests/chapter9-position.test.js
+      - name: Validate Chapter 9 assessment
+        run: node tests/chapter9-assessment.test.js
