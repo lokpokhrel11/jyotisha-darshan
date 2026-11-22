@@ -235,3 +235,33 @@ renderChapter2Exam();
 
 // Public chapter focus and local progress
 (function(){const c=Number(new URLSearchParams(location.search).get('chapter'));const groups={1:['pathshala','practice'],2:['chapter2','planetExample','chapter2exam']};let opened=[];try{opened=JSON.parse(localStorage.getItem('jyotisha-public-opened-v1')||'[]').filter(n=>n===1||n===2)}catch(e){}if(groups[c]){if(!opened.includes(c))opened.push(c);try{localStorage.setItem('jyotisha-public-opened-v1',JSON.stringify(opened))}catch(e){}document.body.classList.add('chapter-focus');document.querySelectorAll('main > section').forEach(s=>{if(!groups[c].includes(s.id))s.classList.add('chapter-focus-hidden')})}const dashboard=document.getElementById('dashboard');if(dashboard){const p=document.createElement('p');p.className='note';p.textContent='खोलिएका अध्याय: '+opened.length+'/२। अभ्यासको नतिजा यही उपकरणमा सुरक्षित हुन्छ।';dashboard.append(p)}})();
+
+/* Public dashboard: show saved assessment results without accessing paid chapters. */
+(function(){
+ const dashboard=document.getElementById('dashboard');
+ if(!dashboard)return;
+ const panel=document.createElement('div');
+ panel.className='cards two';
+ panel.setAttribute('aria-label','निःशुल्क अध्यायको अभ्यास प्रगति');
+ const entries=[
+  {name:'अध्याय १ · पञ्चाङ्ग',key:'jd-chapter1-v05',total:15,pass:12},
+  {name:'अध्याय २ · राशि र भाव',key:'jyotisha-chapter2-score',total:20,pass:16}
+ ];
+ function render(){
+  panel.replaceChildren();
+  for(const entry of entries){
+   const tile=document.createElement('article');tile.className='tile';
+   const heading=document.createElement('h3');heading.textContent=entry.name;
+   const result=document.createElement('p');
+   let saved=null;try{saved=JSON.parse(localStorage.getItem(entry.key)||'null')}catch(e){}
+   if(saved&&Number.isFinite(saved.score)&&Number.isFinite(saved.total)){
+    result.textContent='पछिल्लो अभ्यास: '+saved.score+'/'+saved.total+'। '+(saved.score>=entry.pass?'अभ्यास लक्ष्य पूरा भयो।':'पुनः अभ्यास गर्न सकिन्छ।');
+   }else result.textContent='अभ्यासको नतिजा अझै सुरक्षित गरिएको छैन।';
+   tile.append(heading,result);panel.append(tile);
+  }
+ }
+ dashboard.append(panel);render();
+ window.addEventListener('jyotisha-assessment-updated',render);
+ window.addEventListener('storage',render);
+ window.addEventListener('pageshow',render);
+})();
