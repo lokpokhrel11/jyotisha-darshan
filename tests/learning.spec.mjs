@@ -493,3 +493,24 @@ test('Chapters 8 and 9: previous-next chapter arrows and redesigned quiz', async
   expect(style.background).not.toBe('rgba(0, 0, 0, 0)');
  }
 });
+
+
+test('All chapters: chapter navigation links resolve to existing chapter destinations', async ({ page }) => {
+  for (let n = 1; n <= 13; n++) {
+    await page.goto(chapter(n));
+    const section = page.locator(n === 1 ? '#chapter1' : `#chapter${n}`);
+    await expect(section).toBeVisible();
+    const nav = section.locator('.chapter-bottom-nav');
+    await expect(nav).toBeVisible();
+    const links = nav.locator('a[href*="chapter="]');
+    const count = await links.count();
+    expect(count, `Chapter ${n} should have a previous or next chapter link`).toBeGreaterThan(0);
+    for (let i = 0; i < count; i++) {
+      const href = await links.nth(i).getAttribute('href');
+      const target = Number(new URL(href, page.url()).searchParams.get('chapter'));
+      expect(target, `Invalid navigation destination from chapter ${n}`).toBeGreaterThanOrEqual(1);
+      expect(target, `Invalid navigation destination from chapter ${n}`).toBeLessThanOrEqual(13);
+      expect(Math.abs(target - n), `Nonadjacent chapter link in chapter ${n}`).toBe(1);
+    }
+  }
+});
