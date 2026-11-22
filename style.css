@@ -1895,8 +1895,8 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
 :root[data-theme="dark"] .dashboard-stage-count{color:#e9d5a8;border-color:#756d58}
 @media(max-width:680px){.dashboard-stage-heading{align-items:flex-start}.dashboard-stage-count{font-size:.75rem;padding:5px 8px}.dashboard-stage-heading h4{font-size:1.12rem}}
 
-/* Phase 6: prevent stacked sticky table headers from covering mobile lessons. */
-@media (max-width: 650px) {
+/* Phase 6: prevent stacked sticky table headers on phones and narrow tablets. */
+@media (max-width: 760px) {
   #chapter11 .ch11-lesson-section table th,
   #chapter12 #ch12-planets .ch12-table thead th,
   #chapter13 .ch12-table thead th {
