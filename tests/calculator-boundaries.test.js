@@ -75,7 +75,7 @@ const dashaFields={
  dbOutput:{textContent:''},
  dbCalculate:{addEventListener(event,handler){if(event==='click')this.handler=handler;},click(){this.handler();}}
 };
-const dashaContext=vm.createContext({$:id=>dashaFields[id]});
+const dashaContext=vm.createContext({$:id=>dashaFields[id],document:{getElementById:()=>null}});
 vm.runInContext(extract('const dbYears=', '// Chapter 6.1:'),dashaContext);
 const dashaResult=(a,b,lord='ketu')=>{
  dashaFields.dbBhayat.value=a;dashaFields.dbBhavog.value=b;dashaFields.dbLord.value=lord;
