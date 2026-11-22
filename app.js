@@ -72,7 +72,7 @@ function renderQuestion(){
  });$('quizOptions').append(b);});$('nextQuestion').hidden=true;
 }
 $('nextQuestion').addEventListener('click',()=>{questionIndex++;renderQuestion()});
-$('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;unitScores={};$('restartQuiz').hidden=true;$('unitBreakdown').textContent='';$('savedProgress').textContent='';renderQuestion()});
+$('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;unitScores={};$('restartQuiz').hidden=true;$('unitBreakdown').textContent='';$('savedProgress').textContent='';try{localStorage.removeItem('jd-chapter1-v05')}catch(e){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));renderQuestion()});
 try{const prev=JSON.parse(localStorage.getItem('jd-chapter1-v05')||'null');if(prev){$('savedProgress').textContent=`अघिल्लो अभ्यास: ${prev.score}/${prev.total} · ${prev.completed?'मापदण्ड पूरा':'पुनः अभ्यास आवश्यक'}`;}}catch(e){}
 renderQuestion();
 // Chapter 1 expanded learning tools. Angles are hypothetical teaching inputs.
