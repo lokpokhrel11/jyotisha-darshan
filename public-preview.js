@@ -83,7 +83,16 @@ function renderQuestion(){
 }
 $('nextQuestion').addEventListener('click',()=>{questionIndex++;renderQuestion();$('questionTitle').focus()});
 $('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;unitScores={};$('restartQuiz').hidden=true;$('unitBreakdown').textContent='';renderQuestion();$('questionTitle').focus()});
-try{const prev=JSON.parse(localStorage.getItem('jd-chapter1-v05')||'null');if(prev){$('savedProgress').textContent=`अघिल्लो अभ्यास: ${prev.score}/${prev.total} · ${prev.completed?'मापदण्ड पूरा':'पुनः अभ्यास आवश्यक'}`;}}catch(e){}
+function renderSavedChapter1Progress(){
+ try{
+  const prev=JSON.parse(localStorage.getItem('jd-chapter1-v05')||'null');
+  $('savedProgress').textContent=prev&&prev.total===questions.length&&Number.isInteger(prev.score)
+   ? `पछिल्लो अभ्यास: ${prev.score}/${prev.total} · ${prev.completed?'मापदण्ड पूरा':'पुनः अभ्यास आवश्यक'}`
+   : '';
+ }catch(e){}
+}
+window.addEventListener('jyotisha-assessment-updated',renderSavedChapter1Progress);
+renderSavedChapter1Progress();
 renderQuestion();
 // Chapter 1 expanded learning tools. Angles are hypothetical teaching inputs.
 const tithiGroups=['नन्दा','भद्रा','जया','रिक्ता','पूर्णा'];
@@ -238,8 +247,40 @@ $('examReset').addEventListener('click',()=>{
 renderChapter2Exam();
 
 
-// Public chapter focus and local progress
-(function(){const c=new URLSearchParams(location.search).get('chapter');const groups={1:['pathshala','practice'],2:['chapter2','planetExample','chapter2exam']};let opened=[];try{opened=JSON.parse(localStorage.getItem('jyotisha-public-opened-v1')||'[]').filter(n=>n===1||n===2)}catch(e){}if(c==='1'||c==='2'){const chapter=Number(c);if(!opened.includes(chapter))opened.push(chapter);if(chapter===1)$('lesson').hidden=false;try{localStorage.setItem('jyotisha-public-opened-v1',JSON.stringify(opened))}catch(e){}document.body.classList.add('chapter-focus');document.querySelectorAll('main > section').forEach(s=>{if(!groups[c].includes(s.id))s.classList.add('chapter-focus-hidden')})}const dashboard=document.getElementById('dashboard');if(dashboard){const p=document.createElement('p');p.className='note';p.textContent='खोलिएका अध्याय: '+opened.length+'/२। अभ्यासको नतिजा यही उपकरणमा सुरक्षित हुन्छ।';dashboard.append(p)}})();
+// Chapter links focus on their lesson and record the visit on this browser.
+(function(){
+ const key='jyotisha-public-opened-v1';
+ const chapter=new URLSearchParams(location.search).get('chapter');
+ const groups={
+  1:['pathshala','practice'],
+  2:['chapter2','planetExample','chapter2exam']
+ };
+ function readOpened(){
+  try{
+   const saved=JSON.parse(localStorage.getItem(key)||'[]');
+   return new Set(saved.filter(n=>n===1||n===2));
+  }catch(e){return new Set();}
+ }
+ if(chapter==='1'||chapter==='2'){
+  const opened=readOpened();
+  opened.add(Number(chapter));
+  try{localStorage.setItem(key,JSON.stringify([...opened]));}catch(e){}
+  if(chapter==='1')$('lesson').hidden=false;
+  document.body.classList.add('chapter-focus');
+  document.querySelectorAll('main > section').forEach(section=>{
+   section.classList.toggle('chapter-focus-hidden',!groups[chapter].includes(section.id));
+  });
+ }
+ const note=document.createElement('p');
+ note.className='note';
+ function render(){
+  note.textContent=`खोलिएका अध्याय: ${readOpened().size}/२। अभ्यासको नतिजा यही ब्राउजरमा सुरक्षित हुन्छ।`;
+ }
+ $('dashboard').append(note);
+ render();
+ window.addEventListener('pageshow',render);
+ window.addEventListener('storage',render);
+})();
 
 /* Public dashboard: show saved assessment results without accessing paid chapters. */
 (function(){

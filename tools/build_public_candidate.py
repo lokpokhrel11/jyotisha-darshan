@@ -34,10 +34,11 @@ def build(destination):
             if path.is_symlink() or not path.is_file():
                 raise ValueError(f'Expected a regular source file: {path}')
             target = candidate / name
-            if name in ('index.html', 'course.html'):
+            if name.endswith('.html'):
                 html = path.read_text(encoding='utf-8')
                 html = html.replace('href="public-preview.html', 'href="index.html')
                 html = html.replace('href="public-course.html', 'href="course.html')
+                html = html.replace('</head>', '<link rel="icon" href="icon.svg"></head>', 1)
                 target.write_text(html, encoding='utf-8')
             else:
                 shutil.copyfile(path, target)
