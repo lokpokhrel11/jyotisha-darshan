@@ -63,3 +63,12 @@ This section records **static inspection only**, not a passing browser test.
 - Chapters 9–13: inspected code paths that remove stored assessment results on answer changes and form resets. This guards against stale achievement indicators.
 - Chapters 9–11: explanations include limitations on treating traditional astrological interpretations as established health, marriage or life-outcome predictions. Chapter 10 explicitly flags an unresolved tension between two traditional business-related rules instead of presenting both as simultaneously certain.
 - **Outstanding:** verify the actual semantic correctness of every option in Chapters 12–13 against the study source, execute submissions/resets on desktop and mobile browsers, and test screen-reader focus/feedback. This source review is not a browser QA pass or a claim of scientific validation of Jyotiṣa.
+
+## Chapters 12–13 answer-key verification (2026-11-22)
+
+Compared the five Chapter 12 and ten Chapter 13 assessment items in `index.html` with the most recent 124-page PDF of *ज्योतिष शास्त्र: अध्ययन नोट (गुरुजीका कक्षामा आधारित)*, especially PDF pages 108–119.
+
+- **Chapter 12 (5/5):** ordering of remedies (p.108), handwritten बुध count 8,000 rather than the alternative 9,000 (pp.108–109), turning the mālā at the sumeru (p.115), 27 × 4 = 108 (p.115), and the explicitly unconfirmed 12-name kālasarpa/Rāhu-house mapping (pp.115–116) agree with the assessment's keyed answers.
+- **Chapter 13 (10/10):** northeast/Bṛhaspati, southeast/Śukra and cooking, facing east for study, head oriented south while sleeping, no confirmed separate toilet-direction rule, examining soil three times, Aries eighth lord Maṅgala, the distinction between eighth-house placement and eighth-lord association, and the source-only status of rice/soil omen claims agree with the source (pp.117–119). The Aries eighth-lord calculation is also consistent with the standard zodiacal sign-lord mapping taught earlier in the course.
+- **Editorial conclusion:** no answer-key change indicated. Traditional astrological or omen associations remain descriptions of the study source, not empirical evidence for diagnosis, safety, or property decisions.
+- **Remaining:** verify behavior through a real browser, including all 15 answer submissions, changes, resets, focus and mobile layouts; confirm textual nuances against original handwritten images wherever the PDF marks an unresolved reading.
