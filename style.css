@@ -1999,3 +1999,22 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  outline:2px solid #ebc889;
  outline-offset:2px;
 }
+
+
+/* Phase 6.19: chapter 12 answer cards match the chapter 13 dark-mode contrast standard. */
+:root[data-theme="dark"] #ch12-quiz .ch12-quiz fieldset{
+ background:#1b2e37;color:#e6efec;border-color:#52666c;
+}
+:root[data-theme="dark"] #ch12-quiz .ch12-quiz legend{color:#f0f3ee}
+:root[data-theme="dark"] #ch12-quiz .ch12-quiz label{
+ background:#263b45;color:#f0f3ee;border-color:#566b74;
+}
+:root[data-theme="dark"] #ch12-quiz .ch12-quiz label:has(input:checked){
+ background:#34444a;border-color:#e4bf7e;box-shadow:inset 0 0 0 1px #e4bf7e;
+}
+:root[data-theme="dark"] #ch12-quiz .ch12-quiz input[type="radio"]{accent-color:#e4bf7e}
+:root[data-theme="dark"] #ch12-quiz .ch12-explanation{
+ background:#293e47;color:#edf3f0;border-left:3px solid #e4bf7e;
+}
+#ch12-quiz .ch12-quiz label:focus-within{outline:2px solid #bd9450;outline-offset:2px}
+:root[data-theme="dark"] #ch12-quiz .ch12-quiz label:focus-within{outline-color:#ebc889}
