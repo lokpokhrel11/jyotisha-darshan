@@ -884,7 +884,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   summary.textContent='प्राप्त अङ्क: '+score+' / '+questions.length+'।';
   const list=document.createElement('ol');
   list.className='ch7-answer-explanations';
-  explanations.forEach(line=>{const item=document.createElement('li');item.textContent=line.replace(/^\\d+\\. /,'');list.append(item)});
+  explanations.forEach(line=>{const item=document.createElement('li');item.textContent=line.slice(line.indexOf('. ')+2);list.append(item)});
   feedback.append(summary,list);
  });
  quiz.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))feedback.textContent='उत्तर परिवर्तन गरिएको छ। सबै उत्तर जाँच्नुहोस्।';});
