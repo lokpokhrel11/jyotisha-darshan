@@ -1040,7 +1040,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   {chapter:2,name:'राशि र भाव',total:20,threshold:16,anchor:'chapter2exam'},
   {chapter:3,name:'ग्रह परिचय',total:15,threshold:12,anchor:'chapter3exam'},
   {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'},
-  {chapter:9,name:'स्वभाव, शरीर र स्वास्थ्यका सङ्केत',total:5,threshold:4,anchor:'ch9-quiz'},
+  {chapter:9,name:'स्वभाव, शरीर र स्वास्थ्यका सङ्केत',total:5,threshold:4,anchor:'ch9-practice'},
   {chapter:10,name:'धन, आय, कर्म र यात्रा',total:4,threshold:3,anchor:'ch10-assessment'},
   {chapter:11,name:'सन्तान र कुण्डली मिलान',total:7,threshold:6,anchor:'ch11-quiz'},
   {chapter:12,name:'ग्रहशान्ति र परम्परागत उपाय',total:5,threshold:4,anchor:'ch12-quiz'},
