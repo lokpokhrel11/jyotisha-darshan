@@ -686,6 +686,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(!answer){feedback.textContent='उत्तर जाँच्नुअघि एउटा विकल्प छान्नुहोस्।';return;}
   feedback.textContent=answer.value==='b'?'सही। मकर राशिको स्वामी शनि हो। तर उदाहरणमा दशौँ भावमा बसेको ग्रह मङ्गल हो। भावेश र भावमा बसेको ग्रह फरक हुन्।':'यस उदाहरणमा दशौँ भावमा मकर राशि परेको छ, जसको स्वामी शनि हो। मङ्गल भने उक्त भावमा राखिएको ग्रह हो। भावेश र भावमा रहेको ग्रहबीचको भिन्नता विचार गर्नुहोस्।';
  });
+ quiz.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))feedback.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ उत्तर जाँच्नुहोस्।';});
 })();
 
 /* v4.3: Accessible North Indian-style chart, using only known placements from notes p.64. */
