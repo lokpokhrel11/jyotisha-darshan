@@ -2044,3 +2044,36 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
   overflow-wrap:break-word;
  }
 }
+
+
+/* Chapter 7 assessment: consistent, readable cards in both themes. */
+#ch7Quiz{max-width:920px}
+#ch7Quiz>p:first-child{line-height:1.7}
+#ch7Quiz fieldset{
+ min-width:0;margin:0 0 16px;padding:20px;
+ border:1px solid var(--line,#d8d8d8);border-radius:12px;
+ background:#fffdf8;
+}
+#ch7Quiz legend{float:left;width:100%;padding:0;margin:0 0 14px;line-height:1.65;font-weight:700}
+#ch7Quiz legend+label{clear:both}
+#ch7Quiz .ch7-choice{
+ display:flex;align-items:flex-start;gap:12px;
+ min-height:44px;padding:12px 14px;margin:7px 0;
+ border:1px solid #d9d4c9;border-radius:9px;
+ background:#fff;color:#273c43;line-height:1.55;
+ cursor:pointer;overflow-wrap:anywhere;
+}
+#ch7Quiz .ch7-choice input{flex:0 0 19px;width:19px;height:19px;margin:3px 0 0;accent-color:#a9782f}
+#ch7Quiz .ch7-choice:has(input:checked){border-color:#a9782f;background:#fcf2dc}
+#ch7Quiz .ch7-choice:focus-within{outline:2px solid #a9782f;outline-offset:2px}
+#ch7Feedback:not(:empty){line-height:1.8;white-space:pre-line;overflow-wrap:anywhere;border-radius:9px}
+:root[data-theme="dark"] #ch7Quiz fieldset{background:#233740;border-color:#607079}
+:root[data-theme="dark"] #ch7Quiz .ch7-choice{background:#293f49;color:#f0f3f1;border-color:#62737c}
+:root[data-theme="dark"] #ch7Quiz .ch7-choice:has(input:checked){background:#4c412c;border-color:#e7c481;color:#fff5df}
+:root[data-theme="dark"] #ch7Quiz .ch7-choice:focus-within{outline-color:#e7c481}
+@media(max-width:600px){
+ #ch7Quiz fieldset{padding:15px 12px;margin-bottom:14px}
+ #ch7Quiz legend{font-size:1rem}
+ #ch7Quiz .ch7-choice{padding:11px 10px;gap:10px}
+ #ch7Quiz button[type="submit"]{width:100%;white-space:normal}
+}
