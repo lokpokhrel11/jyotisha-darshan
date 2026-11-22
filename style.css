@@ -2085,3 +2085,47 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
 #chapter13 .ch13-direction-grid button[aria-pressed="true"] small{color:#172d36}
 @media(max-width:420px){#chapter13 .ch13-direction-grid{gap:9px}#chapter13 .ch13-direction-grid button{padding:12px 8px;min-height:78px;font-size:1rem}#chapter13 .ch13-direction-grid button small{font-size:.8rem}}
 @media(prefers-reduced-motion:reduce){#chapter13 .ch13-direction-grid button{transition:none}}
+
+
+/* Consolidated mobile layout pass (all 13 lessons). Keep content scrollable, not clipped. */
+@media(max-width:760px){
+ html{scroll-padding-top:72px}
+ body{min-width:0}
+ body.chapter-focus main,body.chapter-focus main>section,main>section,
+ .study-panel,.ch12-topic,.ch9-step,.ch11-lesson-section,
+ .chapter-focus-banner,.chapter-bottom-nav{min-width:0;max-width:100%;box-sizing:border-box}
+ main img,main svg,main video,main iframe{max-width:100%;height:auto}
+ main :is(h1,h2,h3,h4,p,li,blockquote,legend,figcaption){overflow-wrap:break-word}
+ main :is(pre,code){overflow-wrap:anywhere}
+ main pre{max-width:100%;overflow-x:auto;white-space:pre}
+ main :is(.table-wrap,.ch12-table-scroll,.chapter7-table-wrap){max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch}
+ main table{max-width:none}
+ /* Sticky table headings accumulate underneath the navigation on phones. */
+ body.chapter-focus main table :is(thead th,th){position:static;top:auto}
+ body.chapter-focus main [id]{scroll-margin-top:76px}
+ body.chapter-focus .chapter-focus-banner{position:static!important;min-width:0;align-items:stretch!important;gap:10px!important;padding:12px 4vw!important}
+ body.chapter-focus .chapter-focus-banner>.chapter-pager{width:100%;flex:1 1 100%!important;justify-content:space-between!important;margin:0!important;gap:8px!important}
+ body.chapter-focus .chapter-focus-banner>.chapter-pager a{min-width:0;flex:1 1 120px;white-space:normal;overflow-wrap:anywhere;text-align:center;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+ body.chapter-focus .chapter-bottom-nav{display:flex;gap:10px}
+ body.chapter-focus .chapter-bottom-nav a{min-height:44px;min-width:0;flex:1 1 135px;display:inline-flex;align-items:center;justify-content:center;text-align:center}
+ :is(#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9,#chapter10,#chapter11,#chapter12,#chapter13) :is(input,select,textarea){max-width:100%;box-sizing:border-box}
+ :is(#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9,#chapter10,#chapter11,#chapter12,#chapter13) :is(button,.button,input[type="submit"],input[type="reset"]){max-width:100%;white-space:normal;overflow-wrap:anywhere}
+ :is(#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9,#chapter10,#chapter11,#chapter12,#chapter13) fieldset{min-width:0;max-width:100%;box-sizing:border-box}
+ :is(#chapter4,#chapter5,#chapter6,#chapter7,#chapter8,#chapter9,#chapter10,#chapter11,#chapter12,#chapter13) legend{max-width:100%;white-space:normal;overflow-wrap:break-word}
+ :is(#chapter7,#chapter8,#chapter9,#chapter10,#chapter11,#chapter12,#chapter13) label:has(input[type="radio"]){min-height:44px;box-sizing:border-box;overflow-wrap:anywhere}
+ #ch13Quiz .ch10-quiz-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+ #ch13Quiz .ch10-quiz-actions>button{flex:1 1 150px;min-height:44px}
+ #ch13Quiz .ch10-reset{border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);padding:12px 16px}
+}
+@media(max-width:420px){
+ body.chapter-focus .chapter-focus-banner>.chapter-pager a{font-size:.88rem;padding:10px 8px}
+ body.chapter-focus .chapter-toc{gap:7px}
+ body.chapter-focus .chapter-toc a{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+ #chapter13 #ch13-map .ch13-direction-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ #chapter13 #ch13-map .ch13-direction-grid button{min-width:0;min-height:80px;padding:11px 7px;font-size:1rem}
+}
+#chapter13 #ch13-map .ch13-direction-grid button[aria-pressed="true"]{background:#f0cb8c;color:#172d36;border:2px solid #76501b;box-shadow:inset 0 0 0 1px #76501b}
+#chapter13 #ch13-map .ch13-direction-grid button[aria-pressed="true"] small{color:#172d36}
+#chapter13 #ch13-map .ch13-direction-grid button:focus-visible{outline:3px solid #e2a73b;outline-offset:3px}
+#ch13Quiz .ch10-quiz-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+#ch13Quiz .ch10-reset{border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);padding:12px 16px}
