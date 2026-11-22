@@ -1,5 +1,5 @@
 // District-headquarters longitudes transcribed from the user-supplied Jyotish table.
-// Time difference is measured against 86°15′ E, the table's reference meridian.
+// Time difference is measured against Kathmandu's listed longitude 85°19′ E.
 // Values describe the listed headquarters, not every locality within a district.
 (function(){
  'use strict';
@@ -28,7 +28,7 @@
   const group=document.createElement('optgroup');group.label=province;
   for(const [name,hq,lon] of list){
    const [degrees,minutes]=lon.split(':').map(Number);
-   const seconds=((degrees*60+minutes)-(86*60+15))*4;
+   const seconds=((degrees*60+minutes)-(85*60+19))*4;
    const option=document.createElement('option');
    option.value=format(seconds);
    option.textContent=name+' ('+hq+')';
@@ -44,7 +44,7 @@
   if(!district.value)return;
   const opt=district.selectedOptions[0];
   offset.value=district.value;
-  details.textContent=opt.dataset.district+'को सदरमुकाम '+opt.textContent.split('(')[1].replace(')','')+'को तालिकागत देशान्तर '+opt.dataset.longitude.replace(':','°')+'′ पूर्व। ८६°१५′ पूर्वलाई आधार मानेर समयान्तर '+district.value+' (मिनेट:सेकेन्ड) हुन्छ।';
+  details.textContent=opt.dataset.district+'को सदरमुकाम '+opt.textContent.split('(')[1].replace(')','')+'को तालिकागत देशान्तर '+opt.dataset.longitude.replace(':','°')+'′ पूर्व। काठमाडौँको तालिकागत देशान्तर ८५°१९′ पूर्वलाई आधार मानेर समयान्तर '+district.value+' (मिनेट:सेकेन्ड) हुन्छ।';
   document.getElementById('lsCalculate').click();
  });
  offset.addEventListener('input',()=>{district.value='';details.textContent='हातले वेलान्तर परिवर्तन गरिएको छ। यो अब चयन गरिएको जिल्लाको तालिकागत मान होइन।';});
