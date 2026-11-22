@@ -25,6 +25,28 @@ assert.equal(bh('60/00'), 3600);
 assert.equal(bh('60/01'), null);
 assert.equal(bh('61/00'), null);
 assert.equal(bh('14/60'), null);
+// Chapter 4: exercise the actual conversion, ishtakala and sunrise handlers.
+const timeFields={};
+for(const id of ['ch4Calculate','ch4Hours','ch4Minutes','ch4Output','istCalculate','istBirth','istSunrise','istPrevious','istOutput','lsCalculate','lsCalendar','lsOffset','lsResult']){
+ timeFields[id]={value:'',textContent:'',addEventListener(event,handler){if(event==='click')this.handler=handler;},click(){this.handler();}};
+}
+timeFields.ch4Hours.value='1';timeFields.ch4Minutes.value='0';
+timeFields.istBirth.value='08:00';timeFields.istSunrise.value='06:00';timeFields.istPrevious.value='today';
+timeFields.lsCalendar.value='06:00';timeFields.lsOffset.value='+07:16';
+const timeContext=vm.createContext({$:id=>timeFields[id]});
+vm.runInContext(extract('// Chapter 4 unit conversion:', '// Chapter 5: standard cases'),timeContext);
+const timeResult=(button,output,changes)=>{
+ for(const [id,value] of Object.entries(changes))timeFields[id].value=value;
+ timeFields[button].click();return timeFields[output].textContent;
+};
+assert.match(timeResult('ch4Calculate','ch4Output',{ch4Hours:'1',ch4Minutes:'0'}),/2 घडी 30 पला/);
+assert.match(timeResult('ch4Calculate','ch4Output',{ch4Hours:'0',ch4Minutes:'1'}),/2 पला 30 विपला/);
+assert.match(timeResult('ch4Calculate','ch4Output',{ch4Hours:'24'}),/०–२३/);
+assert.match(timeResult('istCalculate','istOutput',{istBirth:'08:00',istSunrise:'06:00',istPrevious:'today'}),/5 घडी 0 पला/);
+assert.match(timeResult('istCalculate','istOutput',{istBirth:'05:00',istPrevious:'today'}),/अघिल्लो दिन/);
+assert.match(timeResult('istCalculate','istOutput',{istBirth:'05:00',istPrevious:'previous'}),/57 घडी 30 पला/);
+assert.match(timeResult('lsCalculate','lsResult',{lsCalendar:'06:00',lsOffset:'+07:16'}),/05:49/);
+assert.match(timeResult('lsCalculate','lsResult',{lsCalendar:'06:00',lsOffset:'-07:52'}),/06:04/);
 // Run the actual chapter 5 pada click handler with minimal DOM controls.
 const padaFields = {
  padaBhayat: {value:'00/00'}, padaBhavog: {value:'60/00'},
