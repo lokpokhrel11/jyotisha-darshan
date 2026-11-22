@@ -625,7 +625,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(originalSummary){const summary=document.createElement('p');summary.className='chapter-editorial-summary';summary.textContent=originalSummary.textContent.trim();copy.append(summary)}
   const actionsRow=document.createElement('nav');actionsRow.className='chapter-editorial-actions';actionsRow.setAttribute('aria-label','यस अध्यायका मुख्य विकल्प');
   const lesson=document.createElement('a');lesson.className='chapter-editorial-primary';lesson.href='#'+(chapter===1?'lesson':'chapter'+chapter);lesson.textContent='पाठ अध्ययन गर्नुहोस् →';actionsRow.append(lesson);
-  const practiceIds={1:'practice',2:'planetExample',3:'chapter3exam',4:'istakala',5:'padaPractice',6:'antardasha',7:'chapter7',8:'ch8-quiz',9:'ch9-quiz',10:'ch10-assessment',11:'ch11-quiz',12:'ch12-quiz',13:'ch13-quiz'};
+  const practiceIds={1:'practice',2:'planetExample',3:'chapter3exam',4:'istakala',5:'padaPractice',6:'antardasha',7:'chapter7',8:'ch8AssessmentPanel',9:'ch9-practice',10:'ch10-assessment',11:'ch11-quiz',12:'ch12-quiz',13:'ch13-quiz'};
   const practiceId=practiceIds[chapter];if(practiceId&&document.getElementById(practiceId)){const practice=document.createElement('a');practice.className='chapter-editorial-secondary';practice.href='#'+practiceId;practice.textContent='अभ्यास / परीक्षा →';actionsRow.append(practice)}
   copy.append(actionsRow);
   const seal=document.createElement('div');seal.className='chapter-editorial-seal';seal.setAttribute('role','img');seal.setAttribute('aria-label','अध्याय '+chapter);
