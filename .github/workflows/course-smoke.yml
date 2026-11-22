@@ -7,6 +7,14 @@ on:
       - 'district-sunrise.js'
       - 'tests/site-smoke.cjs'
       - 'tests/browser-smoke.cjs'
+      - 'public-*.html'
+      - 'public-*.js'
+      - 'home-tools.js'
+      - 'akshara-chakra.html'
+      - 'style.css'
+      - 'manifest.webmanifest'
+      - 'icon.svg'
+      - 'tools/**'
       - '.github/workflows/course-smoke.yml'
   pull_request:
     paths:
@@ -15,10 +23,18 @@ on:
       - 'district-sunrise.js'
       - 'tests/site-smoke.cjs'
       - 'tests/browser-smoke.cjs'
+      - 'public-*.html'
+      - 'public-*.js'
+      - 'home-tools.js'
+      - 'akshara-chakra.html'
+      - 'style.css'
+      - 'manifest.webmanifest'
+      - 'icon.svg'
+      - 'tools/**'
       - '.github/workflows/course-smoke.yml'
 jobs:
   smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -32,18 +48,51 @@ jobs:
         run: node tests/site-smoke.cjs
       - name: Install browser test dependencies
         run: |
-          npm install --no-save playwright@1.58.2
+          npm install --no-save playwright@1.58.2 axe-core@4.11.1
           npx playwright install --with-deps chromium
       - name: Run Chromium browser tests
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/jyotisha-http.log 2>&1 &
           node tests/browser-smoke.cjs
-      - name: Upload browser diagnostics on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
+      - name: Build and test the public export
+        run: |
+          python3 tools/test_public_preview.py
+          python3 tools/build_public_candidate.py "$RUNNER_TEMP/public-candidate"
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory "$RUNNER_TEMP/public-candidate" > "$RUNNER_TEMP/public-http.log" 2>&1 &
+          node tools/test_public_browser.cjs
+          node tools/test_public_accessibility.cjs
+  public-cross-browser:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          name: browser-test-diagnostics
-          path: |
-            test-results/
-            /tmp/jyotisha-http.log
-          if-no-files-found: ignore
+          node-version: '22'
+      - name: Install selected browser
+        run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps "${{ matrix.browser }}"
+      - name: Run public browser tests
+        env:
+          BROWSER: ${{ matrix.browser }}
+        run: |
+          python3 tools/build_public_candidate.py "$RUNNER_TEMP/public-candidate"
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory "$RUNNER_TEMP/public-candidate" > "$RUNNER_TEMP/public-http.log" 2>&1 &
+          node tools/test_public_browser.cjs
+  artifact-audit:
+    if: github.event_name == 'pull_request' && github.base_ref == 'staging/public-chapters-1-2'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect historical artifacts without uploading archive contents
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/audit_actions_artifacts.py

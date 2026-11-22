@@ -34,8 +34,12 @@ document.addEventListener('pointerdown',event=>{
 });
 function showAnga(i){$('angaTabs').querySelectorAll('button').forEach((b,j)=>{b.classList.toggle('selected',i===j);b.setAttribute('aria-pressed',String(i===j));});const a=anga[i];$('angaDetail').innerHTML=`<strong>${a.name}</strong> · ${a.count}<p>${a.desc}</p>`;}
 anga.forEach((a,i)=>{const b=document.createElement('button');b.textContent=a.name;b.addEventListener('click',()=>showAnga(i));$('angaTabs').append(b);});showAnga(0);
-$('openLesson').addEventListener('click',()=>{$('lesson').hidden=false;$('lesson').scrollIntoView({behavior:'smooth',block:'start'});});
-$('closeLesson').addEventListener('click',()=>{$('lesson').hidden=true;$('openLesson').focus();});
+$('openLesson').addEventListener('click',()=>{
+ $('lesson').hidden=false;
+ $('openLesson').setAttribute('aria-expanded','true');
+ $('lesson').focus();
+});
+$('closeLesson').addEventListener('click',()=>{$('lesson').hidden=true;$('openLesson').setAttribute('aria-expanded','false');$('openLesson').focus();});
 // Chapter 1 formative assessment. Each item includes its study-note section.
 const questions=[
  {unit:'१.१',q:'पञ्चाङ्गका पाँच अङ्गमध्ये कुन पर्दछ?',options:['लग्न','करण','भावेश'],correct:1,why:'तिथि, वार, नक्षत्र, योग र करण पाँच अङ्ग हुन्।'},
@@ -74,11 +78,21 @@ function renderQuestion(){
    $('restartQuiz').hidden=false;
    try{localStorage.setItem('jd-chapter1-v05',JSON.stringify({score:correctCount,total:questions.length,completed:passed,units:unitScores}));}catch(e){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));
   }
+  $(questionIndex===questions.length-1?'restartQuiz':'nextQuestion').focus();
  });$('quizOptions').append(b);});$('nextQuestion').hidden=true;
 }
-$('nextQuestion').addEventListener('click',()=>{questionIndex++;renderQuestion()});
-$('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;unitScores={};$('restartQuiz').hidden=true;$('unitBreakdown').textContent='';$('savedProgress').textContent='';try{localStorage.removeItem('jd-chapter1-v05')}catch(e){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));renderQuestion()});
-try{const prev=JSON.parse(localStorage.getItem('jd-chapter1-v05')||'null');if(prev){$('savedProgress').textContent=`अघिल्लो अभ्यास: ${prev.score}/${prev.total} · ${prev.completed?'मापदण्ड पूरा':'पुनः अभ्यास आवश्यक'}`;}}catch(e){}
+$('nextQuestion').addEventListener('click',()=>{questionIndex++;renderQuestion();$('questionTitle').focus()});
+$('restartQuiz').addEventListener('click',()=>{questionIndex=0;correctCount=0;unitScores={};$('restartQuiz').hidden=true;$('unitBreakdown').textContent='';renderQuestion();$('questionTitle').focus()});
+function renderSavedChapter1Progress(){
+ try{
+  const prev=JSON.parse(localStorage.getItem('jd-chapter1-v05')||'null');
+  $('savedProgress').textContent=prev&&prev.total===questions.length&&Number.isInteger(prev.score)
+   ? `पछिल्लो अभ्यास: ${prev.score}/${prev.total} · ${prev.completed?'मापदण्ड पूरा':'पुनः अभ्यास आवश्यक'}`
+   : '';
+ }catch(e){}
+}
+window.addEventListener('jyotisha-assessment-updated',renderSavedChapter1Progress);
+renderSavedChapter1Progress();
 renderQuestion();
 // Chapter 1 expanded learning tools. Angles are hypothetical teaching inputs.
 const tithiGroups=['नन्दा','भद्रा','जया','रिक्ता','पूर्णा'];
@@ -123,7 +137,8 @@ function updateChart(){
   const n=i+1,r=(l+i-1)%12+1;
   const group=document.createElementNS('http://www.w3.org/2000/svg','g');
   group.setAttribute('role','button');group.setAttribute('tabindex','0');
-  group.setAttribute('aria-label',`${n} औँ भाव, ${signs[r-1]} राशि${n===selectedHouse?', हाल चयन गरिएको':''}`);
+  group.setAttribute('aria-label',`${n} औँ भाव, ${signs[r-1]} राशि`);
+  group.setAttribute('aria-pressed',String(n===selectedHouse));
   group.setAttribute('class','chart-house'+(n===selectedHouse?' selected':''));
   const hit=document.createElementNS('http://www.w3.org/2000/svg','circle');
   hit.setAttribute('cx',x);hit.setAttribute('cy',y-5);hit.setAttribute('r',28);hit.setAttribute('fill','transparent');
@@ -132,7 +147,7 @@ function updateChart(){
   const sub=document.createElementNS('http://www.w3.org/2000/svg','text');
   sub.setAttribute('x',x);sub.setAttribute('y',y+14);sub.setAttribute('font-size','11');sub.setAttribute('fill','currentColor');sub.style.setProperty('font-weight','700','important');sub.textContent=roman[i];
   group.append(hit,t,sub);
-  const select=()=>{selectedHouse=n;updateChart();};
+  const select=()=>{selectedHouse=n;updateChart();g.children[i].focus();};
   group.addEventListener('click',select);
   group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}});
   g.append(group);
@@ -207,7 +222,7 @@ const chapter2Questions=[
 const examForm=$('chapter2ExamForm'),examQuestions=$('chapter2ExamQuestions'),examResults=$('examResults');
 function renderChapter2Exam(){examQuestions.replaceChildren();chapter2Questions.forEach((q,i)=>{const fs=document.createElement('fieldset');fs.className='exam-question';const lg=document.createElement('legend');lg.textContent=`${i+1}. [${q[0]}] ${q[1]}`;fs.append(lg);q[2].forEach((answer,j)=>{const label=document.createElement('label');label.className='exam-option';const radio=document.createElement('input');radio.type='radio';radio.name=`chapter2q${i}`;radio.value=String(j);label.append(radio,document.createTextNode(' '+answer));fs.append(label);});examQuestions.append(fs);});examResults.hidden=true;examResults.replaceChildren();updateChapter2Progress();}
 function updateChapter2Progress(){let done=0;chapter2Questions.forEach((q,i)=>{if(examForm.querySelector(`input[name="chapter2q${i}"]:checked`))done++;});$('examProgress').textContent=`उत्तर दिइएका: ${done}/${chapter2Questions.length}`;}
-examForm.addEventListener('change',event=>{updateChapter2Progress();if(event.target.matches('input[type="radio"]')){try{localStorage.removeItem('jyotisha-chapter2-score')}catch(e){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));examResults.hidden=true;examResults.replaceChildren();}});
+examForm.addEventListener('change',event=>{updateChapter2Progress();if(event.target.matches('input[type="radio"]')){examResults.hidden=true;examResults.replaceChildren();}});
 examForm.addEventListener('submit',event=>{event.preventDefault();const answers=chapter2Questions.map((q,i)=>examForm.querySelector(`input[name="chapter2q${i}"]:checked`));if(answers.some(a=>!a)){examResults.hidden=false;examResults.textContent=`नतिजा हेर्नुअघि बाँकी ${answers.filter(a=>!a).length} प्रश्नको उत्तर दिनुहोस्।`;const first=answers.findIndex(a=>!a);const target=examQuestions.querySelectorAll('fieldset.exam-question')[first];if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}return;}let score=0;const summary=document.createElement('div');const title=document.createElement('h3');chapter2Questions.forEach((q,i)=>{const chosen=Number(answers[i].value);const ok=chosen===q[3];if(ok)score++;const p=document.createElement('p');p.textContent=`${i+1}. ${ok?'✓ सही':'✗ सुधार'} · ${q[4]}${ok?'':` सही उत्तर: ${q[2][q[3]]}।`}`;summary.append(p);});title.textContent=`नतिजा: ${score}/20 · ${score>=16?'अभ्यास लक्ष्य पूरा':'पुनः अभ्यास सिफारिस'}`;examResults.replaceChildren(title,summary);examResults.hidden=false;title.tabIndex=-1;title.focus({preventScroll:true});try{localStorage.setItem('jyotisha-chapter2-score',JSON.stringify({score,total:20}));}catch(e){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));examResults.scrollIntoView({behavior:'smooth',block:'start'});});
 // Shuffle the question objects together with their answer keys and explanations.
 // Reject an unchanged order so every reset visibly changes the sequence.
@@ -223,7 +238,7 @@ function reshuffleChapter2Questions(){
 }
 $('examReset').addEventListener('click',()=>{
   examForm.reset();
-  try{localStorage.removeItem('jyotisha-chapter2-score')}catch(e){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));
+
   reshuffleChapter2Questions();
   renderChapter2Exam();
   // Return to the beginning so the cleared selections are immediately visible.
@@ -233,8 +248,40 @@ $('examReset').addEventListener('click',()=>{
 renderChapter2Exam();
 
 
-// Public chapter focus and local progress
-(function(){const c=Number(new URLSearchParams(location.search).get('chapter'));const groups={1:['pathshala','practice'],2:['chapter2','planetExample','chapter2exam']};let opened=[];try{opened=JSON.parse(localStorage.getItem('jyotisha-public-opened-v1')||'[]').filter(n=>n===1||n===2)}catch(e){}if(groups[c]){if(!opened.includes(c))opened.push(c);try{localStorage.setItem('jyotisha-public-opened-v1',JSON.stringify(opened))}catch(e){}document.body.classList.add('chapter-focus');document.querySelectorAll('main > section').forEach(s=>{if(!groups[c].includes(s.id))s.classList.add('chapter-focus-hidden')})}const dashboard=document.getElementById('dashboard');if(dashboard){const p=document.createElement('p');p.className='note';p.textContent='खोलिएका अध्याय: '+opened.length+'/२। अभ्यासको नतिजा यही उपकरणमा सुरक्षित हुन्छ।';dashboard.append(p)}})();
+// Chapter links focus on their lesson and record the visit on this browser.
+(function(){
+ const key='jyotisha-public-opened-v1';
+ const chapter=new URLSearchParams(location.search).get('chapter');
+ const groups={
+  1:['pathshala','practice'],
+  2:['chapter2','planetExample','chapter2exam']
+ };
+ function readOpened(){
+  try{
+   const saved=JSON.parse(localStorage.getItem(key)||'[]');
+   return new Set(saved.filter(n=>n===1||n===2));
+  }catch(e){return new Set();}
+ }
+ if(chapter==='1'||chapter==='2'){
+  const opened=readOpened();
+  opened.add(Number(chapter));
+  try{localStorage.setItem(key,JSON.stringify([...opened]));}catch(e){}
+  if(chapter==='1')$('lesson').hidden=false;
+  document.body.classList.add('chapter-focus');
+  document.querySelectorAll('main > section').forEach(section=>{
+   section.classList.toggle('chapter-focus-hidden',!groups[chapter].includes(section.id));
+  });
+ }
+ const note=document.createElement('p');
+ note.className='note';
+ function render(){
+  note.textContent=`खोलिएका अध्याय: ${readOpened().size}/२। अभ्यासको नतिजा यही ब्राउजरमा सुरक्षित हुन्छ।`;
+ }
+ $('dashboard').append(note);
+ render();
+ window.addEventListener('pageshow',render);
+ window.addEventListener('storage',render);
+})();
 
 /* Public dashboard: show saved assessment results without accessing paid chapters. */
 (function(){
@@ -254,7 +301,7 @@ renderChapter2Exam();
    const heading=document.createElement('h3');heading.textContent=entry.name;
    const result=document.createElement('p');
    let saved=null;try{saved=JSON.parse(localStorage.getItem(entry.key)||'null')}catch(e){}
-   if(saved&&Number.isFinite(saved.score)&&Number.isFinite(saved.total)){
+   if(saved&&saved.total===entry.total&&Number.isInteger(saved.score)&&saved.score>=0&&saved.score<=entry.total){
     result.textContent='पछिल्लो अभ्यास: '+saved.score+'/'+saved.total+'। '+(saved.score>=entry.pass?'अभ्यास लक्ष्य पूरा भयो।':'पुनः अभ्यास गर्न सकिन्छ।');
    }else result.textContent='अभ्यासको नतिजा अझै सुरक्षित गरिएको छैन।';
    tile.append(heading,result);panel.append(tile);

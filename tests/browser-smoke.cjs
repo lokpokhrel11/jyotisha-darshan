@@ -19,17 +19,15 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:8765/index.html';
     assert(await target.isVisible(),'Chapter '+chapter+' assessment hidden at '+width+'px');
     const tab = page.locator('#chapter'+chapter+'-tab-practice');
     assert.equal(await tab.getAttribute('aria-selected'),'true','Chapter '+chapter+' practice tab not selected');
-    await page.waitForTimeout(150);
-    const visible = await target.evaluate(el => {
-      const rect=el.getBoundingClientRect();
-      return rect.bottom>0 && rect.top<window.innerHeight;
-    });
-    assert(visible,'Chapter '+chapter+' assessment not scrolled into viewport at '+width+'px');
+    await page.waitForFunction(id => {
+      const rect = document.getElementById(id).getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight;
+    }, anchor, { timeout: 5000 });
     const overflow = await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
     assert(!overflow,'Horizontal overflow on chapter '+chapter+' at '+width+'px');
    }
    await page.goto(base+'?chapter=4#localSunrise',{waitUntil:'domcontentloaded'});
-   await page.locator('#lsDistrict option').last().waitFor();
+   await page.locator('#lsDistrict option').last().waitFor({state:'attached'});
    assert.equal(await page.locator('#lsDistrict option').count(),78,'77 districts plus placeholder expected');
    await page.locator('#lsDistrict').selectOption({label:'काठमाडौँ (काठमाडौँ)'});
    assert.equal(await page.locator('#lsOffset').inputValue(),'+00:00','Kathmandu baseline offset');
