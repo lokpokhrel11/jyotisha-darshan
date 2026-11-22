@@ -844,15 +844,44 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   }
  }
  asc.addEventListener('change',render);render();
+
  const quiz=document.getElementById('ch7Quiz'),feedback=document.getElementById('ch7Feedback');
- quiz.addEventListener('submit',event=>{
-  event.preventDefault();
-  const answer=quiz.querySelector('input[name="ch7q"]:checked');
-  if(!answer){feedback.textContent='उत्तर जाँच्नुअघि एउटा विकल्प छान्नुहोस्।';return;}
-  try{localStorage.setItem('jyotisha-chapter7-score',JSON.stringify({score:answer.value==='b'?1:0,total:1}))}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));
-  feedback.textContent=answer.value==='b'?'सही। मकर राशिको स्वामी शनि हो। तर उदाहरणमा दशौँ भावमा बसेको ग्रह मङ्गल हो। भावेश र भावमा बसेको ग्रह फरक हुन्।':'यस उदाहरणमा दशौँ भावमा मकर राशि परेको छ, जसको स्वामी शनि हो। मङ्गल भने उक्त भावमा राखिएको ग्रह हो। भावेश र भावमा रहेको ग्रहबीचको भिन्नता विचार गर्नुहोस्।';
+ const questions=[
+  {q:'मेष लग्नको लग्नेश कुन ग्रह हो?',choices:['शनि','मङ्गल','बृहस्पति'],correct:1,why:'मेष राशिको स्वामी मङ्गल भएकाले मेष लग्नको लग्नेश मङ्गल हो।'},
+  {q:'मेष लग्नमा दशौँ भाव मकर हो। दशमेश कुन ग्रह हो?',choices:['मङ्गल','शनि','शुक्र'],correct:1,why:'मकरको स्वामी शनि हो। दशौँ भावमा मङ्गल बसे पनि दशमेश शनि नै रहन्छ।'},
+  {q:'अभ्यास कुण्डलीमा दशौँ भावमा बसेको ग्रह कुन हो?',choices:['मङ्गल','शनि','चन्द्र'],correct:0,why:'दशौँ भावमा मङ्गल बसेको छ। भावमा बसेको ग्रह र भावको स्वामी छुट्टाछुट्टै पहिचान गर्नुपर्छ।'},
+  {q:'तलका कुन भावहरू केन्द्र हुन्?',choices:['१, ४, ७, १०','२, ५, ८, ११','३, ६, ९, १२'],correct:0,why:'केन्द्र भावहरू १, ४, ७ र १० हुन्। यस पाठमा ५ र ९ लाई लग्नबाहेकका त्रिकोण भाव भनिएको छ।'},
+  {q:'चौथो भावमा रहेको बृहस्पतिको सातौँ दृष्टि कुन भावमा पर्छ?',choices:['आठौँ','दशौँ','बाह्रौँ'],correct:1,why:'ग्रह बसेको चौथो भावलाई पहिलो मानेर सात स्थान गन्दा दशौँ भाव पुगिन्छ।'},
+  {q:'यस अभ्यासमा मकर राशिमा बसेको मङ्गलको अवस्था के हो?',choices:['नीच','स्वगृही','उच्च'],correct:2,why:'परम्परागत उच्च–नीच वर्गीकरणमा मङ्गल मकर राशिमा उच्च मानिन्छ।'},
+  {q:'कुनै भावमा ग्रह नदेखिँदा पहिलो अध्ययन कदम के हो?',choices:['त्यस भावको फल छैन भन्नु','भावेशको स्थिति र सम्बन्ध जाँच्नु','भावलाई अध्ययनबाट हटाउनु'],correct:1,why:'खाली भावको अध्ययनमा पनि त्यसको स्वामी, स्थिति र दृष्टि जाँचिन्छ।'},
+  {q:'केवल यस अपूर्ण अभ्यास कुण्डलीबाट कुन निष्कर्ष उचित हुन्छ?',choices:['निश्चित पेशा घोषणा गर्नु','आयको रकम निश्चित गर्नु','उपलब्ध ग्रहस्थिति र दृष्टि लेखेर सीमित टिप्पणी गर्नु'],correct:2,why:'अपूर्ण ग्रहस्थितिबाट निश्चित जीवनघटना निकाल्नु उचित हुँदैन। स्रोतमा दिइएका सम्बन्धसम्म मात्र व्याख्या सीमित राख्नुपर्छ।'}
+ ];
+ const fieldsets=quiz.querySelectorAll('fieldset');
+ fieldsets.forEach(f=>f.remove());
+ questions.forEach((item,i)=>{
+  const fs=document.createElement('fieldset'),legend=document.createElement('legend');
+  legend.textContent=(i+1)+'. '+item.q;fs.append(legend);
+  item.choices.forEach((choice,j)=>{
+   const label=document.createElement('label');label.className='ch7-choice';
+   const radio=document.createElement('input');radio.type='radio';radio.name='ch7q'+i;radio.value=String(j);
+   label.append(radio,document.createTextNode(' '+choice));fs.append(label);
+  });
+  quiz.insertBefore(fs,quiz.querySelector('button[type="submit"]'));
  });
- quiz.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))feedback.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ उत्तर जाँच्नुहोस्।';});
+ quiz.addEventListener('submit',event=>{
+  event.preventDefault();let score=0;const explanations=[];let missing=0;
+  questions.forEach((item,i)=>{
+   const answer=quiz.querySelector('input[name="ch7q'+i+'"]:checked');
+   if(!answer){missing++;return;}
+   const correct=Number(answer.value)===item.correct;if(correct)score++;
+   explanations.push((i+1)+'. '+(correct?'सही। ':'पुनः हेर्नुहोस्। ')+item.why);
+  });
+  if(missing){feedback.textContent='सबै आठ प्रश्नको उत्तर छान्नुहोस्। अझै '+missing+' प्रश्न बाँकी छन्।';return;}
+  try{localStorage.setItem('jyotisha-chapter7-score',JSON.stringify({score,total:questions.length}))}catch(_){}
+  window.dispatchEvent(new Event('jyotisha-assessment-updated'));
+  feedback.textContent='प्राप्त अङ्क: '+score+' / '+questions.length+'। '+explanations.join(' ');
+ });
+ quiz.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))feedback.textContent='उत्तर परिवर्तन गरिएको छ। सबै उत्तर जाँच्नुहोस्।';});
 })();
 
 /* v4.3: Accessible North Indian-style chart, using only known placements from notes p.64. */
