@@ -498,9 +498,8 @@ test('Chapters 8 and 9: previous-next chapter arrows and redesigned quiz', async
 test('All chapters: chapter navigation links resolve to existing chapter destinations', async ({ page }) => {
   for (let n = 1; n <= 13; n++) {
     await page.goto(chapter(n));
-    const section = page.locator(n === 1 ? '#chapter1' : `#chapter${n}`);
-    await expect(section).toBeVisible();
-    const nav = section.locator('.chapter-bottom-nav');
+    await expect(page.locator('main')).toBeVisible();
+    const nav = page.locator('main > .chapter-bottom-nav');
     await expect(nav).toBeVisible();
     const links = nav.locator('a[href*="chapter="]');
     const count = await links.count();
