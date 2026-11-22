@@ -1736,7 +1736,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   field.classList.remove('ch12-correct','ch12-incorrect');
   const explanation=field.querySelector('.ch12-explanation');
   if(explanation)explanation.hidden=true;
-  result.textContent='';
+  result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';
  });
 })();
 
