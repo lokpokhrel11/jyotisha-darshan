@@ -535,3 +535,33 @@ test('Mobile chapter footer links meet minimum 44px touch height in both themes'
     }
   }
 });
+
+
+test('Mobile quizzes: radio answers remain inside viewport and labels are usable', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  for (const n of [7, 8, 9, 10, 11, 12, 13]) {
+    await page.goto(chapter(n));
+    const audit = await page.evaluate(() => {
+      const radios = [...document.querySelectorAll('main input[type="radio"]')];
+      const candidates = radios.map(input => input.closest('label')).filter(Boolean);
+      const visible = candidates.filter(label => {
+        const style = getComputedStyle(label);
+        const rect = label.getBoundingClientRect();
+        return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+      });
+      return {
+        radioCount: radios.length,
+        labels: visible.slice(0, 80).map(label => {
+          const rect = label.getBoundingClientRect();
+          return { text: label.textContent.trim().slice(0, 40), left: rect.left, right: rect.right, height: rect.height };
+        })
+      };
+    });
+    expect(audit.radioCount, `Chapter ${n} should contain radio-answer controls`).toBeGreaterThan(0);
+    for (const label of audit.labels) {
+      expect(label.left, `Chapter ${n}: quiz answer extends left of screen`).toBeGreaterThanOrEqual(-3);
+      expect(label.right, `Chapter ${n}: quiz answer extends right of screen`).toBeLessThanOrEqual(378);
+      expect(label.height, `Chapter ${n}: quiz answer label too short`).toBeGreaterThanOrEqual(43.5);
+    }
+  }
+});
