@@ -879,7 +879,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(missing){feedback.textContent='सबै आठ प्रश्नको उत्तर छान्नुहोस्। अझै '+missing+' प्रश्न बाँकी छन्।';return;}
   try{localStorage.setItem('jyotisha-chapter7-score',JSON.stringify({score,total:questions.length}))}catch(_){}
   window.dispatchEvent(new Event('jyotisha-assessment-updated'));
-  feedback.textContent='प्राप्त अङ्क: '+score+' / '+questions.length+'। '+explanations.join(' ');
+  feedback.textContent='प्राप्त अङ्क: '+score+' / '+questions.length+'।\n\n'+explanations.join('\n\n');
  });
  quiz.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))feedback.textContent='उत्तर परिवर्तन गरिएको छ। सबै उत्तर जाँच्नुहोस्।';});
 })();
