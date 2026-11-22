@@ -377,8 +377,10 @@ $('dbCalculate').click();
 const cyclePlanets=[['ketu','केतु',7],['venus','शुक्र',20],['sun','सूर्य',6],['moon','चन्द्र',10],['mars','मङ्गल',7],['rahu','राहु',18],['jupiter','बृहस्पति',16],['saturn','शनि',19],['mercury','बुध',17]];
 function renderCycle(){
  const lord=$('cycleLord').value,raw=$('cycleBalance').value,remaining=raw.trim()===''?null:Number(raw);
- const start=cyclePlanets.findIndex(x=>x[0]===lord),out=$('cycleOutput'),full=cyclePlanets[start][2];
- if(start<0|| (remaining!==null&&(!Number.isFinite(remaining)||remaining<0||remaining>full))){out.textContent=`दशा शेष ० देखि ${full} वर्षसम्म हुनुपर्छ।`;return;}
+ const start=cyclePlanets.findIndex(x=>x[0]===lord),out=$('cycleOutput');
+ if(start<0){out.textContent='मान्य महादशाको ग्रह छान्नुहोस्।';return;}
+ const full=cyclePlanets[start][2];
+ if(remaining!==null&&(!Number.isFinite(remaining)||remaining<0||remaining>full)){out.textContent=`दशा शेष ० देखि ${full} वर्षसम्म हुनुपर्छ।`;return;}
  const first=remaining===null?full:remaining;
  let elapsed=0;const table=document.createElement('table');table.className='data-table';
  const header=document.createElement('tr');['दशा','अवधि (वर्ष)','उमेर: सुरु → अन्त्य'].forEach(s=>{const th=document.createElement('th');th.textContent=s;header.append(th);});table.append(header);
@@ -386,6 +388,7 @@ function renderCycle(){
  const note=document.createElement('p');note.textContent=`पहिलो महादशाको शेष ${first.toFixed(3)} वर्ष; त्यसपछि आठ पूर्ण महादशा। बाँकी ग्रहको अवधि अर्को चक्रमा जारी रहन्छ।`;
  out.replaceChildren(note,table);
 }
+$('cycleBalance').addEventListener('input',()=>{$('cycleOutput').textContent='दशा शेष परिवर्तन गरिएको छ। नयाँ दशा क्रम हेर्न फेरि गणना गर्नुहोस्।';});
 $('cycleCalculate').addEventListener('click',renderCycle);
 $('cycleLord').addEventListener('change',()=>{$('cycleBalance').value='';renderCycle();});
 renderCycle();
