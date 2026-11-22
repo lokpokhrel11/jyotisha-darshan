@@ -1686,3 +1686,38 @@ html[data-theme="dark"] #practice #chartLabels .chart-house.selected text,body[d
  #chapter11 .ch11-lesson-section .table-wrap,#chapter12 .ch12-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
 }
 @media(prefers-reduced-motion:reduce){#chapter11 *,#chapter12 *{scroll-behavior:auto!important}}
+
+
+/* Chapter 12: distinguish source passages, procedures, reference data and practice. */
+#chapter12 #ch12-mantras .ch12-two>article{border:1px solid #d9c397;background:#fff9ec;border-radius:15px;padding:clamp(17px,2.4vw,25px);box-shadow:0 3px 14px rgba(50,46,27,.055)}
+#chapter12 #ch12-mantras blockquote[lang="sa"]{font-family:"Noto Serif Devanagari","Noto Sans Devanagari",serif;font-size:clamp(1.1rem,1.7vw,1.36rem);line-height:2.1;letter-spacing:.012em;padding:18px 20px;margin:14px 0;border-inline-start:4px solid #ae8241;background:#fffdf7;border-radius:0 12px 12px 0;color:#302c26;overflow-wrap:anywhere}
+#chapter12 #ch12-mantras .ch12-two>article>p{border-top:1px solid #e5d8bd;padding-top:13px}
+#chapter12 #ch12-planets .ch12-table-scroll{background:#fff}
+#chapter12 #ch12-planets .ch12-table thead th{position:sticky;top:0;z-index:1}
+#chapter12 #ch12-planets .ch12-table tbody tr:nth-child(even){background:#f1f6f2}
+#chapter12 #ch12-planets .ch12-table tbody tr:hover{background:#fff2d9}
+#chapter12 #ch12-nyasa .ch12-detail,#chapter12 #ch12-mala .ch12-math{border:1px solid #d9c397;border-radius:14px;background:#fff8e9;padding:clamp(15px,2vw,22px)}
+#chapter12 #ch12-nyasa .ch12-detail summary{cursor:pointer;font-weight:750;color:#75541e;line-height:1.5}
+#chapter12 #ch12-nyasa .ch12-detail summary:focus-visible{outline:3px solid #b68a46;outline-offset:4px}
+#chapter12 #ch12-mala .ch12-math strong{display:block;font-size:clamp(1.35rem,2vw,1.75rem);color:#79551f;line-height:1.4;margin-top:10px}
+#chapter12 #ch12-kalsarpa .ch12-names{margin:20px 0}
+#chapter12 #ch12-kalsarpa .ch12-names span{border:1px solid #d4dfd8;background:#f2f7f3;border-radius:10px;padding:10px 12px;min-width:0}
+#chapter12 #ch12-kalsarpa .ch12-names b{color:#866026}
+#chapter12>.study-panel{margin-block:22px}
+#chapter12>.study-panel:not(.ch12-intro){background:#f5f8f5;border:1px solid #cbdad3;border-inline-start:5px solid #8eab9b}
+#chapter12>.study-panel:not(.ch12-intro)>h4:first-child{color:#244650;border-bottom:1px solid #cfdbd5;padding-bottom:10px;margin-bottom:16px}
+:root[data-theme="dark"] #chapter12 #ch12-mantras .ch12-two>article,
+:root[data-theme="dark"] #chapter12 #ch12-nyasa .ch12-detail,
+:root[data-theme="dark"] #chapter12 #ch12-mala .ch12-math{background:#293e43;color:#f2eee5;border-color:#927c56}
+:root[data-theme="dark"] #chapter12 #ch12-mantras blockquote[lang="sa"]{background:#1a333b;color:#f5e9cf;border-color:#e3b979}
+:root[data-theme="dark"] #chapter12 #ch12-mantras .ch12-two>article>p{border-color:#6c6b5c}
+:root[data-theme="dark"] #chapter12 #ch12-planets .ch12-table-scroll{background:#193640}
+:root[data-theme="dark"] #chapter12 #ch12-planets .ch12-table tbody tr:nth-child(even){background:#23414a}
+:root[data-theme="dark"] #chapter12 #ch12-planets .ch12-table tbody tr:hover{background:#425044}
+:root[data-theme="dark"] #chapter12 #ch12-nyasa .ch12-detail summary,
+:root[data-theme="dark"] #chapter12 #ch12-mala .ch12-math strong{color:#f3ce89}
+:root[data-theme="dark"] #chapter12 #ch12-kalsarpa .ch12-names span{background:#28464b;color:#f1eee6;border-color:#58766e}
+:root[data-theme="dark"] #chapter12 #ch12-kalsarpa .ch12-names b{color:#f1cb83}
+:root[data-theme="dark"] #chapter12>.study-panel:not(.ch12-intro){background:#223e44;color:#f0f0e9;border-color:#607b76;border-inline-start-color:#d7b477}
+:root[data-theme="dark"] #chapter12>.study-panel:not(.ch12-intro)>h4:first-child{color:#f3eee3;border-color:#5c7473}
+@media(max-width:640px){#chapter12 #ch12-mantras blockquote[lang="sa"]{padding:13px 12px;line-height:1.9}#chapter12 #ch12-mantras .ch12-two>article{padding:15px}#chapter12 #ch12-kalsarpa .ch12-names span{padding:9px 10px}}
