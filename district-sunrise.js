@@ -19,9 +19,9 @@
  ['सुदूरपश्चिम प्रदेश',[
  ['बझाङ','चैनपुर','81:12'],['बाजुरा','मार्तडी','81:29'],['अछाम','मङ्गलसेन','81:15'],['डोटी','सिलगढी','80:59'],['कैलाली','धनगढी','80:36'],['कञ्चनपुर','महेन्द्रनगर','80:11'],['डडेलधुरा','डडेलधुरा','80:35'],['बैतडी','बैतडी','80:16'],['दार्चुला','दार्चुला','80:33']]]
  ];
- const district=document.getElementById('lsDistrict'),offset=document.getElementById('lsOffset');
- if(!district||!offset)return;
- const ascii=v=>String(v).replace(/[०-९]/g,c=>String('०१२३४५६७८९'.indexOf(c)));
+ const detailedDistrict=document.getElementById('lsDistrict');
+ const district=detailedDistrict||document.getElementById('htDistrict');
+ if(!district)return;
  const format=secs=>(secs<0?'-':'+')+String(Math.floor(Math.abs(secs)/60)).padStart(2,'0')+':'+String(Math.abs(secs)%60).padStart(2,'0');
  let count=0;
  for(const [province,list] of rows){
@@ -39,6 +39,8 @@
   district.append(group);
  }
  if(count!==77)throw new Error('District reference must contain 77 districts; found '+count);
+ if(!detailedDistrict)return;
+ const offset=document.getElementById('lsOffset');
  const details=document.getElementById('lsDistrictDetails');
  district.addEventListener('change',()=>{
   if(!district.value)return;
