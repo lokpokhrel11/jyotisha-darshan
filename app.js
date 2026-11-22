@@ -852,8 +852,15 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   button.addEventListener('click',()=>setOpen(section,!expanded.has(section.id)));
   setOpen(section,false);
  });
- const hash=decodeURIComponent(location.hash.slice(1));
- if(groups[chapter].includes(hash)){const target=document.getElementById(hash);if(target)setOpen(target,true);}
+ const openLinkedPractice=()=>{
+  const hash=decodeURIComponent(location.hash.slice(1));
+  const target=document.getElementById(hash);
+  if(!target)return;
+  const panel=panels.find(section=>section===target||section.contains(target));
+  if(panel)setOpen(panel,true);
+ };
+ openLinkedPractice();
+ window.addEventListener('hashchange',openLinkedPractice);
 })();
 
 /* v4.2: Chapter 7 house-lord identification and formative assessment. */
