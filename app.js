@@ -842,7 +842,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  ];
  questions.forEach((item,i)=>{
   const field=document.createElement('fieldset');field.className='ch8-assessment-item';
-  const legend=document.createElement('legend');legend.textContent=(i+1)+'. '+item.q;field.append(legend);
+  const legend=document.createElement('legend');legend.textContent=item.q;field.append(legend);
   item.a.forEach((option,j)=>{const label=document.createElement('label');label.className='ch7-choice';const input=document.createElement('input');input.type='radio';input.name='ch8assessment'+i;input.value=String(j);label.append(input,document.createTextNode(' '+option));field.append(label)});
   const feedback=document.createElement('p');feedback.className='ch8-assessment-feedback';feedback.id='ch8AssessmentFeedback'+i;feedback.setAttribute('aria-live','polite');field.append(feedback);mount.append(field);
  });
@@ -878,6 +878,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   try{localStorage.setItem('jyotisha-chapter8-score',JSON.stringify({score,total:questions.length}))}catch(_){}
   summary.textContent='प्राप्ताङ्क: '+nep(score)+' / '+nep(questions.length)+'। '+(score===questions.length?'सबै उत्तर सही छन्। अध्याय ८ को पुनरावलोकन पूरा भयो।':'प्रतिक्रिया पढेर फेरि अभ्यास गर्नुहोस्।');
  });
+ form.addEventListener('change',e=>{if(!e.target.matches('input[type="radio"]'))return;const index=Number(e.target.name.replace('ch8assessment',''));if(!Number.isInteger(index)||index<0||index>=questions.length)return;const f=document.getElementById('ch8AssessmentFeedback'+index);f.textContent='';f.classList.remove('is-correct');summary.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';});
  reset.addEventListener('click',()=>{form.reset();questions.forEach((_,i)=>{const f=document.getElementById('ch8AssessmentFeedback'+i);f.textContent='';f.classList.remove('is-correct')});summary.textContent='८ प्रश्नको उत्तर छान्नुहोस्।'});
 })();
 
