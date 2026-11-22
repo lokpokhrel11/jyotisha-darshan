@@ -32,3 +32,5 @@ jobs:
         run: node --check app.js
       - name: Run chapter 4–6 calculator boundary tests
         run: node tests/calculator-boundaries.test.js
+      - name: Run chapter 6 cycle regression tests
+        run: node tests/chapter6-cycles.test.js
