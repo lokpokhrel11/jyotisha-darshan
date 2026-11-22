@@ -1838,3 +1838,39 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  body.chapter-focus .chapter-editorial-actions a{min-height:44px;display:inline-flex;align-items:center}
  body.chapter-focus .chapter-focus-banner>.chapter-toc{display:none!important}
 }
+
+
+/* Mobile-friendly reference tables: keep semantic rows intact and scroll only
+   the table region, never the entire chapter viewport. */
+.chapter7-table-wrap,.ch12-table-scroll,.table-wrap{
+ max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;
+ overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;
+ scrollbar-width:thin;scrollbar-color:#aa854a transparent;
+}
+.chapter7-table-wrap>table,.ch12-table-scroll>table,.table-wrap>table{border-collapse:collapse}
+@media(max-width:760px){
+ #chapter7 .chapter7-table-wrap,#chapter8 .chapter7-table-wrap,
+ #chapter12 .ch12-table-scroll,#chapter12 .table-wrap,
+ #chapter13 .ch12-table-scroll{
+  position:relative;width:100%;max-width:100%;border-radius:12px;
+  border:1px solid #cddbd3;background:#fffdf9;
+ }
+ #chapter7 .chapter7-table-wrap>table,#chapter8 .chapter7-table-wrap>table,
+ #chapter12 .ch12-table-scroll>table,#chapter12 .table-wrap>table,
+ #chapter13 .ch12-table-scroll>table{min-width:610px;width:max-content;max-width:none}
+ #chapter7 .chapter7-table-wrap th,#chapter7 .chapter7-table-wrap td,
+ #chapter8 .chapter7-table-wrap th,#chapter8 .chapter7-table-wrap td,
+ #chapter12 .ch12-table-scroll th,#chapter12 .ch12-table-scroll td,
+ #chapter13 .ch12-table-scroll th,#chapter13 .ch12-table-scroll td{
+  white-space:normal;min-width:95px;vertical-align:top;overflow-wrap:break-word;
+ }
+ .mobile-table-hint{display:flex;align-items:center;gap:6px;margin:6px 0 8px;
+  color:#725529;font-size:.85rem;font-weight:650}
+ :root[data-theme="dark"] .mobile-table-hint{color:#f0d096}
+ :root[data-theme="dark"] #chapter7 .chapter7-table-wrap,
+ :root[data-theme="dark"] #chapter8 .chapter7-table-wrap,
+ :root[data-theme="dark"] #chapter12 .ch12-table-scroll,
+ :root[data-theme="dark"] #chapter12 .table-wrap,
+ :root[data-theme="dark"] #chapter13 .ch12-table-scroll{background:#203a43;border-color:#536e73}
+}
+@media(min-width:761px){.mobile-table-hint{display:none}}
