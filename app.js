@@ -352,9 +352,8 @@ $('padaCalculate').addEventListener('click',()=>{
  if(a===null||b===null||b<=0||a<0||a>=b){out.textContent='मान्य घडी/पला दिनुहोस्। भभोग ० भन्दा ठूलो र भयात ० देखि भभोगभन्दा सानो हुनुपर्छ।';return;}
  const boundary=[1,2,3].find(k=>a*4===b*k);const stage=Math.floor(a*4/b)+1;
  const fmt=(n)=>{const g=Math.floor(n/3600),p=Math.floor((n%3600)/60),v=n%60;return `${g} घडी ${p} पला ${v} विपला`;};
- const limits=[1,2,3,4].map(k=>`${k} औँ सीमा: ${fmt(b*k/4)}`).join(' · ');
- // Quarter boundaries can be fractional vipala; show rounded to 2 decimals without claiming exact integer vipala.
- const exactFmt=n=>Number.isInteger(n)?fmt(n):`${(n/60).toFixed(3)} पला`;
+ // Quarter boundaries can contain a fractional vipala; preserve ghadi/pala units.
+ const exactFmt=n=>{const g=Math.floor(n/3600),p=Math.floor((n-g*3600)/60),v=Number((n-g*3600-p*60).toFixed(2));return `${g} घडी ${p} पला ${v} विपला`;};
  const bounds=[1,2,3,4].map(k=>`${k} औँ सीमा: ${exactFmt(b*k/4)}`).join(' | ');
  out.textContent=boundary?`भयात ${fmt(a)} ठ्याक्कै ${boundary} औँ चरणको अन्त्य-सीमामा छ। सीमा-क्षणको परम्परागत निर्धारण पुष्टि नगरी निश्चित चरण तोकिएको छैन। एक चरण: ${exactFmt(b/4)}। ${bounds}`:`चरण: ${['पहिलो','दोस्रो','तेस्रो','चौथो'][stage-1]} (${stage}/४)। भयात: ${fmt(a)}। एक चरण: ${exactFmt(b/4)}। ${bounds}`;
 });
