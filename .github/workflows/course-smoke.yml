@@ -1,0 +1,26 @@
+name: Course source smoke tests
+on:
+  push:
+    paths:
+      - 'index.html'
+      - 'app.js'
+      - 'tests/site-smoke.cjs'
+      - '.github/workflows/course-smoke.yml'
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'app.js'
+      - 'tests/site-smoke.cjs'
+      - '.github/workflows/course-smoke.yml'
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JavaScript syntax
+        run: node --check app.js
+      - name: Validate course structure
+        run: node tests/site-smoke.cjs
