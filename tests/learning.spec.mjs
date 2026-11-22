@@ -610,3 +610,26 @@ test('Phone: chapter 8 kinship calculator and source quiz respond to touch', asy
   await page.locator('#ch8SourceQuiz button[type="submit"]').click();
   await expect(page.locator('#ch8SourceFeedback')).toContainText('सही');
 });
+
+
+test('Phone: chapters 10–13 assessments accept answers and show results', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  const feedbackIds = { 10: '#ch10Feedback', 11: '#ch11Feedback', 12: '#ch12Result', 13: '#ch13Result' };
+  for (const n of [10, 11, 12, 13]) {
+    await page.goto(chapter(n));
+    const form = page.locator(`#ch${n}Quiz`);
+    await expect(form).toBeVisible();
+    const groups = form.locator('fieldset');
+    const count = await groups.count();
+    expect(count, `Chapter ${n} assessment has questions`).toBeGreaterThan(0);
+    for (let i = 0; i < count; i++) {
+      const first = groups.nth(i).locator('input[type="radio"]').first();
+      await first.check();
+      await expect(first).toBeChecked();
+    }
+    await form.locator('button[type="submit"]').click();
+    await expect(page.locator(feedbackIds[n])).not.toBeEmpty();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow, `Chapter ${n} quiz overflows phone screen`).toBeLessThanOrEqual(2);
+  }
+});
