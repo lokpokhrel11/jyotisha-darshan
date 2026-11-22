@@ -2140,3 +2140,16 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  #chapter9 #ch9Quiz .ch9-quiz-actions>*{flex:1 1 100%;min-height:46px;white-space:normal}
  #chapter9 #ch9Quiz .ch9-quiz-feedback:not(:empty){overflow-wrap:anywhere}
 }
+
+/* Chapter 10: consistent mobile quiz controls and accessible practice focus. */
+#chapter10 .ch10-choice{min-height:48px;min-width:0;box-sizing:border-box;overflow-wrap:anywhere}
+#chapter10 .ch10-choice:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+#chapter10 .ch10-practice select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+#chapter10 .ch10-quiz-panel fieldset:focus{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:600px){
+ #chapter10 .ch10-quiz-panel fieldset{min-width:0;padding:14px 12px}
+ #chapter10 .ch10-choice{padding:13px 12px;gap:11px;line-height:1.6}
+ #chapter10 .ch10-quiz-actions>*{flex:1 1 100%;min-height:46px;white-space:normal}
+ #chapter10 .ch10-practice select{max-width:100%;min-height:46px}
+ #chapter10 .ch10-result,#chapter10 .ch10-feedback:not(:empty),#chapter10 .ch10-review-card{overflow-wrap:anywhere}
+}
