@@ -2018,3 +2018,29 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
 }
 #ch12-quiz .ch12-quiz label:focus-within{outline:2px solid #bd9450;outline-offset:2px}
 :root[data-theme="dark"] #ch12-quiz .ch12-quiz label:focus-within{outline-color:#ebc889}
+
+
+/* Phase 6.21: keep the chapter pager usable on narrow mobile screens. */
+@media(max-width:520px){
+ body.chapter-focus .chapter-focus-banner>.chapter-pager{
+  min-width:0;
+  max-width:100%;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+ }
+ body.chapter-focus .chapter-focus-banner>.chapter-pager a{
+  white-space:normal;
+  text-align:center;
+  overflow-wrap:break-word;
+ }
+ body.chapter-focus .chapter-bottom-nav{
+  flex-wrap:wrap;
+  gap:10px;
+ }
+ body.chapter-focus .chapter-bottom-nav a{
+  min-height:44px;
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:break-word;
+ }
+}
