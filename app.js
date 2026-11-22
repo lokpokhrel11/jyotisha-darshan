@@ -1571,7 +1571,8 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const lagna=Number(asc.value),position=Number(house.value);
   const signIndex=(lagna+position-2)%12;
   const sign=signs[signIndex];
-  result.textContent='चरण १: '+nep(position)+'औँ भावमा '+sign+' राशि पर्छ। चरण २: '+descriptions[house.value]+' यो काल्पनिक अभ्यासमा भावको परम्परागत अर्थ बुझाइएको हो। वास्तविक आय, आर्थिक अवस्था वा करिअरको अनुमान होइन।';
+  const secondIndex=lagna%12;const lord=['मङ्गल','शुक्र','बुध','चन्द्र','सूर्य','बुध','शुक्र','मङ्गल','बृहस्पति','शनि','शनि','बृहस्पति'][secondIndex];
+  result.textContent='चरण १: दोस्रो भावमा '+signs[secondIndex]+' राशि पर्छ, त्यसको स्वामी '+lord+' भएकाले द्वितीयेश '+lord+' हो। चरण २: काल्पनिक कुण्डलीमा यही '+lord+' '+nep(position)+'औँ भावको '+sign+' राशिमा बसेको मानिएको छ। चरण ३: '+descriptions[house.value]+' भावेशको स्वामित्व र उसको बसाइ फरक कुरा हुन्। यो अभ्यास वास्तविक आय, आर्थिक अवस्था वा करिअरको अनुमान होइन।';
  };
  asc.addEventListener('change',update);house.addEventListener('change',update);
 })();
