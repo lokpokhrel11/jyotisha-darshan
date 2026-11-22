@@ -629,6 +629,8 @@ test('Phone: chapters 10–13 assessments accept answers and show results', asyn
     }
     await form.locator('button[type="submit"]').click();
     await expect(page.locator(feedbackIds[n])).not.toBeEmpty();
+    await form.locator('button[type="reset"]').click();
+    await expect(form.locator('input[type="radio"]:checked')).toHaveCount(0);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, `Chapter ${n} quiz overflows phone screen`).toBeLessThanOrEqual(2);
   }
