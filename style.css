@@ -2129,3 +2129,14 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
 #chapter13 #ch13-map .ch13-direction-grid button:focus-visible{outline:3px solid #e2a73b;outline-offset:3px}
 #ch13Quiz .ch10-quiz-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
 #ch13Quiz .ch10-reset{border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);padding:12px 16px}
+
+/* Chapter 9 assessment: readable tap targets and keyboard focus on narrow screens. */
+#chapter9 #ch9Quiz .ch7-choice{min-height:48px;min-width:0;overflow-wrap:anywhere}
+#chapter9 #ch9Quiz .ch7-choice:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+#chapter9 #ch9Quiz fieldset:focus{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:600px){
+ #chapter9 #ch9Quiz fieldset{min-width:0;padding:14px 12px}
+ #chapter9 #ch9Quiz .ch7-choice{padding:13px 12px;gap:11px;line-height:1.6}
+ #chapter9 #ch9Quiz .ch9-quiz-actions>*{flex:1 1 100%;min-height:46px;white-space:normal}
+ #chapter9 #ch9Quiz .ch9-quiz-feedback:not(:empty){overflow-wrap:anywhere}
+}
