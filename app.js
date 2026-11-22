@@ -17,6 +17,11 @@ function setMenuOpen(open){
  menuButton.setAttribute('aria-label',open?'विषय सूची बन्द गर्नुहोस्':'विषय सूची खोल्नुहोस्');
 }
 menuButton.addEventListener('click',()=>setMenuOpen(menuButton.getAttribute('aria-expanded')!=='true'));
+// An expanded phone menu must not remain marked open after rotating or widening the viewport.
+const mobileMenuQuery=window.matchMedia('(max-width: 650px)');
+const syncMenuViewport=()=>{if(!mobileMenuQuery.matches&&menuButton.getAttribute('aria-expanded')==='true')setMenuOpen(false);};
+if(mobileMenuQuery.addEventListener)mobileMenuQuery.addEventListener('change',syncMenuViewport);
+else if(mobileMenuQuery.addListener)mobileMenuQuery.addListener(syncMenuViewport);
 mainNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenuOpen(false)));
 document.addEventListener('keydown',event=>{
  if(event.key==='Escape'&&menuButton.getAttribute('aria-expanded')==='true'){
