@@ -372,7 +372,8 @@ $('dbCalculate').addEventListener('click',()=>{
  const fraction=(b-a)/b,remaining=years*fraction;
  // Use nearest day for a stable, transparent pedagogical conversion.
  const totalDays=Math.round(remaining*360),y=Math.floor(totalDays/360),mo=Math.floor(totalDays%360/30),d=totalDays%30;
- out.textContent=`बाँकी नक्षत्र-अंश: ${b-a}/${b} = ${(fraction*100).toFixed(2)}%। महादशा अवधि: ${years} वर्ष। दशा शेष: ${remaining.toFixed(4)} वर्ष ≈ ${y} वर्ष ${mo} महिना ${d} दिन (३६०-दिने वर्षमा, नजिकको दिनमा गोलाकार)।`;
+ const roundingNote=totalDays===0&&remaining>0?' ध्यान दिनुहोस्: वास्तविक शेष शून्य होइन; एक दिनभन्दा कम अवधि नजिकको पूर्ण दिनमा गोलाकार गर्दा ० दिन देखिएको हो।':'';
+ out.textContent=`बाँकी नक्षत्र-अंश: ${b-a}/${b} = ${(fraction*100).toFixed(2)}%। महादशा अवधि: ${years} वर्ष। दशा शेष: ${remaining.toFixed(4)} वर्ष ≈ ${y} वर्ष ${mo} महिना ${d} दिन (३६०-दिने वर्षमा, नजिकको दिनमा गोलाकार)।${roundingNote}`;
 });
 $('dbCalculate').click();
 
@@ -441,7 +442,7 @@ function yoginiBalance(){const selection=yoginiSelection(),out=$('ygBalanceOutpu
  const parse=v=>{const m=/^(\d{1,2})\s*\/\s*(\d{1,2})$/.exec(v.trim());if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return g<=60&&p<60&&(g<60||p===0)?g*60+p:null;};const a=parse($('ygBhayat').value),b=parse($('ygBhavog').value);if(a===null||b===null||b<=0||a<0){out.textContent='भयात र भभोग घडी/पला रूपमा दिनुहोस् (उदाहरण 14/40); भभोग शून्यभन्दा ठूलो हुनुपर्छ।';return;}
  if(a===b){out.textContent='भयात र भभोग बराबर छन्। यो नक्षत्र परिवर्तनको सीमा-क्षण हो; जन्म नक्षत्र पुष्टि गरेपछि मात्र योगिनी दशा शेष निकाल्नुहोस्।';return;}
  if(a>b){out.textContent='भयात भभोगभन्दा ठूलो छ। पञ्चाङ्गका मान पुनः जाँच्नुहोस्।';return;}
- const y=yoginis[selection.index],remaining=(b-a)/b*y[2],totalDays=Math.round(remaining*360),years=Math.floor(totalDays/360),months=Math.floor((totalDays%360)/30),days=totalDays%30;out.textContent=`${y[0]} (${y[1]}) को पूर्ण अवधि ${y[2]} वर्ष। भयात ${Math.floor(a/60)}/${String(a%60).padStart(2,'0')}, भभोग ${Math.floor(b/60)}/${String(b%60).padStart(2,'0')}। बाँकी नक्षत्र अवधि ${b-a} पला। दशा शेष = (${b} − ${a}) ÷ ${b} × ${y[2]} = ${remaining.toFixed(4)} वर्ष ≈ ${years} वर्ष ${months} महिना ${days} दिन (३६०-दिने शैक्षिक वर्ष; नजिकको दिनमा गोलाकार)।`;}
+ const y=yoginis[selection.index],remaining=(b-a)/b*y[2],totalDays=Math.round(remaining*360),years=Math.floor(totalDays/360),months=Math.floor((totalDays%360)/30),days=totalDays%30;out.textContent=`${y[0]} (${y[1]}) को पूर्ण अवधि ${y[2]} वर्ष। भयात ${Math.floor(a/60)}/${String(a%60).padStart(2,'0')}, भभोग ${Math.floor(b/60)}/${String(b%60).padStart(2,'0')}। बाँकी नक्षत्र अवधि ${b-a} पला। दशा शेष = (${b} − ${a}) ÷ ${b} × ${y[2]} = ${remaining.toFixed(4)} वर्ष ≈ ${years} वर्ष ${months} महिना ${days} दिन (३६०-दिने शैक्षिक वर्ष; नजिकको दिनमा गोलाकार)।${totalDays===0&&remaining>0?' वास्तविक शेष शून्य होइन; एक दिनभन्दा कम अवधि गोलाकार गर्दा ० दिन देखिएको हो।':''}`;}
 for(const id of ['ygNak','ygBhayat','ygBhavog']){
  const input=$(id);
  input.addEventListener('input',()=>{
