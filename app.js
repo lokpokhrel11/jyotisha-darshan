@@ -366,7 +366,9 @@ const dbYears={sun:6,moon:10,mars:7,rahu:18,jupiter:16,saturn:19,mercury:17,ketu
 $('dbCalculate').addEventListener('click',()=>{
  const parse=(s)=>{const m=/^\s*(\d+)\s*\/\s*(\d+)\s*$/.exec(s);if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return Number.isInteger(g)&&Number.isInteger(p)&&g>=0&&g<=60&&p>=0&&p<60&&(g<60||p===0)?g*60+p:null;};
  const a=parse($('dbBhayat').value),b=parse($('dbBhavog').value),out=$('dbOutput'),years=dbYears[$('dbLord').value];
- if(a===null||b===null||b<=0||a<0||a>=b||!years){out.textContent='घडी/पला सही लेख्नुहोस् (जस्तै 14/40)। भयात भभोगभन्दा कम हुनुपर्छ।';return;}
+ if(a===null||b===null||b<=0||a<0||!years){out.textContent='घडी/पला सही लेख्नुहोस् (जस्तै 14/40)। भभोग शून्यभन्दा ठूलो हुनुपर्छ।';return;}
+ if(a===b){out.textContent='भयात र भभोग बराबर छन्। यो नक्षत्र परिवर्तनको सीमा-क्षण हो; जन्म नक्षत्र पुष्टि गरेपछि मात्र दशा शेष निकाल्नुहोस्।';return;}
+ if(a>b){out.textContent='भयात भभोगभन्दा ठूलो छ। पञ्चाङ्गका मान र नक्षत्रको अवस्था जाँच्नुहोस्।';return;}
  const fraction=(b-a)/b,remaining=years*fraction;
  // Use nearest day for a stable, transparent pedagogical conversion.
  const totalDays=Math.round(remaining*360),y=Math.floor(totalDays/360),mo=Math.floor(totalDays%360/30),d=totalDays%30;
@@ -436,7 +438,9 @@ function yoginiSelection(){const n=Number($('ygNak').value);if(!Number.isInteger
 function yoginiCycle(){const o=$('ygOutput'),selection=yoginiSelection();if(!selection){o.textContent='नक्षत्र क्रम १ देखि २७ सम्मको पूर्ण सङ्ख्या राख्नुहोस्।';return;}
  const {n,index}=selection,table=document.createElement('table');table.className='data-table';const heading=document.createElement('tr');['योगिनी','ग्रह','वर्ष','सञ्चित वर्ष'].forEach(t=>{const th=document.createElement('th');th.textContent=t;heading.append(th);});table.append(heading);let sum=0;for(let i=0;i<8;i++){const y=yoginis[(index+i)%8];sum+=y[2];const row=document.createElement('tr');[y[0],y[1],String(y[2]),String(sum)].forEach(t=>{const td=document.createElement('td');td.textContent=t;row.append(td);});table.append(row);}const intro=document.createElement('p');intro.textContent=`नक्षत्र क्रम ${n} मा (${n} + ३) ÷ ८ गर्दा शेष ${(n+3)%8} आउँछ। शेष १ देखि ७ भए क्रमशः पहिलोदेखि सातौँ योगिनी, शेष ० भए आठौँ योगिनी लिइन्छ। त्यसैले प्रारम्भिक योगिनी ${yoginis[index][0]} (${yoginis[index][2]} वर्ष) हो। आठ दशाको कुल अवधि ३६ वर्ष हुन्छ।`;o.replaceChildren(intro,table);}
 function yoginiBalance(){const selection=yoginiSelection(),out=$('ygBalanceOutput');if(!selection){out.textContent='पहिले नक्षत्र क्रम १–२७ राख्नुहोस्।';return;}
- const parse=v=>{const m=/^(\d{1,2})\s*\/\s*(\d{1,2})$/.exec(v.trim());if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return g<=60&&p<60&&(g<60||p===0)?g*60+p:null;};const a=parse($('ygBhayat').value),b=parse($('ygBhavog').value);if(a===null||b===null||b<=0||a<0||a>=b){out.textContent='भयात र भभोग घडी/पला रूपमा दिनुहोस् (उदाहरण 14/40); ० ≤ भयात < भभोग हुनुपर्छ।';return;}
+ const parse=v=>{const m=/^(\d{1,2})\s*\/\s*(\d{1,2})$/.exec(v.trim());if(!m)return null;const g=Number(m[1]),p=Number(m[2]);return g<=60&&p<60&&(g<60||p===0)?g*60+p:null;};const a=parse($('ygBhayat').value),b=parse($('ygBhavog').value);if(a===null||b===null||b<=0||a<0){out.textContent='भयात र भभोग घडी/पला रूपमा दिनुहोस् (उदाहरण 14/40); भभोग शून्यभन्दा ठूलो हुनुपर्छ।';return;}
+ if(a===b){out.textContent='भयात र भभोग बराबर छन्। यो नक्षत्र परिवर्तनको सीमा-क्षण हो; जन्म नक्षत्र पुष्टि गरेपछि मात्र योगिनी दशा शेष निकाल्नुहोस्।';return;}
+ if(a>b){out.textContent='भयात भभोगभन्दा ठूलो छ। पञ्चाङ्गका मान पुनः जाँच्नुहोस्।';return;}
  const y=yoginis[selection.index],remaining=(b-a)/b*y[2],totalDays=Math.round(remaining*360),years=Math.floor(totalDays/360),months=Math.floor((totalDays%360)/30),days=totalDays%30;out.textContent=`${y[0]} (${y[1]}) को पूर्ण अवधि ${y[2]} वर्ष। भयात ${Math.floor(a/60)}/${String(a%60).padStart(2,'0')}, भभोग ${Math.floor(b/60)}/${String(b%60).padStart(2,'0')}। बाँकी नक्षत्र अवधि ${b-a} पला। दशा शेष = (${b} − ${a}) ÷ ${b} × ${y[2]} = ${remaining.toFixed(4)} वर्ष ≈ ${years} वर्ष ${months} महिना ${days} दिन (३६०-दिने शैक्षिक वर्ष; नजिकको दिनमा गोलाकार)।`;}
 for(const id of ['ygNak','ygBhayat','ygBhavog']){
  const input=$(id);
