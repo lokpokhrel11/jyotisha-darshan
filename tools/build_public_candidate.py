@@ -1,31 +1,52 @@
 #!/usr/bin/env python3
-"""Build a restricted public HTML candidate from the private master.
-
-This is intentionally a *candidate*, not a deployable release. The original
-app.js contains restricted content and must not be shipped with the output.
-"""
+"""Export the reviewed public site into a new directory, without repository history."""
+import argparse
 from pathlib import Path
-import re
-import sys
+import shutil
+import tempfile
 
-source = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("index.html")
-destination = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("dist-public/index.html")
-html = source.read_text(encoding="utf-8")
-start = '<section id="chapter3"'
-end = '<section id="consult"'
-assert html.count(start) == 1 and html.count(end) == 1, "Unexpected lesson boundaries"
-a, b = html.index(start), html.index(end)
-assert a < b
-html = html[:a] + html[b:]
-# Remove the full-course application bundle: it embeds restricted lessons,
-# assessment banks and routing. A separately audited public bundle is required.
-html, n = re.subn(r'<script\s+src="app\.js[^"]*"\s+defer></script>', '', html)
-assert n == 1, "Expected one full-course app.js reference"
-# Fail closed rather than distributing broken free lessons or leaking course data.
-for token in ('<section id="chapter3"', '<section id="chapter13"', 'app.js?v='):
-    assert token not in html, f"Restricted marker remains: {token}"
-assert '<section id="chapter2"' in html and '<section id="home"' in html
-destination.parent.mkdir(parents=True, exist_ok=True)
-destination.write_text(html, encoding="utf-8")
-print(f"Candidate written: {destination}")
-print("NOT DEPLOYABLE: public JS, navigation, and all other assets still require audit.")
+ROOT = Path(__file__).resolve().parents[1]
+FILES = {
+    'index.html': 'public-preview.html',
+    'course.html': 'public-course.html',
+    'akshara-chakra.html': 'akshara-chakra.html',
+    'public-preview.js': 'public-preview.js',
+    'public-theme.js': 'public-theme.js',
+    'district-sunrise.js': 'district-sunrise.js',
+    'home-tools.js': 'home-tools.js',
+    'style.css': 'style.css',
+    'manifest.webmanifest': 'manifest.webmanifest',
+    'icon.svg': 'icon.svg',
+    'sw.js': 'tools/public-cache-retirement.js',
+}
+
+
+def build(destination):
+    destination = destination.resolve()
+    if destination.exists():
+        raise FileExistsError(f'Choose a new output directory: {destination}')
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=destination.parent) as temporary:
+        candidate = Path(temporary) / 'site'
+        candidate.mkdir()
+        for name, source in FILES.items():
+            path = ROOT / source
+            if path.is_symlink() or not path.is_file():
+                raise ValueError(f'Expected a regular source file: {path}')
+            target = candidate / name
+            if name in ('index.html', 'course.html'):
+                html = path.read_text(encoding='utf-8')
+                html = html.replace('href="public-preview.html', 'href="index.html')
+                html = html.replace('href="public-course.html', 'href="course.html')
+                target.write_text(html, encoding='utf-8')
+            else:
+                shutil.copyfile(path, target)
+        candidate.rename(destination)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('destination', type=Path)
+    arguments = parser.parse_args()
+    build(arguments.destination)
+    print(f'Public candidate exported to {arguments.destination}')
