@@ -2166,3 +2166,16 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  #chapter11 :is(#ch11MoonA,#ch11MoonB,#ch11EducationLevel,#ch11MarriageHouse){max-width:100%;min-height:46px}
  #chapter11 :is(#ch11CountResult,#ch11EducationResult,#ch11MarriageResult,#ch11Feedback,#ch11Review){overflow-wrap:anywhere}
 }
+
+/* Chapter 12: touch-friendly assessment and clear keyboard navigation. */
+#chapter12 .ch12-quiz fieldset{min-width:0}
+#chapter12 .ch12-quiz label{min-height:48px;box-sizing:border-box;overflow-wrap:anywhere;display:flex;align-items:center;gap:10px}
+#chapter12 .ch12-quiz label:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+#chapter12 .ch12-quiz legend{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+#chapter12 .ch12-quiz :is(button,input[type="submit"],input[type="reset"]){min-height:46px;white-space:normal}
+@media(max-width:600px){
+ #chapter12 .ch12-quiz fieldset{padding:14px 12px}
+ #chapter12 .ch12-quiz label{padding:13px 12px;line-height:1.6}
+ #chapter12 .ch12-quiz :is(button,input[type="submit"],input[type="reset"]){max-width:100%}
+ #chapter12 #ch12Result,#chapter12 .ch12-explanation{overflow-wrap:anywhere}
+}
