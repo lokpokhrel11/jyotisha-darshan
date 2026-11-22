@@ -78,4 +78,21 @@ assert.equal(yoginiIndex(5),7); // remainder zero selects Sankata
 assert.equal(yoginiIndex(27),5);
 assert.equal(yoginiIndex(0),null);
 assert.equal(yoginiIndex(28),null);
+// Exercise the actual Yogini birth-balance handler with the selected nakshatra.
+const yoginiFields={
+ ygNak:{value:'5'},ygBhayat:{value:'00/00'},ygBhavog:{value:'60/00'},
+ ygBalanceOutput:{textContent:''}
+};
+const yoginiBalanceContext=vm.createContext({$:id=>yoginiFields[id]});
+vm.runInContext(extract('const yoginis=', "for(const id of ['ygNak'"),yoginiBalanceContext);
+const yoginiBalanceResult=(nak,a,b)=>{
+ yoginiFields.ygNak.value=String(nak);yoginiFields.ygBhayat.value=a;yoginiFields.ygBhavog.value=b;
+ vm.runInContext('yoginiBalance()',yoginiBalanceContext);
+ return yoginiFields.ygBalanceOutput.textContent;
+};
+assert.match(yoginiBalanceResult(5,'00/00','60/00'),/सङ्कटा/);
+assert.match(yoginiBalanceResult(5,'30/00','60/00'),/4\.0000 वर्ष/);
+assert.match(yoginiBalanceResult(5,'60/00','60/00'),/सीमा-क्षण/);
+assert.match(yoginiBalanceResult(5,'60/00','59/59'),/ठूलो/);
+assert.match(yoginiBalanceResult(28,'00/00','60/00'),/नक्षत्र क्रम/);
 console.log('Calculator boundary checks passed (time, ghadi/pala, pada, dasha, Yogini).');
