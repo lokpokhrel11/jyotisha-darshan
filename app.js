@@ -450,6 +450,25 @@ $('dbCalculate').click();
 
 // Chapter 6.1: canonical 120-year Vimshottari sequence.
 const cyclePlanets=[['ketu','केतु',7],['venus','शुक्र',20],['sun','सूर्य',6],['moon','चन्द्र',10],['mars','मङ्गल',7],['rahu','राहु',18],['jupiter','बृहस्पति',16],['saturn','शनि',19],['mercury','बुध',17]];
+// Chapter 6: 27 nakshatras in traditional order, each group of nine repeats the same lords.
+const nakshatraLords=['ketu','venus','sun','moon','mars','rahu','jupiter','saturn','mercury'];
+const nakshatraInput=document.getElementById('cycleNakshatra');
+if(nakshatraInput){
+ nakshatraInput.addEventListener('change',()=>{
+  const n=nakshatraInput.value;
+  if(n===''){$('cycleNakshatraHelp').textContent='नक्षत्र नछानेमा तलबाट स्वामी आफैँ चयन गर्नुहोस्।';return;}
+  const i=Number(n);
+  if(!Number.isInteger(i)||i<0||i>=27)return;
+  $('cycleLord').value=nakshatraLords[i%9];
+  $('cycleBalance').value='';
+  $('cycleNakshatraHelp').textContent='नक्षत्रअनुसार दशास्वामी छानिएको छ। जन्मको दशा शेष अध्याय ५ बाट निकालेर तल प्रविष्ट गर्नुहोस्; खाली छोडे पूरा अवधि देखाइन्छ।';
+  renderCycle();
+ });
+ $('cycleLord').addEventListener('change',()=>{
+  nakshatraInput.value='';
+  $('cycleNakshatraHelp').textContent='दशास्वामी हातैले परिवर्तन गर्नुभएको छ; नक्षत्रसँगको मिलान फेरि पुष्टि गर्नुहोस्।';
+ });
+}
 function renderCycle(){
  const lord=$('cycleLord').value,raw=$('cycleBalance').value,remaining=raw.trim()===''?null:Number(raw);
  const start=cyclePlanets.findIndex(x=>x[0]===lord),out=$('cycleOutput');
