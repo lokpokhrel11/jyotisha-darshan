@@ -536,6 +536,10 @@ function renderAntardasha(){
  const summary=document.createElement('p');summary.textContent=`कुल अवधि: ${formatDays(elapsedDays)} = ${major[2]} वर्ष। ${elapsedDays===totalDays?'जम्मा मिल्यो।':'गणना पुनः जाँच्नुहोस्।'}`;
  out.replaceChildren(summary,table);
 }
+for(const [id,lord] of [['adPresetMoon','moon'],['adPresetSaturn','saturn']]){
+ const button=document.getElementById(id);
+ if(button)button.addEventListener('click',()=>{$('adLord').value=lord;renderAntardasha();});
+}
 $('adCalculate').addEventListener('click',renderAntardasha);
 $('adLord').addEventListener('change',renderAntardasha);
 renderAntardasha();
