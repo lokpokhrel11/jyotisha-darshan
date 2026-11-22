@@ -1410,6 +1410,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
    const field=form.querySelector('input[name="'+items[missing].name+'"]').closest('fieldset');
    field.tabIndex=-1;field.focus({preventScroll:true});return;
   }
+  review.replaceChildren();
   const score=responses.reduce((n,x,i)=>n+Number(x.value===items[i].answer),0);
   feedback.className='ch10-feedback is-result';
   feedback.textContent='नतिजा: '+nep(score)+' / '+nep(items.length)+' सही। '+(score===items.length?'चारवटै उत्तर सही छन्।':'तल प्रत्येक प्रश्नको व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
@@ -1468,6 +1469,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const selected=questions.map(q=>form.querySelector('input[name="'+q.name+'"]:checked'));
   const missing=selected.findIndex(x=>!x);
   if(missing!==-1){clear();feedback.textContent='कृपया सातवटै प्रश्नको उत्तर छान्नुहोस्।';feedback.className='ch10-feedback is-warning';form.querySelector('input[name="'+questions[missing].name+'"]').focus();return}
+  review.replaceChildren();
   const score=selected.reduce((n,x,i)=>n+Number(x.value===questions[i].answer),0);
   feedback.className='ch10-feedback is-result';feedback.textContent='नतिजा: '+nep(score)+' / '+nep(questions.length)+' सही। '+(score===questions.length?'सातवटै उत्तर सही छन्।':'तलका व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
   questions.forEach((q,i)=>{const card=document.createElement('div');card.className='ch10-review-card';const heading=document.createElement('strong');heading.textContent='प्रश्न '+nep(i+1)+' · '+(selected[i].value===q.answer?'सही उत्तर':'समीक्षा आवश्यक');const p=document.createElement('p');p.textContent=q.explanation;card.append(heading,p);review.append(card)});
