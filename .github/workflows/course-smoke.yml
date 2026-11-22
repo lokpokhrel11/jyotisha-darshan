@@ -60,3 +60,16 @@ jobs:
           python3 tools/build_public_candidate.py "$RUNNER_TEMP/public-candidate"
           python3 -m http.server 8766 --bind 127.0.0.1 --directory "$RUNNER_TEMP/public-candidate" > "$RUNNER_TEMP/public-http.log" 2>&1 &
           node tools/test_public_browser.cjs
+  artifact-audit:
+    if: github.event_name == 'pull_request' && github.base_ref == 'staging/public-chapters-1-2'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect historical artifacts without uploading archive contents
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/audit_actions_artifacts.py

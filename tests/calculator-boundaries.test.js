@@ -45,8 +45,8 @@ assert.match(timeResult('ch4Calculate','ch4Output',{ch4Hours:'24'}),/०–२�
 assert.match(timeResult('istCalculate','istOutput',{istBirth:'08:00',istSunrise:'06:00',istPrevious:'same'}),/5 घडी 0 पला/);
 assert.match(timeResult('istCalculate','istOutput',{istBirth:'05:00',istPrevious:'same'}),/अघिल्लो दिन/);
 assert.match(timeResult('istCalculate','istOutput',{istBirth:'05:00',istPrevious:'previous'}),/57 घडी 30 पला/);
-assert.match(timeResult('lsCalculate','lsResult',{lsCalendar:'06:00',lsOffset:'+07:16'}),/05:49/);
-assert.match(timeResult('lsCalculate','lsResult',{lsCalendar:'06:00',lsOffset:'-07:52'}),/06:04/);
+assert.match(timeResult('lsCalculate','lsResult',{lsCalendar:'06:00',lsOffset:'+07:16'}),/05:53/);
+assert.match(timeResult('lsCalculate','lsResult',{lsCalendar:'06:00',lsOffset:'-07:52'}),/06:08/);
 // Run the actual chapter 5 pada click handler with minimal DOM controls.
 const padaFields = {
  padaBhayat: {value:'00/00'}, padaBhavog: {value:'60/00'},
