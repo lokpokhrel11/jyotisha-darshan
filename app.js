@@ -349,6 +349,7 @@ $('istCalculate').click();
   });
   feedback.textContent=`नतिजा: ${correct}/4। ${lines.join(' ')}`;
   try{localStorage.setItem('jyotisha-chapter4-score',JSON.stringify({score:correct,total:cases.length}))}catch(_){}
+  window.dispatchEvent(new Event('jyotisha-assessment-updated'));
  });
  form.addEventListener('reset',()=>{feedback.textContent='';});
 })();
@@ -1174,6 +1175,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   {chapter:12,name:'ग्रहशान्ति र परम्परागत उपाय',total:5,threshold:4,anchor:'ch12-quiz'},
   {chapter:13,name:'वास्तु: दिशा र परम्परागत प्रयोग',total:10,threshold:8,anchor:'ch13-quiz'}
  ];
+ function refreshAssessmentDashboard(){
  let attempted=0,met=0;
  list.replaceChildren();
  for(const exam of exams){
@@ -1211,6 +1213,10 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   if(completionEl)completionEl.textContent='अभ्यास लक्ष्य पूरा गर्नु र अध्यायको सम्पूर्ण अध्ययन पूरा गर्नु एउटै कुरा होइन। औपचारिक पाठ-समापन मापदण्ड अझै लागू गरिएको छैन।';
  }
 
+ }
+ refreshAssessmentDashboard();
+ window.addEventListener('jyotisha-assessment-updated',refreshAssessmentDashboard);
+ window.addEventListener('pageshow',refreshAssessmentDashboard);
 })();
 
 /* Assessment navigation clarity: make the final submission location explicit. */
@@ -1774,6 +1780,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   });
   result.textContent='प्राप्ताङ्क: '+score+' / '+questions.length+'। '+(score>=4?'अभ्यास लक्ष्य पूरा भयो।':'व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
   try{localStorage.setItem('jyotisha-chapter5-score',JSON.stringify({score,total:questions.length}))}catch(_){}
+  window.dispatchEvent(new Event('jyotisha-assessment-updated'));
  });
  form.addEventListener('reset',()=>{questions.forEach((_,i)=>{const el=document.getElementById('ch5why'+i);el.textContent='';el.hidden=true});result.textContent='';});
  form.addEventListener('change',()=>{result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';questions.forEach((_,i)=>{document.getElementById('ch5why'+i).hidden=true})});
@@ -1813,6 +1820,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   });
   result.textContent='प्राप्ताङ्क: '+score+' / '+questions.length+'। '+(score>=4?'अभ्यास लक्ष्य पूरा भयो।':'व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
   try{localStorage.setItem('jyotisha-chapter6-score',JSON.stringify({score,total:questions.length}))}catch(_){}
+  window.dispatchEvent(new Event('jyotisha-assessment-updated'));
  });
  form.addEventListener('reset',()=>{questions.forEach((_,i)=>{const e=document.getElementById('ch6why'+i);e.textContent='';e.hidden=true});result.textContent='';});
  form.addEventListener('change',()=>{result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';questions.forEach((_,i)=>{document.getElementById('ch6why'+i).hidden=true})});
