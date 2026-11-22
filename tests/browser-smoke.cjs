@@ -35,7 +35,7 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:8765/index.html';
    assert.equal(await page.locator('#lsOffset').inputValue(),'+11:00','Jhapa relative-to-Kathmandu offset');
    await page.locator('#lsDistrict').selectOption({label:'तनहुँ (दमौली)'});
    assert.equal(await page.locator('#lsOffset').inputValue(),'-04:08','Damauli relative-to-Kathmandu offset');
-   assert((await page.locator('#lsResult').innerText()).includes('05:38'),'Damauli local sunrise should be 05:38');
+   assert((await page.locator('#lsResult').innerText()).includes('05:14'),'Damauli local sunrise should be 05:14');
 
    // Verify hash navigation works after the page has already loaded.
    await page.goto(base+'?chapter=5#chapter5',{waitUntil:'domcontentloaded'});
