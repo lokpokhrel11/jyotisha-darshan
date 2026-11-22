@@ -1165,6 +1165,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   {chapter:2,name:'राशि र भाव',total:20,threshold:16,anchor:'chapter2exam'},
   {chapter:3,name:'ग्रह परिचय',total:15,threshold:12,anchor:'chapter3exam'},
   {chapter:4,name:'इष्टकाल र समय रूपान्तरण',total:4,threshold:3,anchor:'ch4ExampleQuiz'},
+  {chapter:5,name:'भयात, भभोग र दशा शेष',total:5,threshold:4,anchor:'ch5-assessment'},
   {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'},
   {chapter:9,name:'स्वभाव, शरीर र स्वास्थ्यका सङ्केत',total:5,threshold:4,anchor:'ch9-practice'},
   {chapter:10,name:'धन, आय, कर्म र यात्रा',total:4,threshold:3,anchor:'ch10-assessment'},
@@ -1734,4 +1735,45 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   const feedback=form.querySelector('[role="status"]');if(!feedback)return;
   form.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))feedback.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ उत्तर जाँच्नुहोस्।';});
  });
+})();
+
+/* Chapter 5: explanations tied to the worked examples in the lesson. */
+(function(){
+ const form=document.getElementById('ch5AssessmentForm');
+ const root=document.getElementById('ch5AssessmentQuestions');
+ const result=document.getElementById('ch5AssessmentResult');
+ if(!form||!root||!result)return;
+ const questions=[
+  {q:'भयातले के जनाउँछ?',choices:['जन्म नक्षत्रको पूरा अवधि','जन्म नक्षत्र सुरु भएदेखि जन्मसम्म बितेको समय','सूर्योदयदेखि अर्को सूर्योदयसम्मको समय'],correct:1,why:'भयात जन्म नक्षत्र सुरु भएदेखि जन्मसम्म बितेको अवधि हो। भभोग भने त्यस नक्षत्रको पूरा अवधि हो।'},
+  {q:'कृत्तिका ८/१२ मा समाप्त भयो र जन्मको इष्टकाल २२/५२ छ। रोहिणीको भयात कति हुन्छ?',choices:['१४ घडी ४० पला','३० घडी ४० पला','८ घडी १२ पला'],correct:0,why:'२२/५२ − ८/१२ = १४/४०। कृत्तिका सकिएपछि रोहिणी सुरु भएकाले यही रोहिणीको भयात हो।'},
+  {q:'कृत्तिका आज ८/१२ मा र रोहिणी भोलि ४/१० मा समाप्त भए रोहिणीको भभोग कति हुन्छ?',choices:['१२ घडी २२ पला','६० घडी','५५ घडी ५८ पला'],correct:2,why:'६०/०० − ८/१२ = ५१/४८। त्यसमा भोलिको ४/१० जोड्दा ५५/५८ हुन्छ।'},
+  {q:'भयात १४/४० र भभोग ५५/५८ हुँदा जन्म नक्षत्रको बाँकी अवधि कति पला हुन्छ?',choices:['८८० पला','२४७८ पला','३३५८ पला'],correct:1,why:'भभोग ५५×६०+५८ = ३३५८ पला र भयात १४×६०+४० = ८८० पला। अन्तर २४७८ पला हो।'},
+  {q:'रोहिणीको नक्षत्रेश चन्द्र र महादशा १० वर्ष मान्दा माथिको उदाहरणमा दशा शेष करिब कति हुन्छ?',choices:['१० वर्ष पूरा','७ वर्ष ४ महिना १७ दिन','४ महिना १७ दिन'],correct:1,why:'(२४७८ ÷ ३३५८) × १० ≈ ७.३७९४ वर्ष। १२ महिना र ३०-दिने महिनाको शैक्षिक रूपान्तरणले करिब ७ वर्ष ४ महिना १७ दिन दिन्छ।'}
+ ];
+ questions.forEach((item,i)=>{
+  const field=document.createElement('fieldset');
+  field.className='exam-question';
+  const legend=document.createElement('legend');legend.textContent=(i+1)+'. '+item.q;field.append(legend);
+  item.choices.forEach((choice,j)=>{
+   const label=document.createElement('label');label.style.display='flex';label.style.gap='10px';label.style.alignItems='flex-start';label.style.padding='9px 0';
+   const radio=document.createElement('input');radio.type='radio';radio.name='ch5q'+i;radio.value=String(j);radio.required=true;
+   label.append(radio,document.createTextNode(choice));field.append(label);
+  });
+  const explanation=document.createElement('p');explanation.className='feedback';explanation.id='ch5why'+i;explanation.hidden=true;field.append(explanation);root.append(field);
+ });
+ form.addEventListener('submit',event=>{
+  event.preventDefault();if(!form.reportValidity())return;
+  let score=0;
+  questions.forEach((item,i)=>{
+   const chosen=form.querySelector('input[name="ch5q'+i+'"]:checked');
+   const right=Number(chosen.value)===item.correct;if(right)score++;
+   const explanation=document.getElementById('ch5why'+i);
+   explanation.textContent=(right?'सही। ':'फेरि हेर्नुहोस्। ')+item.why;
+   explanation.hidden=false;
+  });
+  result.textContent='प्राप्ताङ्क: '+score+' / '+questions.length+'। '+(score>=4?'अभ्यास लक्ष्य पूरा भयो।':'व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
+  try{localStorage.setItem('jyotisha-chapter5-score',JSON.stringify({score,total:questions.length}))}catch(_){}
+ });
+ form.addEventListener('reset',()=>{questions.forEach((_,i)=>{const el=document.getElementById('ch5why'+i);el.textContent='';el.hidden=true});result.textContent='';});
+ form.addEventListener('change',()=>{result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';questions.forEach((_,i)=>{document.getElementById('ch5why'+i).hidden=true})});
 })();
