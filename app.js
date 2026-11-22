@@ -1437,6 +1437,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   review.hidden=true;review.replaceChildren();
  });
  form.addEventListener('reset',()=>{
+  try{localStorage.removeItem('jyotisha-chapter9-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));
   feedback.textContent='';feedback.className='ch9-quiz-feedback';
   review.hidden=true;review.replaceChildren();
   form.querySelectorAll('fieldset').forEach(field=>field.removeAttribute('tabindex'));
