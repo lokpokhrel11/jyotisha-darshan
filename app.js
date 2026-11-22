@@ -1162,12 +1162,12 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const exams=[
   {chapter:1,name:'पञ्चाङ्गका आधार',total:15,threshold:12,anchor:'practice',storage:'jd-chapter1-v05'},
-  {chapter:7,name:'कुण्डली कसरी हेर्ने',total:1,threshold:1,anchor:'ch7Quiz'},
   {chapter:2,name:'राशि र भाव',total:20,threshold:16,anchor:'chapter2exam'},
   {chapter:3,name:'ग्रह परिचय',total:15,threshold:12,anchor:'chapter3exam'},
   {chapter:4,name:'इष्टकाल र समय रूपान्तरण',total:4,threshold:3,anchor:'ch4ExampleQuiz'},
   {chapter:5,name:'भयात, भभोग र दशा शेष',total:5,threshold:4,anchor:'ch5-assessment'},
   {chapter:6,name:'विंशोत्तरी दशाको क्रम',total:5,threshold:4,anchor:'ch6-assessment'},
+  {chapter:7,name:'कुण्डली कसरी हेर्ने',total:1,threshold:1,anchor:'ch7Quiz'},
   {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'},
   {chapter:9,name:'स्वभाव, शरीर र स्वास्थ्यका सङ्केत',total:5,threshold:4,anchor:'ch9-practice'},
   {chapter:10,name:'धन, आय, कर्म र यात्रा',total:4,threshold:3,anchor:'ch10-assessment'},
@@ -1217,6 +1217,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  refreshAssessmentDashboard();
  window.addEventListener('jyotisha-assessment-updated',refreshAssessmentDashboard);
  window.addEventListener('pageshow',refreshAssessmentDashboard);
+ window.addEventListener('storage',event=>{
+  if(event.key===null||event.key==='jd-chapter1-v05'||/^jyotisha-chapter(?:[1-9]|1[0-3])-score$/.test(event.key)||event.key==='jyotisha-pathshala-opened-v3')refreshAssessmentDashboard();
+ });
 })();
 
 /* Assessment navigation clarity: make the final submission location explicit. */
