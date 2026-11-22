@@ -2077,3 +2077,11 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  #ch7Quiz .ch7-choice{padding:11px 10px;gap:10px}
  #ch7Quiz button[type="submit"]{width:100%;white-space:normal}
 }
+
+/* Chapter 13 direction selector: visible focus and accessible selection in both themes. */
+#chapter13 .ch13-direction-grid button{min-width:0;line-height:1.4;transition:background-color .15s ease,border-color .15s ease}
+#chapter13 .ch13-direction-grid button:focus-visible{outline:3px solid #e2a73b;outline-offset:3px;box-shadow:0 0 0 5px rgba(10,35,45,.55)}
+#chapter13 .ch13-direction-grid button[aria-pressed="true"]{background:#f0cb8c;color:#172d36;border-color:#76501b;box-shadow:inset 0 0 0 2px #76501b}
+#chapter13 .ch13-direction-grid button[aria-pressed="true"] small{color:#172d36}
+@media(max-width:420px){#chapter13 .ch13-direction-grid{gap:9px}#chapter13 .ch13-direction-grid button{padding:12px 8px;min-height:78px;font-size:1rem}#chapter13 .ch13-direction-grid button small{font-size:.8rem}}
+@media(prefers-reduced-motion:reduce){#chapter13 .ch13-direction-grid button{transition:none}}
