@@ -1789,9 +1789,11 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  form.addEventListener('change',function(e){
   const field=e.target.closest('fieldset[data-answer]');
   if(!field)return;
-  field.classList.remove('ch12-correct','ch12-incorrect');
-  const explanation=field.querySelector('.ch12-explanation');
-  if(explanation)explanation.hidden=true;
+  fields.forEach(item=>{
+   item.classList.remove('ch12-correct','ch12-incorrect');
+   const explanation=item.querySelector('.ch12-explanation');
+   if(explanation)explanation.hidden=true;
+  });
   try{localStorage.removeItem('jyotisha-chapter12-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';
  });
 })();
