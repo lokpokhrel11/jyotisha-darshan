@@ -373,6 +373,19 @@ function bhRead(v){const m=/^(\d{1,2})\s*\/\s*(\d{1,2})$/.exec((v||'').trim());i
 function bhFmt(p){return `${Math.floor(p/60)} घडी ${String(p%60).padStart(2,'0')} पला`;}
 function bhUpdateCase(){const choice=$('bhCase').value;$('bhOtherLabel').textContent=choice==='ka'?'भोलिको नक्षत्र अन्त्य-मान (घडी/पला)':choice==='kha'?'हिजोको गत नक्षत्र अन्त्य-मान (घडी/पला)':'भोलि वा हिजोको सम्बन्धित अन्त्य-मान (घडी/पला)';$('bhCaseHelp').textContent=choice==='ka'?'अवस्था क: इष्टकाल आजको अन्त्य-मानभन्दा ठूलो हुनुपर्छ। भोलिको मान प्रविष्ट गर्नुहोस्।':choice==='kha'?'अवस्था ख: इष्टकाल आजको अन्त्य-मानभन्दा सानो हुनुपर्छ। हिजोको गत नक्षत्रको मान प्रविष्ट गर्नुहोस्।':'इष्टकाल र आजको अन्त्य-मान तुलना गरेर अवस्था स्वतः छानिन्छ।';}
 $('bhCase').addEventListener('change',bhUpdateCase);bhUpdateCase();
+ // Source §5.4: Rohini (22/52, 08/12, next 04/10) => 14/40, 55/58.
+ // Source §5.3: Shravana (25/00, 55/19, previous 50/53) => 34/07, 64/26.
+ for(const [id,values] of [
+  ['bhPresetRohini',['ka','22/52','08/12','04/10']],
+  ['bhPresetShravana',['kha','25/00','55/19','50/53']]
+ ]){
+  const button=document.getElementById(id);
+  if(button)button.addEventListener('click',()=>{
+   ['bhCase','bhIst','bhToday','bhOther'].forEach((field,j)=>{$(field).value=values[j];});
+   bhUpdateCase();
+   $('bhCalculate').click();
+  });
+ }
 $('bhCalculate').addEventListener('click',()=>{
  const i=bhRead($('bhIst').value),e=bhRead($('bhToday').value),o=bhRead($('bhOther').value),out=$('bhOutput'),bhPanel=$('bhBhayat'),bbPanel=$('bhBhavog');
  bhPanel.textContent='—';bbPanel.textContent='—';
