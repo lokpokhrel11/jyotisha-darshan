@@ -735,8 +735,10 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
  document.getElementById('examReset').addEventListener('click',()=>queueMicrotask(()=>{pager.hidden=false;showQuestion(0)}));
  // Preserve deep links to the exercise and assessment when opening a chapter.
- const hash=location.hash.slice(1);
- activate(hash==='chapter2exam'?'quiz':hash==='planetExample'?'practice':'lesson');
+ const syncChapter2Hash=()=>{const hash=decodeURIComponent(location.hash.slice(1));if(hash==='chapter2exam')activate('quiz');else if(hash==='planetExample')activate('practice');else if(hash==='chapter2')activate('lesson')};
+ activate('lesson');
+ syncChapter2Hash();
+ window.addEventListener('hashchange',syncChapter2Hash);
 })();
 
 
