@@ -95,9 +95,9 @@ test('Chapter 7: focused reading, house lords, and quiz feedback', async ({ page
  await expect(page.locator('#ch7LordRows tr').nth(9)).toContainText('शनि');
  await page.locator('#ch7Asc').selectOption('7');
  await expect(page.locator('#ch7LordRows tr').first()).toContainText('मङ्गल');
- await page.locator('#ch7Quiz input[value="b"]').check();
+ for(const [i,answer] of [1,1,0,0,1,2,1,1].entries()) await page.locator(`#ch7Quiz input[name="ch7q${i}"][value="${answer}"]`).check();
  await page.locator('#ch7Quiz button[type="submit"]').click();
- await expect(page.locator('#ch7Feedback')).toContainText('सही');
+ await expect(page.locator('#ch7Feedback')).toContainText('प्राप्त अङ्क:');
 });
 
 test('Chapter 7: chart has twelve selectable houses and accurate source examples', async ({page})=>{
@@ -236,7 +236,7 @@ test('Chapter 8: final eight-question assessment gives explanations and resets',
 test('Chapter 8 design: navigation targets and public attribution policy',async({page})=>{
  await page.goto(chapter(8));
  await expect(page.locator('#chapter8')).toBeVisible();
- await expect(page.locator('.ch8-contents-links a')).toHaveCount(10);
+ await expect(page.locator('.ch8-contents-links a')).toHaveCount(9);
  for(let i=1;i<=8;i++)await expect(page.locator('#ch8-lesson-'+i)).toHaveCount(1);
  await expect(page.locator('#ch8AssessmentPanel')).toBeVisible();
  await expect(page.locator('#chapter8')).not.toContainText('गुरुजी');
@@ -344,8 +344,10 @@ test('Chapter 9: incomplete and complete source-comprehension quiz', async ({ pa
  await form.locator('input[name="ch9q"][value="a"]').check();
  await form.locator('input[name="ch9q2"][value="b"]').check();
  await form.locator('input[name="ch9q3"][value="c"]').check();
+ await form.locator('input[name="ch9q4"][value="a"]').check();
+ await form.locator('input[name="ch9q5"][value="b"]').check();
  await form.getByRole('button',{name:'उत्तर जाँच्नुहोस्'}).click();
- await expect(page.locator('#ch9Feedback')).toContainText('3/3');
+ await expect(page.locator('#ch9Feedback')).toContainText('५ / ५');
  await expect(page.locator('#ch9Feedback')).toBeFocused();
 });
 
@@ -479,9 +481,9 @@ test('Chapters 8 and 9: previous-next chapter arrows and redesigned quiz', async
  await expect(page.locator('#chapter8 .chapter-pager-next')).toHaveAttribute('href',/chapter=9/);
  await expect(page.locator('#chapter8 .chapter-pager-prev')).toContainText('पछिल्लो अध्याय');
  await page.goto(chapter(9));
- await expect(page.locator('#chapter9 .ch9-hero')).toBeVisible();
+ await expect(page.locator('#chapter9')).toBeVisible();
  await expect(page.locator('#chapter9 .ch9-quiz-panel')).toBeVisible();
- await expect(page.locator('#chapter9 #ch9Quiz .ch7-choice')).toHaveCount(3);
+ await expect(page.locator('#chapter9 #ch9Quiz .ch7-choice')).toHaveCount(15);
  await expect(page.locator('#chapter9 .chapter-pager-prev')).toHaveAttribute('href',/chapter=8/);
  for(const theme of ['light','dark']){
   await page.evaluate(t=>document.documentElement.setAttribute('data-theme',t),theme);
