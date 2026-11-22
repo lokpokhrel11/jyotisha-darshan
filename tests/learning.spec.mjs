@@ -45,7 +45,7 @@ test('Chapter 3: score, review and reset', async ({ page }) => {
   await expect(page.locator('#chapter3ExamQuestions fieldset.exam-question:not([hidden])')).toHaveCount(1);
 });
 
-for (const width of [375, 320]) {
+for (const width of [320, 375, 430, 768]) {
   test(`Mobile ${width}px: no horizontal document overflow on chapters 1–8`, async ({ page }) => {
     await page.setViewportSize({ width, height: 780 });
     for (let n = 1; n <= 8; n++) {
