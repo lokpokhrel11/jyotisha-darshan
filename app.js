@@ -1166,6 +1166,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   {chapter:3,name:'ग्रह परिचय',total:15,threshold:12,anchor:'chapter3exam'},
   {chapter:4,name:'इष्टकाल र समय रूपान्तरण',total:4,threshold:3,anchor:'ch4ExampleQuiz'},
   {chapter:5,name:'भयात, भभोग र दशा शेष',total:5,threshold:4,anchor:'ch5-assessment'},
+  {chapter:6,name:'विंशोत्तरी दशाको क्रम',total:5,threshold:4,anchor:'ch6-assessment'},
   {chapter:8,name:'नाता र भावात् भावम्',total:8,threshold:8,anchor:'ch8AssessmentPanel'},
   {chapter:9,name:'स्वभाव, शरीर र स्वास्थ्यका सङ्केत',total:5,threshold:4,anchor:'ch9-practice'},
   {chapter:10,name:'धन, आय, कर्म र यात्रा',total:4,threshold:3,anchor:'ch10-assessment'},
@@ -1776,4 +1777,43 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
  form.addEventListener('reset',()=>{questions.forEach((_,i)=>{const el=document.getElementById('ch5why'+i);el.textContent='';el.hidden=true});result.textContent='';});
  form.addEventListener('change',()=>{result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';questions.forEach((_,i)=>{document.getElementById('ch5why'+i).hidden=true})});
+})();
+
+/* Chapter 6: concept and sequence checks from the Vimshottari lesson. */
+(function(){
+ const form=document.getElementById('ch6AssessmentForm');
+ const root=document.getElementById('ch6AssessmentQuestions');
+ const result=document.getElementById('ch6AssessmentResult');
+ if(!form||!root||!result)return;
+ const questions=[
+  {q:'विंशोत्तरी महादशाको नौ ग्रहको पूरा चक्र कति वर्षको हुन्छ?',choices:['१०८ वर्ष','१२० वर्ष','३६० वर्ष'],correct:1,why:'केतु ७, शुक्र २०, सूर्य ६, चन्द्र १०, मङ्गल ७, राहु १८, बृहस्पति १६, शनि १९ र बुध १७ वर्ष जोड्दा १२० वर्ष हुन्छ।'},
+  {q:'चन्द्रको महादशापछि कुन ग्रहको महादशा आउँछ?',choices:['मङ्गल','राहु','शुक्र'],correct:0,why:'दशाक्रममा सूर्यपछि चन्द्र, त्यसपछि मङ्गल र त्यसपछि राहु आउँछन्।'},
+  {q:'रोहिणी नक्षत्रमा जन्म भए विंशोत्तरी दशाको प्रारम्भिक ग्रह कुन हो?',choices:['सूर्य','केतु','चन्द्र'],correct:2,why:'रोहिणी, हस्त र श्रवण नक्षत्रका स्वामी चन्द्र भएकाले जन्मदशा चन्द्रबाट सुरु हुन्छ।'},
+  {q:'जन्ममा चन्द्र महादशाको ७.३७९ वर्ष बाँकी छ भने त्यसपछि कुन महादशा र कति वर्ष आउँछ?',choices:['मङ्गलको पूरा ७ वर्ष','चन्द्रको अर्को पूरा १० वर्ष','राहुको १८ वर्ष'],correct:0,why:'जन्ममा बाँकी ७.३७९ वर्ष चन्द्रको दशा शेष हो। त्यो समाप्त भएपछि क्रमअनुसार मङ्गलको पूरा ७-वर्षीय महादशा सुरु हुन्छ।'},
+  {q:'जन्ममा बाँकी दशा शेष र महादशाको पूरा अवधि सम्बन्धमा कुन कथन सही छ?',choices:['दुवै सधैँ बराबर हुन्छन्','दशा शेष जन्मसमयमा बाँकी भाग हो; पूरा अवधि ग्रहको निर्धारित अवधि हो','जन्मदशा सधैँ पूरा अवधिबाट सुरु हुन्छ'],correct:1,why:'जन्म नक्षत्रको बितेको र बाँकी अंशअनुसार पहिलो महादशाको शेष बदलिन्छ। त्यस ग्रहको निर्धारित पूरा अवधि भने चक्रमा स्थिर रहन्छ।'}
+ ];
+ questions.forEach((item,i)=>{
+  const field=document.createElement('fieldset');field.className='exam-question';
+  const legend=document.createElement('legend');legend.textContent=(i+1)+'. '+item.q;field.append(legend);
+  item.choices.forEach((choice,j)=>{
+   const label=document.createElement('label');label.style.display='flex';label.style.gap='10px';label.style.alignItems='flex-start';label.style.padding='9px 0';
+   const input=document.createElement('input');input.type='radio';input.name='ch6q'+i;input.value=String(j);input.required=true;
+   label.append(input,document.createTextNode(choice));field.append(label);
+  });
+  const explanation=document.createElement('p');explanation.className='feedback';explanation.id='ch6why'+i;explanation.hidden=true;field.append(explanation);root.append(field);
+ });
+ form.addEventListener('submit',event=>{
+  event.preventDefault();if(!form.reportValidity())return;
+  let score=0;
+  questions.forEach((item,i)=>{
+   const selected=form.querySelector('input[name="ch6q'+i+'"]:checked');
+   const right=Number(selected.value)===item.correct;if(right)score++;
+   const explanation=document.getElementById('ch6why'+i);
+   explanation.textContent=(right?'सही। ':'फेरि हेर्नुहोस्। ')+item.why;explanation.hidden=false;
+  });
+  result.textContent='प्राप्ताङ्क: '+score+' / '+questions.length+'। '+(score>=4?'अभ्यास लक्ष्य पूरा भयो।':'व्याख्या पढेर फेरि अभ्यास गर्नुहोस्।');
+  try{localStorage.setItem('jyotisha-chapter6-score',JSON.stringify({score,total:questions.length}))}catch(_){}
+ });
+ form.addEventListener('reset',()=>{questions.forEach((_,i)=>{const e=document.getElementById('ch6why'+i);e.textContent='';e.hidden=true});result.textContent='';});
+ form.addEventListener('change',()=>{result.textContent='उत्तर परिवर्तन गरिएको छ। नयाँ नतिजाका लागि फेरि जाँच्नुहोस्।';questions.forEach((_,i)=>{document.getElementById('ch6why'+i).hidden=true})});
 })();
