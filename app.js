@@ -1771,6 +1771,16 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   try{localStorage.setItem('jyotisha-chapter12-score',JSON.stringify({score:correct,total:fields.length}))}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));
   result.textContent='नतिजा: '+nep(correct)+' / '+nep(fields.length)+' सही। '+(answered<fields.length?'उत्तर दिइएका प्रश्न: '+nep(answered)+'। बाँकी '+nep(fields.length-answered)+' प्रश्न पनि पूरा गर्नुहोस्।':'प्रत्येक उत्तरको व्याख्या पढेर आवश्यक पाठ पुनः अध्ययन गर्नुहोस्।');
  });
+ form.addEventListener('reset',function(){
+  fields.forEach(field=>{
+   field.classList.remove('ch12-correct','ch12-incorrect');
+   const explanation=field.querySelector('.ch12-explanation');
+   if(explanation)explanation.hidden=true;
+  });
+  result.textContent='';
+  try{localStorage.removeItem('jyotisha-chapter12-score')}catch(_){}
+  window.dispatchEvent(new Event('jyotisha-assessment-updated'));
+ });
  form.addEventListener('change',function(e){
   const field=e.target.closest('fieldset[data-answer]');
   if(!field)return;
