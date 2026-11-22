@@ -1638,7 +1638,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const nep=n=>String(n).replace(/[0-9]/g,d=>'०१२३४५६७८९'[Number(d)]);
  const clear=()=>{feedback.textContent='';feedback.className='ch10-feedback';review.hidden=true;review.replaceChildren()};
  form.addEventListener('change',event=>{if(event.target.matches('input[type="radio"]'))clear()});
- form.addEventListener('reset',()=>{clear();form.querySelectorAll('fieldset').forEach(field=>field.removeAttribute('tabindex'))});
+ form.addEventListener('reset',()=>{clear();try{localStorage.removeItem('jyotisha-chapter10-score')}catch(_){}window.dispatchEvent(new Event('jyotisha-assessment-updated'));form.querySelectorAll('fieldset').forEach(field=>field.removeAttribute('tabindex'))});
  form.addEventListener('submit',event=>{
   event.preventDefault();
   const responses=items.map(item=>form.querySelector('input[name="'+item.name+'"]:checked'));
