@@ -1,0 +1,34 @@
+name: Calculator regression checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app.js'
+      - 'tests/**'
+      - '.github/workflows/calculator-tests.yml'
+  pull_request:
+    paths:
+      - 'app.js'
+      - 'tests/**'
+      - '.github/workflows/calculator-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calculator-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: node --check app.js
+      - name: Run chapter 4–6 calculator boundary tests
+        run: node tests/calculator-boundaries.test.js
