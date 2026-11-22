@@ -44,3 +44,5 @@ jobs:
         run: node tests/chapter9-assessment.test.js
       - name: Validate Chapter 10 calculations and assessment
         run: node tests/chapter10-assessment.test.js
+      - name: Validate Chapter 11 Moon-sign pair counting
+        run: node tests/chapter11-navapanchaka.test.js
