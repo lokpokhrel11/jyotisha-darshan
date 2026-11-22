@@ -92,6 +92,9 @@ const yoginiBalanceResult=(nak,a,b)=>{
 };
 assert.match(yoginiBalanceResult(5,'00/00','60/00'),/सङ्कटा/);
 assert.match(yoginiBalanceResult(5,'30/00','60/00'),/4\.0000 वर्ष/);
+// One pala remaining of a one-year Mangala dasha rounds to zero days, not zero balance.
+assert.match(yoginiBalanceResult(6,'59/59','60/00'),/वास्तविक शेष शून्य होइन/);
+assert.match(yoginiBalanceResult(6,'59/59','60/00'),/० दिन/);
 assert.match(yoginiBalanceResult(5,'60/00','60/00'),/सीमा-क्षण/);
 assert.match(yoginiBalanceResult(5,'60/00','59/59'),/ठूलो/);
 assert.match(yoginiBalanceResult(28,'00/00','60/00'),/नक्षत्र क्रम/);
