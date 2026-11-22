@@ -1258,7 +1258,11 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   openedEl.textContent=nep(new Set(opened).size)+' / १३';
   attemptedEl.textContent=nep(attempted)+' / '+nep(exams.length);
   achievedEl.textContent=nep(met)+' / '+nep(exams.length);
-  if(completionEl)completionEl.textContent='अभ्यास लक्ष्य पूरा गर्नु र अध्यायको सम्पूर्ण अध्ययन पूरा गर्नु एउटै कुरा होइन। औपचारिक पाठ-समापन मापदण्ड अझै लागू गरिएको छैन।';
+  if(completionEl){
+   const openedCount=new Set(opened).size;
+   const nextStep=openedCount<13?'बाँकी अध्याय अध्ययनका लागि खोल्न सक्नुहुन्छ।':attempted<exams.length?'अब बाँकी मुख्य मूल्याङ्कन पूरा गर्न सक्नुहुन्छ।':met<exams.length?'लक्ष्य नपुगेका मूल्याङ्कन पुनः अभ्यास गर्न सक्नुहुन्छ।':'सबै मुख्य मूल्याङ्कनका अभ्यास लक्ष्य पुगेका छन्।';
+   completionEl.textContent='अध्याय खोलिएका: '+nep(openedCount)+' / १३। मुख्य मूल्याङ्कन पूरा: '+nep(attempted)+' / १३। अभ्यास लक्ष्य पुगेका: '+nep(met)+' / १३। '+nextStep+' यी सूचकले पाठ पूरा भएको वा प्रमाणपत्र प्राप्त गर्ने योग्यता प्रमाणित गर्दैनन्।';
+  }
  }
 
  }
