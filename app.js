@@ -774,7 +774,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  tabs.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const index=e.key==='Home'?0:e.key==='End'?keys.length-1:(keys.indexOf(active)+(e.key==='ArrowRight'?1:keys.length-1))%keys.length;activate(keys[index],true)});
  const toc=banner.querySelector('.chapter-toc');if(toc)toc.hidden=true;
  banner.append(tabs);
- const syncHash=()=>{const hash=decodeURIComponent(location.hash.slice(1));if(!hash)return;const target=document.getElementById(hash);if(!target)return;const matching=Object.entries(mapping).find(([,ids])=>ids.some(id=>{const section=document.getElementById(id);return section&&(section===target||section.contains(target));}));if(matching){activate(matching[0]);requestAnimationFrame(()=>{if(location.hash.slice(1)===hash)target.scrollIntoView({block:'start',behavior:'instant'});});}};
+ const syncHash=()=>{const hash=decodeURIComponent(location.hash.slice(1));if(!hash)return;const target=document.getElementById(hash);if(!target)return;const matching=Object.entries(mapping).find(([,ids])=>ids.some(id=>{const section=document.getElementById(id);return section&&(section===target||section.contains(target));}));if(matching){activate(matching[0]);requestAnimationFrame(()=>{if(location.hash.slice(1)===hash)target.scrollIntoView({block:'start',behavior:'auto'});});}};
  activate('lesson');
  syncHash();
  window.addEventListener('hashchange',syncHash);
