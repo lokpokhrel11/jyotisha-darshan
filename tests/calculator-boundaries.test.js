@@ -47,11 +47,24 @@ assert.match(padaResult('59/59','60/00'),/चौथो/);
 assert.match(padaResult('60/00','60/00'),/सीमा-क्षण/);
 assert.match(padaResult('60/00','59/59'),/ठूलो/);
 assert.match(padaResult('14/00','57/01'),/१४ घडी १५ पला १५ विपला/);
-const balanceDays=(elapsed,total,years)=>Math.round((total-elapsed)/total*years*360);
-assert.equal(balanceDays(0,3600,7),2520);
-assert.equal(balanceDays(3599,3600,7),1);
-assert.equal(balanceDays(3599,3600,1),0);
-assert.equal(balanceDays(1800,3600,20),3600);
+// Exercise the actual Vimshottari balance click handler.
+const dashaFields={
+ dbBhayat:{value:'00/00'},dbBhavog:{value:'60/00'},dbLord:{value:'ketu'},
+ dbOutput:{textContent:''},
+ dbCalculate:{addEventListener(event,handler){if(event==='click')this.handler=handler;},click(){this.handler();}}
+};
+const dashaContext=vm.createContext({$:id=>dashaFields[id]});
+vm.runInContext(extract('const dbYears=', '// Chapter 6.1:'),dashaContext);
+const dashaResult=(a,b,lord='ketu')=>{
+ dashaFields.dbBhayat.value=a;dashaFields.dbBhavog.value=b;dashaFields.dbLord.value=lord;
+ dashaFields.dbCalculate.click();return dashaFields.dbOutput.textContent;
+};
+assert.match(dashaResult('00/00','60/00'),/७ वर्ष|7 वर्ष/);
+assert.match(dashaResult('30/00','60/00','venus'),/10\.0000 वर्ष/);
+assert.match(dashaResult('59/59','60/00'),/0\.0019 वर्ष/);
+assert.match(dashaResult('60/00','60/00'),/सीमा-क्षण/);
+assert.match(dashaResult('60/00','59/59'),/ठूलो/);
+assert.match(dashaResult('14/60','60/00'),/सही लेख्नुहोस्/);
 // Exercise the website's actual Yogini selector, rather than duplicating its formula.
 const yoginiContext = vm.createContext({$: id => ({value: yoginiContext.nakshatra})});
 vm.runInContext(extract('function yoginiSelection()', 'function yoginiCycle()'), yoginiContext);
