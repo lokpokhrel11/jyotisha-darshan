@@ -2153,3 +2153,16 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
  #chapter10 .ch10-practice select{max-width:100%;min-height:46px}
  #chapter10 .ch10-result,#chapter10 .ch10-feedback:not(:empty),#chapter10 .ch10-review-card{overflow-wrap:anywhere}
 }
+
+/* Chapter 11: mobile-friendly quiz controls and readable practice results. */
+#chapter11 #ch11Quiz .ch10-choice{min-height:48px;min-width:0;box-sizing:border-box;overflow-wrap:anywhere}
+#chapter11 #ch11Quiz .ch10-choice:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+#chapter11 #ch11Quiz fieldset:focus{outline:2px solid var(--gold);outline-offset:3px}
+#chapter11 :is(#ch11MoonA,#ch11MoonB,#ch11EducationLevel,#ch11MarriageHouse):focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(max-width:600px){
+ #chapter11 #ch11Quiz fieldset{min-width:0;padding:14px 12px}
+ #chapter11 #ch11Quiz .ch10-choice{padding:13px 12px;gap:11px;line-height:1.6}
+ #chapter11 #ch11Quiz .ch10-quiz-actions>*{flex:1 1 100%;min-height:46px;white-space:normal}
+ #chapter11 :is(#ch11MoonA,#ch11MoonB,#ch11EducationLevel,#ch11MarriageHouse){max-width:100%;min-height:46px}
+ #chapter11 :is(#ch11CountResult,#ch11EducationResult,#ch11MarriageResult,#ch11Feedback,#ch11Review){overflow-wrap:anywhere}
+}
