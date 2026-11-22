@@ -1431,6 +1431,9 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  });
  form.addEventListener('change',event=>{
   if(!event.target.matches('input[type="radio"]'))return;
+  // A changed answer invalidates the previously saved score until resubmission.
+  try{localStorage.removeItem('jyotisha-chapter9-score')}catch(_){}
+  window.dispatchEvent(new Event('jyotisha-assessment-updated'));
   if(!feedback.textContent&&!review.childElementCount)return;
   feedback.textContent='';
   feedback.className='ch9-quiz-feedback';
