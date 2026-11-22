@@ -618,7 +618,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  if(chapter<13){const a=document.createElement('a');a.href='index.html?chapter='+(chapter+1);a.textContent='अर्को →';actions.append(a)}
  const toc=document.createElement('nav');toc.className='chapter-toc';toc.setAttribute('aria-label','अध्यायका पाठ र अभ्यास');const labels={pathshala:'पाठ',practice:'अभ्यास',chapter2:'पाठ',planetExample:'अभ्यास',chapter2exam:'परीक्षा',chapter3:'पाठ',chapter3exam:'परीक्षा',chapter4:'पाठ',istakala:'इष्टकाल',localSunrise:'सूर्योदय',chapter5:'पाठ',padaPractice:'चरण',dashaBalance:'दशा शेष',chapter6:'पाठ',antardasha:'अन्तर्दशा',tribhagi:'त्रिभागी',yogini:'योगिनी',chapter7:'पाठ तथा अभ्यास',chapter8:'पाठ तथा परीक्षा'};
  for(const id of groups[chapter]){if(chapter>=8)break;const section=document.getElementById(id);if(!section)continue;const heading=section.querySelector('h2,h3');const link=document.createElement('a');link.href='#'+id;link.textContent=labels[id]||(heading?heading.textContent.trim():id);toc.append(link)}
- banner.append(back,eyebrow,actions);if(toc.childElementCount&&chapter>=9)banner.append(toc);main.prepend(banner);
+ banner.append(back,eyebrow,actions);if(toc.childElementCount)banner.append(toc);main.prepend(banner);
  // Unified chapter masthead for all available chapters. Reuse actual chapter headings, never duplicate them.
  const sourceHero=chapter>=8?heroSection?.querySelector(':scope > .ch8-hero, :scope > .ch9-hero'):null;
  const sourceHeading=chapterHeading||sourceHero;
