@@ -33,7 +33,7 @@ vm.runInContext(extract('function renderTribhagi()', '// Chapter 6.4:'), ctx);
 const readRows = () => elements.triOutput.children[1].children.slice(1)
   .map(row => row.children.map(cell => cell.textContent));
 function months(label) {
-  const m = /^(\\d+) वर्ष (\\d+) महिना$/.exec(label);
+  const m = /^(\d+) वर्ष (\d+) महिना$/.exec(label);
   assert(m, 'Unexpected period format: ' + label);
   return Number(m[1]) * 12 + Number(m[2]);
 }
