@@ -747,6 +747,7 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  const aspects={1:['चन्द्र','मङ्गल'],3:['शनि'],4:['मङ्गल'],5:['मङ्गल'],7:['शनि'],8:['बृहस्पति'],10:['शनि','बृहस्पति'],12:['शुक्र','बृहस्पति']};
  const svgNode=(tag,attrs)=>{const n=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,String(v));return n};
  const frame=svgNode('rect',{x:1,y:1,width:398,height:398,fill:'none',stroke:'#314d58','stroke-width':2});svg.append(frame);
+ svg.setAttribute('aria-label','मेष लग्नको अध्ययन कुण्डली। बाह्र भावमध्ये कुनै भाव छान्न ट्याब र इन्टर वा स्पेस प्रयोग गर्नुहोस्।');
  let active=1;
  function show(house){
   active=house;const sign=(house-1)%12,found=planets[house]||[],seen=aspects[house]||[];
@@ -757,14 +758,14 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
   buttons.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.house)===house)));
  }
  shapes.forEach(([points,x,y],i)=>{
-  const house=i+1,group=svgNode('g',{'data-house':house,role:'button',tabindex:0,'aria-label':'भाव '+house+', राशि '+signs[i]+', '+(planets[house]?planets[house].join(' र '):'ग्रहस्थिति नखुलेको'),'aria-pressed':'false'});
+  const house=i+1,group=svgNode('g',{'data-house':house,role:'button',tabindex:0,'aria-controls':'ch7HouseDetail','aria-label':'भाव '+house+', राशि '+signs[i]+', '+(planets[house]?planets[house].join(' र '):'ग्रहस्थिति नखुलेको'),'aria-pressed':'false'});
   const polygon=svgNode('polygon',{points,class:'ch7-chart-house'}),label=svgNode('text',{x,y,'text-anchor':'middle',class:'ch7-chart-label'});
   const a=svgNode('tspan',{x,dy:0});a.textContent='भाव '+String(house);const b=svgNode('tspan',{x,dy:17});b.textContent='राशि '+String(i+1);
   label.append(a,b);group.append(polygon,label);
   if(planets[house]){const p=svgNode('text',{x,y:y+33,'text-anchor':'middle',class:'ch7-chart-planet'});p.textContent=planets[house].join('·');group.append(p)}
   group.addEventListener('click',()=>show(house));group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(house)}});
   svg.append(group);
-  const button=document.createElement('button');button.type='button';button.dataset.house=String(house);button.textContent='भाव '+house;button.addEventListener('click',()=>show(house));buttons.append(button);
+  const button=document.createElement('button');button.type='button';button.dataset.house=String(house);button.textContent='भाव '+house;button.setAttribute('aria-controls','ch7HouseDetail');button.setAttribute('aria-label','भाव '+house+', '+signs[i]+' राशि: विवरण हेर्नुहोस्');button.addEventListener('click',()=>show(house));buttons.append(button);
  });show(1);
 })();
 
