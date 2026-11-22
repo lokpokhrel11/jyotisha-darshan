@@ -4,6 +4,7 @@ on:
     paths:
       - 'index.html'
       - 'app.js'
+      - 'district-sunrise.js'
       - 'tests/site-smoke.cjs'
       - 'tests/browser-smoke.cjs'
       - '.github/workflows/course-smoke.yml'
@@ -11,6 +12,7 @@ on:
     paths:
       - 'index.html'
       - 'app.js'
+      - 'district-sunrise.js'
       - 'tests/site-smoke.cjs'
       - 'tests/browser-smoke.cjs'
       - '.github/workflows/course-smoke.yml'
@@ -23,7 +25,9 @@ jobs:
         with:
           node-version: '22'
       - name: Validate JavaScript syntax
-        run: node --check app.js
+        run: |
+          node --check app.js
+          node --check district-sunrise.js
       - name: Validate course structure
         run: node tests/site-smoke.cjs
       - name: Install browser test dependencies
