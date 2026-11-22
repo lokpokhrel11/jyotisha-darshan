@@ -1925,3 +1925,19 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
     line-height: 1.6;
   }
 }
+
+/* Phase 6.5: early-chapter assessment accessibility on narrow screens. */
+@media (max-width: 760px) {
+  :is(#chapter1,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8) :is(.quiz-options button,.quiz button,fieldset label:has(input[type="radio"]),fieldset label:has(input[type="checkbox"])) {
+    min-height:44px;
+    overflow-wrap:anywhere;
+    line-height:1.6;
+  }
+  :is(#chapter1,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8) :is(.quiz-options,.quiz-actions) {
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  :is(#chapter1,#chapter2,#chapter3,#chapter4,#chapter5,#chapter6,#chapter7,#chapter8) fieldset {
+    min-width:0;
+  }
+}
