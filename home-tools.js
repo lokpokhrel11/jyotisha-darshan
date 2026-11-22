@@ -36,4 +36,26 @@ $('htNakGo').addEventListener('click',()=>{
  const names=['अश्विनी','भरणी','कृत्तिका','रोहिणी','मृगशिरा','आर्द्रा','पुनर्वसु','पुष्य','आश्लेषा','मघा','पूर्वाफाल्गुनी','उत्तराफाल्गुनी','हस्त','चित्रा','स्वाती','विशाखा','अनुराधा','ज्येष्ठा','मूल','पूर्वाषाढा','उत्तराषाढा','श्रवण','धनिष्ठा','शतभिषा','पूर्वाभाद्रपदा','उत्तराभाद्रपदा','रेवती'];
  out('htNakOut',names[Math.min(idx,26)]+' · '+Math.min(pada,4)+' पाउ');
 });
+
+const timeSeconds=v=>{const m=/^(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(v||'');if(!m)return null;const h=+m[1],mn=+m[2],sc=+(m[3]||0);return h<24&&mn<60&&sc<60?h*3600+mn*60+sc:null;};
+$('htIstGo').addEventListener('click',()=>{
+ const birth=timeSeconds($('htBirth').value),sun=timeSeconds($('htLocalSunrise').value),prev=$('htPrevious').value==='previous';
+ if(birth===null||sun===null){out('htIstOut','जन्म समय र स्थानीय सूर्योदय जाँच्नुहोस्।');return;}
+ if(!prev&&birth<sun){out('htIstOut','सूर्योदयअघिको जन्म हो भने अघिल्लो दिनको सूर्योदय विकल्प छान्नुहोस्।');return;}
+ if(prev&&birth>=sun){out('htIstOut','सूर्योदयअघिको विकल्पमा जन्मको घडी सूर्योदयभन्दा अघि हुनुपर्छ।');return;}
+ const elapsed=birth-sun+(prev?86400:0);
+ if(elapsed<0||elapsed>=86400){out('htIstOut','इष्टकालको अवधि २४ घण्टाभन्दा कम हुनुपर्छ।');return;}
+ const halfVipala=elapsed*5,gh=Math.floor(halfVipala/7200),pa=Math.floor((halfVipala%7200)/120),vi=(halfVipala%120)/2;
+ out('htIstOut',gh+' घडी '+pa+' पला '+vi+' विपला');
+});
+const parseGP=v=>{const m=/^\s*(\d+)\s*\/\s*(\d+)\s*$/.exec(v);if(!m)return null;const g=+m[1],p=+m[2];return g<=120&&p<60&&(g<120||p===0)?g*60+p:null;};
+const dashaYears={sun:6,moon:10,mars:7,rahu:18,jupiter:16,saturn:19,mercury:17,ketu:7,venus:20};
+$('htDashaGo').addEventListener('click',()=>{
+ const a=parseGP($('htBhayat').value),b=parseGP($('htBhavog').value),years=dashaYears[$('htLord').value];
+ if(a===null||b===null||b<=0||!years){out('htDashaOut','घडी/पला र दशास्वामी जाँच्नुहोस्।');return;}
+ if(a===b){out('htDashaOut','नक्षत्र अन्त्य-सीमा: अर्को नक्षत्र र दशास्वामी पुष्टि गर्नुहोस्।');return;}
+ if(a>=3600||a>b){out('htDashaOut','भयात ६० घडीभन्दा कम र भभोगभन्दा सानो हुनुपर्छ।');return;}
+ const remaining=years*(b-a)/b,days=Math.round(remaining*360),y=Math.floor(days/360),mo=Math.floor(days%360/30),d=days%30;
+ out('htDashaOut',y+' वर्ष '+mo+' महिना '+d+' दिन · '+remaining.toFixed(4)+' वर्ष (३६०-दिने वर्ष)');
+});
 })();
