@@ -744,13 +744,13 @@ $('ygCalculate').addEventListener('click',yoginiCycle);$('ygBalance').addEventLi
  ];
  const planets={1:['शनि'],4:['बृहस्पति'],6:['शुक्र'],7:['चन्द्र'],10:['मङ्गल']};
  const strengths={शनि:'नीच',बृहस्पति:'उच्च',शुक्र:'नीच',चन्द्र:'सम',मङ्गल:'उच्च'};
- const aspects={3:['शनि'],7:['शनि'],8:['बृहस्पति'],10:['शनि','बृहस्पति'],12:['बृहस्पति']};
+ const aspects={1:['चन्द्र','मङ्गल'],3:['शनि'],4:['मङ्गल'],5:['मङ्गल'],7:['शनि'],8:['बृहस्पति'],10:['शनि','बृहस्पति'],12:['शुक्र','बृहस्पति']};
  const svgNode=(tag,attrs)=>{const n=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,String(v));return n};
  const frame=svgNode('rect',{x:1,y:1,width:398,height:398,fill:'none',stroke:'#314d58','stroke-width':2});svg.append(frame);
  let active=1;
  function show(house){
   active=house;const sign=(house-1)%12,found=planets[house]||[],seen=aspects[house]||[];
-  const rows=[['भाव',String(house)],['राशि',signs[sign]+' ('+(sign+1)+')'],['भावेश',lords[sign]],['भाव प्रकार',house===1?'केन्द्र र त्रिकोण (लग्न)':[4,7,10].includes(house)?'केन्द्र':[5,9].includes(house)?'त्रिकोण':[6,8,12].includes(house)?'दुःस्थान':'अन्य'],['ग्रहस्थिति',found.length?found.map(p=>p+' ('+strengths[p]+')').join(', '):'नोटमा ग्रहस्थिति दिइएको छैन'],['यस भावमा दृष्टि',seen.length?seen.join(', '):'यस अभ्यासमा दिइएका शनि र बृहस्पतिका विशेष दृष्टिमध्ये कुनै यहाँ पर्दैन; अन्य ग्रहका दृष्टि यस चित्रमा गणना गरिएको छैन']];
+  const rows=[['भाव',String(house)],['राशि',signs[sign]+' ('+(sign+1)+')'],['भावेश',lords[sign]],['भाव प्रकार',house===1?'केन्द्र र त्रिकोण (लग्न)':[4,7,10].includes(house)?'केन्द्र':[5,9].includes(house)?'त्रिकोण':[6,8,12].includes(house)?'दुःस्थान':'अन्य'],['ग्रहस्थिति',found.length?found.map(p=>p+' ('+strengths[p]+')').join(', '):'नोटमा ग्रहस्थिति दिइएको छैन'],['यस भावमा दृष्टि',seen.length?seen.join(', ') :'यस उदाहरणमा स्थान दिइएका पाँच ग्रहबाट यस भावमा कुनै दृष्टि पर्दैन; स्थान नखुलेका ग्रहको दृष्टि गणना गरिएको छैन']];
   detail.replaceChildren();const heading=document.createElement('h4');heading.textContent='भाव '+house+' · '+signs[sign];detail.append(heading);
   const dl=document.createElement('dl');for(const [key,value] of rows){const dt=document.createElement('dt');dt.textContent=key;const dd=document.createElement('dd');dd.textContent=value;dl.append(dt,dd)}detail.append(dl);
   svg.querySelectorAll('[data-house]').forEach(el=>{const selected=Number(el.dataset.house)===house;el.setAttribute('aria-pressed',String(selected));el.classList.toggle('selected',selected)});
