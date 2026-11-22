@@ -22,10 +22,12 @@ python3 -B tools/audit_public_candidate.py ../jyotish-public-export ../jyotisha-
 python3 -m http.server 8766 --bind 127.0.0.1 --directory ../jyotish-public-export
 ```
 
-In a second terminal, install Playwright 1.58.2 in a scratch directory and run the suite with that directory's `node_modules` on `NODE_PATH`. Use Playwright's installed Chromium or set `CHROMIUM_PATH` to a local Chromium executable. `SITE_URL` defaults to `http://127.0.0.1:8766/`.
+In a second terminal, install Playwright 1.58.2 in a scratch directory and run the suite with that directory's `node_modules` on `NODE_PATH`. Set `BROWSER=firefox` or `BROWSER=webkit` to run the same journeys with those Playwright engines. For Chromium, use Playwright's installed browser or set `CHROMIUM_PATH` to a local Chromium executable. `SITE_URL` defaults to `http://127.0.0.1:8766/`.
 
 ```sh
 node tools/test_public_browser.cjs
+# With axe-core 4.11.1 on NODE_PATH:
+node tools/test_public_accessibility.cjs
 ```
 
 The export has 11 allowlisted files. Publish the export directory alone. It excludes full-course `app.js`, private lesson and assessment source, repository metadata, test data, and tooling. The shared stylesheet retains some selectors for later chapters. The audit checks the stylesheet for restricted text alongside the other files, and it contains no corresponding lesson content. The build rejects an existing destination to prevent stale files from carrying forward.
@@ -37,19 +39,41 @@ The export has 11 allowlisted files. Publish the export directory alone. It excl
 | Public static preview and export | Passed. Verified available sections, local file and fragment references, manifest, worker behavior, and 911 sampled signatures from restricted lesson text and JavaScript against every exported file. A signature comparison can miss paraphrased or rearranged text. |
 | Public Chromium 156 and Playwright 1.58.2 at 390 × 844 and 1280 × 844 | Passed. Six calculators including blank input validation, perfect scores on both assessments and retries, dashboard persistence, Chapter 2 deep linking, keyboard skip and menu focus, dark mode, अक्षरचक्र degree lookup and course link, horizontal overflow, console errors, and restricted route and asset checks. |
 | Legacy worker migration fixture | Passed. Chromium first served a cached legacy asset. The replacement at the same scope purged the legacy cache, preserved unrelated cache storage, unregistered, and the legacy asset returned 404. |
-| Clean Git rehearsal | Passed. A freshly initialized local repository, populated solely from the export, had one root commit and 13 reachable objects: one commit, one tree, and 11 blobs. `git fsck --full --no-reflogs` passed. Export tree: `9aba1ba8e401f795f0302a77534c5785e2a1425c`. No remote was connected. |
-| Full-course legacy source checks | Static structure passed. Nine of ten Node test files passed. The sunrise boundary assertion expects 05:49 for 06:00 minus 07:16, while the implementation correctly rounds to 05:53. The failure reproduced on untouched staging. |
-| Full-course legacy browser smoke | Chapter 5 exam deep-link scrolling failed at 390px on both the review checkout and untouched staging. That route is outside the public export. |
-| Full-course learning regression | 48 of 48 passed against the untouched staging checkout. |
-| Existing GitHub Actions smoke workflow | The PR check stopped during setup. Its Playwright 1.58.2 install does not support the current Ubuntu 26.04 runner. The public release checks ran locally with system Chromium. |
+| Clean Git rehearsal | Passed. A freshly initialized local repository, populated solely from the export, had one root commit and 13 reachable objects: one commit, one tree, and 11 blobs. `git fsck --full --no-reflogs` passed. Export tree: `17f5c7cea0ec3489e186d3d36bdf910279be496c`. No remote was connected. |
+| Full-course legacy source checks | Static structure and all ten Node test files passed. Corrected two stale sunrise assertions to reflect the signed offsets and nearest-minute rounding. |
+| Full-course legacy browser smoke | Passed at both widths on the hosted runner. The test now waits for the assessment to enter the viewport and for district options to be attached. |
+| Full-course learning regression | 48 of 48 passed against the untouched staging checkout. The hosted learning workflow also passed after pinning the runner and Playwright version. |
+| Hosted smoke and browser engines | Ubuntu 24.04 with Playwright 1.58.2. Chromium 145, Firefox 146 and WebKit 26 passed public journeys at both widths and the cache retirement fixture. [Hosted PR run](https://github.com/lokpokhrel11/jyotisha-darshan/actions/runs/45082253013). |
 
-Public testing covered Chromium and keyboard interactions. Screen-reader and cross-browser verification were outside this run. The results above were generated locally.
+Axe-core 4.11.1 reported zero WCAG 2.1 A/AA violations in 24 scans covering the homepage, chapter views, course overview, अक्षरचक्र, and the expanded menu at both widths and themes. Keyboard checks covered skip navigation, menu focus, and interaction with the named chart group and its 12 house buttons. Chromium exposed all 12 buttons and the selected state in its accessibility tree. The five public views showed no page-level horizontal overflow at 320 CSS pixels. Native screen-reader and physical iOS Safari testing remain unverified. The hosted WebKit check used Linux.
 
 ## History and previously distributed copies
 
-Both original public branches already expose later chapters in tracked HTML and JavaScript. Their combined reachable history had 943 commits at review, with later lesson sections and assessment banks present on `main`. The GitHub listing returned no tags, pull refs, or forks before this review PR, and listed 503 Actions artifacts, including Pages bundles and browser diagnostics. Artifact payloads were not downloaded. Treat old Pages bundles and diagnostics as potentially containing restricted material until reviewed.
+Both original public branches already expose later chapters in tracked HTML and JavaScript. Their combined reachable history had 943 commits at review, with later lesson sections and assessment banks present on `main`. The GitHub listing returned no tags, pull refs, or forks before this review PR.
+
+### Historical Actions artifact audit
+
+The read-only hosted scan downloaded and inspected all 503 listed archives using nested ZIP, tar and embedded Playwright report handling. It compared supported text members with 532 lesson signatures from the legacy public HTML. It also counted structural markers and route references. These counts overlap. [Hosted audit results](https://github.com/lokpokhrel11/jyotisha-darshan/actions/runs/45082253013/job/137392800451).
+
+| Artifact name | Archives scanned | Restricted lesson passages | Restricted source markers | Restricted route references |
+| --- | ---: | ---: | ---: | ---: |
+| `github-pages` | 30 | 30 | 30 | 30 |
+| `playwright-diagnostics` | 464 | 463 | 297 | 464 |
+| `playwright-report` | 9 | 7 | 0 | 9 |
+| **Total** | **503** | **500** | **327** | **503** |
+
+The three archives without a passage match still reference restricted chapters. A negative signature match does not rule out reformatted content, images, other opaque data, or passages absent from the signature set. The audit covers retained artifacts in this repository. Expired or previously deleted artifacts, workflow logs outside these archives, and external copies were outside scope. The job logs report counts and matching artifact IDs without reproducing lesson passages. The updated test workflows avoid uploading full-course browser diagnostics.
 
 Publishing a new clean repository does not retract the old public repository, GitHub-cached objects or pull refs, browser caches, or third-party copies. The worker update can clean Cache Storage only in browsers that revisit the original origin and receive the replacement at the original scope. Existing downloads, browser HTTP caches, and never-reconnected devices are outside that cleanup.
+
+## Decisions requiring owner authorization
+
+- Whether and when to merge the review PR.
+- Whether to create a fresh public repository, which URL to use, and when to deploy.
+- How to handle the legacy public repository and Pages site, including any visibility change.
+- Which historical artifacts, if any, to delete and whether to ask GitHub Support to address retained copies.
+
+The audit and CI changes are on the review branch. The private master, live Pages source, repository visibility, and historical artifacts were preserved.
 
 ## Deployment sequence, pending owner approval
 
