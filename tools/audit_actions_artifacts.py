@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Read Actions archives and report aggregate exposure without printing their contents."""
+from base64 import b64decode
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
+from html import unescape
 from io import BytesIO
 import json
 import os
+from pathlib import Path
 import re
 import tarfile
 from urllib.error import HTTPError
@@ -24,6 +27,28 @@ TEXT = ('.html', '.js', '.json', '.txt', '.log', '.md', '.xml', '.svg', '.css', 
 IMAGES = ('.png', '.jpg', '.jpeg', '.webp')
 ARCHIVES = ('.zip', '.tar', '.tar.gz', '.tgz', '.tar.br', '.gz')
 LIMIT = 80 * 1024 * 1024
+EMBEDDED_REPORT = re.compile(rb'data:application/zip;base64,([A-Za-z0-9+/=]+)')
+
+
+def normalize(text):
+    return ' '.join(unescape(text).split())
+
+
+def lesson_signatures():
+    # Use the tracked legacy public baseline. The audit runner has no private checkout.
+    source = Path(__file__).resolve().parents[1].joinpath('index.html').read_text(encoding='utf-8')
+    start = source.index('<section id="chapter3"')
+    end = source.index('<section id="consult"', start)
+    free = normalize(source[:start] + source[end:])
+    return {value.encode() for snippet in re.findall(r'>([^<>]{65,})<', source[start:end])
+            if (value := normalize(snippet)) not in free
+            and re.search(r'[\u0900-\u097f]', value)}
+
+
+SIGNATURES = lesson_signatures()
+# A single fast search avoids rescanning a large report once per signature.
+PASSAGES = re.compile(b'|'.join(re.escape(value) for value in sorted(SIGNATURES)))
+
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -55,6 +80,12 @@ def inspect_members(members, depth, results):
                     results.add('restricted source markers')
                 if REFERENCES.search(data):
                     results.add('restricted route references')
+                normalized = normalize(data.decode('utf-8', errors='replace')).encode()
+                if PASSAGES.search(normalized):
+                    results.add('restricted lesson passages')
+                if name.endswith('.html') and depth < 3:
+                    for encoded in EMBEDDED_REPORT.finditer(data):
+                        inspect_archive(b64decode(encoded[1], validate=True), depth + 1, results)
 
 
 def inspect_archive(data, depth, results):
@@ -110,14 +141,19 @@ def main():
             break
     totals = {}
     confirmed_ids = []
+    passage_ids = []
+    print(f'Checking {len(inventory)} artifacts and {len(SIGNATURES)} lesson signatures.', flush=True)
     with ThreadPoolExecutor(max_workers=6) as pool:
         for item, results in pool.map(inspect_artifact, inventory):
             totals.setdefault(item['name'], Counter()).update(results | {'listed'})
             if 'restricted source markers' in results:
                 confirmed_ids.append(item['id'])
+            if 'restricted lesson passages' in results:
+                passage_ids.append(item['id'])
     for name, counts in sorted(totals.items()):
         print(json.dumps({'name': name, **counts}, sort_keys=True))
     print('Artifacts with restricted source markers:', ', '.join(map(str, confirmed_ids)))
+    print('Artifacts with restricted lesson passages:', ', '.join(map(str, passage_ids)))
 
 
 if __name__ == '__main__':
