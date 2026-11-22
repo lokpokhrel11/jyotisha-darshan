@@ -27,4 +27,19 @@ for (const [_, ch, total, target, anchor] of entries) {
 assert.deepEqual(entries.map(e => Number(e[1])), Array.from({length: 13}, (_, i) => i + 1),
   'Assessment chapters are missing or out of order');
 assert(html.includes('app.js?v='), 'Versioned application script reference missing');
+
+const chapter7 = entries.find(e => Number(e[1]) === 7);
+assert.equal(Number(chapter7[2]), 8, 'Chapter 7 dashboard must reflect all eight questions');
+const chapter7Bank = js.match(/\/\* v4\.2: Chapter 7[\s\S]*?const questions=\[([\s\S]*?)\];/);
+assert(chapter7Bank, 'Chapter 7 question bank missing');
+assert.equal([...chapter7Bank[1].matchAll(/\{q:/g)].length, 8, 'Chapter 7 bank size changed');
+const chapter8 = entries.find(e => Number(e[1]) === 8);
+assert.equal(Number(chapter8[2]), 8, 'Chapter 8 dashboard must reflect eight questions');
+const chapter8Bank = js.match(/\/\* Chapter 8[\s\S]*?const questions=\[([\s\S]*?)\];/);
+assert(chapter8Bank, 'Chapter 8 question bank missing');
+assert.equal([...chapter8Bank[1].matchAll(/\{q:/g)].length, 8, 'Chapter 8 bank size changed');
+const ch8Change = js.match(/form\.addEventListener\('change',e=>\{if\(!e\.target\.matches\('input\[type="radio"\]'\)\)[\s\S]*?\}\);/);
+assert(ch8Change && ch8Change[0].includes("localStorage.removeItem('jyotisha-chapter8-score')"),
+  'Chapter 8 must invalidate saved results when answers change');
+
 console.log('PASS: 13 chapter cards, 13 assessment targets, unique HTML IDs, valid score configuration.');
