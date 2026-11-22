@@ -1909,3 +1909,19 @@ body.chapter-focus .chapter-editorial-hero{scroll-margin-top:85px}
     scroll-margin-top: calc(88px + env(safe-area-inset-top, 0px));
   }
 }
+
+/* Phase 6 assessment usability: consistent tap targets and readable choices. */
+@media (max-width: 760px) {
+  :is(#chapter9,#chapter10,#chapter11,#chapter12,#chapter13) :is(.ch9-quiz-panel,.ch10-quiz-panel,.ch12-quiz) label:has(input[type="radio"]),
+  #ch13-quiz .ch12-quiz label:has(input[type="radio"]) {
+    min-height: 44px;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+  }
+  :is(#chapter9,#chapter10,#chapter11,#chapter12,#chapter13) :is(.ch9-quiz-panel,.ch10-quiz-panel,.ch12-quiz) :is(button,select) {
+    min-height: 44px;
+  }
+  :is(#chapter9,#chapter10,#chapter11,#chapter12,#chapter13) :is(.ch9-quiz-panel,.ch10-quiz-panel,.ch12-quiz) :is(legend,label) {
+    line-height: 1.6;
+  }
+}
