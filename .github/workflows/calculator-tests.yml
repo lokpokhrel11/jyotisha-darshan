@@ -36,3 +36,5 @@ jobs:
         run: node tests/chapter6-cycles.test.js
       - name: Validate Chapter 7 assessment
         run: node tests/chapter7-assessment.test.js
+      - name: Validate Chapter 8 house counting
+        run: node tests/chapter8-house-counting.test.js
