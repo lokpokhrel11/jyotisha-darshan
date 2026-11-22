@@ -1,5 +1,5 @@
-// Serve only the built candidate. Requires Playwright and Chromium.
-const { chromium } = require('playwright');
+// Serve only the built candidate. Requires Playwright and its selected browser.
+const { chromium, firefox, webkit } = require('playwright');
 const assert = require('node:assert/strict');
 const { createServer } = require('node:http');
 const { setTimeout: delay } = require('node:timers/promises');
@@ -178,8 +178,12 @@ async function checkCacheRetirement(browser) {
 }
 
 (async () => {
-  const executablePath = process.env.CHROMIUM_PATH || undefined;
-  const browser = await chromium.launch({ executablePath });
+  const engine = process.env.BROWSER || 'chromium';
+  const browserType = { chromium, firefox, webkit }[engine];
+  assert(browserType, 'Unsupported browser: ' + engine);
+  const executablePath = engine === 'chromium' ? process.env.CHROMIUM_PATH : undefined;
+  const browser = await browserType.launch({ executablePath });
+  console.log(engine + ' ' + browser.version());
   try {
     for (const width of [390, 1280]) await checkSite(browser, width);
     await checkCacheRetirement(browser);

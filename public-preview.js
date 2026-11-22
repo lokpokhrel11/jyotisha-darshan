@@ -137,7 +137,8 @@ function updateChart(){
   const n=i+1,r=(l+i-1)%12+1;
   const group=document.createElementNS('http://www.w3.org/2000/svg','g');
   group.setAttribute('role','button');group.setAttribute('tabindex','0');
-  group.setAttribute('aria-label',`${n} औँ भाव, ${signs[r-1]} राशि${n===selectedHouse?', हाल चयन गरिएको':''}`);
+  group.setAttribute('aria-label',`${n} औँ भाव, ${signs[r-1]} राशि`);
+  group.setAttribute('aria-pressed',String(n===selectedHouse));
   group.setAttribute('class','chart-house'+(n===selectedHouse?' selected':''));
   const hit=document.createElementNS('http://www.w3.org/2000/svg','circle');
   hit.setAttribute('cx',x);hit.setAttribute('cy',y-5);hit.setAttribute('r',28);hit.setAttribute('fill','transparent');
@@ -146,7 +147,7 @@ function updateChart(){
   const sub=document.createElementNS('http://www.w3.org/2000/svg','text');
   sub.setAttribute('x',x);sub.setAttribute('y',y+14);sub.setAttribute('font-size','11');sub.setAttribute('fill','currentColor');sub.style.setProperty('font-weight','700','important');sub.textContent=roman[i];
   group.append(hit,t,sub);
-  const select=()=>{selectedHouse=n;updateChart();};
+  const select=()=>{selectedHouse=n;updateChart();g.children[i].focus();};
   group.addEventListener('click',select);
   group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}});
   g.append(group);
