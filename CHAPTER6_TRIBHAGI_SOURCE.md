@@ -1,2 +1,0 @@
-# Chapter 6.3 source mapping
-Source: 117-page Jyotisha notes (October 2026), Chapter 6.3, PDF p.56. Explicit correction: Tribhagi is TWO THIRDS of Vimshottari, 80-year cycle (not one-third / 40 years). Handwritten Moon-start example: Moon 6y8m; Mars 4y8m; Rahu 12y; Jupiter 10y8m; Saturn 12y8m; Mercury 11y4m; Ketu 4y8m; Venus 13y4m; Sun 4y. Cumulative 80 years. UI can rotate to any start planet, but does not determine a birth-specific starting period or balance. Claims about predictive efficacy are not scientifically validated.
